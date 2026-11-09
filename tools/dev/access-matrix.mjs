@@ -87,7 +87,7 @@ let batchId, proposalId;
 {
   const src = await E.c.from("sources").select("id").limit(1).single();
   let b = await E.c.from("ingest_batches").select("id").eq("notes", TEST_NOTE).maybeSingle();
-  if (!b.data) b = await E.c.from("ingest_batches").insert({ source_id: src.data.id, tool: "tools/dev/access-matrix.mjs", tool_version: "1", notes: TEST_NOTE }).select("id").single();
+  if (!b.data) b = await E.c.from("ingest_batches").insert({ source_id: src.data.id, tool: "tools/dev/access-matrix.mjs", tool_version: "1", notes: TEST_NOTE, publishable: false }).select("id").single();
   batchId = b.data?.id;
   check("E", "cria/lê lote editorial", Boolean(batchId), b.error?.message ?? "");
   let p = await E.c.from("item_proposals").select("id").eq("batch_id", batchId).maybeSingle();

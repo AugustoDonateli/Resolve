@@ -139,9 +139,60 @@ test("duas abas editando a mesma revisão: a segunda recebe conflito", async ({ 
   await b.ctx.close();
 });
 
+async function openTags(page: Page, question: number) {
+  await page.goto("/editor");
+  const lote = page.locator("section", { has: page.getByRole("heading", { name: /lote de teste automatizado/ }) });
+  await lote.getByRole("link", { name: `Questão ${question}`, exact: true }).click();
+  await page.getByRole("link", { name: "Etiquetas e aprovação" }).click();
+  await expect(page.getByRole("heading", { level: 2, name: "Etiquetas" })).toBeVisible();
+}
+
+test("etiquetas: aprovar exige campos e checklist; preenchidas, a aprovação é registrada", async ({ browser }) => {
+  const { ctx, page } = await editorPage(browser);
+  await openTags(page, 10);
+  await expect(page.getByText("Gabarito oficial: E")).toBeVisible();
+
+  // Sem nada preenchido: o banco lista o que falta.
+  await page.getByRole("button", { name: "Conferir pendências" }).click();
+  await expect(page.getByText(/^Pendências \(\d+\):$/)).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByText("checklist: gabarito conferido contra o oficial")).toBeVisible();
+  await expect(page.getByText("habilidade principal ausente ou fora da área")).toBeVisible();
+
+  await page.getByLabel("Habilidade principal").selectOption("H18");
+  await page.getByLabel("1 · conhecimento escolar básico").check();
+  await page.getByLabel("Bloco do trecho").selectOption("c1");
+  await page.getByLabel("Trecho literal (colar)").fill("síntese da opinião da autora");
+  await page.getByRole("button", { name: "Adicionar trecho colado" }).click();
+  await page.getByLabel("Por que este trecho sustenta a resposta (evidência 1)").fill("O comando pede o recurso que marca a síntese.");
+  for (const l of ["A", "B", "C", "D"]) {
+    await page.getByLabel(`Tipo principal (${l})`).selectOption("verdade_fora_do_comando");
+    await page.getByLabel(`Justificativa editorial (${l})`).fill("Recurso presente no texto que não marca a síntese da opinião.");
+  }
+  await page.getByLabel("Ou: justificativa da ausência de resolução").fill("Resolução comentada fica para o próximo lote (teste automatizado).");
+
+  // Falta só o checklist.
+  await page.getByRole("button", { name: "Conferir pendências" }).click();
+  await expect(page.getByText("Pendências (7):")).toBeVisible({ timeout: 15_000 });
+  for (const c of await page.getByRole("group", { name: "Checklist de aprovação" }).getByRole("checkbox").all()) await c.check();
+  await page.getByRole("button", { name: "Conferir pendências" }).click();
+  await expect(page.getByText("Nenhuma pendência: pronta para aprovar.")).toBeVisible({ timeout: 15_000 });
+
+  await page.getByRole("button", { name: "Aprovar etiquetas" }).click();
+  await expect(page.getByRole("region", { name: "Decisões anteriores" }).getByText(/^Aprovada · conteúdo na revisão \d+$/).first()).toBeVisible({ timeout: 15_000 });
+  await ctx.close();
+});
+
+test("etiquetas: devolver ou rejeitar sem motivo é recusado", async ({ browser }) => {
+  const { ctx, page } = await editorPage(browser);
+  await openTags(page, 10);
+  await page.getByRole("button", { name: "Rejeitar questão" }).click();
+  await expect(page.getByText("Explique o motivo (mínimo de 10 caracteres) para devolver ou rejeitar.")).toBeVisible({ timeout: 15_000 });
+  await ctx.close();
+});
+
 test("área editorial sem violações de acessibilidade (axe)", async ({ browser }) => {
   const { ctx, page } = await editorPage(browser);
-  for (const go of [() => page.goto("/editor"), () => openFixture(page)]) {
+  for (const go of [() => page.goto("/editor"), () => openFixture(page), () => openTags(page, 10)]) {
     await go();
     const r = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]).analyze();
     expect(r.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);

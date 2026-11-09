@@ -160,3 +160,70 @@ export async function getProposal(id: string): Promise<ProposalDetail> {
     userId: user.id,
   };
 }
+
+export interface SkillOption {
+  code: string;
+  description: string;
+}
+export interface DistractorType {
+  code: string;
+  label: string;
+  definition: string;
+  limits: string | null;
+}
+export interface TagReviewRow {
+  id: string;
+  proposal_revision: number;
+  decision: "aprovar" | "devolver" | "rejeitar";
+  tags: Record<string, unknown>;
+  checklist: Record<string, boolean>;
+  notes: string | null;
+  reviewer_id: string;
+  created_at: string;
+}
+
+export interface TagReviewContext {
+  proposal: ProposalRow & { payload: ProposalPayload };
+  answer: string | null;
+  skills: SkillOption[];
+  distractorTypes: DistractorType[];
+  reviews: TagReviewRow[];
+  suggestion: { id: string; status: string; suggestion: Record<string, unknown>; model_served: string | null; prompt_version: string } | null;
+  openDoubts: number;
+  userId: string;
+}
+
+export async function getTagReviewContext(id: string): Promise<TagReviewContext> {
+  const { supabase, user } = await requireEditor();
+  if (!/^[0-9a-f-]{36}$/.test(id)) notFound();
+  const { data: proposal } = await supabase
+    .from("item_proposals")
+    .select("id, batch_id, question_number, foreign_language, status, current_revision, updated_at, payload")
+    .eq("id", id)
+    .maybeSingle();
+  if (!proposal) notFound();
+  const payload = proposal.payload as ProposalPayload;
+  const [{ data: answer }, { data: skills }, { data: types }, { data: reviews }, { data: suggestions }, { count }] = await Promise.all([
+    supabase.rpc("official_answer", { p_proposal: id }),
+    supabase
+      .from("skills")
+      .select("code, number, description, areas!inner(code, matrix_versions!inner(status))")
+      .eq("areas.code", payload.area)
+      .eq("areas.matrix_versions.status", "published")
+      .order("number"),
+    supabase.from("distractor_types").select("code, label, definition, limits").eq("taxonomy_version", "v0-proposta").order("label"),
+    supabase.from("proposal_tag_reviews").select("id, proposal_revision, decision, tags, checklist, notes, reviewer_id, created_at").eq("proposal_id", id).order("created_at", { ascending: false }),
+    supabase.from("tag_suggestions").select("id, status, suggestion, model_served, prompt_version").eq("proposal_id", id).order("created_at", { ascending: false }).limit(1),
+    supabase.from("doubt_queue").select("id", { count: "exact", head: true }).eq("proposal_id", id).eq("status", "aberta"),
+  ]);
+  return {
+    proposal: { ...(proposal as ProposalRow), payload },
+    answer: (answer as string | null) ?? null,
+    skills: (skills ?? []).map((s) => ({ code: s.code as string, description: s.description as string })),
+    distractorTypes: (types ?? []) as DistractorType[],
+    reviews: (reviews ?? []) as TagReviewRow[],
+    suggestion: suggestions?.[0] ?? null,
+    openDoubts: count ?? 0,
+    userId: user.id,
+  };
+}

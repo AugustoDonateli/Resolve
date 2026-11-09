@@ -8,8 +8,10 @@ Entra com a conta de um editor (as políticas do banco valem: nada usa chave de 
 4. envia os recortes de figura do piloto (docs/validation/f2-t08).
 
 Uso:
-  RESOLVE_EDITOR_EMAIL=... RESOLVE_EDITOR_PASSWORD=... python load_editorial.py D1_CD1 D2_CD7 [--fixture]
---fixture cria também o lote de teste automatizado (cópias de duas questões; nunca publicar).
+  RESOLVE_EDITOR_EMAIL=... RESOLVE_EDITOR_PASSWORD=... python load_editorial.py D1_CD1 D2_CD7 [--fixture] [--gabaritos] [--cruzamento]
+--fixture cria também o lote de teste automatizado (cópias de duas questões; não publicável).
+--gabaritos grava os gabaritos oficiais de todos os cadernos baixados; --cruzamento grava o resultado
+do cruzamento entre cores (F2-T10). Os dois são idempotentes.
 """
 from __future__ import annotations
 
@@ -85,13 +87,63 @@ def booklet_meta(name: str) -> dict:
     return {"file": data["file"], "sha256": data["sha256"], "questions": data["questions"]}
 
 
-def ensure_batch(api: Api, source_id: str, note: str) -> tuple[str, bool]:
+def ensure_batch(api: Api, source_id: str, note: str, publishable: bool = True) -> tuple[str, bool]:
     q = "?select=id&notes=eq." + urllib.parse.quote(note)
     found = api.rest("GET", "ingest_batches", query=q)
     if found:
         return found[0]["id"], False
-    row = api.rest("POST", "ingest_batches", {"source_id": source_id, "tool": "tools/ingest/load_editorial.py", "tool_version": "1", "notes": note})
+    row = api.rest("POST", "ingest_batches", {"source_id": source_id, "tool": "tools/ingest/load_editorial.py", "tool_version": "1",
+                                              "notes": note, "publishable": publishable})
     return row[0]["id"], True
+
+
+CHECK_CODE = {"confere": "confere", "anulada nas duas": "anulada_nas_duas", "ANULAÇÃO DIVERGENTE": "anulacao_divergente", "DIVERGE": "diverge",
+              "gabarito ausente": "gabarito_ausente", "letra não mapeável automaticamente": "letra_nao_mapeavel"}
+
+
+def booklets_by_file(api: Api) -> dict[str, dict]:
+    """{nome do PDF da prova: {"id", "answer_key_source_id"}} a partir de booklets + sources."""
+    rows = api.rest("GET", "booklets", query="?select=id,source_id,answer_key_source_id")
+    srcs = {s["id"]: s for s in api.rest("GET", "sources", query="?select=id,sha256,metadata&kind=in.(prova,gabarito)")}
+    return {srcs[r["source_id"]]["metadata"]["file"]: {**r, "gabarito_file": srcs[r["answer_key_source_id"]]["metadata"]["file"]} for r in rows if r["answer_key_source_id"]}
+
+
+def load_answer_keys(api: Api) -> dict:
+    """Gabaritos oficiais de todos os cadernos baixados (inclui "ANULADO" e as colunas de língua)."""
+    from crossmatch import parse_answer_key
+
+    counts = {}
+    existing = {r["booklet_id"] for r in api.rest("GET", "official_answer_keys", query="?select=booklet_id")}
+    for file, b in sorted(booklets_by_file(api).items()):
+        gb = ROOT / "raw" / "enem-2025" / b["gabarito_file"]
+        if b["id"] in existing or not gb.exists():
+            counts[file] = "já carregado" if b["id"] in existing else "PDF do gabarito ausente"
+            continue
+        key = parse_answer_key(gb)
+        rows = [{"booklet_id": b["id"], "question_number": n, "foreign_language": lang, "answer": a, "source_id": b["answer_key_source_id"]}
+                for (n, lang), a in sorted(key.items(), key=lambda x: (x[0][0], x[0][1] or ""))]
+        api.rest("POST", "official_answer_keys", rows)
+        counts[file] = len(rows)
+    return counts
+
+
+def load_variant_checks(api: Api) -> dict:
+    """Resultado do cruzamento entre cores (data/extraction/enem-2025-cruzamento.json)."""
+    report = json.loads((REPO / "data" / "extraction" / "enem-2025-cruzamento.json").read_text(encoding="utf-8"))
+    books = booklets_by_file(api)
+    counts = {}
+    for pair in report["pairs"]:
+        a, b = books[pair["a"]["file"]]["id"], books[pair["b"]["file"]]["id"]
+        if api.rest("GET", "variant_checks", query=f"?select=id&base_booklet_id=eq.{a}&other_booklet_id=eq.{b}&limit=1"):
+            counts[pair["day"]] = "já carregado"
+            continue
+        rows = [{"base_booklet_id": a, "base_position": r["position_a"], "foreign_language": r["foreign_language"], "other_booklet_id": b,
+                 "other_position": r["position_b"], "letter_map": r["letter_map"], "result": CHECK_CODE[r["check"]],
+                 "fingerprint": r["fingerprint"], "tool": "tools/ingest/crossmatch.py"}
+                for r in pair["rows"] if r.get("position_b")]
+        api.rest("POST", "variant_checks", rows)
+        counts[pair["day"]] = len(rows)
+    return counts
 
 
 def load_proposals(api: Api, batch_id: str, files: list[Path]) -> dict:
@@ -150,6 +202,10 @@ def upload_figures(api: Api) -> int:
 def main() -> int:
     names = [a for a in sys.argv[1:] if not a.startswith("--")]
     api = Api()
+    if "--gabaritos" in sys.argv:
+        print(f"gabaritos oficiais: {load_answer_keys(api)}")
+    if "--cruzamento" in sys.argv:
+        print(f"cruzamento entre cores: {load_variant_checks(api)}")
     for name in names:
         meta = booklet_meta(name)
         src = api.rest("GET", "sources", query=f"?select=id&sha256=eq.{meta['sha256']}")
@@ -165,9 +221,10 @@ def main() -> int:
     if "--fixture" in sys.argv:
         meta = booklet_meta(names[0])
         src = api.rest("GET", "sources", query=f"?select=id&sha256=eq.{meta['sha256']}")
-        fx_id, _ = ensure_batch(api, src[0]["id"], FIXTURE_NOTE)
+        fx_id, _ = ensure_batch(api, src[0]["id"], FIXTURE_NOTE, publishable=False)
         print(f"lote de teste: {load_proposals(api, fx_id, [ROOT / 'raw' / 'proposals' / f for f in FIXTURE_PICK])}")
-    print(f"figuras do piloto enviadas: {upload_figures(api)}")
+    if names:
+        print(f"figuras do piloto enviadas: {upload_figures(api)}")
     return 0
 
 

@@ -31,9 +31,12 @@ export default async function ProposalPage({ params, searchParams }: { params: P
         kicker={`${p.payload.source.booklet_file} · área ${p.payload.area}`}
         title={`Questão ${p.question_number}${p.foreign_language ? ` (${LANG[p.foreign_language]})` : ""}`}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <StatusBadge status={p.status} />
           <span className="t-meta text-ink-2">Revisão {p.current_revision}</span>
+          <Link href={`/editor/proposta/${p.id}/etiquetas`} className="inline-flex min-h-11 items-center rounded-control border border-line bg-surface px-4 t-ui hover:bg-surface-subtle">
+            Etiquetas e aprovação
+          </Link>
         </div>
       </ScreenHeader>
       <ProposalReview
