@@ -11,3 +11,6 @@ coverage/
 test-results/
 playwright-report/
 docs/validation/captures/tmp/
+tools/ingest/.venv/
+tools/ingest/raw/
+__pycache__/

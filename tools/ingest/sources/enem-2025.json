@@ -1,0 +1,805 @@
+{
+  "edition": "enem-2025",
+  "source_page": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gabaritos/2025",
+  "notes": [
+    "D1 e D2: aplicação regular (cadernos padrão baixados nesta etapa).",
+    "D3–D6: outras aplicações do mesmo ano; identificar pela capa antes de usar.",
+    "Variantes ampliada/superampliada/ledor e versões NVDA listadas, não baixadas: mesmos itens em formato acessível."
+  ],
+  "files": [
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_Dia_1_P1_LC_CH_Caderno_09_Laranja_NVDA.pdf",
+      "kind": "acessivel_nvda",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_Dia_1_P2_LC_CH_Caderno_09_Laranja_NVDA.pdf",
+      "kind": "acessivel_nvda",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_Dia_2_P1_CN_MT_Caderno_11_Laranja_NVDA.pdf",
+      "kind": "acessivel_nvda",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_Dia_2_P2_CN_MT_Caderno_11_Laranja_NVDA.pdf",
+      "kind": "acessivel_nvda",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D1_CD1.pdf",
+      "kind": "gabarito",
+      "day_code": "D1",
+      "booklet": 1,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D1_CD10.pdf",
+      "kind": "gabarito",
+      "day_code": "D1",
+      "booklet": 10,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D1_CD2.pdf",
+      "kind": "gabarito",
+      "day_code": "D1",
+      "booklet": 2,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D1_CD3.pdf",
+      "kind": "gabarito",
+      "day_code": "D1",
+      "booklet": 3,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D1_CD4.pdf",
+      "kind": "gabarito",
+      "day_code": "D1",
+      "booklet": 4,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D1_CD9.pdf",
+      "kind": "gabarito",
+      "day_code": "D1",
+      "booklet": 9,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D2_CD11.pdf",
+      "kind": "gabarito",
+      "day_code": "D2",
+      "booklet": 11,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D2_CD12.pdf",
+      "kind": "gabarito",
+      "day_code": "D2",
+      "booklet": 12,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D2_CD5.pdf",
+      "kind": "gabarito",
+      "day_code": "D2",
+      "booklet": 5,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D2_CD6.pdf",
+      "kind": "gabarito",
+      "day_code": "D2",
+      "booklet": 6,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D2_CD7.pdf",
+      "kind": "gabarito",
+      "day_code": "D2",
+      "booklet": 7,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D2_CD8.pdf",
+      "kind": "gabarito",
+      "day_code": "D2",
+      "booklet": 8,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D3_CD1.pdf",
+      "kind": "gabarito",
+      "day_code": "D3",
+      "booklet": 1,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D3_CD2.pdf",
+      "kind": "gabarito",
+      "day_code": "D3",
+      "booklet": 2,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D3_CD3.pdf",
+      "kind": "gabarito",
+      "day_code": "D3",
+      "booklet": 3,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D3_CD4.pdf",
+      "kind": "gabarito",
+      "day_code": "D3",
+      "booklet": 4,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D3_CD9.pdf",
+      "kind": "gabarito",
+      "day_code": "D3",
+      "booklet": 9,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D4_CD11.pdf",
+      "kind": "gabarito",
+      "day_code": "D4",
+      "booklet": 11,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D4_CD5.pdf",
+      "kind": "gabarito",
+      "day_code": "D4",
+      "booklet": 5,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D4_CD6.pdf",
+      "kind": "gabarito",
+      "day_code": "D4",
+      "booklet": 6,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D4_CD7.pdf",
+      "kind": "gabarito",
+      "day_code": "D4",
+      "booklet": 7,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D4_CD8.pdf",
+      "kind": "gabarito",
+      "day_code": "D4",
+      "booklet": 8,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D5_CD1.pdf",
+      "kind": "gabarito",
+      "day_code": "D5",
+      "booklet": 1,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D5_CD2.pdf",
+      "kind": "gabarito",
+      "day_code": "D5",
+      "booklet": 2,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D5_CD3.pdf",
+      "kind": "gabarito",
+      "day_code": "D5",
+      "booklet": 3,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D5_CD4.pdf",
+      "kind": "gabarito",
+      "day_code": "D5",
+      "booklet": 4,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D5_CD9.pdf",
+      "kind": "gabarito",
+      "day_code": "D5",
+      "booklet": 9,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D6_CD11.pdf",
+      "kind": "gabarito",
+      "day_code": "D6",
+      "booklet": 11,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D6_CD5.pdf",
+      "kind": "gabarito",
+      "day_code": "D6",
+      "booklet": 5,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D6_CD6.pdf",
+      "kind": "gabarito",
+      "day_code": "D6",
+      "booklet": 6,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D6_CD7.pdf",
+      "kind": "gabarito",
+      "day_code": "D6",
+      "booklet": 7,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_GB_impresso_D6_CD8.pdf",
+      "kind": "gabarito",
+      "day_code": "D6",
+      "booklet": 8,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D1_CD1.pdf",
+      "kind": "prova",
+      "day_code": "D1",
+      "booklet": 1,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D1_CD10.pdf",
+      "kind": "prova",
+      "day_code": "D1",
+      "booklet": 10,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D1_CD10_ampliada.pdf",
+      "kind": "prova",
+      "day_code": "D1",
+      "booklet": 10,
+      "variant": "ampliada",
+      "application": "regular",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D1_CD10_superampliada.pdf",
+      "kind": "prova",
+      "day_code": "D1",
+      "booklet": 10,
+      "variant": "superampliada",
+      "application": "regular",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D1_CD2.pdf",
+      "kind": "prova",
+      "day_code": "D1",
+      "booklet": 2,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D1_CD3.pdf",
+      "kind": "prova",
+      "day_code": "D1",
+      "booklet": 3,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D1_CD4.pdf",
+      "kind": "prova",
+      "day_code": "D1",
+      "booklet": 4,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D1_CD9.pdf",
+      "kind": "prova",
+      "day_code": "D1",
+      "booklet": 9,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D1_CD9_ampliada.pdf",
+      "kind": "prova",
+      "day_code": "D1",
+      "booklet": 9,
+      "variant": "ampliada",
+      "application": "regular",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D1_CD9_ledor.pdf",
+      "kind": "prova",
+      "day_code": "D1",
+      "booklet": 9,
+      "variant": "ledor",
+      "application": "regular",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D1_CD9_superampliada.pdf",
+      "kind": "prova",
+      "day_code": "D1",
+      "booklet": 9,
+      "variant": "superampliada",
+      "application": "regular",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D2_CD11.pdf",
+      "kind": "prova",
+      "day_code": "D2",
+      "booklet": 11,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D2_CD11_ampliada.pdf",
+      "kind": "prova",
+      "day_code": "D2",
+      "booklet": 11,
+      "variant": "ampliada",
+      "application": "regular",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D2_CD11_ledor.pdf",
+      "kind": "prova",
+      "day_code": "D2",
+      "booklet": 11,
+      "variant": "ledor",
+      "application": "regular",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D2_CD11_superampliada.pdf",
+      "kind": "prova",
+      "day_code": "D2",
+      "booklet": 11,
+      "variant": "superampliada",
+      "application": "regular",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D2_CD12.pdf",
+      "kind": "prova",
+      "day_code": "D2",
+      "booklet": 12,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D2_CD12_ampliada.pdf",
+      "kind": "prova",
+      "day_code": "D2",
+      "booklet": 12,
+      "variant": "ampliada",
+      "application": "regular",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D2_CD12_superampliada.pdf",
+      "kind": "prova",
+      "day_code": "D2",
+      "booklet": 12,
+      "variant": "superampliada",
+      "application": "regular",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D2_CD5.pdf",
+      "kind": "prova",
+      "day_code": "D2",
+      "booklet": 5,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D2_CD6.pdf",
+      "kind": "prova",
+      "day_code": "D2",
+      "booklet": 6,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D2_CD7.pdf",
+      "kind": "prova",
+      "day_code": "D2",
+      "booklet": 7,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D2_CD8.pdf",
+      "kind": "prova",
+      "day_code": "D2",
+      "booklet": 8,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D3_CD1.pdf",
+      "kind": "prova",
+      "day_code": "D3",
+      "booklet": 1,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D3_CD2.pdf",
+      "kind": "prova",
+      "day_code": "D3",
+      "booklet": 2,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D3_CD3.pdf",
+      "kind": "prova",
+      "day_code": "D3",
+      "booklet": 3,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D3_CD4.pdf",
+      "kind": "prova",
+      "day_code": "D3",
+      "booklet": 4,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D3_CD9.pdf",
+      "kind": "prova",
+      "day_code": "D3",
+      "booklet": 9,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D3_CD9_ampliada.pdf",
+      "kind": "prova",
+      "day_code": "D3",
+      "booklet": 9,
+      "variant": "ampliada",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D3_CD9_ledor.pdf",
+      "kind": "prova",
+      "day_code": "D3",
+      "booklet": 9,
+      "variant": "ledor",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D3_CD9_superampliada.pdf",
+      "kind": "prova",
+      "day_code": "D3",
+      "booklet": 9,
+      "variant": "superampliada",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D4_CD11.pdf",
+      "kind": "prova",
+      "day_code": "D4",
+      "booklet": 11,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D4_CD11_ampliada.pdf",
+      "kind": "prova",
+      "day_code": "D4",
+      "booklet": 11,
+      "variant": "ampliada",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D4_CD11_ledor.pdf",
+      "kind": "prova",
+      "day_code": "D4",
+      "booklet": 11,
+      "variant": "ledor",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D4_CD11_superampliada.pdf",
+      "kind": "prova",
+      "day_code": "D4",
+      "booklet": 11,
+      "variant": "superampliada",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D4_CD5.pdf",
+      "kind": "prova",
+      "day_code": "D4",
+      "booklet": 5,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D4_CD6.pdf",
+      "kind": "prova",
+      "day_code": "D4",
+      "booklet": 6,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D4_CD7.pdf",
+      "kind": "prova",
+      "day_code": "D4",
+      "booklet": 7,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D4_CD8.pdf",
+      "kind": "prova",
+      "day_code": "D4",
+      "booklet": 8,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D5_CD1.pdf",
+      "kind": "prova",
+      "day_code": "D5",
+      "booklet": 1,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D5_CD2.pdf",
+      "kind": "prova",
+      "day_code": "D5",
+      "booklet": 2,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D5_CD3.pdf",
+      "kind": "prova",
+      "day_code": "D5",
+      "booklet": 3,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D5_CD4.pdf",
+      "kind": "prova",
+      "day_code": "D5",
+      "booklet": 4,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D5_CD9.pdf",
+      "kind": "prova",
+      "day_code": "D5",
+      "booklet": 9,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D5_CD9_ampliada.pdf",
+      "kind": "prova",
+      "day_code": "D5",
+      "booklet": 9,
+      "variant": "ampliada",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D5_CD9_ledor.pdf",
+      "kind": "prova",
+      "day_code": "D5",
+      "booklet": 9,
+      "variant": "ledor",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D5_CD9_superampliada.pdf",
+      "kind": "prova",
+      "day_code": "D5",
+      "booklet": 9,
+      "variant": "superampliada",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D6_CD11.pdf",
+      "kind": "prova",
+      "day_code": "D6",
+      "booklet": 11,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D6_CD11_ampliada.pdf",
+      "kind": "prova",
+      "day_code": "D6",
+      "booklet": 11,
+      "variant": "ampliada",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D6_CD11_ledor.pdf",
+      "kind": "prova",
+      "day_code": "D6",
+      "booklet": 11,
+      "variant": "ledor",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D6_CD11_superampliada.pdf",
+      "kind": "prova",
+      "day_code": "D6",
+      "booklet": 11,
+      "variant": "superampliada",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D6_CD5.pdf",
+      "kind": "prova",
+      "day_code": "D6",
+      "booklet": 5,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D6_CD6.pdf",
+      "kind": "prova",
+      "day_code": "D6",
+      "booklet": 6,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D6_CD7.pdf",
+      "kind": "prova",
+      "day_code": "D6",
+      "booklet": 7,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D6_CD8.pdf",
+      "kind": "prova",
+      "day_code": "D6",
+      "booklet": 8,
+      "variant": "padrao",
+      "application": "a_identificar",
+      "download": false
+    }
+  ]
+}
