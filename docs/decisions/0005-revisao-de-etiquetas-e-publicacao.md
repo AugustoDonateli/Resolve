@@ -1,0 +1,12 @@
+# 0005 — Revisão de etiquetas sem IA obrigatória e publicação transacional
+
+Data: 9 nov. 2026 · Sessão 08
+
+1. **F2-T13 não depende da rodada real da F2-T11.** No backlog, a revisão de etiquetas depende da etiquetagem assistida. Como a chave da API foi adiada por Guto (custo), a tela funciona com preenchimento manual; quando houver sugestão do modelo (`tag_suggestions`), ela entra como ponto de partida e fica ligada à revisão (`suggestion_id`). O critério de pronto da F2-T13 não exige IA.
+2. **Etiquetas são revisadas na proposta, antes de virar item.** A revisão aponta para a revisão exata do conteúdo (`proposal_revision`); se o conteúdo mudar depois, a aprovação deixa de valer e a publicação é barrada. Evidências usam bloco + offsets UTF-16 do conteúdo dessa revisão, que é o mesmo publicado.
+3. **Ausência só com justificativa.** Assunto (a taxonomia de assuntos ainda não existe), evidência e resolução comentada podem ficar ausentes apenas com justificativa escrita. Distratores cobrem exatamente as letras erradas do gabarito oficial, cada um com tipo e justificativa editorial. Figuras precisam de texto alternativo e de recorte em dia.
+4. **Gabarito e cruzamento no banco.** Os gabaritos oficiais dos 12 cadernos e o resultado do cruzamento entre cores (F2-T10) foram gravados (só editores leem). A letra correta do item publicado vem do gabarito oficial, nunca de digitação.
+5. **Questões anuladas ficam fora da publicação** nesta etapa. O plano permite mantê-las como material de leitura identificado; isso fica para quando houver tela que mostre a identificação.
+6. **Publicação por função com privilégios (`publish_proposals`).** As tabelas de conteúdo seguem fechadas para escrita de clientes; a função confere o papel de editor e todas as pré-condições e faz tudo numa transação. O linter do Supabase avisa que usuários logados podem chamá-la: é intencional, e quem não é editor recebe recusa (testado).
+7. **Lotes de teste nunca são publicados** (`ingest_batches.publishable = false`). O teste de ponta a ponta para na aprovação; a publicação completa é testada no banco em transação desfeita. Nenhum item foi publicado nesta sessão: publicar exige a conferência humana de Guto.
+8. **Conteúdo para estudo pela vista `study_items`** (só publicados; sem gabarito, resolução, evidências nem distratores). A figura de item publicado fica legível para contas logadas; páginas do PDF e o resto do bucket editorial, não.
