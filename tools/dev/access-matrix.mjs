@@ -143,6 +143,38 @@ let batchId, proposalId;
   check("visitante", "não lê a vista de estudo", permError(vs), vs.error?.message ?? `${rows(vs)} item(ns)`);
 }
 
+// ── Ciclo de estudo: sessões, tentativas, caderno e eventos (F3-T01/T06/T12) ──
+{
+  const fake = "00000000-0000-4000-8000-000000000000";
+  for (const t of ["study_sessions", "session_items", "attempts", "error_entries", "attempt_events"]) {
+    const v = await V.c.from(t).select("*").limit(1);
+    check("visitante", `não lê ${t}`, permError(v), v.error?.message ?? `${rows(v)} linha(s)`);
+  }
+  const ins = await A.c.from("attempts").insert({ user_id: A.id, session_item_id: fake, item_version_id: fake, item_id: fake, chosen_alternative_id: fake, is_correct: true, client_action_id: fake }).select();
+  check("A", "não grava tentativa direto (nem acerto informado pelo cliente)", permError(ins), ins.error?.message ?? "gravou!");
+  const ss = await A.c.from("study_sessions").insert({ user_id: A.id, client_action_id: fake, mode: "treino" }).select();
+  check("A", "não cria sessão direto", permError(ss), ss.error?.message ?? "criou!");
+  const st = await A.c.rpc("start_session", { p_client_action_id: crypto.randomUUID(), p_mode: "treino", p_item_version_ids: [fake] });
+  check("A", "sessão só com item publicado", /resolve_item_unavailable/.test(st.error?.message ?? ""), st.error?.message ?? "iniciou!");
+  const sub = await B.c.rpc("submit_attempt", { p_client_action_id: crypto.randomUUID(), p_session_item_id: fake, p_alternative_id: fake });
+  check("B", "não responde em item de sessão alheia/inexistente", /resolve_session_item_not_found/.test(sub.error?.message ?? ""), sub.error?.message ?? "respondeu!");
+  const ev = await B.c.rpc("log_session_events", { p_session_id: fake, p_events: [] });
+  check("B", "não registra evento em sessão alheia/inexistente", /resolve_session_not_found/.test(ev.error?.message ?? ""), ev.error?.message ?? "registrou!");
+  const er = await B.c.rpc("set_error_reason", { p_entry_id: fake, p_reason: "calculo" });
+  check("B", "não muda motivo de erro alheio", /resolve_error_entry_not_found/.test(er.error?.message ?? ""), er.error?.message ?? "mudou!");
+  const calls = {
+    start_session: { p_client_action_id: fake, p_mode: "treino", p_item_version_ids: [fake] },
+    submit_attempt: { p_client_action_id: fake, p_session_item_id: fake, p_alternative_id: fake },
+    log_session_events: { p_session_id: fake, p_events: [] },
+    set_error_reason: { p_entry_id: fake, p_reason: "calculo" },
+    set_session_status: { p_session_id: fake, p_status: "encerrada" },
+  };
+  for (const [fn, args] of Object.entries(calls)) {
+    const r = await V.c.rpc(fn, args);
+    check("visitante", `não executa ${fn}`, permError(r), r.error?.message ?? "executou!");
+  }
+}
+
 // ── Arquivos ──
 {
   const bytes = new Blob(["arquivo de teste da matriz de acesso"], { type: "text/plain" });
