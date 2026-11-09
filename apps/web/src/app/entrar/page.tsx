@@ -6,7 +6,7 @@ import { SignInForm } from "./sign-in-form";
 
 export const metadata: Metadata = { title: "Entrar" };
 
-export default async function EntrarPage({ searchParams }: { searchParams: Promise<{ next?: string; erro?: string }> }) {
+export default async function EntrarPage({ searchParams }: { searchParams: Promise<{ next?: string }> }) {
   if (!authEnabled) redirect("/hoje");
   const sp = await searchParams;
   return (
@@ -15,7 +15,7 @@ export default async function EntrarPage({ searchParams }: { searchParams: Promi
         <Wordmark size={36} />
         <p className="mt-2 t-meta text-ink-2">Preparação para o ENEM</p>
         <h1 className="mb-6 mt-6 t-section">Entre para continuar de onde parou</h1>
-        <SignInForm next={safeNext(sp.next)} linkError={sp.erro === "link"} />
+        <SignInForm next={safeNext(sp.next)} />
       </div>
     </main>
   );

@@ -31,7 +31,7 @@ Legenda: ✅ concluída (critério verificado) · 🟡 parcial (o que falta est�
 
 | ID | Estado | Evidência / o que falta |
 |---|---|---|
-| F2-T01 | ✅ | Projeto Supabase `resolve` (sa-east-1). Login por e-mail e senha, sessão por cookies, `proxy.ts` protege as telas, preferências salvas na conta. Cadastro fechado por convite (gatilho no banco). API 17/17 e interface 6/6 (`docs/validation/2026-11-09-f2-t01.md`). Falta exercitar o e-mail de confirmação real no primeiro cadastro de Guto. |
+| F2-T01 | ✅ | Projeto Supabase `resolve` (sa-east-1). Login por e-mail e senha, sessão por cookies, `proxy.ts` protege as telas, preferências salvas na conta. Criar conta = e-mail + senha, ativa na hora, sem e-mail de confirmação (pedido de Guto). Cadastro restrito a e-mails liberados. API 17/17 + 8/8, interface 6/6 + fluxo de criação (`docs/validation/2026-11-09-f2-t01.md`). |
 
 Demais F2 ⬜. **F2-T02** depende de EXT-MATRIZ, **F2-T03** de F2-T02, **F2-T06** de EXT-PDF. F2-T05 (isolamento e papéis) depende de F2-T04.
 

@@ -10,11 +10,11 @@ import { authenticate, type AuthState } from "./actions";
  * Entrar e criar conta por convite (T01). Erro conserva o e-mail digitado e
  * diz o que fazer; carregando preserva o rótulo do botão.
  */
-export function SignInForm({ next, linkError }: { next: string; linkError: boolean }) {
+export function SignInForm({ next }: { next: string }) {
   const [state, action, pending] = useActionState<AuthState, FormData>(authenticate, {
     mode: "entrar",
     email: "",
-    error: linkError ? "O link de confirmação expirou ou já foi usado. Entre com e-mail e senha ou peça um novo cadastro." : undefined,
+    error: undefined,
   });
   const [mode, setMode] = useState<AuthState["mode"]>(state.mode);
   // Quando a ação devolve um novo estado (ex.: conta criada → Entrar), o modo acompanha.
@@ -55,7 +55,7 @@ export function SignInForm({ next, linkError }: { next: string; linkError: boole
       </fieldset>
 
       {current === "criar" && (
-        <p className="-mt-2 t-meta text-ink-2">O cadastro está fechado: só e-mails convidados conseguem criar conta.</p>
+        <p className="-mt-2 t-meta text-ink-2">Escolha uma senha e pronto: a conta já fica ativa, sem e-mail de confirmação.</p>
       )}
 
       <div className="flex flex-col gap-1.5">

@@ -75,13 +75,13 @@ test("preferência salva na conta vale em outro aparelho", async ({ browser }) =
   await two.close();
 });
 
-test("cadastro sem convite é recusado com mensagem clara", async ({ page }) => {
+test("cadastro de e-mail não liberado é recusado com mensagem clara", async ({ page }) => {
   await page.goto("/entrar");
   await page.getByText("Criar conta", { exact: true }).click();
   await page.getByLabel("E-mail").fill("sem-convite@resolve.test");
   await page.getByLabel("Senha", { exact: true }).fill("umasenhalonga123");
   await page.getByRole("button", { name: "Criar conta" }).click();
-  await expect(page.getByText("O cadastro está fechado e este e-mail não tem convite.")).toBeVisible();
+  await expect(page.getByText("Este e-mail não está liberado para criar conta no Resolve.")).toBeVisible();
   await expect(page.getByLabel("E-mail")).toHaveValue("sem-convite@resolve.test");
 });
 

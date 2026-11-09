@@ -8,7 +8,7 @@ export const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? 
 export const authEnabled = Boolean(SUPABASE_URL && SUPABASE_KEY);
 
 /** Rotas acessíveis sem sessão. */
-export const PUBLIC_PATHS = ["/entrar", "/auth/callback"];
+export const PUBLIC_PATHS = ["/entrar"];
 
 export function isPublicPath(pathname: string): boolean {
   return PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`));
