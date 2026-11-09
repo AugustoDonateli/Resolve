@@ -75,7 +75,7 @@ export function Correction() {
           <p className="t-meta text-ink-2">Tema</p>
           <h2 className="t-section">{E.prompt}</h2>
         </div>
-        <div className="text-right">
+        <div className="sm:text-right">
           <p className="t-meta text-ink-2">Total demonstrativo</p>
           <p className="t-metric">{total}</p>
         </div>
