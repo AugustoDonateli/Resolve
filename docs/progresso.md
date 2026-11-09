@@ -27,6 +27,14 @@ Legenda: ✅ concluída (critério verificado) · 🟡 parcial (o que falta est�
 | F1-T17 | ✅ | Hoje → foco → histórico em PC e celular. Interrupção aos 120 ms, caminho só por teclado e clique repetido verificados. Gravações em `docs/validation/recordings`. |
 | F1-T18 | 🟡 | Raio-X e troca de competência prontos e gravados. Evidência e comentário ficam ligados, e o ritmo é controlado pelo aluno. Falta repetir com questão real quando F1-T05 sair do bloqueio. |
 
-## F2–F7 e E
+## F2 — Conta, conteúdo e dados
 
-⬜ Nenhuma iniciada. Próxima liberada: **F2-T01** (conta pessoal; precisa de projeto Supabase). **F2-T02** depende de EXT-MATRIZ. **F2-T06** depende de EXT-PDF.
+| ID | Estado | Evidência / o que falta |
+|---|---|---|
+| F2-T01 | ✅ | Projeto Supabase `resolve` (sa-east-1). Login por e-mail e senha, sessão por cookies, `proxy.ts` protege as telas, preferências salvas na conta. Cadastro fechado por convite (gatilho no banco). API 17/17 e interface 6/6 (`docs/validation/2026-11-09-f2-t01.md`). Falta exercitar o e-mail de confirmação real no primeiro cadastro de Guto. |
+
+Demais F2 ⬜. **F2-T02** depende de EXT-MATRIZ, **F2-T03** de F2-T02, **F2-T06** de EXT-PDF. F2-T05 (isolamento e papéis) depende de F2-T04.
+
+## F3–F7 e E
+
+⬜ Nenhuma iniciada. **F2-T02** depende de EXT-MATRIZ. **F2-T06** depende de EXT-PDF.

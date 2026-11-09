@@ -53,6 +53,7 @@ export function PrefsForm() {
           { value: "22", label: "22 px" },
         ]}
       />
+      <SyncNote />
       <div>
         <label className="flex cursor-pointer items-start gap-3">
           <input
@@ -70,5 +71,23 @@ export function PrefsForm() {
         </label>
       </div>
     </div>
+  );
+}
+
+function SyncNote() {
+  const { sync } = usePrefs();
+  if (sync === "local") return null;
+  const text =
+    sync === "saving"
+      ? "Salvando na conta…"
+      : sync === "saved"
+        ? "Salvo na conta."
+        : sync === "error"
+          ? "Não foi possível salvar na conta agora. A preferência vale neste aparelho; tente de novo."
+          : "";
+  return (
+    <p className="-mt-2 min-h-5 t-meta text-ink-2" aria-live="polite" data-testid="prefs-sync">
+      {text}
+    </p>
   );
 }

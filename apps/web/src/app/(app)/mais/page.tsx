@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { AccountSection } from "@/components/account/account-section";
 import { PrefsForm } from "@/components/prefs/prefs-form";
 import { ScreenHeader } from "@/components/shell/app-shell";
 
@@ -22,9 +23,11 @@ export default function MaisPage() {
           <h2 id="prefs-title" className="mb-1 t-section">
             Preferências
           </h2>
-          <p className="mb-5 t-meta text-ink-2">Salvas neste aparelho até a conta pessoal existir (F2-T01).</p>
+          <p className="mb-5 t-meta text-ink-2">Com a conta conectada, ficam salvas nela; em modo local, só neste aparelho.</p>
           <PrefsForm />
         </section>
+        <div className="flex flex-col gap-6">
+        <AccountSection />
         <nav aria-label="Outras áreas">
           <ul className="flex flex-col gap-2">
             {LINKS.map((l) => (
@@ -40,6 +43,7 @@ export default function MaisPage() {
             ))}
           </ul>
         </nav>
+        </div>
       </div>
     </>
   );

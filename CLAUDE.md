@@ -17,5 +17,8 @@ Plataforma de preparação para o ENEM. Dono e primeiro usuário: Guto. Especifi
 ## Comandos
 `pnpm dev` · `pnpm check` (lint + tipos + testes) · `pnpm build` · `pnpm --filter @resolve/web audit:ui` (auditoria visual e de acessibilidade; exige build)
 
+## Supabase e testes com login
+Projeto `resolve` (ref `osgajpnvhhwujfzjlfwf`). Migrações em `supabase/migrations/`, aplicadas pelo MCP. Decisões em `docs/decisions/0002-conta-supabase.md`. Para a suíte `audit:ui` com login: crie `apps/web/.env.local` (veja `.env.example`), gere senhas das contas de teste com `node tools/dev/test-accounts.mjs <arquivo>` e exporte o arquivo antes de rodar.
+
 ## Ao encerrar
 Atualize `docs/progresso.md` e crie `docs/handoffs/AAAA-MM-DD-sessao-NN.md` com IDs concluídos, arquivos, verificações, pendências e o próximo ID liberado.

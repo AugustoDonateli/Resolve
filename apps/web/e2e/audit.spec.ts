@@ -2,7 +2,10 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { AUTH_FILE } from "./session";
 import { HEIGHT, THEMES, VIEWS, WIDTHS } from "./views";
+
+test.use({ storageState: AUTH_FILE });
 
 const CAPTURES = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../docs/validation/f1-t08");
 const AXE_TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
@@ -19,7 +22,7 @@ for (const view of VIEWS) {
   for (const theme of THEMES) {
     for (const width of WIDTHS) {
       test(`${view.id} · ${theme} · ${width}px`, async ({ browser }) => {
-        const ctx = await browser.newContext({ viewport: { width, height: HEIGHT[width]! }, colorScheme: theme });
+        const ctx = await browser.newContext({ storageState: AUTH_FILE, viewport: { width, height: HEIGHT[width]! }, colorScheme: theme });
         const page = await ctx.newPage();
         const errors: string[] = [];
         page.on("pageerror", (e) => errors.push(e.message));
@@ -49,7 +52,7 @@ for (const view of VIEWS) {
 for (const view of VIEWS) {
   for (const width of [720, 640]) {
     test(`${view.id} · zoom 200% (${width * 2}px)`, async ({ browser }) => {
-      const ctx = await browser.newContext({ viewport: { width, height: 450 } });
+      const ctx = await browser.newContext({ storageState: AUTH_FILE, viewport: { width, height: 450 } });
       const page = await ctx.newPage();
       await page.goto(view.path);
       await view.open(page);
@@ -60,11 +63,13 @@ for (const view of VIEWS) {
     });
   }
   test(`${view.id} · leitura 22 px em 360px`, async ({ browser }) => {
-    const ctx = await browser.newContext({ viewport: { width: 360, height: 780 } });
-    await ctx.addInitScript(() => localStorage.setItem("resolve:prefs", JSON.stringify({ theme: "system", reduceMotion: false, textScale: "22" })));
+    const ctx = await browser.newContext({ storageState: AUTH_FILE, viewport: { width: 360, height: 780 } });
     const page = await ctx.newPage();
     await page.goto(view.path);
     await view.open(page);
+    // Com conta conectada, a preferência vem da conta; aqui só o layout importa.
+    await page.evaluate(() => document.documentElement.setAttribute("data-text-scale", "22"));
+    await page.waitForTimeout(150);
     expect(await page.evaluate(() => document.documentElement.dataset.textScale)).toBe("22");
     expect(await horizontalOverflow(page)).toBeLessThanOrEqual(0);
     await ctx.close();
@@ -78,7 +83,7 @@ for (const view of VIEWS) {
 for (const view of VIEWS) {
   for (const width of [390, 1440]) {
     test(`${view.id} · teclado · ${width}px`, async ({ browser }) => {
-      const ctx = await browser.newContext({ viewport: { width, height: HEIGHT[width]! } });
+      const ctx = await browser.newContext({ storageState: AUTH_FILE, viewport: { width, height: HEIGHT[width]! } });
       const page = await ctx.newPage();
       await page.goto(view.path);
       await view.open(page);

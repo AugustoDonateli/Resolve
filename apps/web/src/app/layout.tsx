@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { PrefsProvider, prefsBootScript } from "@/components/prefs/prefs";
+import { loadPreferences, savePreferences } from "@/lib/prefs/actions";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,14 +19,24 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const account = await loadPreferences();
   return (
-    <html lang="pt-BR" data-text-scale="18" suppressHydrationWarning>
+    <html
+      lang="pt-BR"
+      data-text-scale={account?.textScale ?? "18"}
+      data-theme={account && account.theme !== "system" ? account.theme : undefined}
+      data-motion={account?.reduceMotion ? "reduced" : undefined}
+      data-account={account ? "" : undefined}
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: prefsBootScript }} />
       </head>
       <body>
-        <PrefsProvider>{children}</PrefsProvider>
+        <PrefsProvider account={account} persist={account ? savePreferences : undefined}>
+          {children}
+        </PrefsProvider>
       </body>
     </html>
   );

@@ -15,6 +15,11 @@ export default defineConfig({
     trace: "off",
     deviceScaleFactor: 1,
   },
+  projects: [
+    { name: "sessao", testMatch: /auth\.setup\.ts/ },
+    { name: "auditoria", testMatch: /audit\.spec\.ts/, dependencies: ["sessao"] },
+    { name: "conta", testMatch: /auth\.spec\.ts/ },
+  ],
   webServer: {
     command: "pnpm start -p 3100",
     url: "http://localhost:3100/hoje",
