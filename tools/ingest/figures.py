@@ -52,7 +52,8 @@ def question_region(page, q: dict, pno: int) -> tuple[float, float, float, float
         cx = (m["x0"] + m["x1"]) / 2
         if x0 - 10 <= m["x0"] <= x1 and m["top"] > b[1] + 5:
             limit = min(limit, m["top"] - 4)
-    return (x0, top, x1, limit)
+    px0, ptop, px1, _ = page.bbox
+    return (max(x0, px0), max(top, ptop), min(x1, px1), limit)
 
 
 def figures_on_page(page, q: dict, pno: int) -> list[dict]:

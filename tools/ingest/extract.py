@@ -14,7 +14,7 @@ import hashlib
 import json
 import re
 import sys
-from dataclasses import dataclass, field
+from dataclasses import dataclass, replace, field
 from pathlib import Path
 
 import pdfplumber
@@ -66,8 +66,8 @@ def footer_top(page) -> float:
     return (min(tops) - 4) if tops else page.height - 38
 
 
-SUB = str.maketrans("0123456789+-=()", "₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎")
-SUP = str.maketrans("0123456789+-=()", "⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾")
+SUB = str.maketrans("0123456789+-−=()", "₀₁₂₃₄₅₆₇₈₉₊₋₋₌₍₎")
+SUP = str.maketrans("0123456789+-−=()", "⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁻⁼⁽⁾")
 
 
 def body_size_of(raw: list[dict]) -> float:
@@ -133,6 +133,48 @@ def line_text(chars: list[dict], body: float) -> tuple[str, int, int]:
     return re.sub(r"\s+", " ", text), conv, left
 
 
+def bands(body, gutter: float, top: float, bottom: float) -> list[tuple[float, float, bool]]:
+    """Faixas verticais da página: (y0, y1, largura_total). Uma questão pode ocupar a largura toda
+    (linhas que atravessam a calha sem lacuna); o restante segue em duas colunas."""
+    lines = body.extract_text_lines(return_chars=True)
+
+    def is_wide(ln: dict) -> bool:
+        cs = sorted((c for c in ln["chars"] if c["text"].strip()), key=lambda c: c["x0"])
+        if not cs or cs[0]["x0"] > gutter - 20 or cs[-1]["x1"] < gutter + 20:
+            return False
+        return all(b["x0"] - a["x1"] < 8 for a, b in zip(cs, cs[1:]) if a["x1"] <= gutter + 8 and b["x0"] >= gutter - 8)
+
+    wide = sorted((ln for ln in lines if is_wide(ln)), key=lambda ln: ln["top"])
+    if not wide:
+        return [(top, bottom, False)]
+    groups: list[list[float]] = []
+    for ln in wide:
+        if groups and ln["top"] - groups[-1][1] < 30:
+            groups[-1][1] = ln["bottom"]
+        else:
+            groups.append([ln["top"], ln["bottom"]])
+    right = [ln for ln in lines if ln["x0"] >= gutter - 2]
+    out: list[tuple[float, float, bool]] = []
+    cursor = top
+    for g0, g1 in groups:
+        # o cabeçalho "QUESTÃO N" logo acima da faixa larga pertence a ela
+        head = [ln for ln in lines if QUESTION_RE.match(ln["text"].strip()) and 0 < g0 - ln["bottom"] < 30 and ln["top"] >= cursor]
+        if head:
+            g0 = min(ln["top"] for ln in head)
+        # a faixa continua para baixo até a coluna da direita voltar
+        nxt = [ln["top"] for ln in right if ln["top"] > g1 and not is_wide(ln)]
+        g1 = min(nxt) - 1 if nxt else bottom
+        if g1 <= cursor + 1:
+            continue
+        if g0 - 1 > cursor:
+            out.append((cursor, g0 - 1, False))
+        out.append((max(cursor, g0 - 1), g1, True))
+        cursor = g1
+    if cursor < bottom - 1:
+        out.append((cursor, bottom, False))
+    return out
+
+
 def page_lines(page, pno: int) -> list[Line]:
     w, h = page.width, page.height
     bottom = footer_top(page)
@@ -152,7 +194,15 @@ def page_lines(page, pno: int) -> list[Line]:
             if frac < best:
                 best, gutter = frac, x
     two_cols = len(rows) >= 20 and best < 0.2
-    regions = [(0, body.crop((0, 90, gutter, bottom))), (1, body.crop((gutter, 90, w, bottom)))] if two_cols else [(0, body)]
+    if two_cols:
+        regions = []
+        for y0, y1, full in bands(body, gutter, 90, bottom):
+            if full:
+                regions.append((0, body.crop((0, y0, w, y1))))
+            else:
+                regions += [(0, body.crop((0, y0, gutter, y1))), (1, body.crop((gutter, y0, w, y1)))]
+    else:
+        regions = [(0, body)]
     out: list[Line] = []
     for col, reg in regions:
         # y_tolerance maior junta sub/sobrescritos à linha de base (S₁ não vira linha solta)
@@ -244,11 +294,35 @@ def segment(pdf) -> tuple[list[Question], list[str]]:
     return questions, warnings
 
 
+def stack_fractions(lines: list[Line]) -> tuple[list[Line], int]:
+    """Alternativa em fração empilhada: o numerador vem antes da letra e o denominador depois,
+    ambos sobrepostos verticalmente à letra. Junta em "numerador/denominador"."""
+    out: list[Line] = []
+    i, n_frac = 0, 0
+    while i < len(lines):
+        ln = lines[i]
+        nxt = lines[i + 1] if i + 1 < len(lines) else None
+        if out and nxt and ln.alt_letter and not ln.text:
+            num = out[-1]
+            same = num.page == ln.page == nxt.page and num.column == ln.column == nxt.column
+            if (same and not num.alt_letter and not nxt.alt_letter and num.x0 > ln.x0 and nxt.x0 > ln.x0
+                    and num.top < ln.top < num.bottom and nxt.top < ln.bottom < nxt.bottom
+                    and re.fullmatch(r"[\w,.−\-+ ]{1,12}", num.text) and re.fullmatch(r"[\w,.−\-+ ]{1,12}", nxt.text)):
+                out[-1] = replace(ln, top=num.top, bottom=nxt.bottom, x1=max(num.x1, nxt.x1), text=f"{num.text}/{nxt.text}")
+                n_frac += 1
+                i += 2
+                continue
+        out.append(ln)
+        i += 1
+    return out, n_frac
+
+
 def structure(q: Question) -> dict:
     alts: dict[str, list[Line]] = {}
     pre: list[Line] = []
     cur = None
-    for ln in q.lines:
+    lines, n_frac = stack_fractions(q.lines)
+    for ln in lines:
         if ln.alt_letter:
             cur = ln.alt_letter
             alts.setdefault(cur, []).append(ln)
@@ -304,6 +378,8 @@ def structure(q: Question) -> dict:
         blocks.append({"id": "src", "type": "source", "text": join(source)})
     pages = sorted({l.page for l in q.lines})
     warnings = []
+    if n_frac:
+        warnings.append(f"fração empilhada em {n_frac} alternativa(s): reconstruída como a/b; conferir")
     empty = [k for k, v in alts.items() if not join(v)]
     if empty:
         warnings.append(f"alternativa(s) sem texto {''.join(empty)}: provavelmente figura")

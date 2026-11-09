@@ -124,6 +124,7 @@
         "alternativa D sem conteúdo": 6,
         "alternativa E sem conteúdo": 6,
         "alternativa(s) sem texto ABCDE": 6,
+        "fração empilhada em # alternativa(s)": 4,
         "alternativa(s) sem texto C": 2,
         "alternativas encontradas": 2
       },
@@ -445,7 +446,8 @@
           "status": "duvida",
           "errors": [],
           "doubts": [
-            "figura detectada sem recorte (F2-T08)"
+            "figura detectada sem recorte (F2-T08)",
+            "fração empilhada em 5 alternativa(s): reconstruída como a/b; conferir"
           ]
         },
         {
@@ -550,7 +552,8 @@
           "status": "duvida",
           "errors": [],
           "doubts": [
-            "figura detectada sem recorte (F2-T08)"
+            "figura detectada sem recorte (F2-T08)",
+            "fração empilhada em 5 alternativa(s): reconstruída como a/b; conferir"
           ]
         },
         {
@@ -686,6 +689,7 @@
           "status": "duvida",
           "errors": [],
           "doubts": [
+            "fração empilhada em 2 alternativa(s): reconstruída como a/b; conferir",
             "índices (sub/sobrescrito) em 5 linha(s): convertidos quando numéricos; conferir fórmulas"
           ]
         },
@@ -715,6 +719,7 @@
           "errors": [],
           "doubts": [
             "figura detectada sem recorte (F2-T08)",
+            "fração empilhada em 5 alternativa(s): reconstruída como a/b; conferir",
             "índices (sub/sobrescrito) em 3 linha(s): convertidos quando numéricos; conferir fórmulas"
           ]
         },
