@@ -126,3 +126,28 @@ export async function setSessionStatus(input: unknown): Promise<Outcome<string>>
   if (!p.success) return { ok: false, error: "estado inválido", final: true };
   return rpc<string>("set_session_status", { p_session_id: p.data.sessionId, p_status: p.data.status });
 }
+
+export interface ReviewQueueRow {
+  review_item_id: string;
+  item_id: string;
+  item_version_id: string | null;
+  due_date: string;
+  days_overdue: number;
+  stage: number;
+  queue_position: number;
+  in_batch: boolean;
+  local_date: string;
+  minutes_per_item: number;
+}
+
+const queueSchema = z.object({ availableMinutes: z.number().int().min(0).max(600) });
+
+/** Fila de revisão do dia (F3-T07): vencidos primeiro; o tempo disponível define o lote, o resto fica visível. */
+export async function reviewQueue(input: unknown): Promise<Outcome<{ rows: ReviewQueueRow[]; inBatch: number; remaining: number }>> {
+  const p = queueSchema.safeParse(input);
+  if (!p.success) return { ok: false, error: "tempo inválido", final: true };
+  const r = await rpc<ReviewQueueRow[]>("review_queue", { p_available_minutes: p.data.availableMinutes });
+  if (!r.ok) return r;
+  const inBatch = r.value.filter((x) => x.in_batch).length;
+  return { ok: true, value: { rows: r.value, inBatch, remaining: r.value.length - inBatch } };
+}

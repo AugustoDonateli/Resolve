@@ -175,6 +175,22 @@ let batchId, proposalId;
   }
 }
 
+// ── Agenda de revisão (F3-T07) ──
+{
+  for (const t of ["review_items", "review_events"]) {
+    const v = await V.c.from(t).select("*").limit(1);
+    check("visitante", `não lê ${t}`, permError(v), v.error?.message ?? `${rows(v)} linha(s)`);
+    const b = await B.c.from(t).insert({}).select();
+    check("B", `não grava ${t} direto`, permError(b), b.error?.message ?? "gravou!");
+  }
+  const vq = await V.c.rpc("review_queue", { p_available_minutes: 30 });
+  check("visitante", "não executa review_queue", permError(vq), vq.error?.message ?? "executou!");
+  const bq = await B.c.rpc("review_queue", { p_available_minutes: 30 });
+  check("B", "fila de revisão só com o que é dele", !bq.error && Array.isArray(bq.data), bq.error?.message ?? `${rows(bq)} item(ns)`);
+  const sc = await A.c.from("review_schedulers").select("version, intervals_days").eq("version", "srs-v1").single();
+  check("A", "lê a agenda versionada (1, 3, 7, 14, 30)", JSON.stringify(sc.data?.intervals_days) === "[1,3,7,14,30]", sc.error?.message ?? JSON.stringify(sc.data));
+}
+
 // ── Arquivos ──
 {
   const bytes = new Blob(["arquivo de teste da matriz de acesso"], { type: "text/plain" });
