@@ -67,6 +67,20 @@ export function PrefsProvider({ children }: { children: ReactNode }) {
     setPrefs(readStored());
   }, []);
 
+  // Modalidade de entrada: Radix foca abas por script no clique, o que o navegador
+  // trata como :focus-visible. Com ponteiro, o anel das abas fica oculto; qualquer tecla o traz de volta.
+  useEffect(() => {
+    const el = document.documentElement;
+    const pointer = () => el.setAttribute("data-modality", "pointer");
+    const keyboard = () => el.setAttribute("data-modality", "keyboard");
+    window.addEventListener("pointerdown", pointer, true);
+    window.addEventListener("keydown", keyboard, true);
+    return () => {
+      window.removeEventListener("pointerdown", pointer, true);
+      window.removeEventListener("keydown", keyboard, true);
+    };
+  }, []);
+
   const set = useCallback((patch: Partial<Prefs>) => {
     setPrefs((prev) => {
       const next = { ...prev, ...patch };

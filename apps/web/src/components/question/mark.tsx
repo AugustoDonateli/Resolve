@@ -40,7 +40,6 @@ export function Mark({
       transition={{ duration: reduced ? 0 : duration.evidence / 1000, ease: ease.evidence, delay: reduced || !on ? 0 : delay }}
       role={interactive ? "button" : undefined}
       tabIndex={interactive ? 0 : undefined}
-      aria-label={interactive ? label : undefined}
       onClick={interactive ? onActivate : undefined}
       onKeyDown={
         interactive
@@ -54,6 +53,7 @@ export function Mark({
       }
     >
       {children}
+      {interactive && label && <span className="sr-only"> ({label})</span>}
     </motion.span>
   );
 }

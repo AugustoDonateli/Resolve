@@ -15,7 +15,7 @@ Plataforma de preparação para o ENEM. Dono e primeiro usuário: Guto. Especifi
 - Ao criar um par de cores texto/fundo novo, acrescente-o a `usedPairs` em `packages/ui/src/tokens.ts`.
 
 ## Comandos
-`pnpm dev` · `pnpm check` (lint + tipos + testes) · `pnpm build`
+`pnpm dev` · `pnpm check` (lint + tipos + testes) · `pnpm build` · `pnpm --filter @resolve/web audit:ui` (auditoria visual e de acessibilidade; exige build)
 
 ## Ao encerrar
 Atualize `docs/progresso.md` e crie `docs/handoffs/AAAA-MM-DD-sessao-NN.md` com IDs concluídos, arquivos, verificações, pendências e o próximo ID liberado.

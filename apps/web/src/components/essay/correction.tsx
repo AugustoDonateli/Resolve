@@ -90,7 +90,7 @@ export function Correction() {
         }}
       >
         <LayoutGroup id="competencias">
-          <Tabs.List aria-label="Competências" className="-mx-4 flex gap-1 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
+          <Tabs.List aria-label="Competências" tabIndex={-1} className="grid grid-cols-5 gap-1 sm:flex">
             {E.competencies.map((c) => {
               const active = tab === c.code;
               return (
@@ -98,7 +98,7 @@ export function Correction() {
                   key={c.code}
                   value={c.code}
                   className={clsx(
-                    "relative flex min-h-14 shrink-0 flex-col items-start justify-center rounded-control px-3.5 py-2 text-left transition-colors duration-[var(--rs-dur-state)]",
+                    "relative flex min-h-12 min-w-0 shrink-0 flex-col items-center justify-center rounded-control px-1 py-2 text-center sm:min-h-14 sm:items-start sm:px-3.5 sm:text-left transition-colors duration-[var(--rs-dur-state)]",
                     active ? "text-on-mark" : "text-ink-2 hover:text-ink",
                   )}
                 >
@@ -113,12 +113,16 @@ export function Correction() {
                   <span className="relative t-ui">
                     {c.code} <span className="tabular">{c.score}</span>
                   </span>
-                  <span className="relative t-meta">{c.label}</span>
+                  <span className="relative max-sm:sr-only t-meta">{c.label}</span>
                 </Tabs.Trigger>
               );
             })}
           </Tabs.List>
         </LayoutGroup>
+        {/* Celular: o nome da competência ativa aparece sob as abas (as cinco cabem na largura). */}
+        <p className="mt-2 t-meta text-ink-2 sm:hidden" aria-hidden="true">
+          {E.competencies.find((c) => c.code === tab)?.label}
+        </p>
 
         <div ref={scopeRef} className="mt-6 grid gap-x-10 md:grid-cols-[minmax(0,68ch)_minmax(220px,280px)]">
           <div className="min-w-0">

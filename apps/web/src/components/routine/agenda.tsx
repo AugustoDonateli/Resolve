@@ -189,7 +189,6 @@ function AgendaBlock({
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
-      aria-label={`${KIND_LABEL[block.kind]}: ${block.title}, ${fmtClock(block.start)} a ${fmtClock(block.start + block.minutes)}${block.fixed ? ", compromisso fixo" : ". Ativar para remarcar"}`}
       aria-disabled={block.fixed || undefined}
       style={{ top, height: h, y, touchAction: block.fixed ? "auto" : "none" }}
       className={clsx(
@@ -203,15 +202,19 @@ function AgendaBlock({
       )}
     >
       <span aria-hidden="true" className={clsx("w-1 shrink-0", block.fixed ? "bg-line-subtle" : "bg-primary")} />
-      <span className={clsx("flex min-w-0 flex-1 items-start gap-2 px-2.5", h < 40 ? "py-0.5" : "py-1.5")}>
+      <span className={clsx("flex min-w-0 flex-1 items-start gap-2 px-2.5", h < 52 ? "py-0.5" : "py-1.5")}>
         <KindIcon kind={block.kind} className="mt-0.5 size-3.5 shrink-0" />
         <span className="min-w-0 flex-1">
           <span className="block truncate text-[14px] font-medium leading-5">{block.title}</span>
-          {h > 34 && (
-            <span className="block truncate t-meta tabular text-ink-2">
-              {fmtClock(block.start)}–{fmtClock(block.start + block.minutes)} · {fmtDuration(block.minutes)}
-            </span>
-          )}
+          {/* Nome acessível = texto visível + complemento só para leitor de tela (WCAG 2.5.3). */}
+          <span className={clsx("block truncate t-meta tabular text-ink-2", h < 52 && "sr-only")}>
+            {" "}
+            {fmtClock(block.start)}–{fmtClock(block.start + block.minutes)} · {fmtDuration(block.minutes)}
+          </span>
+          <span className="sr-only">
+            , {KIND_LABEL[block.kind]}
+            {block.fixed ? ", compromisso fixo" : ". Ativar para remarcar"}
+          </span>
         </span>
         {!block.fixed && <GripVertical aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-ink-2" />}
       </span>

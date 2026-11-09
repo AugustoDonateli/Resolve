@@ -255,13 +255,12 @@ function Timeline({
             const isFinal = finals.get(e.q)?.eventId === e.id;
             const lit = cursor >= e.t - 0.01;
             const qi = e.q - 1;
-            const label = `${e.t} min, questão ${e.q}: ${EVENT_LABEL[e.type]}${e.letter ? ` ${e.letter}` : ""}`;
+            const label = `${e.t} min, questão ${e.q}: ${EVENT_LABEL[e.type]}${e.type === "mudanca" ? ` de ${e.from} para ${e.letter}` : e.letter ? ` ${e.letter}` : ""}`;
             return (
               <li key={e.id} className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left: pct(e.t) }}>
                 <button
                   type="button"
                   onClick={() => onSelect(e)}
-                  aria-label={label}
                   aria-pressed={selected === e.id}
                   className={clsx(
                     "relative grid place-items-center rounded-full transition-opacity duration-[var(--rs-dur-state)]",
@@ -284,6 +283,8 @@ function Timeline({
                       )}
                     </motion.span>
                   )}
+                  {/* Nome = letras visíveis + descrição só para leitor de tela (WCAG 2.5.3). */}
+                  <span className="sr-only">, {label}</span>
                   {e.type === "mudanca" && (
                     <span aria-hidden="true" className="absolute -left-3 -top-3 grid size-5 place-items-center rounded-full border border-ink bg-surface text-[11px] text-ink-2 line-through">
                       {e.from}

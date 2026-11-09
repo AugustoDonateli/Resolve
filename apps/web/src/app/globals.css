@@ -72,6 +72,9 @@ body {
   border-radius: 4px;
 }
 
+/* Abas focadas por script após clique não exibem anel; teclado sempre exibe. */
+:root[data-modality="pointer"] [role="tab"]:focus-visible { outline: none; }
+
 ::selection { background: color-mix(in srgb, var(--rs-highlight-yellow) 70%, transparent); color: var(--rs-on-highlight); }
 
 /* Escala tipográfica (plano §6) — celular primeiro, PC a partir de 960 px. */

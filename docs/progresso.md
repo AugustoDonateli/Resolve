@@ -15,7 +15,7 @@ Legenda: ✅ concluída (critério verificado) · 🟡 parcial (o que falta est�
 | F1-T05 | ⛔ EXT-PDF | Componente de questão longa pronto com **questão demonstrativa identificada** (`/estudar`). Faltam uma questão real com figura e figura ampliável. |
 | F1-T06 | 🟡 | Comentário aponta para o trecho e as camadas são independentes (`/redacao`). Falta verificar "teclado móvel não encobre ação": a tela ainda não tem campo de texto. Conferir quando houver resposta/reescrita. |
 | F1-T07 | ✅ | Hoje + agenda com dados demonstrativos identificados. Remarcação por arrasto e por formulário usa a mesma regra (`canPlace`, com testes). |
-| F1-T08 | ⬜ | Capturas iniciais em `docs/validation/captures`. Falta a auditoria formal das 12 vistas (3 situações × 2 temas × 2 formatos), 768 px e zoom 200%. |
+| F1-T08 | 🟡 | **Concluída em emulação** (`docs/validation/2026-11-09-f1-t08-auditoria.md`). Suíte repetível `pnpm audit:ui`: 42/42 (12 vistas + 360/768 px, zoom 200%, leitura 22 px, teclado, foco encoberto, estrutura). Cinco correções feitas, incluindo uma falha WCAG 2.5.3. Falta a passada no aparelho de referência: toque, teclado virtual e leitor de tela. |
 | F1-T09 | ✅ | `docs/motion/storyboard-momentos.md`. |
 | F1-T10 | ✅ | `/prototipos/envelope`: formas CSS 3D + GSAP seguindo Q0–Q5. Cena medida em 5,00 s. **Pular** e Esc visíveis desde o primeiro quadro e levam à capa final. Cronômetro parado em 05:30:00 durante toda a cena, iniciando só em **Começar prova**. Variante sorteada entre dois cadernos demonstrativos. Reduzido = capa direta. Produção final: F7-T08 a T14. |
 | F1-T11 | ✅ | `/prototipos`: passagem medida em 607 ms. Esc ou novo clique terminam na etapa de destino, com foco no título. |
@@ -29,4 +29,4 @@ Legenda: ✅ concluída (critério verificado) · 🟡 parcial (o que falta est�
 
 ## F2–F7 e E
 
-⬜ Nenhuma iniciada. Próximas liberadas: **F2-T01** (conta pessoal; precisa de projeto Supabase) e **F1-T08** (auditoria das 12 vistas; idealmente no aparelho de referência). **F2-T02** depende de EXT-MATRIZ. **F2-T06** depende de EXT-PDF.
+⬜ Nenhuma iniciada. Próxima liberada: **F2-T01** (conta pessoal; precisa de projeto Supabase). **F2-T02** depende de EXT-MATRIZ. **F2-T06** depende de EXT-PDF.
