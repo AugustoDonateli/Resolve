@@ -35,7 +35,7 @@ Legenda: ✅ concluída (critério verificado) · 🟡 parcial (o que falta est�
 | F2-T02 | ✅ | Esquema versionado (fontes só acrescentam, matriz publicada imutável) e carga da matriz oficial do INEP (abril 2026): 5 eixos, 30 competências, 120 habilidades, conferidas texto a texto contra o PDF e por hash no banco. Teste de duas versões coexistindo e de imutabilidade passou. Perfil Enem 2025 (referência). |
 | F2-T03 | ✅ | Itens, versões, estímulos, alternativas, cadernos, mapa de letras (chave composta impede alternativa de outro item ou de outra versão), figuras. Publicar exige 5 alternativas e 1 correta; versão publicada imutável. 19 testes de integridade em transação desfeita. |
 | F2-T04 | ✅ | Etiquetas (proposta vs revisão), evidências por multitrecho (offsets UTF-16 validados contra a versão), figura (bbox 0–1) ou passo de cálculo, taxonomia de distratores v0, revisões editoriais. Aluno não lê gabarito, resolução nem evidências (6 testes de acesso). |
-| F2-T05 | ✅ | Papel de editor em `user_roles` (só SQL do dono escreve), políticas da área editorial, buckets privados `editorial` (só editor) e `pessoal` (cada conta na própria pasta). Matriz de acesso contra o projeto real com A, B, editor e visitante: 61/61 (`pnpm test:access`). Rascunho visível só ao editor, testado no banco (`docs/validation/2026-11-09-f2-t05-t11-t12.md`). |
+| F2-T05 | ✅ | Papel de editor em `user_roles` (só SQL do dono escreve), políticas da área editorial, buckets privados `editorial` (só editor) e `pessoal` (cada conta na própria pasta). Matriz de acesso contra o projeto real com A, B, editor e visitante: 61/61 na entrega (135/135 na sessão 10) (`pnpm test:access`). Rascunho visível só ao editor, testado no banco (`docs/validation/2026-11-09-f2-t05-t11-t12.md`). |
 | F2-T06 | ✅ | Enem 2025: manifesto com 90 arquivos listados, 24 baixados (D1/D2 regulares, cadernos padrão) com sha256, cor e caderno conferidos pela capa; registrados em `sources`. |
 | F2-T07 | ✅ | `tools/ingest/extract.py`: Dia 1 95/95 e Dia 2 90/90 questões localizadas. Piloto de 10 com conferência visual e relatório (`docs/validation/2026-11-09-f2-t07-extracao-piloto.md`). Limitações (tabelas, alternativas em grade, texto em imagem) registradas. |
 | F2-T08 | ✅ | `tools/ingest/figures.py`: imagens, vetoriais e tabelas da área da questão, ligadas à letra da alternativa. PNG a 216 dpi com bbox, página, origem e sha256. Piloto: 16 recortes, 0 cortados, conferidos visualmente. Limitações (faixa da figura vizinha, texto em imagem) ficam para a revisão F2-T12 (`docs/validation/2026-11-09-f2-t08-t09-t10.md`). |
@@ -54,10 +54,18 @@ Demais F2 ⬜. F2-T15 (revisar lote de até 15 itens) liberada: é a primeira re
 |---|---|---|
 | F3-T01 | ✅ | Sessões, lista congelada e tentativas por funções que usam a conta do login. Mesma confirmação enviada duas vezes = uma tentativa lógica; acerto calculado no servidor; gabarito só depois; ajuda vista marca a tentativa; tempos limitados; prazo e pausa conforme o modo (`docs/validation/2026-11-09-f3-t01-t06-t12.md`). Concorrência real ainda não exercitada (proteção estrutural; teste via API quando houver questão publicada). |
 | F3-T06 | ✅ | Caderno: um erro ativo por item, erro repetido atualiza a mesma entrada, motivo opcional com "não informado" explícito (taxonomia v0, decisão 0006). A interface do motivo entra na tela de resolver (F3-T02). |
-| F3-T12 | ✅ | Eventos discretos com sequência única por sessão, reenvio ignorado, conteúdo fechado por tipo (sem texto livre), hora do cliente só quando plausível. Limpeza de 30 dias pendente. |
+| F3-T07 | ✅ | Agenda `srs-v1` (1/3/7/14/30 dias, 3 min por item no lote) alimentada pela confirmação da resposta. Relógio controlado: erro → dia local seguinte; progressão completa; ajuda repete o intervalo; acerto antecipado não conta; última etapa conclui e resolve o erro no caderno; fuso Tóquio × São Paulo e fuso inválido; fila com lote pelo tempo e restante visível; reenvio = 1 evento (`docs/validation/2026-11-09-f3-t07-f5-t02.md`, decisão 0007). Tela da revisão: F3-T08. |
 
-Demais F3 ⬜. F3-T02 depende de F2-T16 (piloto de 30 publicado) e F1-T05. F3-T07 (agenda de revisão) liberada.
+Demais F3 ⬜. F3-T02 depende de F2-T16 (piloto de 30 publicado) e F1-T05. F3-T08 depende de F3-T04; F3-T09 (flashcards) liberada.
 
-## F4–F7 e E
+## F5 — Redação
+
+| ID | Estado | Evidência / o que falta |
+|---|---|---|
+| F5-T02 | ✅ | Temas, textos motivadores, redações, versões, correções, avaliações, anotações e resultados. Rubrica oficial (5 competências × 6 níveis) extraída da matriz do Inep e conferida contra a página (`tools/ingest/rubrica.py`). Versão enviada imutável com sha256; tema só publica com fonte de direitos conferidos; avaliação C1–C5 nos degraus com total = soma; anotação dentro do texto e ausência sem trecho; faixa calibrada só com calibração. Outra conta e editor não leem texto nem arquivo. 14 grupos de casos no banco; matriz de acesso 135/135 (decisão 0007). Regras de discrepância ausentes até F5-T11. |
+
+Demais F5 ⬜. Liberadas: F5-T03 (publicar eixos e textos motivadores conferidos) e F5-T08 (fila e reserva de custo). F5-T01/T17 dependem de EXT-CORPUS.
+
+## F4, F6, F7 e E
 
 ⬜ Nenhuma iniciada.
