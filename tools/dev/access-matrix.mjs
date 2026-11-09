@@ -191,6 +191,45 @@ let batchId, proposalId;
   check("A", "lê a agenda versionada (1, 3, 7, 14, 30)", JSON.stringify(sc.data?.intervals_days) === "[1,3,7,14,30]", sc.error?.message ?? JSON.stringify(sc.data));
 }
 
+// ── Redação (F5-T02) ──
+{
+  for (const t of ["essays", "essay_versions", "essay_jobs", "essay_evaluations", "essay_results", "essay_annotations", "essay_rubrics"]) {
+    const v = await V.c.from(t).select("*").limit(1);
+    check("visitante", `não lê ${t}`, permError(v), v.error?.message ?? `${rows(v)} linha(s)`);
+  }
+  const dims = await A.c.from("rubric_dimensions").select("code").order("code");
+  check("A", "lê as 5 competências da rubrica oficial", (dims.data ?? []).map((d) => d.code).join() === "C1,C2,C3,C4,C5", dims.error?.message ?? JSON.stringify(dims.data));
+  const es = await A.c.from("essays").insert({}).select("id").single();
+  check("A", "cria a própria redação (tema livre)", Boolean(es.data), es.error?.message ?? "");
+  const essayId = es.data?.id;
+  const ver = await A.c.from("essay_versions").insert({ essay_id: essayId, paragraphs_json: [{ id: "p1", text: "Rascunho da matriz de acesso." }] }).select("id, plain_text").single();
+  check("A", "cria rascunho; texto corrido vem dos parágrafos", ver.data?.plain_text === "Rascunho da matriz de acesso.", ver.error?.message ?? JSON.stringify(ver.data));
+  for (const [who, s] of [["B", B], ["E", E]]) {
+    const r1 = await s.c.from("essays").select("id").eq("id", essayId);
+    check(who, "não lê a redação de A", denied(r1), r1.error?.message ?? `${rows(r1)} linha(s)`);
+    const r2 = await s.c.from("essay_versions").select("id").eq("essay_id", essayId);
+    check(who, "não lê as versões de A", denied(r2), r2.error?.message ?? `${rows(r2)} linha(s)`);
+    const up = await s.c.from("essay_versions").update({ paragraphs_json: [{ id: "p1", text: "invadido" }] }).eq("essay_id", essayId).select();
+    check(who, "não altera o rascunho de A", denied(up), up.error?.message ?? `${rows(up)} linha(s)`);
+    const ins = await s.c.from("essay_versions").insert({ essay_id: essayId, paragraphs_json: [{ id: "p1", text: "intruso" }] }).select();
+    check(who, "não cria versão na redação de A", permError(ins), ins.error?.message ?? "criou!");
+    const rm = await s.c.from("essays").delete().eq("id", essayId).select();
+    check(who, "não apaga a redação de A", denied(rm), rm.error?.message ?? `${rows(rm)} linha(s)`);
+  }
+  const job = await A.c.from("essay_jobs").insert({ version_id: ver.data?.id, model_policy_id: "x", idempotency_key: "matriz-de-acesso" }).select();
+  check("A", "não cria correção direto", permError(job), job.error?.message ?? "criou!");
+  for (const t of ["essay_evaluations", "essay_results", "essay_annotations"]) {
+    const w = await A.c.from(t).insert({}).select();
+    check("A", `não grava ${t} direto`, permError(w), w.error?.message ?? "gravou!");
+  }
+  const pr = await A.c.from("essay_prompts").insert({ title: "Tema intruso", instruction: "não deveria entrar" }).select();
+  check("A", "não cria tema de redação", permError(pr), pr.error?.message ?? "criou!");
+  const still = await A.c.from("essay_versions").select("plain_text").eq("essay_id", essayId);
+  check("A", "rascunho continua intacto", rows(still) === 1 && still.data[0].plain_text === "Rascunho da matriz de acesso.", JSON.stringify(still.data));
+  const del = await A.c.from("essays").delete().eq("id", essayId).select();
+  check("A", "apaga a própria redação sem versão enviada", rows(del) === 1, del.error?.message ?? `${rows(del)} linha(s)`);
+}
+
 // ── Arquivos ──
 {
   const bytes = new Blob(["arquivo de teste da matriz de acesso"], { type: "text/plain" });

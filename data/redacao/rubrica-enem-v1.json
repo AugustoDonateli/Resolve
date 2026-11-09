@@ -1,0 +1,210 @@
+{
+  "source": {
+    "title": "Matrizes de Referência – Enem",
+    "institution": "Inep/MEC",
+    "url": "https://download.inep.gov.br/enem/outros_documentos/enem_matriz_de_referencia_v1.pdf",
+    "sha256": "4f540d5439df00f88e13363ecaff3d884b83d16c1ae6cedbe5c2c3aabbf288b6",
+    "pages": [
+      29,
+      30,
+      31
+    ]
+  },
+  "label": "Redação do Enem — competências e níveis (Inep, abril de 2026)",
+  "allowed_scores": [
+    0,
+    40,
+    80,
+    120,
+    160,
+    200
+  ],
+  "competencies": [
+    {
+      "code": "C1",
+      "roman": "I",
+      "title": "Demonstrar domínio da modalidade escrita formal da língua portuguesa.",
+      "levels": [
+        {
+          "score": 200,
+          "description": "Demonstra excelente domínio da modalidade escrita formal da língua portuguesa e de escolha de registro. Desvios gramaticais ou de convenções da escrita serão aceitos somente como excepcionalidade e quando não caracterizarem reincidência.",
+          "page": 29
+        },
+        {
+          "score": 160,
+          "description": "Demonstra bom domínio da modalidade escrita formal da língua portuguesa e de escolha de registro, com poucos desvios gramaticais e de convenções da escrita.",
+          "page": 29
+        },
+        {
+          "score": 120,
+          "description": "Demonstra domínio mediano da modalidade escrita formal da língua portuguesa e de escolha de registro, com alguns desvios gramaticais e de convenções da escrita.",
+          "page": 29
+        },
+        {
+          "score": 80,
+          "description": "Demonstra domínio insuficiente da modalidade escrita formal da língua portuguesa, com muitos desvios gramaticais, de escolha de registro e de convenções da escrita.",
+          "page": 29
+        },
+        {
+          "score": 40,
+          "description": "Demonstra domínio precário da modalidade escrita formal da língua portuguesa, de forma sistemática, com diversificados e frequentes desvios gramaticais, de escolha de registro e de convenções da escrita.",
+          "page": 29
+        },
+        {
+          "score": 0,
+          "description": "Demonstra desconhecimento da modalidade escrita formal da língua portuguesa.",
+          "page": 29
+        }
+      ]
+    },
+    {
+      "code": "C2",
+      "roman": "II",
+      "title": "Compreender a proposta de redação e aplicar conceitos das várias áreas de conhecimento para desenvolver o tema dentro dos limites estruturais do texto dissertativo-argumentativo em prosa.",
+      "levels": [
+        {
+          "score": 200,
+          "description": "Desenvolve o tema por meio de argumentação consistente, a partir de um repertório sociocultural produtivo, e apresenta excelente domínio do texto dissertativo-argumentativo.",
+          "page": 30
+        },
+        {
+          "score": 160,
+          "description": "Desenvolve o tema por meio de argumentação consistente e apresenta bom domínio do texto dissertativo-argumentativo, com proposição, argumentação e conclusão.",
+          "page": 30
+        },
+        {
+          "score": 120,
+          "description": "Desenvolve o tema por meio de argumentação previsível e apresenta domínio mediano do texto dissertativo-argumentativo, com proposição, argumentação e conclusão.",
+          "page": 30
+        },
+        {
+          "score": 80,
+          "description": "Desenvolve o tema recorrendo à cópia de trechos dos textos motivadores ou apresenta domínio insuficiente do texto dissertativo-argumentativo, não atendendo à estrutura com proposição, argumentação e conclusão.",
+          "page": 30
+        },
+        {
+          "score": 40,
+          "description": "Apresenta o assunto, tangenciando o tema, ou demonstra domínio precário do texto dissertativo-argumentativo, com traços constantes de outros tipos textuais.",
+          "page": 30
+        },
+        {
+          "score": 0,
+          "description": "Fuga ao tema/não atendimento à estrutura dissertativo-argumentativa. Nestes casos a redação recebe nota 0 (zero) e é anulada.",
+          "page": 30
+        }
+      ]
+    },
+    {
+      "code": "C3",
+      "roman": "III",
+      "title": "Selecionar, relacionar, organizar e interpretar informações, fatos, opiniões e argumentos em defesa de um ponto de vista.",
+      "levels": [
+        {
+          "score": 200,
+          "description": "Apresenta informações, fatos e opiniões relacionados ao tema proposto, de forma consistente e organizada, configurando autoria, em defesa de um ponto de vista.",
+          "page": 30
+        },
+        {
+          "score": 160,
+          "description": "Apresenta informações, fatos e opiniões relacionados ao tema, de forma organizada, com indícios de autoria, em defesa de um ponto de vista.",
+          "page": 30
+        },
+        {
+          "score": 120,
+          "description": "Apresenta informações, fatos e opiniões relacionados ao tema, limitados aos argumentos dos textos motivadores e pouco organizados, em defesa de um ponto de vista.",
+          "page": 30
+        },
+        {
+          "score": 80,
+          "description": "Apresenta informações, fatos e opiniões relacionados ao tema, mas desorganizados ou contraditórios e limitados aos argumentos dos textos motivadores, em defesa de um ponto de vista.",
+          "page": 30
+        },
+        {
+          "score": 40,
+          "description": "Apresenta informações, fatos e opiniões pouco relacionados ao tema ou incoerentes e sem defesa de um ponto de vista.",
+          "page": 30
+        },
+        {
+          "score": 0,
+          "description": "Apresenta informações, fatos e opiniões não relacionados ao tema e sem defesa de um ponto de vista.",
+          "page": 30
+        }
+      ]
+    },
+    {
+      "code": "C4",
+      "roman": "IV",
+      "title": "Demonstrar conhecimento dos mecanismos linguísticos necessários para a construção da argumentação.",
+      "levels": [
+        {
+          "score": 200,
+          "description": "Articula bem as partes do texto e apresenta repertório diversificado de recursos coesivos.",
+          "page": 31
+        },
+        {
+          "score": 160,
+          "description": "Articula as partes do texto, com poucas inadequações, e apresenta repertório diversificado de recursos coesivos.",
+          "page": 31
+        },
+        {
+          "score": 120,
+          "description": "Articula as partes do texto, de forma mediana, com inadequações, e apresenta repertório pouco diversificado de recursos coesivos.",
+          "page": 31
+        },
+        {
+          "score": 80,
+          "description": "Articula as partes do texto, de forma insuficiente, com muitas inadequações, e apresenta repertório limitado de recursos coesivos.",
+          "page": 31
+        },
+        {
+          "score": 40,
+          "description": "Articula as partes do texto de forma precária.",
+          "page": 31
+        },
+        {
+          "score": 0,
+          "description": "Não articula as informações.",
+          "page": 31
+        }
+      ]
+    },
+    {
+      "code": "C5",
+      "roman": "V",
+      "title": "Elaborar proposta de intervenção para o problema abordado, respeitando os direitos humanos.",
+      "levels": [
+        {
+          "score": 200,
+          "description": "Elabora muito bem proposta de intervenção, detalhada, relacionada ao tema e articulada à discussão desenvolvida no texto.",
+          "page": 31
+        },
+        {
+          "score": 160,
+          "description": "Elabora bem proposta de intervenção relacionada ao tema e articulada à discussão desenvolvida no texto.",
+          "page": 31
+        },
+        {
+          "score": 120,
+          "description": "Elabora, de forma mediana, proposta de intervenção relacionada ao tema e articulada à discussão desenvolvida no texto.",
+          "page": 31
+        },
+        {
+          "score": 80,
+          "description": "Elabora, de forma insuficiente, proposta de intervenção relacionada ao tema, ou não articulada com a discussão desenvolvida no texto.",
+          "page": 31
+        },
+        {
+          "score": 40,
+          "description": "Apresenta proposta de intervenção vaga, precária ou relacionada apenas ao assunto.",
+          "page": 31
+        },
+        {
+          "score": 0,
+          "description": "Não apresenta proposta de intervenção ou apresenta proposta não relacionada ao tema ou ao assunto.",
+          "page": 31
+        }
+      ]
+    }
+  ],
+  "note": "Regras de discrepância e consolidação entre avaliadores não constam desta publicação; ficam para a F5-T11 com fonte própria."
+}
