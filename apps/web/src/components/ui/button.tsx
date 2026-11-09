@@ -29,7 +29,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         "inline-flex select-none items-center justify-center gap-2 rounded-control t-ui whitespace-nowrap",
         "transition-[background-color,border-color,transform,color] duration-[var(--rs-dur-press)] ease-press",
         "active:translate-y-px disabled:cursor-not-allowed disabled:active:translate-y-0",
-        size === "md" ? "min-h-11 px-4" : "min-h-9 px-3 text-[15px]",
+        size === "md" ? "min-h-11 px-4" : "min-h-9 px-3 text-[15px] pointer-coarse:min-h-11",
         variant === "primary" &&
           "bg-primary text-on-primary hover:bg-primary-hover active:bg-primary-pressed disabled:bg-disabled disabled:text-ink-2",
         variant === "secondary" &&

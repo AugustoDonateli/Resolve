@@ -267,7 +267,7 @@ function LayerToggles({ layers, onChange }: { layers: Set<CompetencyCode>; onCha
       <p className="mb-3 t-meta text-ink-2">Mostre os trechos de outras competências ao mesmo tempo. Cada camada liga e desliga sozinha.</p>
       <div className="flex flex-wrap gap-x-5 gap-y-2">
         {E.competencies.map((c) => (
-          <label key={c.code} className="flex min-h-9 cursor-pointer items-center gap-2 t-meta">
+          <label key={c.code} className="flex min-h-9 cursor-pointer items-center gap-2 t-meta pointer-coarse:min-h-11">
             <input
               type="checkbox"
               className="size-4 accent-[var(--rs-primary)]"

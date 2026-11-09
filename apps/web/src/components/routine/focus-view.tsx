@@ -79,7 +79,7 @@ export function FocusView({
         aria-hidden="true"
         className="absolute inset-y-0 left-6 w-0.5 bg-primary sm:left-12 md:left-20"
       />
-      <div className="relative flex min-h-full max-w-[880px] flex-col py-8 pl-12 pr-5 sm:py-12 sm:pl-24 sm:pr-8 md:pl-32 md:py-16">
+      <div className="relative flex min-h-full max-w-[880px] flex-col pb-[calc(2rem+env(safe-area-inset-bottom))] pl-12 pr-5 pt-[calc(2rem+env(safe-area-inset-top))] sm:pl-24 sm:pr-8 md:pl-32 md:py-16">
         <motion.div
           layout="position"
           className="flex flex-wrap items-center gap-3"

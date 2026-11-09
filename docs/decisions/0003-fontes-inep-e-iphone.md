@@ -1,0 +1,12 @@
+# 0003 — Fontes do INEP, edição inicial e celular de referência
+
+Data: 9 nov. 2026 · Sessão 05
+
+1. **Edição inicial: Enem 2025, aplicação regular.** É o pacote mais recente e completo verificável: provas e gabaritos de todos os cadernos e microdados de 2025 (1,0 GB, publicados em 15 set. 2026). Microdados de 2024 (526 MB) também existem. Ambos ficam para a F2-T17 e ainda não foram baixados.
+2. **Download direto do INEP.** `download.inep.gov.br` envia o certificado sem o intermediário "RNP ICPEdu GR46 OV TLS CA 2025". O intermediário oficial (GlobalSign, verificado até a raiz GlobalSign Root R46) está versionado em `tools/ingest/certs/` e só completa a cadeia. A verificação TLS continua ligada.
+3. **Arquivos brutos fora do git** (`tools/ingest/raw/`, recriáveis por `fetch.py`). No repositório ficam os manifestos com origem, sha256, tamanho, páginas, cor e caderno (`data/manifests/`). No banco, cada PDF vira uma linha em `public.sources` (só acrescenta).
+4. **Matriz de referência:** a publicação do INEP de abril de 2026 (v1) mantém a estrutura vigente: 5 eixos cognitivos, competências de área (LC 9, MT 7, CN 8, CH 6) e 30 habilidades por área. Foi carregada como versão publicada e imutável. As competências da redação (níveis 0–200) do mesmo documento serão a base da rubrica na F5.
+5. **Perfil "Enem 2025 · aplicação regular (referência)":** durações (330 e 300 min), faixas de questões e opção de língua vêm da capa dos cadernos. O horário de início não consta no caderno e ficou nulo, à espera de fonte oficial antes do Dia D.
+6. **Taxonomia de distratores v0-proposta:** as definições e limites são editoriais do Resolve (o plano dá só os nomes). Os exemplos revisados entram com os primeiros itens publicados.
+7. **Gabarito protegido no banco:** `alternatives.is_correct`, `item_versions.explanation_steps`, evidências e anotações de distrator não são legíveis pelo aluno. Serão entregues por função após a resposta (F3-T04).
+8. **Celular de referência: iPhone (Safari/iOS).** Guto ainda não informou o modelo; o roteiro pede para anotá-lo. Na suíte, o projeto `iphone` emula o iPhone 15 no Chromium (o WebKit não está disponível neste ambiente). Isso cobre viewport, toque, densidade e user agent, mas não o Safari real nem o VoiceOver: esses ficam em `docs/validation/roteiro-iphone.md`. Ajustes feitos: `viewport-fit=cover` e áreas seguras (cabeçalho, barra inferior, foco, laterais), sem destaque de toque do iOS, e alvos de 44 px em telas de toque (`pointer: coarse`).

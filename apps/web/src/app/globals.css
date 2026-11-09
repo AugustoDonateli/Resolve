@@ -50,11 +50,16 @@
 :root[data-text-scale="22"] { --rs-reading-size: 22px; --rs-reading-line: 35px; }
 
 html {
+  /* iOS: sem o destaque cinza padrão; botões e alternativas têm estado de pressionado próprio. */
+  -webkit-tap-highlight-color: transparent;
   background: var(--rs-background);
   color: var(--rs-text);
   -webkit-text-size-adjust: 100%;
 }
 body {
+  /* iPhone deitado: conteúdo fora das áreas do entalhe */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 24px;

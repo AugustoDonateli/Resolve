@@ -13,6 +13,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  // iPhone: ocupa a tela inteira e respeita entalhe/barra via env(safe-area-inset-*).
+  viewportFit: "cover",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#F7F4ED" },
     { media: "(prefers-color-scheme: dark)", color: "#20242C" },

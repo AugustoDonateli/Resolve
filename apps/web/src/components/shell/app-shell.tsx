@@ -104,8 +104,8 @@ export function AppShell({ children }: { children: ReactNode }) {
       </aside>
 
       {/* Celular: cabeçalho com marca */}
-      <header className="sticky top-0 z-20 flex h-14 items-center border-b border-line-subtle bg-background/95 px-4 backdrop-blur md:hidden">
-        <Link href="/hoje" className="rounded-control">
+      <header className="sticky top-0 z-20 flex h-[calc(3.5rem+env(safe-area-inset-top))] items-center border-b border-line-subtle bg-background/95 px-4 pt-[env(safe-area-inset-top)] backdrop-blur md:hidden">
+        <Link href="/hoje" className="-mx-2 flex min-h-11 items-center rounded-control px-2">
           <Wordmark size={24} />
         </Link>
       </header>

@@ -19,6 +19,7 @@ export default defineConfig({
     { name: "sessao", testMatch: /auth\.setup\.ts/ },
     { name: "auditoria", testMatch: /audit\.spec\.ts/, dependencies: ["sessao"] },
     { name: "conta", testMatch: /auth\.spec\.ts/ },
+    { name: "iphone", testMatch: /iphone\.spec\.ts/, dependencies: ["sessao"] },
   ],
   webServer: {
     command: "pnpm start -p 3100",
