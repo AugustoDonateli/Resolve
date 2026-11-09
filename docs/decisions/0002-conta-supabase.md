@@ -13,3 +13,10 @@ Data: 9 nov. 2026 · Sessão 04
 9. **Modo local:** sem `NEXT_PUBLIC_SUPABASE_URL`/`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, o app abre sem login, para desenvolvimento. Em produção as duas variáveis são obrigatórias.
 10. **Contas de teste** `e2e-a@resolve.test` e `e2e-b@resolve.test`: criadas por SQL (sem envio de e-mail), confirmadas, com convite. As senhas não ficam no repositório. Para gerar senhas novas: `node tools/dev/test-accounts.mjs <arquivo.env>` e aplicar o SQL impresso. A auditoria usa a A; o teste de conta usa a B.
 11. **Zod 4** valida formulários e o contrato das preferências.
+
+## Deploy na Vercel (registrado na sessão 04)
+
+12. **Root Directory = `apps/web`** em Project Settings → Build and Deployment, com "Include files outside the root directory" ligado (padrão). A Vercel instala a partir da raiz do monorepo (pnpm workspace) e compila o app. Na raiz não há `next`, por isso o erro `NEXT_NO_VERSION` quando o Root Directory fica vazio.
+13. **Variáveis** (Production e Preview): `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` e `NEXT_PUBLIC_SITE_URL` (endereço público, sem barra no fim). `next.config.ts` faz o build falhar na Vercel se as duas primeiras faltarem, para o app nunca ir ao ar em modo local, sem login.
+14. **Supabase → Authentication → URL Configuration:** Site URL = endereço de produção; Redirect URLs = `https://<produção>/auth/callback` e, para prévias, `https://*-<time>.vercel.app/auth/callback`.
+15. Node fixado em `22.x` (`engines`).

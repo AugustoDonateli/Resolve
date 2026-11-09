@@ -2,7 +2,7 @@
   "name": "resolve",
   "private": true,
   "packageManager": "pnpm@10.28.0",
-  "engines": { "node": ">=22" },
+  "engines": { "node": "22.x" },
   "scripts": {
     "dev": "pnpm --filter @resolve/web dev",
     "build": "pnpm --filter @resolve/web build",
