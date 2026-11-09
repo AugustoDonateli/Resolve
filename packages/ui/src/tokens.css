@@ -1,0 +1,90 @@
+/*
+ * Resolve — tokens da identidade Caderno de Prova (plano §6).
+ * Fonte única: espelha src/tokens.ts (um teste confere que os valores coincidem).
+ * Tema: <html data-theme="light|dark">; sem atributo, segue o sistema.
+ */
+
+:root {
+  color-scheme: light;
+  --rs-background: #F7F4ED;
+  --rs-surface: #FFFFFF;
+  --rs-surface-subtle: #EEEAE1;
+  --rs-text: #20242C;
+  --rs-text-secondary: #626772;
+  --rs-primary: #2452D1;
+  --rs-on-primary: #FFFFFF;
+  --rs-primary-hover: #1F49BE;
+  --rs-primary-pressed: #1B42AE;
+  --rs-link-focus: #2452D1;
+  --rs-border-control: #737984;
+  --rs-border-subtle: #DAD6CC;
+  --rs-highlight-yellow: #F2CA52;
+  --rs-highlight-pink: #E88CAE;
+  --rs-on-highlight: #20242C;
+  --rs-disabled-surface: #EEEAE1;
+  --rs-scrim: rgb(32 36 44 / 0.48);
+  --rs-shadow: 0 1px 2px rgb(32 36 44 / 0.08), 0 4px 16px rgb(32 36 44 / 0.08);
+  --rs-paper-grain: 0.05;
+
+  /* Movimento (plano §8) */
+  --rs-ease-press: cubic-bezier(.2, 0, .2, 1);
+  --rs-ease-state: cubic-bezier(.2, 0, 0, 1);
+  --rs-ease-layout: cubic-bezier(.22, 1, .36, 1);
+  --rs-ease-evidence: cubic-bezier(.22, 1, .36, 1);
+  --rs-ease-stage: cubic-bezier(.76, 0, .24, 1);
+  --rs-dur-press: 120ms;
+  --rs-dur-state: 180ms;
+  --rs-dur-layout: 260ms;
+  --rs-dur-evidence: 520ms;
+  --rs-dur-stage: 600ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --rs-background: #20242C;
+    --rs-surface: #2B3039;
+    --rs-surface-subtle: #343A45;
+    --rs-text: #F7F4ED;
+    --rs-text-secondary: #B7BDC8;
+    --rs-link-focus: #9FB7FF;
+    --rs-border-control: #8B929E;
+    --rs-border-subtle: #4A515D;
+    --rs-disabled-surface: #343A45;
+    --rs-scrim: rgb(32 36 44 / 0.72);
+    --rs-shadow: none;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --rs-background: #20242C;
+  --rs-surface: #2B3039;
+  --rs-surface-subtle: #343A45;
+  --rs-text: #F7F4ED;
+  --rs-text-secondary: #B7BDC8;
+  --rs-link-focus: #9FB7FF;
+  --rs-border-control: #8B929E;
+  --rs-border-subtle: #4A515D;
+  --rs-disabled-surface: #343A45;
+  --rs-scrim: rgb(32 36 44 / 0.72);
+  --rs-shadow: none;
+}
+
+/* Movimento reduzido: preferência do sistema OU opção interna (data-motion="reduced"). */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --rs-dur-press: 0ms;
+    --rs-dur-state: 0ms;
+    --rs-dur-layout: 0ms;
+    --rs-dur-evidence: 0ms;
+    --rs-dur-stage: 0ms;
+  }
+}
+:root[data-motion="reduced"] {
+  --rs-dur-press: 0ms;
+  --rs-dur-state: 0ms;
+  --rs-dur-layout: 0ms;
+  --rs-dur-evidence: 0ms;
+  --rs-dur-stage: 0ms;
+}
