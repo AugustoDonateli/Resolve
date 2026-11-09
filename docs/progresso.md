@@ -48,6 +48,16 @@ Legenda: ✅ concluída (critério verificado) · 🟡 parcial (o que falta est�
 
 Demais F2 ⬜. F2-T15 (revisar lote de até 15 itens) liberada: é a primeira revisão humana real. F2-T17 (microdados) depende só de EXT-DADOS.
 
-## F3–F7 e E
+## F3 — Primeiro ciclo de estudo
+
+| ID | Estado | Evidência / o que falta |
+|---|---|---|
+| F3-T01 | ✅ | Sessões, lista congelada e tentativas por funções que usam a conta do login. Mesma confirmação enviada duas vezes = uma tentativa lógica; acerto calculado no servidor; gabarito só depois; ajuda vista marca a tentativa; tempos limitados; prazo e pausa conforme o modo (`docs/validation/2026-11-09-f3-t01-t06-t12.md`). Concorrência real ainda não exercitada (proteção estrutural; teste via API quando houver questão publicada). |
+| F3-T06 | ✅ | Caderno: um erro ativo por item, erro repetido atualiza a mesma entrada, motivo opcional com "não informado" explícito (taxonomia v0, decisão 0006). A interface do motivo entra na tela de resolver (F3-T02). |
+| F3-T12 | ✅ | Eventos discretos com sequência única por sessão, reenvio ignorado, conteúdo fechado por tipo (sem texto livre), hora do cliente só quando plausível. Limpeza de 30 dias pendente. |
+
+Demais F3 ⬜. F3-T02 depende de F2-T16 (piloto de 30 publicado) e F1-T05. F3-T07 (agenda de revisão) liberada.
+
+## F4–F7 e E
 
 ⬜ Nenhuma iniciada.
