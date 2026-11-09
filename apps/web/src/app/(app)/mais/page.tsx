@@ -4,6 +4,7 @@ import Link from "next/link";
 import { AccountSection } from "@/components/account/account-section";
 import { PrefsForm } from "@/components/prefs/prefs-form";
 import { ScreenHeader } from "@/components/shell/app-shell";
+import { currentUserIsEditor } from "@/lib/editor/data";
 
 export const metadata: Metadata = { title: "Mais" };
 
@@ -14,7 +15,9 @@ const LINKS = [
   { href: "/componentes", label: "Componentes", desc: "Estados de botões, campos e alternativas" },
 ];
 
-export default function MaisPage() {
+export default async function MaisPage() {
+  const editor = await currentUserIsEditor();
+  const links = editor ? [{ href: "/editor", label: "Revisão editorial", desc: "Propostas extraídas dos PDFs, dúvidas e histórico" }, ...LINKS] : LINKS;
   return (
     <>
       <ScreenHeader title="Mais" />
@@ -30,7 +33,7 @@ export default function MaisPage() {
         <AccountSection />
         <nav aria-label="Outras áreas">
           <ul className="flex flex-col gap-2">
-            {LINKS.map((l) => (
+            {links.map((l) => (
               <li key={l.href}>
                 <Link href={l.href} className="flex min-h-16 items-center gap-3 rounded-card border border-line-subtle bg-surface px-4 py-3 transition-colors duration-[var(--rs-dur-state)] hover:border-line">
                   <span className="flex-1">

@@ -29,7 +29,7 @@ const NAV: NavItem[] = [
 ];
 
 function isActive(pathname: string, href: string) {
-  if (href === "/mais") return ["/mais", "/componentes", "/prototipos"].some((p) => pathname.startsWith(p));
+  if (href === "/mais") return ["/mais", "/componentes", "/prototipos", "/editor"].some((p) => pathname.startsWith(p));
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 

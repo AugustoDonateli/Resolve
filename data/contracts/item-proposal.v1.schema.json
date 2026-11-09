@@ -180,6 +180,15 @@
           "png_sha256": {
             "type": "string",
             "pattern": "^[0-9a-f]{64}$"
+          },
+          "alt_text": {
+            "type": "string",
+            "maxLength": 2000,
+            "description": "Texto alternativo escrito na revisão editorial; não pode revelar a resposta."
+          },
+          "recrop_pending": {
+            "type": "boolean",
+            "description": "A caixa foi corrigida na revisão; o PNG precisa ser recortado de novo antes da publicação."
           }
         }
       }
