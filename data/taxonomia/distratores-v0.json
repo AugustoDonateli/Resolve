@@ -1,0 +1,61 @@
+{
+  "taxonomy_version": "v0-proposta",
+  "source": "supabase/migrations/20261109060000_itens_e_etiquetas.sql (tabela distractor_types)",
+  "note": "Proposta inicial do plano (§4.1). A justificativa do distrator é análise editorial, não justificativa oficial do elaborador.",
+  "types": [
+    {
+      "code": "extrapolacao",
+      "label": "Extrapolação",
+      "definition": "Vai além do que o texto ou o comando autoriza concluir.",
+      "limits": "Não usar quando a alternativa contradiz o texto: aí é contradição."
+    },
+    {
+      "code": "reducao",
+      "label": "Redução",
+      "definition": "Fica com parte da ideia e perde o elemento que responde ao comando.",
+      "limits": "A parte retida precisa ser verdadeira no texto."
+    },
+    {
+      "code": "contradicao",
+      "label": "Contradição",
+      "definition": "Afirma o oposto do que o texto ou o enunciado estabelece.",
+      "limits": "Exige trecho que sustente a oposição."
+    },
+    {
+      "code": "verdade_fora_do_comando",
+      "label": "Verdade fora do comando",
+      "definition": "Afirmação correta em si que não responde ao que foi pedido.",
+      "limits": "Não confundir com redução: aqui o conteúdo não pertence à pergunta."
+    },
+    {
+      "code": "inversao_causa_efeito",
+      "label": "Inversão de causa e efeito",
+      "definition": "Troca a relação causal ou a ordem entre fenômenos.",
+      "limits": "Exige relação causal explícita no texto ou no conhecimento cobrado."
+    },
+    {
+      "code": "generalizacao",
+      "label": "Generalização",
+      "definition": "Estende a todos os casos uma afirmação válida para casos específicos.",
+      "limits": "Marcadores típicos: sempre, nunca, todos, qualquer."
+    },
+    {
+      "code": "isca_de_palavra",
+      "label": "Isca de palavra",
+      "definition": "Reaproveita termos do texto em uma relação que o texto não faz.",
+      "limits": "A semelhança lexical precisa ser o atrativo principal."
+    },
+    {
+      "code": "erro_de_calculo_previsto",
+      "label": "Erro de cálculo previsto",
+      "definition": "Corresponde ao resultado de um erro de procedimento esperado.",
+      "limits": "Indicar qual passo errado leva ao valor."
+    },
+    {
+      "code": "nao_classificado",
+      "label": "Não classificado",
+      "definition": "Nenhum tipo da taxonomia descreve a alternativa com segurança.",
+      "limits": "Exige justificativa editorial."
+    }
+  ]
+}
