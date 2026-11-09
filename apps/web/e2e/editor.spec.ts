@@ -152,7 +152,13 @@ test("etiquetas: aprovar exige campos e checklist; preenchidas, a aprovação é
   await openTags(page, 10);
   await expect(page.getByText("Gabarito oficial: E")).toBeVisible();
 
-  // Sem nada preenchido: o banco lista o que falta.
+  // O formulário vem com a última decisão (rodadas anteriores): limpa o que o teste preenche.
+  await page.getByLabel("Habilidade principal").selectOption("");
+  while ((await page.getByRole("button", { name: /^Remover evidência \d+$/ }).count()) > 0) {
+    await page.getByRole("button", { name: /^Remover evidência \d+$/ }).first().click();
+  }
+
+  // Sem habilidade e sem checklist: o banco lista o que falta.
   await page.getByRole("button", { name: "Conferir pendências" }).click();
   await expect(page.getByText(/^Pendências \(\d+\):$/)).toBeVisible({ timeout: 15_000 });
   await expect(page.getByText("checklist: gabarito conferido contra o oficial")).toBeVisible();
@@ -190,9 +196,28 @@ test("etiquetas: devolver ou rejeitar sem motivo é recusado", async ({ browser 
   await ctx.close();
 });
 
+test("publicação: lote de teste nunca é publicável e o aluno não chega à tela", async ({ browser }) => {
+  const { ctx, page } = await editorPage(browser);
+  await page.goto("/editor");
+  await page.getByRole("link", { name: "Publicação" }).click();
+  await expect(page.getByRole("heading", { level: 1, name: "Publicação" })).toBeVisible();
+  await expect(page.getByText(/pronta\(s\) para publicar/)).toBeVisible({ timeout: 20_000 });
+  await page.getByRole("button", { name: "Mostrar motivos" }).click();
+  const fixture = page.locator("div", { has: page.getByRole("heading", { level: 3, name: /lote de teste automatizado/ }) }).last();
+  await expect(fixture.getByText("Lote de teste: nunca é publicado.")).toBeVisible();
+  await expect(fixture.getByText(/lote de teste: não publicável/).first()).toBeVisible();
+  await ctx.close();
+
+  const s = await browser.newContext();
+  const sp = await s.newPage();
+  await signIn(sp, student);
+  expect((await sp.goto("/editor/publicar"))?.status()).toBe(404);
+  await s.close();
+});
+
 test("área editorial sem violações de acessibilidade (axe)", async ({ browser }) => {
   const { ctx, page } = await editorPage(browser);
-  for (const go of [() => page.goto("/editor"), () => openFixture(page), () => openTags(page, 10)]) {
+  for (const go of [() => page.goto("/editor"), () => openFixture(page), () => openTags(page, 10), () => page.goto("/editor/publicar")]) {
     await go();
     const r = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]).analyze();
     expect(r.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);

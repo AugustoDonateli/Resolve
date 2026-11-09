@@ -123,6 +123,26 @@ let batchId, proposalId;
   check("A", "não lê versão de item não publicada", denied(draft), `${rows(draft)} linha(s)`);
 }
 
+// ── Revisão de etiquetas, gabaritos e publicação (F2-T13/T14) ──
+{
+  for (const [who, sess] of [["A", A], ["B", B], ["visitante", V]]) {
+    for (const t of ["official_answer_keys", "variant_checks", "proposal_tag_reviews", "tag_suggestions", "item_proposal_revisions"]) {
+      const r = await sess.c.from(t).select("*").limit(3);
+      check(who, `não lê ${t}`, denied(r), r.error?.message ?? `${rows(r)} linha(s)`);
+    }
+    const pub = await sess.c.rpc("publish_proposals", { p_ids: [proposalId], p_note: "tentativa" });
+    check(who, "não publica", permError(pub) || /resolve_not_editor/.test(pub.error?.message ?? ""), pub.error?.message ?? "publicou!");
+    const ans = await sess.c.rpc("official_answer", { p_proposal: proposalId });
+    check(who, "não obtém gabarito oficial", Boolean(ans.error) || ans.data === null, ans.error?.message ?? String(ans.data));
+  }
+  const keys = await E.c.from("official_answer_keys").select("answer").limit(1);
+  check("E", "lê gabaritos oficiais", rows(keys) === 1, keys.error?.message ?? "");
+  const study = await A.c.from("study_items").select("item_version_id, alternatives");
+  check("A", "lê a vista de estudo sem gabarito", !study.error && !JSON.stringify(study.data).includes("is_correct"), study.error?.message ?? `${rows(study)} item(ns)`);
+  const vs = await V.c.from("study_items").select("item_version_id").limit(1);
+  check("visitante", "não lê a vista de estudo", permError(vs), vs.error?.message ?? `${rows(vs)} item(ns)`);
+}
+
 // ── Arquivos ──
 {
   const bytes = new Blob(["arquivo de teste da matriz de acesso"], { type: "text/plain" });

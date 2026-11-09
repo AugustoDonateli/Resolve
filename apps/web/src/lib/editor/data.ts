@@ -227,3 +227,21 @@ export async function getTagReviewContext(id: string): Promise<TagReviewContext>
     userId: user.id,
   };
 }
+
+export interface QueueRow {
+  proposal_id: string;
+  batch_id: string;
+  batch_notes: string | null;
+  publishable: boolean;
+  question_number: number;
+  foreign_language: "ingles" | "espanhol" | null;
+  status: ProposalStatus;
+  blockers: string[];
+}
+
+/** Fila de publicação com os impedimentos calculados pelo banco (mesma regra da publicação). */
+export async function getPublicationQueue(): Promise<QueueRow[]> {
+  const { supabase } = await requireEditor();
+  const { data } = await supabase.rpc("publication_queue");
+  return (data ?? []) as QueueRow[];
+}

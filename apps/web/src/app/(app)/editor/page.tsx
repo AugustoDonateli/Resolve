@@ -24,7 +24,11 @@ export default async function EditorPage({ searchParams }: { searchParams: Promi
 
   return (
     <>
-      <ScreenHeader title="Revisão editorial" kicker="Área do editor" />
+      <ScreenHeader title="Revisão editorial" kicker="Área do editor">
+        <Link href="/editor/publicar" className="inline-flex min-h-11 items-center rounded-control border border-line bg-surface px-4 t-ui hover:bg-surface-subtle">
+          Publicação
+        </Link>
+      </ScreenHeader>
       <p className="mb-6 max-w-2xl t-meta text-ink-2">
         Propostas extraídas dos PDFs oficiais. Nada aqui está publicado: cada correção vira uma revisão nova e a anterior fica no histórico.
       </p>
