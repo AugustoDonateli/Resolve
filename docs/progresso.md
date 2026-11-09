@@ -32,19 +32,18 @@ Legenda: ✅ concluída (critério verificado) · 🟡 parcial (o que falta est�
 | ID | Estado | Evidência / o que falta |
 |---|---|---|
 | F2-T01 | ✅ | Projeto Supabase `resolve` (sa-east-1). Login por e-mail e senha, sessão por cookies, `proxy.ts` protege as telas, preferências salvas na conta. Criar conta = e-mail + senha, ativa na hora, sem e-mail de confirmação (pedido de Guto). Cadastro restrito a e-mails liberados. API 17/17 + 8/8, interface 6/6 + fluxo de criação (`docs/validation/2026-11-09-f2-t01.md`). |
-
 | F2-T02 | ✅ | Esquema versionado (fontes só acrescentam, matriz publicada imutável) e carga da matriz oficial do INEP (abril 2026): 5 eixos, 30 competências, 120 habilidades, conferidas texto a texto contra o PDF e por hash no banco. Teste de duas versões coexistindo e de imutabilidade passou. Perfil Enem 2025 (referência). |
 | F2-T03 | ✅ | Itens, versões, estímulos, alternativas, cadernos, mapa de letras (chave composta impede alternativa de outro item ou de outra versão), figuras. Publicar exige 5 alternativas e 1 correta; versão publicada imutável. 19 testes de integridade em transação desfeita. |
 | F2-T04 | ✅ | Etiquetas (proposta vs revisão), evidências por multitrecho (offsets UTF-16 validados contra a versão), figura (bbox 0–1) ou passo de cálculo, taxonomia de distratores v0, revisões editoriais. Aluno não lê gabarito, resolução nem evidências (6 testes de acesso). |
 | F2-T05 | ⬜ | Liberada (papel de editor e acesso a arquivos). |
 | F2-T06 | ✅ | Enem 2025: manifesto com 90 arquivos listados, 24 baixados (D1/D2 regulares, cadernos padrão) com sha256, cor e caderno conferidos pela capa; registrados em `sources`. |
 | F2-T07 | ✅ | `tools/ingest/extract.py`: Dia 1 95/95 e Dia 2 90/90 questões localizadas. Piloto de 10 com conferência visual e relatório (`docs/validation/2026-11-09-f2-t07-extracao-piloto.md`). Limitações (tabelas, alternativas em grade, texto em imagem) registradas. |
-| F2-T08 | ⬜ | Liberada (recorte de figuras, inclusive vetoriais). |
-| F2-T09 | ⬜ | Liberada (contrato da estruturação e fila de dúvidas). |
-| F2-T10 | ⬜ | Liberada (cruzamento entre cadernos). |
+| F2-T08 | ✅ | `tools/ingest/figures.py`: imagens, vetoriais e tabelas da área da questão, ligadas à letra da alternativa. PNG a 216 dpi com bbox, página, origem e sha256. Piloto: 16 recortes, 0 cortados, conferidos visualmente. Limitações (faixa da figura vizinha, texto em imagem) ficam para a revisão F2-T12 (`docs/validation/2026-11-09-f2-t08-t09-t10.md`). |
+| F2-T09 | ✅ | Contrato `item-proposal.v1` (JSON Schema) + `contract.py`: válida / dúvida / rejeitada. Conteúdo perigoso (HTML, script, `javascript:`, controle, inversão de direção) rejeitado também por `CHECK` no banco. Tabelas `item_proposals` e `doubt_queue`. Testes: 17 unitários e 15 no banco. Propostas ainda não gravadas no banco (entram com F2-T12). |
+| F2-T10 | ✅ | `tools/ingest/crossmatch.py`. CD1×CD2: 95/95 conferem. CD7×CD5: 87 conferem e 3 anuladas nas duas. 0 divergências. Letras mapeadas por texto, bitmap idêntico ou comparação visual. 10 pares conferidos à mão (`docs/validation/f2-t10/`). Corrigiu 4 defeitos do extrator (largura total, fração empilhada, sinal de expoente, "Anulado"). 7 testes. |
 
-Demais F2 ⬜. Microdados (F2-T17) dependem de F2-T10.
+Demais F2 ⬜. F2-T17 (microdados) depende agora só de EXT-DADOS. F2-T11 e F2-T12 liberadas.
 
 ## F3–F7 e E
 
-⬜ Nenhuma iniciada. **F2-T02** depende de EXT-MATRIZ. **F2-T06** depende de EXT-PDF.
+⬜ Nenhuma iniciada.

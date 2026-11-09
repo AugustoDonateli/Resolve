@@ -217,7 +217,7 @@ def main() -> int:
                 crop_pt = crop_box(page, g)
                 px = tuple(round((v - (dx if k % 2 == 0 else dy)) * SCALE) for k, v in enumerate(crop_pt))
                 piece = img.crop(px)
-                tag = f"{q['booklet_file'][16:22]}_Q{q['number']}{'_' + q['foreign_language'] if q['foreign_language'] else ''}_p{pno}_{i}{'_' + g['alternative'] if g['alternative'] else ''}"
+                tag = f"{re.search(r'D\d_CD\d+', q['booklet_file']).group()}_Q{q['number']}{'_' + q['foreign_language'] if q['foreign_language'] else ''}_p{pno}_{i}{'_' + g['alternative'] if g['alternative'] else ''}"
                 path = OUT_DIR / f"{tag}.png"
                 piece.save(path, optimize=True)
                 problems = cut_check(page, g)
