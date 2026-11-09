@@ -18,6 +18,12 @@ const FLOWS = [
   { href: "/redacao", label: "Correção: troca de competência e traço M04", id: "F1-T06 · F1-T18" },
 ];
 
+const MOMENTS = [
+  { href: "/prototipos/envelope", label: "Envelope e caderno", id: "F1-T10 · M03" },
+  { href: "/prototipos/replay", label: "Replay da sessão", id: "F1-T12 · M06" },
+  { href: "/prototipos/constelacao", label: "Constelação como evidência", id: "F1-T15 · M05" },
+];
+
 export default function PrototiposPage() {
   return (
     <>
@@ -39,20 +45,26 @@ export default function PrototiposPage() {
         </ul>
       </section>
 
+      <section aria-labelledby="moments" className="mb-10">
+        <h2 id="moments" className="mb-3 t-section">Momentos principais e constelação</h2>
+        <ul className="grid gap-2 sm:grid-cols-3">
+          {MOMENTS.map((f) => (
+            <li key={f.href}>
+              <Link href={f.href} className="flex h-full flex-col rounded-card border border-line-subtle bg-surface p-4 hover:border-line">
+                <span className="t-ui">{f.label}</span>
+                <span className="mt-1 t-meta text-ink-2">{f.id}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <section aria-labelledby="passage">
         <h2 id="passage" className="mb-1 t-section">Passagem entre etapas</h2>
         <p className="mb-4 t-meta text-ink-2">F1-T11 · até 700 ms · folha azul com título em continuidade</p>
         <StagePassage stages={STAGES} />
       </section>
 
-      <section aria-labelledby="pending" className="mt-10 max-w-2xl">
-        <h2 id="pending" className="mb-2 t-section">Ainda por fazer nesta trilha</h2>
-        <ul className="list-disc pl-5 t-reading text-ink-2">
-          <li>Envelope e caderno em 3D (F1-T10) — storyboard em docs/motion.</li>
-          <li>Replay com dez eventos demonstrativos (F1-T12).</li>
-          <li>Constelação como evidência (F1-T15).</li>
-        </ul>
-      </section>
     </>
   );
 }

@@ -23,11 +23,14 @@ Fonte: plano §8 ("Direção de movimento autoral", "Coreografias específicas")
 ## Três momentos principais na mesma linguagem
 
 - **Passagem entre etapas:** a folha azul (`primary`) cobre a tela de baixo para cima e revela a etapa por cima. Número em Newsreader e título no mesmo lugar do título da página. Duração de 600 ms, ≤ 700. Protótipo pronto (F1-T11).
-- **Envelope/caderno 3D:** papel, lacre e capa. A câmera se aproxima até a capa ocupar o enquadramento da folha de prova. Ver `storyboard-momentos.md`.
-- **Replay:** as bolinhas do cartão-resposta saem do grid e se alinham numa linha do tempo, mantendo a correspondência. Ver storyboard.
+- **Envelope/caderno 3D:** papel, lacre azul e capa. A câmera se aproxima até a capa ocupar o enquadramento da folha de prova. Protótipo pronto (F1-T10): 5,00 s, curvas `stage` e `layout`, aba passa para trás do caderno após 90°.
+- **Replay:** as bolinhas do cartão-resposta saem do grid e se alinham numa linha do tempo, mantendo a correspondência (`layoutId` por questão, 700 ms `stage`, 40 ms entre questões). Arcos tracejados de tinta marcam retornos. Protótipo pronto (F1-T12).
+- **Constelação (candidata R0-P03):** os pontos de tentativa em órbita do nó viajam até as linhas da lista de evidências (`layoutId`, 520 ms `evidence`, 35 ms entre pontos). Protótipo pronto (F1-T15), adoção a decidir.
 
 ## Pendências de acabamento conhecidas
 
 - Encerrar: o título passa de 22 px (foco) para 16 px (histórico) por escala, com leve distorção durante 520 ms. O quadro final fica nítido. Avaliar em F6-T13 se vale um crossfade de rótulo.
 - Raio-X no PC: a etapa "Evidência" pode cair fora da tela se o aluno estiver nas alternativas. Hoje oferecemos **Ir ao trecho**. Avaliar em F6-T11 uma miniatura do trecho no painel do scanner.
 - Fonte do título da folha de passagem = `t-screen`. Conferir em telas com o título em duas linhas.
+- Envelope: o protótipo usa CSS 3D, sem luz nem material. Sombras e textura de papel ficam para Blender (F7-T09). A abertura da aba é crível de frente, mas não foi avaliada em ângulos maiores.
+- Replay em 390 px: a linha do tempo rola horizontalmente dentro do quadro (mínimo de 600 px). Avaliar uma versão vertical no celular em F7-T18.

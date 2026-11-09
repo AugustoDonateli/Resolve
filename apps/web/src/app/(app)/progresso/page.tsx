@@ -13,7 +13,8 @@ export default function ProgressoPage() {
         icon={BarChart3}
         title="Dados insuficientes"
         body="A constelação de habilidades só classifica um nó depois de oito tentativas sem ajuda, em cinco itens e dois dias diferentes."
-        note="Protótipo da constelação: F1-T15. Mapa real: F4-T10 a F4-T12."
+        note="Mapa real: F4-T10 a F4-T12."
+        action={{ href: "/prototipos/constelacao", label: "Ver protótipo da constelação" }}
       />
     </>
   );
