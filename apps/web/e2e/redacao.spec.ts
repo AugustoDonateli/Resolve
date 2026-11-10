@@ -218,3 +218,67 @@ test("folha simulada: mesma contagem no celular e no PC, prévia ampliável e li
     await wipe();
   }
 });
+
+test("treino por peças: quatro modos, intervenção com dez minutos e sem nota total", async ({
+  browser,
+}) => {
+  const db = await studentDb();
+  const wipe = async () =>
+    void (await db.from("essays").delete().not("id", "is", null));
+  await wipe();
+  try {
+    const a = await device(browser);
+    await a.page.goto("/redacao");
+    await a.page.getByRole("link", { name: "Treino por peças" }).click();
+    const form = a.page.getByRole("form", { name: "Escolher peça" });
+    await expect(form.getByRole("radio")).toHaveCount(4);
+    for (const name of [/^Introdução/, /^Desenvolvimento/, /^Conclusão/, /^Proposta de intervenção/])
+      await expect(form.getByRole("radio", { name })).toBeVisible();
+    await form.getByRole("radio", { name: /Proposta de intervenção/ }).check();
+    await form.getByRole("button", { name: "Começar a peça" }).click();
+    await a.page.waitForURL(/\/redacao\/escrever\//);
+    await expect(
+      a.page.getByText("Peça: Proposta de intervenção"),
+    ).toBeVisible();
+    await expect(
+      a.page.getByText(
+        /agente \(quem\), ação \(o quê\), meio \(como\), finalidade \(para quê\) e detalhamento/,
+      ),
+    ).toBeVisible();
+    await a.page.getByRole("button", { name: "Iniciar 10 minutos" }).click();
+    await expect(
+      a.page
+        .getByRole("group", { name: "Tempo da peça" })
+        .getByText("Cronometrando."),
+    ).toBeVisible();
+    await a.page
+      .getByLabel("Texto da redação")
+      .fill(
+        "O Ministério da Educação deve criar programas de leitura, por meio de parcerias com escolas, a fim de ampliar o acesso.",
+      );
+    await saved(a.page);
+    await a.page.reload();
+    await expect(
+      a.page
+        .getByRole("group", { name: "Tempo da peça" })
+        .getByText("Cronometrando."),
+    ).toBeVisible();
+    await expect(a.page.getByText(/Folha simulada/)).toHaveCount(0);
+    await expect(
+      a.page.getByRole("main").getByText(/\bnota\b|pontos/i),
+    ).toHaveCount(0);
+    const { data: e } = await db
+      .from("essays")
+      .select("training_piece")
+      .limit(1)
+      .single();
+    expect(e?.training_piece).toBe("intervencao");
+    const r = await new AxeBuilder({ page: a.page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+      .analyze();
+    expect(r.violations.map((x) => `${x.id}: ${x.nodes.length}`)).toEqual([]);
+    await a.ctx.close();
+  } finally {
+    await wipe();
+  }
+});

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { EssayEditor } from "@/components/essay/essay-editor";
 import { ScreenHeader } from "@/components/shell/app-shell";
 import { loadDraft } from "@/lib/essay/drafts";
+import { pieceOf } from "@/lib/essay/pieces";
 
 export const metadata: Metadata = { title: "Escrever redação" };
 export const dynamic = "force-dynamic";
@@ -25,7 +26,7 @@ export default async function WritePage({
       </Link>
       <ScreenHeader
         title="Escrever"
-        kicker={draft.promptTitle ? `Tema: ${draft.promptTitle}` : "Tema livre"}
+        kicker={`${pieceOf(draft.trainingPiece) ? `Treino por peça · ${pieceOf(draft.trainingPiece)!.label} · ` : ""}${draft.promptTitle ? `Tema: ${draft.promptTitle}` : "Tema livre"}`}
       />
       <EssayEditor draft={draft} />
     </>

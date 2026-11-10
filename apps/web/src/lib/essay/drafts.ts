@@ -8,6 +8,7 @@ export interface EssaySummary {
   id: string;
   created_at: string;
   promptTitle: string | null;
+  trainingPiece: string | null;
   status: "rascunho" | "submetida";
   preview: string;
   updated_at: string;
@@ -21,6 +22,7 @@ export interface DraftView {
   text: string;
   promptTitle: string | null;
   promptId: string | null;
+  trainingPiece: string | null;
 }
 
 /** Redações da conta do login (a versão mais recente de cada uma). */
@@ -32,7 +34,7 @@ export async function listMyEssays(): Promise<EssaySummary[] | null> {
   const { data } = await supabase
     .from("essays")
     .select(
-      "id, created_at, essay_prompts(title), essay_versions(status, plain_text, updated_at, created_at)",
+      "id, created_at, training_piece, essay_prompts(title), essay_versions(status, plain_text, updated_at, created_at)",
     )
     .order("created_at", { ascending: false })
     .limit(50);
@@ -50,6 +52,7 @@ export async function listMyEssays(): Promise<EssaySummary[] | null> {
     return {
       id: e.id,
       created_at: e.created_at,
+      trainingPiece: e.training_piece,
       promptTitle:
         (e.essay_prompts as unknown as { title: string } | null)?.title ?? null,
       status: v?.status ?? "rascunho",
@@ -65,7 +68,7 @@ export async function loadDraft(essayId: string): Promise<DraftView> {
   const supabase = await createClient();
   const { data: essay } = await supabase
     .from("essays")
-    .select("id, prompt_id, essay_prompts(title)")
+    .select("id, prompt_id, training_piece, essay_prompts(title)")
     .eq("id", essayId)
     .maybeSingle();
   if (!essay) notFound();
@@ -87,5 +90,6 @@ export async function loadDraft(essayId: string): Promise<DraftView> {
       (essay.essay_prompts as unknown as { title: string } | null)?.title ??
       null,
     promptId: essay.prompt_id,
+    trainingPiece: essay.training_piece,
   };
 }

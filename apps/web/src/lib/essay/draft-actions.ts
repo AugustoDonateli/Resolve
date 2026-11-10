@@ -78,7 +78,13 @@ export async function createEssay(
   input: unknown,
 ): Promise<{ ok: true; essayId: string } | { ok: false; error: string }> {
   const p = z
-    .object({ promptId: z.string().uuid().nullable() })
+    .object({
+      promptId: z.string().uuid().nullable(),
+      trainingPiece: z
+        .enum(["introducao", "desenvolvimento", "conclusao", "intervencao"])
+        .nullable()
+        .default(null),
+    })
     .safeParse(input);
   if (!p.success) return { ok: false, error: "Dados inválidos." };
   const supabase = await createClient();
@@ -86,7 +92,10 @@ export async function createEssay(
   if (!auth.user) return { ok: false, error: "Entre para escrever." };
   const { data: essay, error } = await supabase
     .from("essays")
-    .insert({ prompt_id: p.data.promptId })
+    .insert({
+      prompt_id: p.data.promptId,
+      training_piece: p.data.trainingPiece,
+    })
     .select("id")
     .single();
   if (error || !essay)

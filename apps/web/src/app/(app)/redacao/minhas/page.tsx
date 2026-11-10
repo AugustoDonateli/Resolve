@@ -4,6 +4,7 @@ import Link from "next/link";
 import { NewEssayButton } from "@/components/essay/new-essay-button";
 import { ScreenHeader } from "@/components/shell/app-shell";
 import { listMyEssays } from "@/lib/essay/drafts";
+import { pieceOf } from "@/lib/essay/pieces";
 
 export const metadata: Metadata = { title: "Minhas redações" };
 export const dynamic = "force-dynamic";
@@ -32,7 +33,10 @@ export default async function MyEssaysPage() {
                   className="flex flex-col gap-1 rounded-card border border-line-subtle bg-surface p-4 hover:border-line"
                 >
                   <span className="t-meta text-ink-2">
-                    {e.status === "submetida" ? "Enviada" : "Rascunho"} ·{" "}
+                    {e.status === "submetida" ? "Enviada" : "Rascunho"} ·
+                    {pieceOf(e.trainingPiece)
+                      ? ` Peça: ${pieceOf(e.trainingPiece)!.label} ·`
+                      : ""}{" "}
                     {e.promptTitle ?? "Tema livre"} · atualizada em{" "}
                     {new Date(e.updated_at).toLocaleDateString("pt-BR")}
                   </span>

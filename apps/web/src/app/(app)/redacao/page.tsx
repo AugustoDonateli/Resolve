@@ -21,6 +21,12 @@ export default function RedacaoPage() {
         >
           Minhas redações
         </Link>
+        <Link
+          href="/redacao/pecas"
+          className="inline-flex min-h-11 items-center rounded-control border border-line bg-surface px-4 t-ui hover:bg-surface-subtle"
+        >
+          Treino por peças
+        </Link>
       </ScreenHeader>
       <Correction />
     </>

@@ -10,6 +10,8 @@ import {
 } from "@/lib/essay/draft";
 import { saveDraft } from "@/lib/essay/draft-actions";
 import type { DraftView } from "@/lib/essay/drafts";
+import { pieceOf } from "@/lib/essay/pieces";
+import { PieceTimer } from "./piece-timer";
 import { SheetPreview } from "./sheet-preview";
 
 type Status =
@@ -170,8 +172,25 @@ export function EssayEditor({ draft }: { draft: DraftView }) {
   };
 
   const paragraphs = toParagraphs(text).length;
+  const piece = pieceOf(draft.trainingPiece);
   return (
     <div className="flex flex-col gap-4">
+      {piece && (
+        <section
+          aria-label={`Orientação da peça: ${piece.label}`}
+          className="flex flex-col gap-2 rounded-card border border-line-subtle bg-surface p-4"
+        >
+          <p className="t-ui font-semibold">Peça: {piece.label}</p>
+          <ul className="flex list-disc flex-col gap-1 pl-5 t-meta">
+            {piece.guide.map((g) => (
+              <li key={g}>{g}</li>
+            ))}
+          </ul>
+          {piece.minutes && !readOnly && (
+            <PieceTimer essayId={draft.essayId} minutes={piece.minutes} />
+          )}
+        </section>
+      )}
       <label className="flex flex-col gap-1.5 t-ui">
         Texto da redação
         <textarea
@@ -190,7 +209,7 @@ export function EssayEditor({ draft }: { draft: DraftView }) {
         {paragraphs === 1 ? "parágrafo" : "parágrafos"} · deixe uma linha em
         branco entre parágrafos
       </p>
-      <SheetPreview text={text} />
+      {!piece && <SheetPreview text={text} />}
       <p id="estado-rascunho" role="status" className="t-meta">
         {readOnly
           ? "Versão enviada: não muda mais. A reescrita cria uma nova versão."
