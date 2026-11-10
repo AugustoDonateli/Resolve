@@ -56,7 +56,9 @@ Demais F2 ⬜. F2-T15 (revisar lote de até 15 itens) liberada: é a primeira re
 | F3-T06 | ✅ | Caderno: um erro ativo por item, erro repetido atualiza a mesma entrada, motivo opcional com "não informado" explícito (taxonomia v0, decisão 0006). A interface do motivo entra na tela de resolver (F3-T02). |
 | F3-T07 | ✅ | Agenda `srs-v1` (1/3/7/14/30 dias, 3 min por item no lote) alimentada pela confirmação da resposta. Relógio controlado: erro → dia local seguinte; progressão completa; ajuda repete o intervalo; acerto antecipado não conta; última etapa conclui e resolve o erro no caderno; fuso Tóquio × São Paulo e fuso inválido; fila com lote pelo tempo e restante visível; reenvio = 1 evento (`docs/validation/2026-11-09-f3-t07-f5-t02.md`, decisão 0007). Tela da revisão: F3-T08. |
 
-Demais F3 ⬜. F3-T02 depende de F2-T16 (piloto de 30 publicado) e F1-T05. F3-T08 depende de F3-T04; F3-T09 (flashcards) liberada.
+| F3-T09 | 🟡 | Cartões com fonte e revisão; erro na habilidade põe o cartão na fila; revisão em `card_reviews` (fora de `attempts`/TRI); fila do dia junta questões e cartões; tela `/editor/cartoes`. **Falta:** aplicar a migração `20261110110000` (confirmação do Supabase sem resposta) e rodar o teste no banco. |
+
+Demais F3 ⬜. F3-T02 depende de F2-T16 (piloto de 30 publicado) e F1-T05. F3-T08 depende de F3-T04.
 
 ## F5 — Redação
 
@@ -64,7 +66,10 @@ Demais F3 ⬜. F3-T02 depende de F2-T16 (piloto de 30 publicado) e F1-T05. F3-T0
 |---|---|---|
 | F5-T02 | ✅ | Temas, textos motivadores, redações, versões, correções, avaliações, anotações e resultados. Rubrica oficial (5 competências × 6 níveis) extraída da matriz do Inep e conferida contra a página (`tools/ingest/rubrica.py`). Versão enviada imutável com sha256; tema só publica com fonte de direitos conferidos; avaliação C1–C5 nos degraus com total = soma; anotação dentro do texto e ausência sem trecho; faixa calibrada só com calibração. Outra conta e editor não leem texto nem arquivo. 14 grupos de casos no banco; matriz de acesso 135/135 (decisão 0007). Regras de discrepância ausentes até F5-T11. |
 
-Demais F5 ⬜. Liberadas: F5-T03 (publicar eixos e textos motivadores conferidos) e F5-T08 (fila e reserva de custo). F5-T01/T17 dependem de EXT-CORPUS.
+| F5-T03 | ✅ | Tema oficial do Enem 2025 extraído do caderno 1 (p. 20), conferido com os cadernos 2–4, figuras recortadas; carregado como **rascunho**. Revisão lado a lado em `/editor/temas` (conferir texto, corrigir texto alternativo, publicar só sem impedimentos) e leitura em `/redacao/temas`. Banco, 11/11 de ponta a ponta, axe (`docs/validation/2026-11-10-f5-t03-t08-f3-t09.md`, decisão 0008). **Publicação depende da conferência de Guto.** |
+| F5-T08 | ✅ | Um trabalho por versão; reserva antes de cada etapa no orçamento global (US$5/mês, proposta do plano) e da conta; consumidor de uma etapa com conclusão, falhas, reconciliação e limite de tentativas. Concorrência real pela API: 8 envios simultâneos com saldo para 3 → 3 reservas; 10 envios da mesma versão → 1 trabalho. Consumidor em código com avaliador falso (9 testes). Matriz de acesso 166/166. Avaliador real: F5-T09 (depende da chave). |
+
+Demais F5 ⬜. F5-T09 depende da chave da API; F5-T05 depende de F3-T03; F5-T04 (gerador editorial) liberada, mas também usa IA. F5-T01/T17 dependem de EXT-CORPUS.
 
 ## F4, F6, F7 e E
 
