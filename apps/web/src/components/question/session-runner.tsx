@@ -4,11 +4,18 @@ import { Check, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Button } from "@/components/ui/button";
-import { setErrorReason, submitAttempt } from "@/lib/study/actions";
+import {
+  getExplanation,
+  requestHelp,
+  setErrorReason,
+  submitAttempt,
+} from "@/lib/study/actions";
+import { buildRaioX, type RaioXView } from "@/lib/study/raiox";
 import { ERROR_REASONS } from "@/lib/study/reasons";
 import { withSameAction } from "@/lib/study/retry";
 import type { SessionEntry, SessionView } from "@/lib/study/session";
 import { QuestionView } from "./question-view";
+import { RaioXPanel } from "./raiox-panel";
 
 const noop = () => () => {};
 
@@ -59,6 +66,9 @@ export function SessionRunner({ session }: { session: SessionView }) {
   const [eliminated, setEliminated] = useState<Set<string>>(new Set());
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [raiox, setRaiox] = useState<Record<string, RaioXView>>({});
+  const [loadingX, setLoadingX] = useState(false);
+  const [confirmHelp, setConfirmHelp] = useState(false);
   const shownAt = useRef(0);
   const headingRef = useRef<HTMLHeadingElement>(null);
 
@@ -117,6 +127,30 @@ export function SessionRunner({ session }: { session: SessionView }) {
     setValue(null);
     setEliminated(new Set());
     setError(null);
+    setConfirmHelp(false);
+  };
+
+  const view = raiox[entry.sessionItemId];
+  const openRaioX = async (help: boolean) => {
+    setLoadingX(true);
+    setError(null);
+    const r = help
+      ? await requestHelp({
+          sessionId: session.id,
+          sessionItemId: entry.sessionItemId,
+        })
+      : await getExplanation({ sessionItemId: entry.sessionItemId });
+    setLoadingX(false);
+    setConfirmHelp(false);
+    const v = r.ok ? buildRaioX(entry.question, r.value) : null;
+    if (!v) {
+      setError("Não foi possível abrir o Raio-X agora. Tente de novo.");
+      return;
+    }
+    setRaiox((m) => ({ ...m, [entry.sessionItemId]: v }));
+    requestAnimationFrame(() =>
+      document.getElementById(`raiox-${entry.sessionItemId}`)?.focus(),
+    );
   };
 
   const confirm = async () => {
@@ -224,6 +258,44 @@ export function SessionRunner({ session }: { session: SessionView }) {
                 Escolha uma alternativa.
               </span>
             )}
+            {!view &&
+              (confirmHelp ? (
+                <span
+                  role="alertdialog"
+                  aria-label="Confirmar ajuda"
+                  className="flex flex-wrap items-center gap-2"
+                >
+                  <span className="t-meta">
+                    A tentativa ficará marcada como feita com ajuda.
+                  </span>
+                  <Button
+                    type="button"
+                    size="sm"
+                    loading={loadingX}
+                    onClick={() => openRaioX(true)}
+                  >
+                    Ver resolução
+                  </Button>
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => setConfirmHelp(false)}
+                  >
+                    Voltar
+                  </Button>
+                </span>
+              ) : (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  disabled={!hydrated}
+                  onClick={() => setConfirmHelp(true)}
+                >
+                  Pedir ajuda
+                </Button>
+              ))}
           </div>
         ) : (
           <div role="status" className="flex items-center gap-2 t-ui">
@@ -243,6 +315,20 @@ export function SessionRunner({ session }: { session: SessionView }) {
               </>
             )}
           </div>
+        )}
+        {result && !view && (
+          <Button
+            type="button"
+            variant="secondary"
+            className="self-start"
+            loading={loadingX}
+            onClick={() => openRaioX(false)}
+          >
+            Ver Raio-X
+          </Button>
+        )}
+        {view && (
+          <RaioXPanel view={view} headingId={`raiox-${entry.sessionItemId}`} />
         )}
         <div aria-live="assertive">
           {error && (

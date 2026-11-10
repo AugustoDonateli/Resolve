@@ -25,7 +25,9 @@ test("estudar: estado vazio ou treino real com resposta preservada ao recarregar
 }) => {
   await signIn(page);
   await page.goto("/estudar");
-  const empty = page.getByText("Ainda não há questões publicadas", { exact: true });
+  const empty = page.getByText("Ainda não há questões publicadas", {
+    exact: true,
+  });
   const form = page.getByRole("form", { name: "Começar treino" });
   await expect(empty.or(form)).toBeVisible();
 
@@ -35,12 +37,10 @@ test("estudar: estado vazio ou treino real com resposta preservada ao recarregar
     await expect(
       page.getByText("Questão demonstrativa · não é item do ENEM"),
     ).toBeVisible();
-    test
-      .info()
-      .annotations.push({
-        type: "pendente",
-        description: "fluxo real aguarda questões publicadas (F2-T16)",
-      });
+    test.info().annotations.push({
+      type: "pendente",
+      description: "fluxo real aguarda questões publicadas (F2-T16)",
+    });
     return;
   }
 
@@ -68,6 +68,13 @@ test("estudar: estado vazio ou treino real com resposta preservada ao recarregar
     .getByRole("status")
     .filter({ hasText: /Você acertou|Resposta correta/ })
     .innerText();
+
+  // Raio-X só depois de responder (F3-T04)
+  await page.getByRole("button", { name: "Ver Raio-X" }).click();
+  await expect(
+    page.getByRole("heading", { name: "Raio-X", level: 3 }),
+  ).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByRole("heading", { name: /^Resolução/ })).toBeVisible();
 
   // recarregar: a primeira questão já respondida não volta em branco
   await page.goto(url);

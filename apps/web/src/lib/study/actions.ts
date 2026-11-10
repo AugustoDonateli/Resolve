@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { CLIENT_EVENT_TYPES } from "./events";
 import { ERROR_REASONS } from "./reasons";
 import { classify, type Outcome } from "./retry";
+import type { Explanation } from "./raiox";
 
 /**
  * Ações do ciclo de estudo (F3-T01, F3-T06, F3-T12). A identidade vem da sessão de login; o acerto,
@@ -214,4 +215,21 @@ export async function startTraining(input: unknown): Promise<Outcome<string>> {
     p_time_limit_minutes: null,
     p_selection_reason: "escolha",
   });
+}
+
+/** Raio-X (F3-T04): só vem conteúdo depois da resposta ou da ajuda pedida; antes, `released: false`. */
+export async function getExplanation(input: unknown): Promise<Outcome<Explanation>> {
+  const p = z.object({ sessionItemId: uuid }).safeParse(input);
+  if (!p.success) return { ok: false, error: "dados inválidos", final: true };
+  return rpc<Explanation>("item_explanation", { p_session_item_id: p.data.sessionItemId });
+}
+
+/** Ajuda explícita antes de responder: registra `ajuda_vista` (a tentativa fica marcada como feita com ajuda). */
+export async function requestHelp(input: unknown): Promise<Outcome<Explanation>> {
+  const p = z.object({ sessionId: uuid, sessionItemId: uuid }).safeParse(input);
+  if (!p.success) return { ok: false, error: "dados inválidos", final: true };
+  const event = { client_event_id: `ajuda-${p.data.sessionItemId}`, type: "ajuda_vista", session_item_id: p.data.sessionItemId, payload: {}, client_at: new Date().toISOString() };
+  const logged = await rpc<unknown>("log_session_events", { p_session_id: p.data.sessionId, p_events: [event] });
+  if (!logged.ok) return logged;
+  return rpc<Explanation>("item_explanation", { p_session_item_id: p.data.sessionItemId });
 }
