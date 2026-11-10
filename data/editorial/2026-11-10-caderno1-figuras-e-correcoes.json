@@ -1,0 +1,55 @@
+{
+  "booklet_note": "%D1_CD1%",
+  "pdf_sha": "a0f19f878d4ef3ba94c3e0f5ef9e57c13fb046d4bb362f72651898b473ddb7c8",
+  "figures": {
+    "4/espanhol": {"crop": "4_espanhol_p5_1.png", "alt": "Charge em preto e branco. Um homem de cabelo espetado, nariz grande e camiseta escura, com o braço estendido, conversa com alguém que não aparece no quadro. Balões de fala: \"¿Qué van a hacer en el cole para el día de la paz...?\"; \"Vamo a sortá una paloma ahí...\"; \"¿Y luego?\"; \"Yoquisé... luego vamo acogehla...\"."},
+    "5/ingles": {"crop": "5_ingles_p3_1.png", "alt": "Fotografia de um balcão de cafeteria. Três copos descartáveis de tamanhos diferentes têm inscrições à mão: no de 16 ounce, \"What is sleep?\"; no de 12 ounce, \"Slept 5-7 hours\"; no de 8 ounce, \"Slept 8-10 hours\". Ao fundo, um quadro com o cardápio e um atendente; à frente, bolinhos em uma vitrine."},
+    "14": {"crop": "14_p8_1.png", "alt": "Cartaz ilustrado. Rosto de um homem de óculos e barba grisalha, com pequenas figuras no alto da cabeça; o peito é formado por cenas de cidade, com bonde, prédios, barcos e um farol. À esquerda, \"Você entra Fernando.\"; à direita, \"E sai Pessoa.\". Na faixa azul inferior: \"26ª Bienal Internacional do Livro de São Paulo. Todo mundo sai melhor do que entrou. 02 a 10 de julho. Novo local: Expo Center Norte\", ao lado do desenho de um livro aberto."},
+    "15": {"crop": "15_p9_1.png", "alt": "Duas pinturas lado a lado, com fundo verde-claro. Figura 1: retrato de uma mulher negra de cabelo curto, brincos e vestido vermelho-escuro com gola rendada. Figura 2: retrato de um homem negro de barba, com terno escuro, colete, camisa branca e gravata. Legendas: Figura 1 — PAULA, D. Zeferina. Óleo sobre tela, 59 × 44 cm. Masp, São Paulo, 2018. Figura 2 — PAULA, D. João de Deus Nascimento. Óleo sobre tela, 59,5 × 44 cm. Masp, São Paulo, 2018."},
+    "22": {"crop": "22_p11_1.png", "alt": "Fotografia de cinco esculturas sobre uma mesa, cada uma presa a uma base de madeira clara. Representam figuras humanas de corpo fino e alongado, com cabeça redonda e rosto pintado, em poses de dança, com braços e pernas abertos; as roupas são pintadas em azul, amarelo, branco e vermelho."},
+    "23": {"crop": "23_p11_1.png", "alt": "Fotografia de uma obra em que uma forma irregular, avermelhada e de textura rugosa, semelhante a carne, se projeta de uma parede revestida de azulejos brancos com desenhos azuis; parte dos azulejos aparece dobrada e rachada sobre a forma."},
+    "24": {"crop": "24_p12_1.png", "role": "texto-base/comando", "alt": "Cartaz de campanha com duas fotografias de crianças sorrindo. À esquerda, um menino indígena com cocar e pintura vermelha no rosto, com a legenda \"Carlos Pataxicorê, aos 36 anos, médico e o futuro todo pela frente.\"; à direita, uma menina negra de tranças, com a legenda \"Quézia Silva, aos 29 anos, advogada e o futuro todo pela frente.\". Abaixo: \"Em um mundo de diferenças enxergue a igualdade\" e o texto \"O Brasil tem 31 milhões de crianças negras e indígenas. A maioria sofre com discriminação racial, sem ter acesso à educação, à saúde e ao desenvolvimento. Ajude a mudar essa realidade. Contribua para uma infância sem racismo.\". No rodapé: \"Participe desta campanha. Acesse: www.unicef.org.br\", a palavra \"Racismo\" com um sinal de proibido e o logotipo do Unicef."},
+    "26": {"crop": "26_p13_1.png", "alt": "Quadro de fundo azul-claro com o título \"Doce mistura\" e o texto: \"A canjica – creme amarelo à base de milho – é prova da diversidade do Brasil, pelas variações em seu nome de batismo. Servido polvilhado com canela, o doce confunde: o que lá no norte é 'canjica', lá no sul é 'curau'. Os nomes se invertem quando o doce muda. O creme branco com os grãos inteiros de milho, no sul, é 'canjica', e, no norte, 'curau'.\". Abaixo, fotografia de uma tigela com creme amarelo, uma espiga de milho e uma colher; linhas ligam a tigela a nomes e lugares: \"Curau (MG, SP, MT e GO)\"; \"Corá, piruruca, pururuca ou jimbelê (MG)\"; \"Canjiquinha (RJ)\"; \"Coral e papa de milho (RJ, MG)\"; \"Canjica de milho verde (BA)\"."},
+    "31": {"crop": "31_p14_1.png", "alt": "Quadro de fundo cinza com o título \"dezenove\" e três pequenos quadrados coloridos ao lado. Texto: \"Cada vez mais somos convocados para dentro das Redes. / Mas não levamos a nossa rede e penduramos no alpendre da casa de um amigo, não sentimos o cheiro da casa enquanto o café se derrama na xícara ou ouvimos o piar dos passarinhos ou a música da chuva. / A Rede nos convoca e o que somos lá dentro é o que somos do lado de fora? / Há um intervalo entre este eu dentro da tela e o outro que somos? / A palavra rede é vasta.\""},
+    "33": {"crop": "33_p14_1.png", "alt": "Banner de campanha. À esquerda, três selos: \"Dossiê violência contra as mulheres\"; \"#Desafio... igualdade\"; \"Anuário Brasileiro de Segurança Pública 2019\", com o mapa do Brasil. À direita, o título \"Por que falar sobre violência contra mulheres na escola?\", o desenho de uma flor ao lado de uma lousa com a inscrição \"Maria da Penha vai à escola\" e o texto \"A violência de gênero afeta a vida de meninas e meninos em vários aspectos e hoje é um dos grandes empecilhos para que vivam plenamente, com segurança e qualidade de vida.\""},
+    "34": {"crop": "34_p15_1.png", "alt": "Capa da revista Galileu. No alto: \"Galileu. A ciência ajuda você a mudar o mundo. Ed. 371, fevereiro de 2023\". A ilustração mostra muitas pessoas, cada uma dentro de um buraco separado num chão azul-claro, quase todas olhando para o celular. Texto: \"Você (não) está sozinho. No Brasil, metade da população se sente solitária, e a mesma sensação cresce em outras partes do mundo. Por que devemos repensar nossas relações?\""},
+    "41": {"crop": "41_p18_1.png", "alt": "Fotografia de uma escultura de madeira em forma de tamanduá, com focinho longo e fino e cauda alongada; o corpo é decorado com desenhos geométricos em preto e se apoia sobre uma base vazada."},
+    "47": {"crop": "47_p22_adj.png", "adjusted": true, "alt": "Mapa da América do Sul e da África com manchas em tons de amarelo, marrom e preto que indicam a concentração de CO₂; o contorno dos estados brasileiros aparece em azul. As manchas mais escuras ficam no interior da América do Sul, sobre o centro do Brasil e países vizinhos, e no centro-sul da África. Legenda: PPbv* 0, 50, 100, 500, 1200, do amarelo-claro ao vinho; *PPbv: partes por bilhão em volume."},
+    "49": {"crop": "49_p23_adj.png", "adjusted": true, "alt": "Pintura de uma praça de Veneza ao lado de um longo edifício com arcadas em vários andares; ao fundo, uma coluna alta. Na praça, grupos de pessoas conversam; em primeiro plano, homens de turbante e túnica longa, um deles com manto azul, e homens de casaca e peruca; à direita, um homem lê sentado sobre caixas; há cães pelo chão."},
+    "68": {"crop": "68_p27_1.png", "alt": "Fotografia aérea de Salvador. Em primeiro plano, um farol e um forte sobre uma ponta de terra com rochas e mar agitado; ao lado, uma praia extensa; ao fundo, muitos edifícios altos ocupam a orla e se estendem até o horizonte."},
+    "77": {"crop": "77_p29_1.png", "alt": "Charge colorida dividida em duas cenas por uma faixa vertical. À esquerda, num dia ensolarado com árvores, um homem de terno sorri ao lado de um carro verde com o símbolo de um raio. À direita, numa paisagem escura de fumaça e fuligem, duas pessoas em meio a destroços seguram um cabo grosso que termina num plugue de tomada; o cabo atravessa a divisão até o carro. Assinatura: Adão."}
+  },
+  "alt_only": {
+    "45": "Ilustração em tons de verde-água: duas mãos em concha seguram um pouco de água, e dentro dela está uma menina pequena de cabelo curto; gotas escorrem entre os dedos. Texto: \"Gufra (árabe)\" e \"A quantidade de água que pode ser segurada com as mãos\".",
+    "63": "Infográfico em forma de tabela com oito produtos, cada um com um ícone, e três linhas: Produz, Exporta e *Share. Açúcar: produz 29,5 MI t (2º), exporta 19,6 MI t (1º), share 36%. Café: 3,8 MI t (1º); 1,9 MI t (1º); 27%. Suco de laranja: 1,3 MI t (1º); 1,2 MI t (1º); 76%. Soja: 117 MI t (2º); 75,4 MI t (1º); 51%. Carne de frango: 13,3 MI t (2º); 3,6 MI t (1º); 38%. Carne bovina: 9,9 MI t (2º); 2,0 MI t (1º); 22%. Milho: 101 MI t (3º); 39,0 MI t (3º); 20%. Carne suína: 3,7 MI t (4º); 0,7 MI t (4º); 10%."
+  },
+  "text_fixes": {
+    "5/espanhol": {"alternative_E": "indiferença em relação a fatos históricos."},
+    "90": {"alternative_E": "religioso e humanitário."},
+    "42": {"stimulus": [
+      {"type": "heading", "text": "TRADUZINDO O JURIDIQUÊS"},
+      {"type": "paragraph", "text": "“Denego a liminar pleiteada na exordial, inobstante após a oitiva da parte adversa e da dilação probatória possa lograr alcançar um outro epílogo para o deslinde da quaestio sub examine.”"},
+      {"type": "heading", "text": "TRADUÇÃO"},
+      {"type": "paragraph", "text": "Não atendo, por ora, a liminar requerida na petição inicial, ainda que possa chegar a uma outra conclusão após ouvir a outra parte e avaliar as provas produzidas."},
+      {"type": "paragraph", "text": "Proposta de emenda à Constituição 269 de 2013. Aplica-se aos Governadores e Prefeitos o Regime Geral de Previdência Social, vedada a concessão graciosa, após o término do mandato, de vantagem pecuniária, verba de representação, pensão ou subsídio."},
+      {"type": "heading", "text": "TRADUÇÃO"},
+      {"type": "paragraph", "text": "Torna-se proibido pagar benefícios vitalícios para ex-prefeitos e ex-governadores."}
+    ]}
+  },
+  "letters": [
+    {"key": "4/espanhol", "letter": "E", "other": "E", "pages": "caderno 1 p. 5 (questão 04) e caderno 2 p. 5 (questão 05)"},
+    {"key": "5/espanhol", "letter": "E", "other": "E", "pages": "caderno 1 p. 5 (questão 05) e caderno 2 p. 5 (questão 04)"},
+    {"key": "75", "letter": "E", "other": "E", "pages": "caderno 1 p. 28 (questão 75) e caderno 2 p. 31 (questão 90)"},
+    {"key": "90", "letter": "E", "other": "E", "pages": "caderno 1 p. 31 (questão 90) e caderno 2 p. 27 (questão 71)"}
+  ],
+  "false_positive_figures": {
+    "16": "p. 9: poema, sem figura; o objeto detectado é a moldura da coluna.",
+    "44": "p. 19: texto corrido, sem figura; a imagem detectada é a da questão 45, na coluna vizinha.",
+    "50": "p. 23: texto corrido, sem figura.",
+    "67": "p. 27: texto corrido, sem figura.",
+    "90": "p. 31: texto corrido, sem figura; o objeto detectado é o rodapé da contracapa."
+  },
+  "formula_doubts": {
+    "47": "Índice conferido no PDF oficial (p. 22): o título traz CO₂, igual ao texto da proposta."
+  }
+}

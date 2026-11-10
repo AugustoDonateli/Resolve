@@ -29,3 +29,10 @@ RESOLVE_ANTHROPIC_API_KEY=... .venv/bin/python tagging.py raw/proposals/D2_CD7_Q
 ```
 
 `load_editorial.py` entra com a sessão do editor (as políticas do banco valem; nenhuma chave de serviço) e é idempotente pela nota do lote. `tagging.py` nunca grava sugestão sem modelo e prompt; qualquer incerteza deixa a sugestão pendente para a revisão (F2-T13).
+
+## Revisão editorial assistida (sessão 14)
+
+- `audit_figuras.py <pdf> [páginas-de-língua-json]`: para cada questão do PDF oficial, conta imagens e gráficos vetoriais na região do cabeçalho até o próximo; cruzar com as figuras da proposta mostra figura essencial ausente.
+- `recorte_por_cabecalho.py <pdf> <alvos-json> <pasta>`: recorta as figuras com a lógica de `figures.py`, usando a região derivada dos cabeçalhos (a região gravada na proposta pode errar).
+- `aplicar_revisao.mjs <job.json>`: aplica figuras (envio a `editorial/figuras/<sha256>.png`), textos alternativos, correções de texto, fechamento de dúvidas e preenchimento de letra vazia no cruzamento, sempre com a sessão de um editor (`RESOLVE_EDITOR_ENV` aponta para um arquivo com `RESOLVE_EDITOR_EMAIL`/`RESOLVE_EDITOR_PASSWORD`; `RESOLVE_JOB_DIR` para a pasta com o job, `crops.json`, `adjusted.json` e `figs/`). `DRY=1` só lista o que faria. Não é idempotente para figuras: rode uma vez por job.
+- Registro do que foi aplicado no caderno 1 em `data/editorial/2026-11-10-*`.
