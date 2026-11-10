@@ -21,6 +21,7 @@ export default defineConfig({
     { name: "conta", testMatch: /auth\.spec\.ts/ },
     { name: "iphone", testMatch: /iphone\.spec\.ts/, dependencies: ["sessao"] },
     { name: "editor", testMatch: /editor\.spec\.ts/ },
+    { name: "rotina", testMatch: /rotina\.spec\.ts/ },
   ],
   webServer: {
     command: "pnpm start -p 3100",

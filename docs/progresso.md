@@ -71,6 +71,14 @@ Demais F3 ⬜. F3-T02 depende de F2-T16 (piloto de 30 publicado) e F1-T05. F3-T0
 
 Demais F5 ⬜. F5-T09 depende da chave da API; F5-T05 depende de F3-T03; F5-T04 (gerador editorial) liberada, mas também usa IA. F5-T01/T17 dependem de EXT-CORPUS.
 
-## F4, F6, F7 e E
+## F4 — Rotina, habilidades e foco
+
+| ID | Estado | Evidência / o que falta |
+|---|---|---|
+| F4-T13 | ✅ | Horários livres e compromissos semanais com fuso próprio; exceções de um dia (cancelar, mudar, avulso) que nunca alteram a regra; ocorrências no fuso de quem vê; conflito conferido no banco sobre o próximo ano (entre fusos e no horário de verão, com explicação de data e horário); desfazer também conferido. Tela `/rotina`. Banco (transação desfeita), unitários 8, ponta a ponta do projeto `rotina`, `audit:ui` 68/68, matriz 203/203 (`docs/validation/2026-11-10-f4-t13.md`, decisão 0009). Falta: medir com Guto o planejamento da semana em menos de 5 min (§11); avulso pela tela. |
+
+Demais F4 ⬜. F4-T14 (metas e planos se-então) fica liberada. F4-T04/T06 dependem só de F3-T12, mas precisam de questão publicada para fazer sentido (F3-T02).
+
+## F6, F7 e E
 
 ⬜ Nenhuma iniciada.

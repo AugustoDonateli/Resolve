@@ -235,6 +235,37 @@ let batchId, proposalId;
   }
 }
 
+// ── Rotina: disponibilidade, compromissos e exceções (F4-T13) ──
+{
+  for (const t of ["availability_rules", "fixed_commitments", "schedule_exceptions"]) {
+    const v = await V.c.from(t).select("*").limit(1);
+    check("visitante", `não lê ${t}`, permError(v), v.error?.message ?? `${rows(v)} linha(s)`);
+  }
+  const vo = await V.c.rpc("schedule_occurrences", { p_from: "2026-11-16", p_to: "2026-11-22" });
+  check("visitante", "não executa schedule_occurrences", permError(vo), vo.error?.message ?? "executou!");
+  const mine = await A.c.from("fixed_commitments").insert({ title: "Matriz de acesso", weekday: 0, start_time: "06:00", end_time: "06:05" }).select("id").single();
+  check("A", "cria o próprio compromisso", !mine.error && Boolean(mine.data?.id), mine.error?.message ?? "");
+  const cid = mine.data?.id;
+  if (cid) {
+    for (const [who, s] of [["B", B], ["E", E]]) {
+      const r = await s.c.from("fixed_commitments").select("id").eq("id", cid);
+      check(who, "não lê compromisso de A", denied(r), r.error?.message ?? `${rows(r)} linha(s)`);
+      const u = await s.c.from("fixed_commitments").update({ title: "invadido" }).eq("id", cid).select();
+      check(who, "não altera compromisso de A", denied(u), u.error?.message ?? `${rows(u)} linha(s)`);
+      const d = await s.c.from("fixed_commitments").delete().eq("id", cid).select();
+      check(who, "não apaga compromisso de A", denied(d), d.error?.message ?? `${rows(d)} linha(s)`);
+      const x = await s.c.from("schedule_exceptions").insert({ kind: "compromisso", action: "cancelar", commitment_id: cid, on_date: "2026-11-15" }).select();
+      check(who, "não cancela um dia do compromisso de A", Boolean(x.error), x.error?.message ?? "cancelou!");
+      const o = await s.c.rpc("schedule_occurrences", { p_from: "2026-11-15", p_to: "2026-11-21" });
+      check(who, "ocorrências só da própria conta", !o.error && (o.data ?? []).every((y) => y.source_id !== cid), o.error?.message ?? "");
+    }
+    const ins = await B.c.from("availability_rules").insert({ user_id: A.id, weekday: 2, start_time: "08:00", end_time: "09:00" }).select();
+    check("B", "não grava horário em nome de A", permError(ins), ins.error?.message ?? "gravou!");
+    const del = await A.c.from("fixed_commitments").delete().eq("id", cid).select("id");
+    check("A", "apaga o próprio compromisso de teste", rows(del) === 1, del.error?.message ?? `${rows(del)} linha(s)`);
+  }
+}
+
 // ── Redação (F5-T02) ──
 {
   for (const t of ["essays", "essay_versions", "essay_jobs", "essay_evaluations", "essay_results", "essay_annotations", "essay_rubrics"]) {
