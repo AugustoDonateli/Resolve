@@ -309,6 +309,7 @@ test("metas e planos se-então: criar, editar, arquivar e restaurar", async ({
 test("plano de hoje: blocos nos horários livres, sem encostar no compromisso, e o que ficou de fora", async ({
   page,
 }) => {
+  test.setTimeout(120_000); // plano + remarcação + arrasto + foco: fluxo longo
   const db = await studentDb();
   const wipe = async () => {
     await db.from("study_blocks").delete().not("id", "is", null); // intervalos de foco saem em cascata
