@@ -10,6 +10,7 @@ Nota única: o que funciona, o que falta e onde retomar. Objetivo em vigor: conc
 - **Redação**: temas com textos motivadores (tema oficial 2025 em rascunho), editor com salvamento automático e recuperação, folha de 30 linhas (`folha-v1`), treino por peças, **envio para correção** (versão congela), **correção em etapas** A → B → regra de discrepância (`discrepancia-plano-v1`: >100 no total ou >80 numa competência; fonte oficial do Inep pendente) → C quando necessário, resultado como divergência entre avaliações ("não calibrado"), comentários ancorados ao trecho com traço de caneta, cinco elementos da intervenção, **reescrita e evolução** por versão.
   - Serviço: Edge Function `corrigir-redacao` (implantada) + núcleo `supabase/functions/_shared/essay-core.ts` (testado no app com avaliador de teste) + funções `worker_*` só para `service_role` + agenda a cada 5 min (pg_cron) que só chama com fila. Sem a chave, a função responde "pendente" e não pega trabalho.
   - A conta de teste A pode ter uma correção feita pelo **avaliador de teste** (marcada na tela como teste, zero tokens). Nenhuma correção real foi feita.
+- **Progresso** (`/progresso`): relatório dos últimos 7 dias (minutos feitos pelo foco × planejados, blocos, respostas, revisões, redações, por área e meta semanal), tabela equivalente; mapa de habilidades e TRI declarados como indisponíveis, com o motivo.
 - **Área editorial**: propostas, dúvidas, etiquetas, cartões de conceito, temas e **publicação de conteúdo conferido com etiquetas pendentes** (`/editor/publicar`).
 - **Estudo pronto, aguardando questões publicadas**: sessão de treino com resposta preservada, Raio-X (mostra campos sem etiqueta como indisponíveis), caderno de erros e revisão espaçada, banco com filtros, triagem e conferência, ritmo.
 
@@ -25,9 +26,9 @@ Nota única: o que funciona, o que falta e onde retomar. Objetivo em vigor: conc
 1. Redação restante: calibração (precisa de redações com nota humana, que Guto traz), banco de repertório, biblioteca nota 1000 com anotações e camadas (conteúdo de Guto), trilha Redação do zero, retorno do treino por peças (IA).
 2. **Dia D (simulado)**: perfil de prova versionado, duração, ordem, cartão-resposta, retomada, encerramento, replay da sessão real, abertura com caderno.
 3. **TRI e diagnóstico**: sem parâmetros oficiais dos itens no banco; a tela deve dizer "indisponível" até carregar parâmetros do Inep e conferir o cálculo com dados de referência.
-4. Habilidades de prova restantes (comando primeiro com seleção de evidência, caça ao distrator), relatório semanal, Progresso com evidências reais.
+4. Habilidades de prova restantes (comando primeiro com seleção de evidência, caça ao distrator); mapa de habilidades real quando houver tentativas.
 5. Expansões (plano adaptativo, previsão, feed finito, dados brasileiros, incidência e fichas, tutor, texto compartilhado, meta de curso, reta final, questão do dia, redação por foto, grupos e duelos).
 
 ## Retomar por aqui
 
-Itens 2 a 4 de "Falta implementar" (Dia D, TRI/diagnóstico honesto, habilidades de prova e relatório semanal), em paralelo às pendências de Guto. Ambiente local: `apps/web/.env.local` com a URL e a chave publicável do projeto; senhas das contas de teste geradas por `tools/dev/test-accounts.mjs`.
+Item 2 de "Falta implementar" (Dia D), depois 3 e 4, em paralelo às pendências de Guto. Ambiente local: `apps/web/.env.local` com a URL e a chave publicável do projeto; senhas das contas de teste geradas por `tools/dev/test-accounts.mjs`.
