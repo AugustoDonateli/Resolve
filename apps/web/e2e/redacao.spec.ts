@@ -152,3 +152,69 @@ test("redação: salva sozinho, recupera ao recarregar e ao voltar a conexão; c
     await wipe();
   }
 });
+
+test("folha simulada: mesma contagem no celular e no PC, prévia ampliável e limite explicado", async ({
+  browser,
+}) => {
+  const db = await studentDb();
+  const wipe = async () =>
+    void (await db.from("essays").delete().not("id", "is", null));
+  await wipe();
+  try {
+    const a = await device(browser);
+    await a.page.goto("/redacao/minhas");
+    await a.page.getByRole("button", { name: "Nova redação" }).click();
+    await a.page.waitForURL(/\/redacao\/escrever\//);
+    const long = Array.from(
+      { length: 12 },
+      () => "A participação social amplia a cidadania.",
+    ).join(" ");
+    await a.page
+      .getByLabel("Texto da redação")
+      .fill(`${long}\n\nSegundo parágrafo.`);
+    await saved(a.page);
+    const counts: string[] = [];
+    for (const width of [390, 1440]) {
+      await a.page.setViewportSize({ width, height: 900 });
+      counts.push(
+        await a.page.getByText(/^Folha simulada: \d+ de 30 linhas/).innerText(),
+      );
+    }
+    expect(counts[0]).toBe(counts[1]);
+    await expect(
+      a.page.getByText(/não prevê quantas linhas a sua letra ocupa/),
+    ).toBeVisible();
+    const lines = Number(counts[0]!.match(/(\d+) de 30/)![1]);
+    const { data: v } = await db
+      .from("essay_versions")
+      .select("simulated_lines, layout_profile_id")
+      .limit(1)
+      .single();
+    expect(v?.simulated_lines).toBe(lines);
+    expect(v?.layout_profile_id).toBeTruthy();
+
+    await a.page.setViewportSize({ width: 390, height: 844 });
+    await a.page.getByRole("button", { name: "Ver a folha" }).click();
+    const dialog = a.page.getByRole("dialog", { name: /Folha simulada/ });
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator("ol > li")).toHaveCount(30);
+    const before = await dialog
+      .locator("ol")
+      .evaluate((el) => getComputedStyle(el).fontSize);
+    await dialog.getByRole("button", { name: "Ampliar a folha" }).click();
+    expect(
+      await dialog
+        .locator("ol")
+        .evaluate((el) => getComputedStyle(el).fontSize),
+    ).not.toBe(before);
+    const r = await new AxeBuilder({ page: a.page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+      .analyze();
+    expect(r.violations.map((x) => `${x.id}: ${x.nodes.length}`)).toEqual([]);
+    await a.page.keyboard.press("Escape");
+    await expect(dialog).toHaveCount(0);
+    await a.ctx.close();
+  } finally {
+    await wipe();
+  }
+});

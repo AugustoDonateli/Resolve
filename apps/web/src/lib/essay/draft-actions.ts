@@ -3,6 +3,7 @@
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { fromParagraphs, toParagraphs } from "./draft";
+import { SHEET_PROFILE, wrapLines } from "./sheet";
 
 /**
  * Rascunho de redação (F5-T05). Gravar exige a revisão que o cliente viu; se outra aba/aparelho gravou
@@ -33,9 +34,20 @@ export async function saveDraft(input: unknown): Promise<SaveResult> {
   const supabase = await createClient();
   const { data: auth } = await supabase.auth.getUser();
   if (!auth.user) return { ok: false, error: "Entre para salvar." };
+  const { data: profile } = await supabase
+    .from("essay_layout_profiles")
+    .select("id")
+    .eq("version", SHEET_PROFILE.version)
+    .maybeSingle();
+  const profileId = profile?.id ?? null;
   const { data, error } = await supabase
     .from("essay_versions")
-    .update({ paragraphs_json: toParagraphs(p.data.text) })
+    .update({
+      paragraphs_json: toParagraphs(p.data.text),
+      // Contagem reproduzível da folha simulada (F5-T06), calculada com o perfil fixo.
+      layout_profile_id: profileId,
+      simulated_lines: Math.min(200, wrapLines(p.data.text).length),
+    })
     .eq("id", p.data.versionId)
     .eq("revision", p.data.expectedRevision)
     .eq("status", "rascunho")

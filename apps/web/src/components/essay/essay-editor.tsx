@@ -10,6 +10,7 @@ import {
 } from "@/lib/essay/draft";
 import { saveDraft } from "@/lib/essay/draft-actions";
 import type { DraftView } from "@/lib/essay/drafts";
+import { SheetPreview } from "./sheet-preview";
 
 type Status =
   | "salvo"
@@ -189,6 +190,7 @@ export function EssayEditor({ draft }: { draft: DraftView }) {
         {paragraphs === 1 ? "parágrafo" : "parágrafos"} · deixe uma linha em
         branco entre parágrafos
       </p>
+      <SheetPreview text={text} />
       <p id="estado-rascunho" role="status" className="t-meta">
         {readOnly
           ? "Versão enviada: não muda mais. A reescrita cria uma nova versão."
