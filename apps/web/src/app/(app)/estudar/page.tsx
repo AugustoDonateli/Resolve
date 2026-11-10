@@ -12,6 +12,8 @@ export const dynamic = "force-dynamic";
 
 const MODES = [
   { href: "/estudar/dia-d", title: "Dia D", body: "Simulado com caderno oficial, relógio do servidor e cartão-resposta." },
+  { href: "/estudar/comando", title: "Comando primeiro", body: "Leia o comando antes do texto, marque a evidência e só então responda." },
+  { href: "/estudar/distrator", title: "Caça ao distrator", body: "Depois de responder, classifique por que cada alternativa errada atrai." },
   { href: "/diagnostico", title: "Diagnóstico", body: "Até 20 questões por área e a estimativa por TRI quando houver parâmetros oficiais." },
 ];
 

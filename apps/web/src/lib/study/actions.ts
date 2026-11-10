@@ -321,3 +321,85 @@ export async function startRhythm(input: unknown): Promise<Outcome<string>> {
   if (!chosen.length) return { ok: false, error: "resolve_no_items", final: true };
   return rpc<string>("start_session", { p_client_action_id: p.data.actionId, p_mode: "simulado", p_item_version_ids: chosen, p_planned_minutes: p.data.minutes, p_time_limit_minutes: p.data.minutes, p_selection_reason: "escolha" });
 }
+
+/**
+ * Treinos de habilidade (comando primeiro, caça ao distrator): sessão de treino com até 5 questões da
+ * área, marcada com o treino. Comando primeiro prefere questões com texto-base para marcar evidência.
+ */
+export async function startSkill(input: unknown): Promise<Outcome<string>> {
+  const p = z
+    .object({ actionId: uuid, skill: z.enum(["comando", "distrator"]), area: z.enum(["LC", "CH", "CN", "MT", "todas"]) })
+    .safeParse(input);
+  if (!p.success) return { ok: false, error: "dados inválidos", final: true };
+  const supabase = await createClient();
+  const { data: auth } = await supabase.auth.getUser();
+  if (!auth.user) return { ok: false, error: "resolve_not_signed_in", final: true };
+  let q = supabase.from("study_items").select("item_version_id, stimulus_blocks").eq("annulled", false);
+  if (p.data.area !== "todas") q = q.eq("area", p.data.area);
+  const [{ data: pool }, { data: done }] = await Promise.all([q, supabase.from("attempts").select("item_version_id")]);
+  const answered = new Set((done ?? []).map((a) => a.item_version_id));
+  const hasText = (r: { stimulus_blocks: unknown }) =>
+    Array.isArray(r.stimulus_blocks) && (r.stimulus_blocks as { type: string; text?: string }[]).some((b) => b.type === "paragraph" && (b.text ?? "").length > 80);
+  const ranked = (pool ?? [])
+    .filter((r) => p.data.skill === "distrator" || hasText(r))
+    .map((r) => [(answered.has(r.item_version_id) ? 1 : 0) + Math.random(), r.item_version_id as string] as const)
+    .sort((a, b) => a[0] - b[0])
+    .slice(0, 5)
+    .map(([, id]) => id);
+  if (!ranked.length) return { ok: false, error: "resolve_no_items", final: true };
+  const s = await rpc<string>("start_session", {
+    p_client_action_id: p.data.actionId,
+    p_mode: "treino",
+    p_item_version_ids: ranked,
+    p_planned_minutes: null,
+    p_time_limit_minutes: null,
+    p_selection_reason: "escolha",
+  });
+  if (!s.ok) return s;
+  await supabase.rpc("set_session_skill", { p_session: s.value, p_skill: p.data.skill });
+  return s;
+}
+
+const rangeSchema = z.object({
+  block_id: z.string().regex(/^[A-Za-z0-9_-]{1,40}$/),
+  start_utf16: z.number().int().min(0),
+  end_utf16: z.number().int().min(1),
+  quote: z.string().max(2000).optional(),
+});
+
+/** Comando primeiro: grava a evidência marcada antes da resposta (até 3 trechos, ou o motivo de não haver). */
+export async function recordEvidence(input: unknown): Promise<Outcome<unknown>> {
+  const p = z
+    .object({ sessionItemId: uuid, ranges: z.array(rangeSchema).max(3), noneReason: z.enum(["figura", "calculo", "nao_encontrei"]).nullable() })
+    .safeParse(input);
+  if (!p.success) return { ok: false, error: "dados inválidos", final: true };
+  return rpc<unknown>("record_evidence", { p_session_item: p.data.sessionItemId, p_ranges: p.data.ranges, p_none_reason: p.data.noneReason });
+}
+
+/** Caça ao distrator: grava a classificação das alternativas erradas depois da resposta. */
+export async function recordDistractorChoices(input: unknown): Promise<Outcome<unknown>> {
+  const p = z
+    .object({
+      sessionItemId: uuid,
+      choices: z.array(z.object({ key: z.string().min(1).max(4), type: z.string().regex(/^[a-z_]{3,40}$/), justification: z.string().max(500).optional() })).min(1).max(4),
+    })
+    .safeParse(input);
+  if (!p.success) return { ok: false, error: "dados inválidos", final: true };
+  return rpc<unknown>("record_distractor_choices", { p_session_item: p.data.sessionItemId, p_choices: p.data.choices });
+}
+
+export interface SkillFeedback {
+  released: boolean;
+  annotation_status?: "aprovadas" | "pendentes";
+  correct_key?: string;
+  my_evidence?: { ranges: { block_id: string; start_utf16: number; end_utf16: number; quote?: string }[]; none_reason: string | null } | null;
+  my_choices?: { key: string; type: string; justification?: string }[] | null;
+  evidence?: { block_id: string; start_utf16: number; end_utf16: number; rationale: string | null }[] | null;
+  distractors?: { key: string; type: string; label: string; rationale: string }[] | null;
+}
+
+export async function getSkillFeedback(input: unknown): Promise<Outcome<SkillFeedback>> {
+  const p = z.object({ sessionItemId: uuid }).safeParse(input);
+  if (!p.success) return { ok: false, error: "dados inválidos", final: true };
+  return rpc<SkillFeedback>("skill_feedback", { p_session_item: p.data.sessionItemId });
+}
