@@ -18,6 +18,19 @@ export default async function EstudarPage() {
       {total > 0 ? (
         <div className="flex flex-col gap-6">
           <StartTraining counts={counts!} />
+          <section
+            aria-labelledby="treinos-habilidade"
+            className="flex max-w-xl flex-col gap-3"
+          >
+            <h2 id="treinos-habilidade" className="t-section">
+              Triagem de 20 segundos
+            </h2>
+            <p className="t-meta text-ink-2">
+              Para cada questão, decida em até 20 segundos: resolver agora,
+              deixar para depois ou chutar. Depois você resolve todas e compara.
+            </p>
+            <StartTraining counts={counts!} mode="triagem" />
+          </section>
           <p className="t-meta text-ink-2">
             Só questões reais do Enem, conferidas e publicadas.{" "}
             <Link href="/estudar/banco" className="underline">

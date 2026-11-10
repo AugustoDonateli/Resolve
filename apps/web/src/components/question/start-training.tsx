@@ -11,7 +11,13 @@ const selectCls =
 const noop = () => () => {};
 
 /** Escolha do treino livre: área e quantidade; abre a sessão e leva à primeira questão. */
-export function StartTraining({ counts }: { counts: Record<string, number> }) {
+export function StartTraining({
+  counts,
+  mode = "treino",
+}: {
+  counts: Record<string, number>;
+  mode?: "treino" | "triagem";
+}) {
   const router = useRouter();
   const hydrated = useSyncExternalStore(
     noop,
@@ -26,7 +32,7 @@ export function StartTraining({ counts }: { counts: Record<string, number> }) {
   const available = area === "todas" ? total : (counts[area] ?? 0);
   return (
     <form
-      aria-label="Começar treino"
+      aria-label={mode === "triagem" ? "Começar triagem" : "Começar treino"}
       className="flex max-w-xl flex-col gap-4 rounded-panel border border-line bg-surface p-4 sm:p-6"
       onSubmit={(e) => {
         e.preventDefault();
@@ -37,7 +43,12 @@ export function StartTraining({ counts }: { counts: Record<string, number> }) {
             area,
             count: Number(count),
           });
-          if (r.ok) router.push(`/estudar/sessao/${r.value}`);
+          if (r.ok)
+            router.push(
+              mode === "triagem"
+                ? `/estudar/triagem/${r.value}`
+                : `/estudar/sessao/${r.value}`,
+            );
           else
             setError(
               r.error === "resolve_no_items"
@@ -91,7 +102,7 @@ export function StartTraining({ counts }: { counts: Record<string, number> }) {
         loading={pending}
         disabled={!hydrated || available === 0}
       >
-        Começar treino
+        {mode === "triagem" ? "Começar triagem" : "Começar treino"}
       </Button>
       <div aria-live="polite">
         {error && (

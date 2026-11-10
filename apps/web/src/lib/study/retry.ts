@@ -15,6 +15,8 @@ export const FINAL_ERRORS = [
   "resolve_time_invalid",
   "resolve_card_not_in_review",
   "resolve_card_unavailable",
+  "resolve_already_decided",
+  "resolve_triage_decision_invalid",
 ] as const;
 
 export type Outcome<T> = { ok: true; value: T } | { ok: false; error: string; final: boolean };

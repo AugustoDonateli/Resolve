@@ -11,6 +11,12 @@ import {
 export interface SessionEntry {
   sessionItemId: string;
   itemVersionId: string;
+  /** Decisão da triagem (F4-T04), se houve. */
+  triage: {
+    decision: "agora" | "depois" | "chuto";
+    visible_ms: number;
+    window_closed: boolean;
+  } | null;
   position: number;
   question: StudyQuestion;
   /** Chave estável → id da alternativa (o envio usa o id). */
@@ -65,20 +71,31 @@ export async function loadSession(id: string): Promise<SessionView> {
     .eq("session_id", id)
     .order("position");
   const versionIds = (items ?? []).map((i) => i.item_version_id);
-  const [{ data: study }, { data: alts }, { data: feedback }] =
-    await Promise.all([
-      supabase
-        .from("study_items")
-        .select(
-          "item_version_id, area, stimulus_blocks, command_blocks, alternatives, appearances",
-        )
-        .in("item_version_id", versionIds),
-      supabase
-        .from("alternatives")
-        .select("id, item_version_id, stable_key")
-        .in("item_version_id", versionIds),
-      supabase.rpc("session_feedback", { p_session_id: id }),
-    ]);
+  const [
+    { data: study },
+    { data: alts },
+    { data: feedback },
+    { data: triage },
+  ] = await Promise.all([
+    supabase
+      .from("study_items")
+      .select(
+        "item_version_id, area, stimulus_blocks, command_blocks, alternatives, appearances",
+      )
+      .in("item_version_id", versionIds),
+    supabase
+      .from("alternatives")
+      .select("id, item_version_id, stable_key")
+      .in("item_version_id", versionIds),
+    supabase.rpc("session_feedback", { p_session_id: id }),
+    supabase
+      .from("triage_decisions")
+      .select("session_item_id, decision, visible_ms, window_closed")
+      .in(
+        "session_item_id",
+        (items ?? []).map((i) => i.id),
+      ),
+  ]);
   // Figuras publicadas: asset_id dos blocos → link assinado (bucket privado, política só para figuras publicadas).
   const assetIds = new Set<string>();
   const walk = (blocks: { asset_id?: string }[] | null | undefined) =>
@@ -139,6 +156,15 @@ export async function loadSession(id: string): Promise<SessionView> {
     entries.push({
       sessionItemId: it.id,
       itemVersionId: it.item_version_id,
+      triage:
+        (
+          (triage ?? []) as {
+            session_item_id: string;
+            decision: "agora" | "depois" | "chuto";
+            visible_ms: number;
+            window_closed: boolean;
+          }[]
+        ).find((t) => t.session_item_id === it.id) ?? null,
       position: it.position,
       question: fromStudyItem(row, assets),
       alternativeIds: ids,

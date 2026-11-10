@@ -255,3 +255,15 @@ export async function startWithItems(input: unknown): Promise<Outcome<string>> {
   const ids = [...new Set(p.data.itemVersionIds)].map((x) => [Math.random(), x] as const).sort((a, b) => a[0] - b[0]).map(([, x]) => x).slice(0, 30);
   return rpc<string>("start_session", { p_client_action_id: p.data.actionId, p_mode: "treino", p_item_version_ids: ids, p_planned_minutes: null, p_time_limit_minutes: null, p_selection_reason: "escolha" });
 }
+
+export interface TriageResult { decision: "agora" | "depois" | "chuto"; visible_ms: number; window_closed: boolean; duplicate: boolean }
+
+/** Triagem (F4-T04): grava a decisão com o tempo visível. Reenviar com a mesma ação devolve a mesma decisão. */
+export async function recordTriage(input: unknown): Promise<Outcome<TriageResult>> {
+  const p = z.object({ actionId: uuid, sessionItemId: uuid, decision: z.enum(["agora", "depois", "chuto"]), visibleMs: z.number().int().min(0).max(600000) }).safeParse(input);
+  if (!p.success) return { ok: false, error: "dados inválidos", final: true };
+  const r = await rpc<TriageResult[]>("record_triage", { p_client_action_id: p.data.actionId, p_session_item_id: p.data.sessionItemId, p_decision: p.data.decision, p_visible_ms: p.data.visibleMs });
+  if (!r.ok) return r;
+  const row = r.value[0];
+  return row ? { ok: true, value: row } : { ok: false, error: "resposta vazia", final: true };
+}

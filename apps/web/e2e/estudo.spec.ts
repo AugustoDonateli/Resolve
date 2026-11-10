@@ -174,3 +174,55 @@ test("banco: filtros por URL e recuperação de combinação vazia", async ({
     .analyze();
   expect(r.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);
 });
+
+test("triagem: três decisões, página oculta não conta tempo, janela encerra sem avançar", async ({
+  page,
+}) => {
+  test.setTimeout(120_000);
+  await signIn(page);
+  await page.goto("/estudar");
+  const form = page.getByRole("form", { name: "Começar triagem" });
+  if (!(await form.isVisible())) {
+    test
+      .info()
+      .annotations.push({
+        type: "pendente",
+        description: "triagem aguarda questões publicadas (F2-T16)",
+      });
+    return;
+  }
+  await form.getByRole("combobox", { name: "Quantidade" }).selectOption("5");
+  await form.getByRole("button", { name: "Começar triagem" }).click();
+  await page.waitForURL(/\/estudar\/triagem\//);
+  const decisions = page.getByRole("group", { name: "Decisão da triagem" });
+  await expect(decisions.getByRole("button")).toHaveCount(3);
+  // página oculta: o relógio para
+  await page.evaluate(() => {
+    Object.defineProperty(document, "visibilityState", {
+      value: "hidden",
+      configurable: true,
+    });
+    document.dispatchEvent(new Event("visibilitychange"));
+  });
+  const before = await page.getByRole("timer").innerText();
+  await page.waitForTimeout(3000);
+  expect(await page.getByRole("timer").innerText()).toBe(before);
+  await page.evaluate(() => {
+    Object.defineProperty(document, "visibilityState", {
+      value: "visible",
+      configurable: true,
+    });
+    document.dispatchEvent(new Event("visibilitychange"));
+  });
+  // janela de 20 s encerra com aviso e a questão continua na tela
+  await expect(page.getByText("Janela encerrada")).toBeVisible({
+    timeout: 30_000,
+  });
+  await expect(
+    page.getByRole("heading", { name: /Triagem 1 de/ }),
+  ).toBeVisible();
+  await decisions.getByRole("button", { name: "Deixar para depois" }).click();
+  await expect(
+    page.getByRole("heading", { name: /Triagem 2 de|Triagem concluída/ }),
+  ).toBeVisible({ timeout: 15_000 });
+});

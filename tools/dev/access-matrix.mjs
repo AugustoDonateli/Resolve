@@ -198,6 +198,18 @@ let batchId, proposalId;
   check("B", "não lê relatos de outras contas", denied(others), others.error?.message ?? `${rows(others)} linha(s)`);
 }
 
+// ── Triagem (F4-T04) ──
+{
+  const v = await V.c.from("triage_decisions").select("*").limit(1);
+  check("visitante", "não lê triage_decisions", permError(v), v.error?.message ?? `${rows(v)} linha(s)`);
+  const vr = await V.c.rpc("record_triage", { p_client_action_id: crypto.randomUUID(), p_session_item_id: crypto.randomUUID(), p_decision: "agora", p_visible_ms: 1000 });
+  check("visitante", "não executa record_triage", permError(vr), vr.error?.message ?? "executou!");
+  const b = await B.c.rpc("record_triage", { p_client_action_id: crypto.randomUUID(), p_session_item_id: crypto.randomUUID(), p_decision: "agora", p_visible_ms: 1000 });
+  check("B", "não decide em questão de sessão alheia/inexistente", /session_item_not_found/.test(b.error?.message ?? ""), b.error?.message ?? "decidiu!");
+  const w = await B.c.from("triage_decisions").insert({}).select();
+  check("B", "não grava triage_decisions direto", permError(w), w.error?.message ?? "gravou!");
+}
+
 // ── Agenda de revisão (F3-T07) ──
 {
   for (const t of ["review_items", "review_events"]) {
