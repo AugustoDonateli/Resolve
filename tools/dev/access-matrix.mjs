@@ -266,6 +266,27 @@ let batchId, proposalId;
   }
 }
 
+// ── Metas e planos se-então (F4-T14) ──
+{
+  for (const t of ["goals", "if_then_plans"]) {
+    const v = await V.c.from(t).select("*").limit(1);
+    check("visitante", `não lê ${t}`, permError(v), v.error?.message ?? `${rows(v)} linha(s)`);
+  }
+  const g = await A.c.from("if_then_plans").insert({ trigger_text: "Se a matriz rodar", alternative_activity: "confiro o acesso", duration_minutes: 5 }).select("id").single();
+  check("A", "cria o próprio plano se-então", !g.error && Boolean(g.data?.id), g.error?.message ?? "");
+  if (g.data?.id) {
+    for (const [who, s] of [["B", B], ["E", E]]) {
+      const r = await s.c.from("if_then_plans").select("id").eq("id", g.data.id);
+      check(who, "não lê plano de A", denied(r), r.error?.message ?? `${rows(r)} linha(s)`);
+      const u = await s.c.from("if_then_plans").update({ duration_minutes: 1 }).eq("id", g.data.id).select();
+      check(who, "não altera plano de A", denied(u), u.error?.message ?? `${rows(u)} linha(s)`);
+    }
+    const ins = await B.c.from("goals").insert({ user_id: A.id, level: "semanal", target_minutes: 60 }).select();
+    check("B", "não grava meta em nome de A", permError(ins), ins.error?.message ?? "gravou!");
+    await A.c.from("if_then_plans").delete().eq("id", g.data.id);
+  }
+}
+
 // ── Redação (F5-T02) ──
 {
   for (const t of ["essays", "essay_versions", "essay_jobs", "essay_evaluations", "essay_results", "essay_annotations", "essay_rubrics"]) {

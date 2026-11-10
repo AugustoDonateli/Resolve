@@ -38,7 +38,7 @@ import {
 } from "@/lib/routine/schedule-types";
 
 const selectCls =
-  "min-h-11 rounded-control border border-line bg-surface px-3 t-ui text-ink";
+  "w-full min-w-0 min-h-11 rounded-control border border-line bg-surface px-3 t-ui text-ink";
 const KIND_LABEL = {
   disponivel: "Horário livre",
   compromisso: "Compromisso fixo",

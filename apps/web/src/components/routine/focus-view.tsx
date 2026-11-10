@@ -57,7 +57,10 @@ export function FocusView({
     headingRef.current?.focus({ preventScroll: true });
   }, []);
 
-  const T = { duration: reduced ? 0 : duration.evidence / 1000, ease: ease.layout };
+  const T = {
+    duration: reduced ? 0 : duration.evidence / 1000,
+    ease: ease.layout,
+  };
   const elapsed = activeMs(clock, now);
   const remaining = block.minutes * 60_000 - elapsed;
   const paused = clock.runningSince === null;
@@ -86,7 +89,11 @@ export function FocusView({
           initial={{ opacity: 0, y: reduced ? 0 : 8 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, transition: { duration: reduced ? 0 : 0.1 } }}
-          transition={{ delay: reduced ? 0 : 0.22, duration: reduced ? 0 : duration.layout / 1000, ease: ease.state }}
+          transition={{
+            delay: reduced ? 0 : 0.22,
+            duration: reduced ? 0 : duration.layout / 1000,
+            ease: ease.state,
+          }}
         >
           <span className="inline-flex items-center gap-2 t-meta text-ink-2">
             <KindIcon kind={block.kind} />
@@ -105,7 +112,11 @@ export function FocusView({
         >
           {block.title}
         </motion.h2>
-        <motion.span layoutId={`dur-${block.id}`} transition={T} className="mt-2 inline-flex self-start rounded-full bg-surface-subtle px-2.5 py-0.5 t-meta tabular text-ink">
+        <motion.span
+          layoutId={`dur-${block.id}`}
+          transition={T}
+          className="mt-2 inline-flex self-start rounded-full bg-surface-subtle px-2.5 py-0.5 t-meta tabular text-ink"
+        >
           {fmtDuration(block.minutes)}
         </motion.span>
 
@@ -115,12 +126,21 @@ export function FocusView({
           initial={{ opacity: 0, y: reduced ? 0 : 12 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, transition: { duration: reduced ? 0 : 0.1 } }}
-          transition={{ delay: reduced ? 0 : 0.26, duration: reduced ? 0 : duration.layout / 1000, ease: ease.state }}
+          transition={{
+            delay: reduced ? 0 : 0.26,
+            duration: reduced ? 0 : duration.layout / 1000,
+            ease: ease.state,
+          }}
         >
           <p className="t-reading text-ink-2">{block.detail}</p>
           <div className="mt-8" role="timer" aria-live="off">
-            <p className="t-meta text-ink-2">{remaining >= 0 ? "Restante" : "Além do planejado"}</p>
-            <p className="font-medium tabular text-ink" style={{ fontSize: "clamp(56px, 14vw, 104px)", lineHeight: 1 }}>
+            <p className="t-meta text-ink-2">
+              {remaining >= 0 ? "Restante" : "Além do planejado"}
+            </p>
+            <p
+              className="font-medium tabular text-ink"
+              style={{ fontSize: "clamp(56px, 14vw, 104px)", lineHeight: 1 }}
+            >
               {mmss(remaining)}
             </p>
             <p className="mt-2 t-meta tabular text-ink-2">
@@ -132,10 +152,23 @@ export function FocusView({
           </p>
 
           <div className="mt-auto flex flex-wrap gap-3 pt-12">
-            <Button variant="secondary" onClick={onTogglePause} icon={paused ? <Play aria-hidden className="size-4" /> : <Pause aria-hidden className="size-4" />}>
+            <Button
+              variant="secondary"
+              onClick={onTogglePause}
+              icon={
+                paused ? (
+                  <Play aria-hidden className="size-4" />
+                ) : (
+                  <Pause aria-hidden className="size-4" />
+                )
+              }
+            >
               {paused ? "Retomar" : "Pausar"}
             </Button>
-            <Button onClick={onEnd} icon={<Square aria-hidden className="size-4" />}>
+            <Button
+              onClick={onEnd}
+              icon={<Square aria-hidden className="size-4" />}
+            >
               Encerrar bloco
             </Button>
           </div>

@@ -221,3 +221,87 @@ test("rotina: visitante é levado a Entrar", async ({ page }) => {
   await page.goto("/rotina");
   await expect(page).toHaveURL(/\/entrar/);
 });
+
+test("metas e planos se-então: criar, editar, arquivar e restaurar", async ({
+  page,
+}) => {
+  const db = await studentDb();
+  const wipe = async () => {
+    await db.from("goals").delete().not("id", "is", null);
+    await db.from("if_then_plans").delete().not("id", "is", null);
+  };
+  await wipe();
+  try {
+    await signIn(page);
+    await page.goto("/rotina");
+    const goalForm = page.getByRole("form", { name: "Nova meta" });
+    await goalForm.getByLabel("Minutos por dia", { exact: true }).fill("60");
+    await goalForm.getByRole("button", { name: "Criar meta" }).click();
+    const daily = page
+      .getByRole("listitem")
+      .filter({ hasText: "Meta diária · 1 h por dia" });
+    await expect(daily).toBeVisible({ timeout: 15_000 });
+
+    await goalForm
+      .getByRole("combobox", { name: "Tipo de meta" })
+      .selectOption("area");
+    await goalForm.getByRole("combobox", { name: "Área" }).selectOption("MT");
+    await goalForm.getByLabel("Nota-alvo (0 a 1000)").fill("750");
+    await goalForm
+      .getByLabel("Minutos por semana", { exact: true })
+      .fill("180");
+    await goalForm.getByRole("button", { name: "Criar meta" }).click();
+    await expect(
+      page.getByText(
+        "Meta por área · Matemática · nota-alvo 750 · 3 h por semana",
+      ),
+    ).toBeVisible({ timeout: 15_000 });
+
+    // segunda meta diária ativa: recusada com explicação
+    await goalForm
+      .getByRole("combobox", { name: "Tipo de meta" })
+      .selectOption("diaria");
+    await goalForm.getByLabel("Minutos por dia", { exact: true }).fill("30");
+    await goalForm.getByRole("button", { name: "Criar meta" }).click();
+    await expect(
+      page.getByText("Já há uma meta ativa desse tipo. Arquive a atual antes."),
+    ).toBeVisible({ timeout: 15_000 });
+
+    // editar
+    await daily.getByRole("button", { name: "Editar" }).click();
+    await daily.getByLabel("Minutos por dia", { exact: true }).fill("90");
+    await daily.getByRole("button", { name: "Salvar meta" }).click();
+    const edited = page
+      .getByRole("listitem")
+      .filter({ hasText: "Meta diária · 1 h 30 min por dia" });
+    await expect(edited).toBeVisible({ timeout: 15_000 });
+
+    // plano se-então
+    const planForm = page.getByRole("form", { name: "Novo plano se-então" });
+    await planForm.getByLabel("Se…").fill("Se eu chegar cansado do trabalho");
+    await planForm.getByLabel("Então…").fill("faço 10 minutos de revisão");
+    await planForm.getByLabel("Duração (minutos)").fill("10");
+    await planForm.getByRole("button", { name: "Criar plano" }).click();
+    const plan = page.getByRole("listitem").filter({
+      hasText:
+        "Se eu chegar cansado do trabalho, então faço 10 minutos de revisão",
+    });
+    await expect(plan).toBeVisible({ timeout: 15_000 });
+
+    // arquivar e restaurar: a meta volta com o valor editado
+    await edited.getByRole("button", { name: "Arquivar" }).click();
+    const archived = page.getByRole("region", { name: "Arquivadas" });
+    await expect(
+      archived.getByText("Meta diária · 1 h 30 min por dia"),
+    ).toBeVisible({ timeout: 15_000 });
+    await archived.getByRole("button", { name: "Restaurar" }).click();
+    await expect(
+      page
+        .getByRole("region", { name: "Metas" })
+        .getByText("Meta diária · 1 h 30 min por dia"),
+    ).toBeVisible({ timeout: 15_000 });
+    await expect(plan).toBeVisible();
+  } finally {
+    await wipe();
+  }
+});

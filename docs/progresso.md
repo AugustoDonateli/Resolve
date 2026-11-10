@@ -76,8 +76,9 @@ Demais F5 ⬜. F5-T09 depende da chave da API; F5-T05 depende de F3-T03; F5-T04 
 | ID | Estado | Evidência / o que falta |
 |---|---|---|
 | F4-T13 | ✅ | Horários livres e compromissos semanais com fuso próprio; exceções de um dia (cancelar, mudar, avulso) que nunca alteram a regra; ocorrências no fuso de quem vê; conflito conferido no banco sobre o próximo ano (entre fusos e no horário de verão, com explicação de data e horário); desfazer também conferido. Tela `/rotina`. Banco (transação desfeita), unitários 8, ponta a ponta do projeto `rotina`, `audit:ui` 68/68, matriz 203/203 (`docs/validation/2026-11-10-f4-t13.md`, decisão 0009). Falta: medir com Guto o planejamento da semana em menos de 5 min (§11); avulso pela tela. |
+| F4-T14 | ✅ | Metas diária, semanal e por área (nota-alvo escolhida pelo aluno, minutos) e planos se-então de até 60 min; editar, arquivar e restaurar (nada é apagado); uma meta ativa por tipo/área. Banco em transação desfeita (sessão 12), ponta a ponta no projeto `rotina` (3/3, inclui 360 px sem rolagem), matriz. Migração `20261110130000_metas_e_planos`. |
 
-Demais F4 ⬜. F4-T14 (metas e planos se-então) fica liberada. F4-T04/T06 dependem só de F3-T12, mas precisam de questão publicada para fazer sentido (F3-T02).
+Demais F4 ⬜. F4-T04/T06 dependem só de F3-T12, mas precisam de questão publicada para fazer sentido (F3-T02).
 
 ## F6, F7 e E
 

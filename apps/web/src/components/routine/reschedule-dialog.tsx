@@ -16,7 +16,14 @@ interface Props {
 }
 
 /** Remarcação por formulário: mesmo resultado do gesto (F1-T07, F4-T16). */
-export function RescheduleDialog({ block, blocks, gridStart, gridEnd, onClose, onConfirm }: Props) {
+export function RescheduleDialog({
+  block,
+  blocks,
+  gridStart,
+  gridEnd,
+  onClose,
+  onConfirm,
+}: Props) {
   return (
     <Dialog.Root open={block !== null} onOpenChange={(o) => !o && onClose()}>
       <Dialog.Portal>
@@ -26,10 +33,21 @@ export function RescheduleDialog({ block, blocks, gridStart, gridEnd, onClose, o
           aria-describedby="reschedule-desc"
         >
           {block && (
-            <Body key={block.id} block={block} blocks={blocks} gridStart={gridStart} gridEnd={gridEnd} onConfirm={onConfirm} />
+            <Body
+              key={block.id}
+              block={block}
+              blocks={blocks}
+              gridStart={gridStart}
+              gridEnd={gridEnd}
+              onConfirm={onConfirm}
+            />
           )}
           <Dialog.Close asChild>
-            <button type="button" aria-label="Fechar" className="absolute right-3 top-3 grid size-10 place-items-center rounded-control text-ink-2 hover:bg-surface-subtle hover:text-ink">
+            <button
+              type="button"
+              aria-label="Fechar"
+              className="absolute right-3 top-3 grid size-10 place-items-center rounded-control text-ink-2 hover:bg-surface-subtle hover:text-ink"
+            >
               <X aria-hidden="true" className="size-5" />
             </button>
           </Dialog.Close>
@@ -39,7 +57,19 @@ export function RescheduleDialog({ block, blocks, gridStart, gridEnd, onClose, o
   );
 }
 
-function Body({ block, blocks, gridStart, gridEnd, onConfirm }: { block: StudyBlock; blocks: StudyBlock[]; gridStart: number; gridEnd: number; onConfirm: (id: string, start: number) => void }) {
+function Body({
+  block,
+  blocks,
+  gridStart,
+  gridEnd,
+  onConfirm,
+}: {
+  block: StudyBlock;
+  blocks: StudyBlock[];
+  gridStart: number;
+  gridEnd: number;
+  onConfirm: (id: string, start: number) => void;
+}) {
   const slots = freeSlots(blocks, block.id, gridStart, gridEnd);
   const [choice, setChoice] = useState<number>(block.start);
   return (
@@ -49,9 +79,15 @@ function Body({ block, blocks, gridStart, gridEnd, onConfirm }: { block: StudyBl
         onConfirm(block.id, choice);
       }}
     >
-      <Dialog.Title className="t-section pr-10">Remarcar “{block.title}”</Dialog.Title>
-      <Dialog.Description id="reschedule-desc" className="mt-1 t-meta text-ink-2">
-        Horários livres de hoje para {block.minutes} minutos. Compromissos não se movem.
+      <Dialog.Title className="t-section pr-10">
+        Remarcar “{block.title}”
+      </Dialog.Title>
+      <Dialog.Description
+        id="reschedule-desc"
+        className="mt-1 t-meta text-ink-2"
+      >
+        Horários livres de hoje para {block.minutes} minutos. Compromissos não
+        se movem.
       </Dialog.Description>
       <fieldset className="mt-4">
         <legend className="sr-only">Novo horário</legend>
@@ -61,12 +97,21 @@ function Body({ block, blocks, gridStart, gridEnd, onConfirm }: { block: StudyBl
               key={s}
               className="relative flex min-h-11 cursor-pointer items-center justify-center rounded-control border border-line t-ui tabular has-[:checked]:border-ink has-[:checked]:bg-ink has-[:checked]:text-background has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-link"
             >
-              <input type="radio" name="slot" value={s} checked={choice === s} onChange={() => setChoice(s)} className="sr-only" />
+              <input
+                type="radio"
+                name="slot"
+                value={s}
+                checked={choice === s}
+                onChange={() => setChoice(s)}
+                className="sr-only"
+              />
               {fmtClock(s)}
             </label>
           ))}
         </div>
-        {slots.length === 0 && <p className="t-meta">Não há espaço livre hoje para este bloco.</p>}
+        {slots.length === 0 && (
+          <p className="t-meta">Não há espaço livre hoje para este bloco.</p>
+        )}
       </fieldset>
       <div className="mt-5 flex justify-end gap-2">
         <Dialog.Close asChild>
