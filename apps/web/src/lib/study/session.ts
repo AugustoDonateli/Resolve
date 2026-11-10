@@ -10,6 +10,7 @@ import {
 
 export interface SessionEntry {
   sessionItemId: string;
+  itemVersionId: string;
   position: number;
   question: StudyQuestion;
   /** Chave estável → id da alternativa (o envio usa o id). */
@@ -137,6 +138,7 @@ export async function loadSession(id: string): Promise<SessionView> {
       | undefined;
     entries.push({
       sessionItemId: it.id,
+      itemVersionId: it.item_version_id,
       position: it.position,
       question: fromStudyItem(row, assets),
       alternativeIds: ids,

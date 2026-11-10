@@ -184,6 +184,20 @@ let batchId, proposalId;
   check("B", "session_feedback de sessão alheia/inexistente vem vazio", !b.error && (b.data ?? []).length === 0, b.error?.message ?? `${rows(b)} linha(s)`);
 }
 
+// ── Ocorrências (F3-T17) ──
+{
+  const v = await V.c.from("item_reports").select("*").limit(1);
+  check("visitante", "não lê item_reports", permError(v), v.error?.message ?? `${rows(v)} linha(s)`);
+  const draft = await E.c.from("item_versions").select("id").neq("review_status", "published").limit(1);
+  const vid = draft.data?.[0]?.id ?? "00000000-0000-4000-8000-000000000000";
+  const ins = await A.c.from("item_reports").insert({ item_version_id: vid, kind: "outro", message: "teste da matriz" }).select();
+  check("A", "não relata sobre versão não publicada", Boolean(ins.error), ins.error?.message ?? "relatou!");
+  const fake = await A.c.from("item_reports").insert({ item_version_id: vid, kind: "outro", message: "teste da matriz", status: "resolvida" }).select();
+  check("A", "não cria relato já fechado", Boolean(fake.error), fake.error?.message ?? "criou!");
+  const others = await B.c.from("item_reports").select("id").neq("user_id", B.id);
+  check("B", "não lê relatos de outras contas", denied(others), others.error?.message ?? `${rows(others)} linha(s)`);
+}
+
 // ── Agenda de revisão (F3-T07) ──
 {
   for (const t of ["review_items", "review_events"]) {

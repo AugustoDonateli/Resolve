@@ -43,6 +43,12 @@ export default async function EditorPage({
             Cartões
           </Link>
           <Link
+            href="/editor/ocorrencias"
+            className="inline-flex min-h-11 items-center rounded-control border border-line bg-surface px-4 t-ui hover:bg-surface-subtle"
+          >
+            Ocorrências
+          </Link>
+          <Link
             href="/editor/publicar"
             className="inline-flex min-h-11 items-center rounded-control border border-line bg-surface px-4 t-ui hover:bg-surface-subtle"
           >

@@ -685,3 +685,27 @@ test("prévia do aluno: questão real com figuras intacta em 360/390/1440 e figu
   expect(r.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);
   await ctx.close();
 });
+
+test("ocorrências: editor vê a fila; aluno não chega", async ({ browser }) => {
+  const { ctx, page } = await editorPage(browser);
+  await page.goto("/editor");
+  await page.getByRole("link", { name: "Ocorrências" }).click();
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Ocorrências" }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Fechar uma ocorrência não muda a questão", {
+      exact: false,
+    }),
+  ).toBeVisible();
+  const r = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+    .analyze();
+  expect(r.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);
+  await ctx.close();
+  const sctx = await browser.newContext();
+  const sp = await sctx.newPage();
+  await signIn(sp, student);
+  expect((await sp.goto("/editor/ocorrencias"))?.status()).toBe(404);
+  await sctx.close();
+});

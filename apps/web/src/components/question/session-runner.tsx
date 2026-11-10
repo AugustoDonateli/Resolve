@@ -18,6 +18,7 @@ import type { SubmitResult } from "@/lib/study/actions";
 import type { SessionEntry, SessionView } from "@/lib/study/session";
 import { QuestionView } from "./question-view";
 import { RaioXPanel } from "./raiox-panel";
+import { ReportProblem } from "./report-problem";
 
 const noop = () => () => {};
 
@@ -472,6 +473,11 @@ export function SessionRunner({ session }: { session: SessionView }) {
             </Button>
           )}
         </div>
+        <ReportProblem
+          key={entry.sessionItemId}
+          itemVersionId={entry.itemVersionId}
+          sessionItemId={entry.sessionItemId}
+        />
       </div>
     </div>
   );
