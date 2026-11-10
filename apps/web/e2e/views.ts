@@ -36,7 +36,8 @@ export const VIEWS: View[] = [
     label: "Hoje e agenda",
     path: "/hoje",
     open: async (page) => {
-      await page.waitForSelector("[data-hero-start]");
+      // Dados reais da conta de teste: com ou sem plano montado, a seção do plano sempre aparece.
+      await page.waitForSelector("#plano-hoje");
       await page.waitForTimeout(300);
     },
   },

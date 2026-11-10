@@ -165,10 +165,10 @@ export function AppShell({ children }: { children: ReactNode }) {
 /** Cabeçalho de tela: título focável para preservar foco ao navegar. */
 export function ScreenHeader({ title, kicker, children }: { title: string; kicker?: string; children?: ReactNode }) {
   return (
-    <div className="mb-6 flex flex-wrap items-end justify-between gap-4 md:mb-8">
-      <div>
-        {kicker && <p className="mb-1 t-meta text-ink-2">{kicker}</p>}
-        <h1 tabIndex={-1} className="t-screen text-ink outline-none">
+    <div className="mb-8 flex flex-wrap items-end justify-between gap-x-6 gap-y-4 border-b border-line-subtle pb-5 md:mb-10 md:pb-6">
+      <div className="min-w-0">
+        {kicker && <p className="mb-2 t-kicker first-letter:uppercase">{kicker}</p>}
+        <h1 tabIndex={-1} className="t-title text-ink outline-none">
           {title}
         </h1>
       </div>

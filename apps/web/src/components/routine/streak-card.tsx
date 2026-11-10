@@ -30,9 +30,9 @@ export function StreakCard({ s }: { s: StreakView }) {
   return (
     <section
       aria-labelledby="sequencia"
-      className="flex flex-col gap-4 rounded-panel border border-line bg-surface p-4 sm:p-6"
+      className="flex flex-col gap-4"
     >
-      <h2 id="sequencia" className="t-section">
+      <h2 id="sequencia" className="scroll-mt-24 t-section">
         Sequência: {s.streak} {s.streak === 1 ? "dia" : "dias"}
       </h2>
       <p className="max-w-2xl t-meta text-ink-2">

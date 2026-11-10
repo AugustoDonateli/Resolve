@@ -13,10 +13,22 @@ import { RescheduleDialog } from "./reschedule-dialog";
  * (`canPlace`) na tela e a mesma ação no servidor, que confere de novo antes de gravar.
  * Compromissos aparecem fixos; blocos em curso ou feitos também não se movem.
  */
-export function DayAgenda({ plan }: { plan: DayPlan }) {
+export function DayAgenda({
+  plan,
+  openRequest,
+}: {
+  plan: DayPlan;
+  /** Pedido externo para abrir a remarcação de um bloco (ex.: botão "Remarcar" do cartão de Hoje). */
+  openRequest?: { id: string; n: number } | null;
+}) {
   const router = useRouter();
   const [moved, setMoved] = useState<Record<string, number>>({});
   const [openId, setOpenId] = useState<string | null>(null);
+  const [seenRequest, setSeenRequest] = useState<number | null>(null);
+  if (openRequest && openRequest.n !== seenRequest) {
+    setSeenRequest(openRequest.n);
+    setOpenId(openRequest.id);
+  }
   const [message, setMessage] = useState<string | null>(null);
 
   const blocks: StudyBlock[] = useMemo(
@@ -58,12 +70,17 @@ export function DayAgenda({ plan }: { plan: DayPlan }) {
     Number(parts.find((p) => p.type === "hour")?.value ?? 0) * 60 +
     Number(parts.find((p) => p.type === "minute")?.value ?? 0);
   const gridStart = Math.min(1425, Math.ceil(now / 15) * 15);
+  // Fixos que já começaram aparecem só no trecho restante. Um bloco planejado que passou do horário
+  // aparece a partir de agora com a duração inteira: é o que ele ocupa se começar agora, e é a mesma
+  // duração que o servidor confere ao remarcar.
   const visible = blocks
-    .filter((b) => b.start + b.minutes > gridStart)
+    .filter((b) => !b.fixed || b.start + b.minutes > gridStart)
     .map((b) =>
-      b.start < gridStart
-        ? { ...b, start: gridStart, minutes: b.start + b.minutes - gridStart }
-        : b,
+      b.start >= gridStart
+        ? b
+        : b.fixed
+          ? { ...b, start: gridStart, minutes: b.start + b.minutes - gridStart }
+          : { ...b, start: gridStart },
     );
   const ends = [
     ...visible.map((b) => b.start + b.minutes),

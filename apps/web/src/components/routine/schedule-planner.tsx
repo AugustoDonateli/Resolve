@@ -86,19 +86,15 @@ export function SchedulePlanner({ data }: { data: ScheduleData }) {
   const canceled = data.exceptions.filter((e) => e.action === "cancelar");
 
   return (
-    <div className="flex flex-col gap-10">
-      <p className="t-meta text-ink-2">
-        Horários no fuso {data.timezone}. Para trocar o fuso, use Mais ›
-        Preferências.
-      </p>
-
-      <section aria-labelledby="proximos-dias">
+    <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(320px,380px)] lg:gap-14">
+      <section aria-labelledby="proximos-dias" className="min-w-0">
         <h2 id="proximos-dias" className="mb-1 t-section">
           Próximos 7 dias
         </h2>
-        <p className="mb-4 max-w-2xl t-meta text-ink-2">
-          Mudar ou cancelar um dia vale só para aquele dia. A regra da semana
-          continua igual.
+        <p className="mb-5 max-w-2xl t-meta text-ink-2">
+          Mudar ou cancelar um dia vale só para aquele dia; a regra da semana
+          continua igual. Horários no fuso {data.timezone} (troque em Mais ›
+          Preferências).
         </p>
         {data.rules.length === 0 && (
           <p className="mb-4 t-ui">
@@ -106,21 +102,34 @@ export function SchedulePlanner({ data }: { data: ScheduleData }) {
             fixos em “Toda semana”.
           </p>
         )}
-        <ol className="flex flex-col gap-4">
+        <ol className="flex flex-col border-t border-line">
           {data.days.map((day) => {
             const list = byDay.get(day) ?? [];
             const off = canceled.filter((e) => e.on_date === day);
             return (
               <li
                 key={day}
-                className="rounded-panel border border-line bg-surface p-4"
+                className="grid grid-cols-[6.5rem_minmax(0,1fr)] gap-x-4 border-b border-line-subtle py-3 sm:grid-cols-[8rem_minmax(0,1fr)]"
               >
-                <h3 className="mb-2 t-ui font-semibold">
-                  {day === data.today ? "Hoje · " : ""}
-                  {dayLabel(day)}
+                <h3 className="pt-0.5 t-ui">
+                  {day === data.today ? (
+                    <span aria-hidden="true" className="mr-1.5 rounded-full bg-mark-yellow px-2 py-0.5 t-meta font-medium text-on-mark">
+                      Hoje
+                    </span>
+                  ) : null}
+                  <span className={day === data.today ? "sr-only" : ""}>
+                    {day === data.today ? "Hoje · " : ""}
+                  </span>
+                  <span
+                    className={
+                      day === data.today ? "t-meta text-ink-2" : "text-ink"
+                    }
+                  >
+                    {dayLabel(day)}
+                  </span>
                 </h3>
                 {list.length === 0 && off.length === 0 ? (
-                  <p className="t-meta text-ink-2">Nada marcado.</p>
+                  <p className="pt-0.5 t-meta text-ink-2">Nada marcado.</p>
                 ) : (
                   <ul className="flex flex-col divide-y divide-line-subtle">
                     {list.map((o) => (
@@ -182,10 +191,14 @@ export function SchedulePlanner({ data }: { data: ScheduleData }) {
         </ol>
       </section>
 
-      <section aria-labelledby="toda-semana">
-        <h2 id="toda-semana" className="mb-4 t-section">
+      <section aria-labelledby="toda-semana" className="min-w-0">
+        <h2 id="toda-semana" className="mb-1 t-section">
           Toda semana
         </h2>
+        <p className="mb-5 t-meta text-ink-2">
+          Horários livres viram o espaço do plano do dia; compromissos ficam
+          intocados.
+        </p>
         <WeeklyForm pending={pending} run={run} message={message} />
         {(["disponivel", "compromisso"] as const).map((kind) => {
           const list = data.rules.filter((r) => r.kind === kind);
@@ -199,12 +212,9 @@ export function SchedulePlanner({ data }: { data: ScheduleData }) {
               {list.length === 0 ? (
                 <p className="t-meta text-ink-2">Nenhum.</p>
               ) : (
-                <ul className="flex flex-col gap-2">
+                <ul className="flex flex-col divide-y divide-line-subtle border-y border-line-subtle">
                   {list.map((r) => (
-                    <li
-                      key={r.id}
-                      className="flex flex-col gap-2 rounded-card border border-line-subtle bg-surface p-3"
-                    >
+                    <li key={r.id} className="flex flex-col gap-2 py-3">
                       <p className="t-ui">
                         {WEEKDAYS[r.weekday]}, {hhmm(r.start_time)}–
                         {hhmm(r.end_time)}
@@ -262,8 +272,8 @@ export function SchedulePlanner({ data }: { data: ScheduleData }) {
                         <Button
                           type="button"
                           size="sm"
-                          variant="secondary"
-                          className="self-start"
+                          variant="ghost"
+                          className="-ml-3 self-start text-ink-2"
                           onClick={() => setConfirmRemove(r.id)}
                         >
                           Remover de todas as semanas
@@ -465,7 +475,7 @@ function WeeklyForm({
   return (
     <form
       aria-label="Novo horário semanal"
-      className="flex flex-col gap-4 rounded-panel border border-line bg-surface p-4 sm:p-6"
+      className="flex flex-col gap-4 rounded-panel border border-line-subtle bg-surface p-4 shadow-paper sm:p-5"
       onSubmit={(e) => {
         e.preventDefault();
         run(

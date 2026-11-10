@@ -31,6 +31,7 @@ export async function markRest(input: unknown): Promise<StreakResult> {
     .insert({ rest_date: p.data.date });
   if (error) return { ok: false, message: explain(error.message) };
   revalidatePath("/rotina");
+  revalidatePath("/hoje");
   return { ok: true };
 }
 
@@ -47,5 +48,6 @@ export async function unmarkRest(input: unknown): Promise<StreakResult> {
   if (error) return { ok: false, message: explain(error.message) };
   if (!data?.length) return { ok: false, message: "Folga não encontrada." };
   revalidatePath("/rotina");
+  revalidatePath("/hoje");
   return { ok: true };
 }

@@ -32,6 +32,7 @@ function done(
   if (error)
     return { ok: false, message: scheduleError(error.message, error.hint) };
   revalidatePath("/rotina");
+  revalidatePath("/hoje");
   return { ok: true };
 }
 

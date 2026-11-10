@@ -77,6 +77,9 @@ body {
   border-radius: 4px;
 }
 
+/* Títulos e <main> recebem foco por script ao navegar (leitor de tela); não são controles, sem anel. */
+[tabindex="-1"]:focus-visible { outline: none; }
+
 /* Abas focadas por script após clique não exibem anel; teclado sempre exibe. */
 :root[data-modality="pointer"] [role="tab"]:focus-visible { outline: none; }
 
@@ -91,12 +94,17 @@ body {
   .t-ui { font-weight: 500; font-size: 16px; line-height: 24px; }
   .t-meta { font-weight: 400; font-size: 14px; line-height: 20px; }
   .t-metric { font-weight: 500; font-size: 22px; line-height: 28px; font-variant-numeric: tabular-nums; }
+  /* Rótulo de seção: versalete discreto, como os cabeçalhos do caderno de prova. */
+  .t-kicker { font-weight: 600; font-size: 12px; line-height: 16px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rs-text-secondary); }
+  /* Título de tela: serifa do caderno. */
+  .t-title { font-family: var(--font-display); font-weight: 500; font-size: 36px; line-height: 40px; letter-spacing: -0.015em; }
   .tabular { font-variant-numeric: tabular-nums; }
   @media (min-width: 960px) {
     .t-display { font-size: 48px; line-height: 52px; }
     .t-screen { font-size: 30px; line-height: 36px; }
     .t-section { font-size: 22px; line-height: 28px; }
     .t-metric { font-size: 24px; line-height: 30px; }
+    .t-title { font-size: 48px; line-height: 52px; }
   }
 
   /* Papel: granulação só em capas e cenas, nunca atrás de enunciados. */

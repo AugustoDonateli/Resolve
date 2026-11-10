@@ -1,7 +1,7 @@
 import "server-only";
 import { authEnabled } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
-import { dateInZone } from "./schedule-types";
+import { dateInZone, minuteInZone } from "./schedule-types";
 
 export interface DayBlock {
   id: string;
@@ -11,6 +11,8 @@ export interface DayBlock {
   title: string;
   reason: string | null;
   status: string;
+  area_code: string | null;
+  actual_minutes: number | null;
 }
 
 export type LeftOutEntry =
@@ -26,6 +28,8 @@ export interface DayPlan {
   blocks: DayBlock[];
   leftOut: LeftOutEntry[];
   generatedAt: string | null;
+  /** Minuto atual no fuso do perfil (a mesma referência do plano). */
+  nowMinute: number;
 }
 
 export async function loadDayPlan(): Promise<DayPlan | null> {
@@ -49,7 +53,7 @@ export async function loadDayPlan(): Promise<DayPlan | null> {
   const [b, d, occ] = await Promise.all([
     supabase
       .from("study_blocks")
-      .select("id, start_minute, planned_minutes, kind, title, reason, status")
+      .select("id, start_minute, planned_minutes, kind, title, reason, status, area_code, actual_minutes")
       .eq("local_date", today)
       .order("start_minute"),
     supabase
@@ -92,5 +96,6 @@ export async function loadDayPlan(): Promise<DayPlan | null> {
     blocks: (b.data ?? []) as DayBlock[],
     leftOut: (d.data?.left_out ?? []) as LeftOutEntry[],
     generatedAt: d.data?.generated_at ?? null,
+    nowMinute: minuteInZone(new Date(), timezone),
   };
 }

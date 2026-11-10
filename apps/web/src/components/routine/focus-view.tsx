@@ -1,12 +1,11 @@
 "use client";
 
-import { Pause, Play, Square } from "lucide-react";
+import { Check, Minimize2, Pause, Play } from "lucide-react";
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { duration, ease } from "@resolve/ui/motion";
 import { useReduced } from "@/components/prefs/prefs";
 import { Button } from "@/components/ui/button";
-import { DemoBadge } from "@/components/ui/demo-badge";
 import { fmtDuration, KIND_LABEL, type StudyBlock } from "@/lib/demo/routine";
 import { KindIcon } from "./kind-icon";
 
@@ -36,13 +35,23 @@ function mmss(ms: number) {
 export function FocusView({
   block,
   clock,
+  synced = true,
+  busy = false,
+  error = null,
   onTogglePause,
   onEnd,
+  onMinimize,
 }: {
   block: StudyBlock;
   clock: FocusClock;
+  /** Falso enquanto o tempo registrado ainda não chegou do servidor. */
+  synced?: boolean;
+  busy?: boolean;
+  error?: string | null;
   onTogglePause: () => void;
   onEnd: () => void;
+  /** Volta para a tela anterior sem encerrar (o tempo continua contando). */
+  onMinimize?: () => void;
 }) {
   const reduced = useReduced();
   const [now, setNow] = useState(() => Date.now());
@@ -99,7 +108,17 @@ export function FocusView({
             <KindIcon kind={block.kind} />
             Foco · {KIND_LABEL[block.kind]}
           </span>
-          <DemoBadge>Bloco demonstrativo</DemoBadge>
+          {onMinimize && (
+            <Button
+              size="sm"
+              variant="ghost"
+              className="fixed right-3 top-[calc(0.75rem+env(safe-area-inset-top))] z-10 sm:right-6 sm:top-6"
+              onClick={onMinimize}
+              icon={<Minimize2 aria-hidden className="size-4" />}
+            >
+              Voltar para Hoje
+            </Button>
+          )}
         </motion.div>
 
         <motion.h2
@@ -141,10 +160,12 @@ export function FocusView({
               className="font-medium tabular text-ink"
               style={{ fontSize: "clamp(56px, 14vw, 104px)", lineHeight: 1 }}
             >
-              {mmss(remaining)}
+              {synced ? mmss(remaining) : "--:--"}
             </p>
             <p className="mt-2 t-meta tabular text-ink-2">
-              Tempo ativo {mmss(elapsed)} {paused && "· pausado"}
+              {synced
+                ? `Tempo ativo ${mmss(elapsed)}${paused ? " · pausado" : ""}`
+                : "Lendo o tempo registrado…"}
             </p>
           </div>
           <p className="sr-only" aria-live="polite">
@@ -154,6 +175,7 @@ export function FocusView({
           <div className="mt-auto flex flex-wrap gap-3 pt-12">
             <Button
               variant="secondary"
+              disabled={busy || !synced}
               onClick={onTogglePause}
               icon={
                 paused ? (
@@ -167,10 +189,22 @@ export function FocusView({
             </Button>
             <Button
               onClick={onEnd}
-              icon={<Square aria-hidden className="size-4" />}
+              disabled={busy || elapsed < 1000}
+              icon={<Check aria-hidden className="size-4" />}
             >
-              Encerrar bloco
+              Concluir bloco
             </Button>
+          </div>
+          <p className="mt-4 t-meta text-ink-2">
+            O Resolve não bloqueia outros aplicativos. Para focar, silencie as
+            notificações e deixe o celular longe.
+          </p>
+          <div aria-live="assertive">
+            {error && (
+              <p role="alert" className="mt-2 t-ui">
+                {error}
+              </p>
+            )}
           </div>
         </motion.div>
       </div>

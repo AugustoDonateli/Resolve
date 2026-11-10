@@ -1,30 +1,28 @@
 # Resolve — instruções para sessões do Claude
 
-Plataforma de preparação para o ENEM. Dono e primeiro usuário: Guto. Especificação completa: `docs/plan/Resolve-pacote.md` (plano na Parte A, backlog de 182 tarefas na Parte B).
+Plataforma de preparação para o ENEM. Dono e primeiro usuário: Guto (prova em 2027).
+
+**Pedido em vigor:** briefing de retomada de 10/11/2026 (sessão 13). Ele substitui o processo do plano antigo: a lista de 182 tarefas, IDs, estimativas, dependências administrativas, relatórios e etapas de aceite não são mais roteiro. `docs/plan/Resolve-pacote.md` continua como referência funcional — consulte pontualmente quando precisar de um detalhe, sem reler tudo.
 
 ## Ao começar
-1. Leia `docs/progresso.md` e o handoff mais recente em `docs/handoffs/`.
-2. Escolha a próxima tarefa liberada (dependências no backlog). Tarefas de até 4 h. Se for maior, divida com sufixo A/B e registre.
-3. Não reconstrua o planejamento. Não marque como concluído um teste que não rodou.
+1. Leia `docs/continuidade.md` (nota única de continuidade) e confira o estado do código e do banco.
+2. Rode o app (`pnpm dev`) e olhe as telas que vai mexer. Inspecione para agir, não para auditar.
+3. Escolha o próximo conjunto coerente de mudanças pelo estado real do produto e pelo que melhora a experiência. Prioridade atual: qualidade visual das telas existentes e conectar funcionalidades que já existem.
 
-## Ritmo de trabalho (Guto, fim da sessão 12: "está lento demais")
-- Não siga o backlog item por item nem o ritual por tarefa. Trabalhe em blocos grandes e visíveis, guiados pelo que Guto pedir, e mostre capturas de tela.
-- Verificação mínima: segurança dos dados (políticas de acesso) continua obrigatória; fora isso, um teste rápido por área no fim do bloco. Nada de teste no banco em transação a cada tarefa nem de documentação a cada tarefa.
-- Documentação: só `docs/progresso.md` (uma linha por entrega) e um handoff curto no fim da sessão.
-- Sessões curtas: conversa longa encarece cada passo. Feche e abra outra quando o contexto crescer.
-- Migrações sem `delete`/`drop` (o conector do Supabase pede confirmação que não chega ao app).
-- Chave da API: por último. Redações nota 1000: Guto traz depois.
-
-## Estado declarado por Guto (sessão 12)
-- Guto diz que conferiu todas as questões extraídas contra o PDF, o tema oficial de redação e o app no iPhone (funcionou). No banco, nada foi aprovado nem publicado: 0 questões publicadas, tema em rascunho. A aprovação de etiquetas exige habilidade, distratores e resolução (ou justificativa) e checklist. Próximo passo combinado: decidir com Guto como publicar (por exemplo, aprovação simplificada no piloto, com justificativa padrão para os campos ausentes) e publicar, para destravar resolver, Raio-X, revisão, banco, triagem e ritmo, que já estão prontos.
-- Sem uso real ainda (a semana de uso, F3-T13, não começou).
+## Ritmo de trabalho
+- Trabalhe em blocos de mudanças visíveis e incorporados ao produto (nada de app paralelo nem demos soltas). Resolva escolhas rotineiras sozinho; pergunte só quando faltar informação que impede avançar.
+- Confira no navegador e exercite o fluxo alterado. Para mudanças de aparência, isso basta. Ao mudar cálculos, salvamento, acesso a dados, políticas de acesso ou chamadas pagas, rode os testes relevantes. Não crie testes que repetem valores de CSS nem rode a suíte inteira a cada ajuste.
+- Sem plano, checklist, storyboard ou documento por botão. Ao fim de um bloco: relato curto (o que mudou, o que foi conferido, o que falta) e atualização da nota `docs/continuidade.md`.
+- Sessões curtas: conversa longa encarece cada passo.
 
 ## Regras do produto que não se negociam
-- Banco principal só com questões reais conferidas. Conteúdo demonstrativo fica em `apps/web/src/lib/demo`, sempre com `<DemoBadge>`.
-- Nunca invente parâmetros, notas, fontes ou estatísticas. Dado ausente aparece como indisponível.
-- Identidade Caderno de Prova: só os tokens de `packages/ui`. Amarelo/rosa são preenchimento com texto em tinta, nunca texto, linha ou contorno essencial. O escuro deriva da tinta.
-- Movimento (§8): use os tokens de `@resolve/ui/motion` e `useReduced()`. A ação é registrada antes da animação. Interromper sempre termina em estado válido. Nada se move durante leitura e escrita.
-- Ao criar um par de cores texto/fundo novo, acrescente-o a `usedPairs` em `packages/ui/src/tokens.ts`.
+- Banco principal só com questões oficiais conferidas. Conteúdo demonstrativo fica em `apps/web/src/lib/demo`, sempre com `<DemoBadge>`.
+- Nunca invente parâmetros, notas, fontes ou estatísticas. Dado ausente aparece como indisponível. Interfaces sem dados dizem isso.
+- Preserve rascunhos, respostas e dados existentes.
+- Regras de prova e matriz mudam por versão; a proposta de 2028 não é regra adotada.
+- Identidade Caderno de Prova: tokens de `packages/ui` (papel `#F7F4ED`, tinta `#20242C`, azul `#2452D1`; DM Sans e Newsreader). Amarelo/rosa são preenchimento com texto em tinta, nunca texto, linha ou contorno essencial. O escuro deriva da tinta. Ao criar um par texto/fundo novo, acrescente-o a `usedPairs` em `packages/ui/src/tokens.ts`.
+- Composição: cada tela tem um objetivo e uma ação principal claros. Evite grades repetidas de cartões e números.
+- Movimento: tokens de `@resolve/ui/motion` e `useReduced()`. A ação é registrada antes da animação; interromper termina em estado válido; nada se move durante leitura e escrita; cenas longas podem ser puladas.
 
 ## Comandos
 `pnpm dev` · `pnpm check` (lint + tipos + testes) · `pnpm build` · `pnpm --filter @resolve/web audit:ui` (auditoria visual, acessibilidade, conta, iPhone e área editorial; exige build) · `pnpm test:access` (matriz de acesso contra o projeto real) · importação: `cd tools/ingest && .venv/bin/python -m unittest test_contract test_crossmatch test_tagging`
@@ -33,7 +31,7 @@ Plataforma de preparação para o ENEM. Dono e primeiro usuário: Guto. Especifi
 Projeto `resolve` (ref `osgajpnvhhwujfzjlfwf`). Migrações em `supabase/migrations/`, aplicadas pelo MCP. Escreva migrações sem `delete`/`drop`: o MCP pede confirmação para comandos destrutivos, e esse pedido não chega ao app (a chamada expira). Prefira desativar, renomear ou mover para `private`. Decisões em `docs/decisions/0002-conta-supabase.md`. Para a suíte `audit:ui` com login: crie `apps/web/.env.local` (veja `.env.example`), gere senhas das contas de teste (A, B e editor) com `node tools/dev/test-accounts.mjs <arquivo>` e exporte o arquivo antes de rodar. Papel de editor e área editorial: `docs/decisions/0004-papeis-editoria-e-ia.md`. Nunca use a chave de serviço no app nem no carregador; a área editorial funciona com a sessão de um editor.
 
 ## IA
-A etiquetagem (`tools/ingest/tagging.py`) usa a chave própria `RESOLVE_ANTHROPIC_API_KEY` e o endereço fixo da API. Não use `ANTHROPIC_API_KEY`/`ANTHROPIC_BASE_URL` do ambiente de nuvem: são da sessão do Claude Code, não do produto.
+Consumo controlado. A etiquetagem (`tools/ingest/tagging.py`) usa a chave própria `RESOLVE_ANTHROPIC_API_KEY` e o endereço fixo da API. Não use `ANTHROPIC_API_KEY`/`ANTHROPIC_BASE_URL` do ambiente de nuvem: são da sessão do Claude Code, não do produto. Chave da API: por último. Redações nota 1000: Guto traz depois.
 
 ## Ao encerrar
-Atualize `docs/progresso.md` e crie (ou complete) `docs/handoffs/AAAA-MM-DD-sessao-NN.md` com IDs concluídos, arquivos, verificações, pendências e o próximo ID liberado.
+Atualize `docs/continuidade.md` (estado, pendências reais, próximos passos prováveis). `docs/progresso.md` e `docs/handoffs/` são histórico até a sessão 12 e não precisam mais ser mantidos.

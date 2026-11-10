@@ -3,21 +3,10 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { buildTasks, freeWindows, planDay, type Window } from "./planner";
-import { dateInZone } from "./schedule-types";
+import { dateInZone, minuteInZone } from "./schedule-types";
 
 export type PlanResult = { ok: true } | { ok: false; message: string };
 
-function minuteInZone(d: Date, tz: string): number {
-  const parts = new Intl.DateTimeFormat("en-GB", {
-    timeZone: tz,
-    hour: "2-digit",
-    minute: "2-digit",
-    hourCycle: "h23",
-  }).formatToParts(d);
-  const h = Number(parts.find((p) => p.type === "hour")?.value ?? 0);
-  const m = Number(parts.find((p) => p.type === "minute")?.value ?? 0);
-  return h * 60 + m;
-}
 
 /** "2026-11-16T19:30:00" → minuto do dia `day` (recortado a 0–1440 quando atravessa a meia-noite). */
 function toMinute(local: string, day: string, edge: "start" | "end"): number {
@@ -165,6 +154,7 @@ export async function generateDayPlan(): Promise<PlanResult> {
       message: "Plano gravado, mas a explicação não foi salva.",
     };
   revalidatePath("/rotina");
+  revalidatePath("/hoje");
   return { ok: true };
 }
 
@@ -269,6 +259,7 @@ export async function rescheduleBlock(input: unknown): Promise<PlanResult> {
   if (error)
     return { ok: false, message: "Não foi possível remarcar. Tente de novo." };
   revalidatePath("/rotina");
+  revalidatePath("/hoje");
   return { ok: true };
 }
 
@@ -305,6 +296,9 @@ export async function focusAction(
     };
   const state = (data as FocusState[] | null)?.[0];
   if (!state) return { ok: false, message: "Bloco não encontrado." };
-  if (p.data.action !== "estado") revalidatePath("/rotina");
+  if (p.data.action !== "estado") {
+    revalidatePath("/rotina");
+    revalidatePath("/hoje");
+  }
   return { ok: true, state };
 }

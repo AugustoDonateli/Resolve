@@ -9,24 +9,26 @@ export default function RedacaoPage() {
   return (
     <>
       <ScreenHeader title="Redação" kicker="Correção por competência">
-        <Link
-          href="/redacao/temas"
-          className="inline-flex min-h-11 items-center rounded-control border border-line bg-surface px-4 t-ui hover:bg-surface-subtle"
-        >
-          Temas
-        </Link>
-        <Link
-          href="/redacao/minhas"
-          className="inline-flex min-h-11 items-center rounded-control border border-line bg-surface px-4 t-ui hover:bg-surface-subtle"
-        >
-          Minhas redações
-        </Link>
-        <Link
-          href="/redacao/pecas"
-          className="inline-flex min-h-11 items-center rounded-control border border-line bg-surface px-4 t-ui hover:bg-surface-subtle"
-        >
-          Treino por peças
-        </Link>
+        <nav aria-label="Redação" className="flex flex-wrap items-center gap-2">
+          <Link
+            href="/redacao/temas"
+            className="inline-flex min-h-11 items-center rounded-control px-3 t-ui text-ink hover:bg-surface-subtle"
+          >
+            Temas
+          </Link>
+          <Link
+            href="/redacao/pecas"
+            className="inline-flex min-h-11 items-center rounded-control px-3 t-ui text-ink hover:bg-surface-subtle"
+          >
+            Treino por peças
+          </Link>
+          <Link
+            href="/redacao/minhas"
+            className="inline-flex min-h-11 items-center rounded-control bg-primary px-4 t-ui text-on-primary hover:bg-primary-hover"
+          >
+            Minhas redações
+          </Link>
+        </nav>
       </ScreenHeader>
       <Correction />
     </>

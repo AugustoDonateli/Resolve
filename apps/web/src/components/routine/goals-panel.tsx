@@ -103,8 +103,8 @@ export function GoalsPanel({
   ];
 
   return (
-    <div className="flex flex-col gap-10">
-      <section aria-labelledby="metas">
+    <div className="grid gap-12 lg:grid-cols-2 lg:gap-14">
+      <section aria-labelledby="metas" className="min-w-0">
         <h2 id="metas" className="mb-1 t-section">
           Metas
         </h2>
@@ -115,11 +115,11 @@ export function GoalsPanel({
         {activeGoals.length === 0 ? (
           <p className="mb-4 t-ui">Nenhuma meta ativa.</p>
         ) : (
-          <ul className="mb-4 flex flex-col gap-2">
+          <ul className="mb-5 flex flex-col">
             {activeGoals.map((g) => (
               <li
                 key={g.id}
-                className="flex flex-col gap-2 rounded-card border border-line-subtle bg-surface p-3"
+                className="flex flex-col gap-2 border-b border-line-subtle py-3 first:border-t"
               >
                 <p className="t-ui">
                   <span className="font-semibold">{LEVEL[g.level]}</span> ·{" "}
@@ -173,8 +173,8 @@ export function GoalsPanel({
         <GoalForm pending={pending} run={run} msg={msg} />
       </section>
 
-      <section aria-labelledby="planos">
-        <h2 id="planos" className="mb-1 t-section">
+      <section aria-labelledby="planos" className="min-w-0">
+        <h2 id="planos" className="mb-1 scroll-mt-24 t-section">
           Planos se-então
         </h2>
         <p className="mb-4 max-w-2xl t-meta text-ink-2">
@@ -184,11 +184,11 @@ export function GoalsPanel({
         {activePlans.length === 0 ? (
           <p className="mb-4 t-ui">Nenhum plano ativo.</p>
         ) : (
-          <ul className="mb-4 flex flex-col gap-2">
+          <ul className="mb-5 flex flex-col">
             {activePlans.map((p) => (
               <li
                 key={p.id}
-                className="flex flex-col gap-2 rounded-card border border-line-subtle bg-surface p-3"
+                className="flex flex-col gap-2 border-b border-line-subtle py-3 first:border-t"
               >
                 <p className="t-ui">
                   {p.trigger_text}, então {p.alternative_activity}{" "}
@@ -245,7 +245,7 @@ export function GoalsPanel({
       </section>
 
       {archived.length > 0 && (
-        <section aria-labelledby="arquivadas">
+        <section aria-labelledby="arquivadas" className="lg:col-span-2">
           <h2 id="arquivadas" className="mb-3 t-section">
             Arquivadas
           </h2>
@@ -255,7 +255,7 @@ export function GoalsPanel({
               return (
                 <li
                   key={x.id}
-                  className="flex flex-col gap-2 rounded-card border border-line-subtle bg-surface p-3"
+                  className="flex flex-col gap-2 border-b border-line-subtle py-3 first:border-t"
                 >
                   <p className="t-ui text-ink-2">
                     {isGoal
@@ -326,7 +326,7 @@ function GoalForm({
       className={
         goal
           ? "flex flex-col gap-3"
-          : "flex flex-col gap-4 rounded-panel border border-line bg-surface p-4 sm:p-6"
+          : "flex flex-col gap-4 rounded-panel border border-line-subtle bg-surface p-4 shadow-paper sm:p-5"
       }
       onSubmit={(e) => {
         e.preventDefault();
@@ -448,7 +448,7 @@ function PlanForm({
       className={
         plan
           ? "flex flex-col gap-3"
-          : "flex flex-col gap-4 rounded-panel border border-line bg-surface p-4 sm:p-6"
+          : "flex flex-col gap-4 rounded-panel border border-line-subtle bg-surface p-4 shadow-paper sm:p-5"
       }
       onSubmit={(e) => {
         e.preventDefault();

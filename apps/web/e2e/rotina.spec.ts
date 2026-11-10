@@ -363,7 +363,7 @@ test("plano de hoje: blocos nos horários livres, sem encostar no compromisso, e
         .error,
     ).toBeNull();
     await signIn(page);
-    await page.goto("/rotina");
+    await page.goto("/hoje");
     await page.getByRole("button", { name: "Montar plano de hoje" }).click();
     await expect(page.getByText("Plano montado.")).toBeVisible({
       timeout: 15_000,
@@ -486,27 +486,33 @@ test("plano de hoje: blocos nos horários livres, sem encostar no compromisso, e
     expect(r.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);
 
     // Foco e pausa (F4-T17): o tempo volta certo depois de recarregar; concluir registra.
-    await page.getByRole("button", { name: "Começar foco" }).first().click();
-    const focus = page.getByRole("group", { name: /^Foco:/ });
-    await expect(focus.getByText("Pronto para começar.")).toBeVisible({
+    await page
+      .getByRole("button", { name: "Começar foco", exact: true })
+      .click();
+    const focus = page.getByRole("dialog");
+    await expect(focus.getByRole("button", { name: "Pausar" })).toBeVisible({
       timeout: 15_000,
     });
     await expect(
       focus.getByText(/não bloqueia outros aplicativos/),
     ).toBeVisible();
-    await focus.getByRole("button", { name: "Começar", exact: true }).click();
-    await expect(focus.getByText("Em foco.")).toBeVisible({ timeout: 15_000 });
     await page.waitForTimeout(2500);
     await focus.getByRole("button", { name: "Pausar" }).click();
-    await expect(focus.getByText("Pausado.")).toBeVisible({ timeout: 15_000 });
-    await page.reload();
-    const back = page.getByRole("group", { name: /^Foco:/ });
-    await expect(back.getByText("Pausado.")).toBeVisible({ timeout: 15_000 });
-    expect(await back.locator(".t-display").innerText()).toMatch(/^00:0[2-9]$/);
-    await back.getByRole("button", { name: "Concluir bloco" }).click();
-    await expect(page.getByText(/concluído\)/).first()).toBeVisible({
+    await expect(focus.getByRole("button", { name: "Retomar" })).toBeVisible({
       timeout: 15_000,
     });
+    await page.reload();
+    await page
+      .getByRole("button", { name: "Continuar foco", exact: true })
+      .click();
+    const back = page.getByRole("dialog");
+    await expect(back.getByText(/Tempo ativo 00:0[2-9]/)).toBeVisible({
+      timeout: 15_000,
+    });
+    await back.getByRole("button", { name: "Concluir bloco" }).click();
+    await expect(page.getByRole("heading", { name: "Feito hoje" })).toBeVisible(
+      { timeout: 15_000 },
+    );
     const { data: done } = await db
       .from("study_blocks")
       .select("status, actual_minutes")

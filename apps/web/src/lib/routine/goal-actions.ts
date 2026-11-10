@@ -28,6 +28,7 @@ function done(error: { message: string } | null): GoalResult {
     return { ok: false, message: "Não foi possível salvar. Tente de novo." };
   }
   revalidatePath("/rotina");
+  revalidatePath("/hoje");
   return { ok: true };
 }
 

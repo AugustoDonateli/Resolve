@@ -78,6 +78,19 @@ export function dateInZone(instant: Date | string, timeZone: string): string {
   }).format(d);
 }
 
+/** Minuto do dia (0–1439) de um instante no fuso indicado. */
+export function minuteInZone(d: Date, tz: string): number {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: tz,
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(d);
+  const h = Number(parts.find((p) => p.type === "hour")?.value ?? 0);
+  const m = Number(parts.find((p) => p.type === "minute")?.value ?? 0);
+  return h * 60 + m;
+}
+
 /** Soma dias a uma data AAAA-MM-DD, sem depender do fuso da máquina. */
 export function addDays(date: string, days: number): string {
   const [y, m, d] = date.split("-").map(Number);
