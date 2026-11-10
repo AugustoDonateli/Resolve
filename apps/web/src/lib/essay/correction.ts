@@ -47,6 +47,9 @@ export interface CorrectionView {
   } | null;
   rule: { version: string; totalGt: number; competencyGt: number; sourceNote: string } | null;
   dimensions: { code: string; title: string }[];
+  /** Versões enviadas desta redação, da mais antiga para a mais nova, com o resultado de cada uma. */
+  history: { versionId: string; submittedAt: string; lower: number | null; upper: number | null; isTest: boolean; current: boolean }[];
+  hasDraft: boolean;
 }
 
 const isTestModel = (model: string, prompt: string) => model.startsWith("avaliador-de-teste") || prompt.startsWith("teste");
@@ -65,6 +68,32 @@ export async function loadCorrection(essayId: string): Promise<CorrectionView> {
     .order("submitted_at", { ascending: false })
     .limit(1)
     .maybeSingle();
+  const { data: allVersions } = await supabase
+    .from("essay_versions")
+    .select("id, status, submitted_at, essay_jobs(essay_results(evaluator_lower, evaluator_upper), essay_evaluations(model_id, prompt_version))")
+    .eq("essay_id", essayId)
+    .order("created_at");
+  type VRow = {
+    id: string;
+    status: string;
+    submitted_at: string | null;
+    essay_jobs: { essay_results: { evaluator_lower: number; evaluator_upper: number } | null; essay_evaluations: { model_id: string; prompt_version: string }[] }[];
+  };
+  const rows = (allVersions ?? []) as unknown as VRow[];
+  const history = rows
+    .filter((r) => r.status === "submetida" && r.submitted_at)
+    .map((r) => {
+      const j = r.essay_jobs[0];
+      return {
+        versionId: r.id,
+        submittedAt: r.submitted_at!,
+        lower: j?.essay_results?.evaluator_lower ?? null,
+        upper: j?.essay_results?.evaluator_upper ?? null,
+        isTest: (j?.essay_evaluations ?? []).some((e) => isTestModel(e.model_id, e.prompt_version)),
+        current: r.id === v?.id,
+      };
+    });
+  const hasDraft = rows.at(-1)?.status === "rascunho";
   const [{ data: dims }, { data: rule }] = await Promise.all([
     supabase.from("rubric_dimensions").select("code, title, position, essay_rubrics!inner(version)").eq("essay_rubrics.version", "enem-redacao-v1").order("position"),
     supabase.from("essay_aggregation_rules").select("version, total_gt, competency_gt, source_note").eq("status", "ativa").maybeSingle(),
@@ -76,6 +105,8 @@ export async function loadCorrection(essayId: string): Promise<CorrectionView> {
     submittedAt: v?.submitted_at ?? null,
     rule: rule ? { version: rule.version, totalGt: rule.total_gt, competencyGt: rule.competency_gt, sourceNote: rule.source_note } : null,
     dimensions: (dims ?? []).map((d) => ({ code: d.code, title: d.title })),
+    history,
+    hasDraft,
   };
   if (!v) return { ...base, job: null, evaluations: [], result: null };
   const { data: job } = await supabase

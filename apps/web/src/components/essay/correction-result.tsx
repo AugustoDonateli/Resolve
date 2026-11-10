@@ -5,7 +5,7 @@ import { Check, Circle, FlaskConical, Minus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
-import { retryCorrection } from "@/lib/essay/correction-actions";
+import { retryCorrection, startRewrite } from "@/lib/essay/correction-actions";
 import type { CorrectionAnnotation, CorrectionView } from "@/lib/essay/correction";
 import { PenStroke } from "./pen-stroke";
 
@@ -58,6 +58,7 @@ export function CorrectionResult({ view }: { view: CorrectionView }) {
       {result && <Verdict view={view} />}
       {evaluations.length > 0 && <Reading view={view} />}
       {evaluations.length > 0 && <Intervention view={view} />}
+      {job?.status === "pronto" && <Evolution view={view} />}
     </div>
   );
 }
@@ -342,6 +343,53 @@ function Intervention({ view }: { view: CorrectionView }) {
             ))}
           </tbody>
         </table>
+      </div>
+    </section>
+  );
+}
+
+function Evolution({ view }: { view: CorrectionView }) {
+  const router = useRouter();
+  const [pending, start] = useTransition();
+  const [msg, setMsg] = useState<string | null>(null);
+  return (
+    <section aria-labelledby="evolucao" className="flex flex-col gap-4 border-t border-line-subtle pt-8">
+      <h2 id="evolucao" className="t-section">
+        Reescrita e evolução
+      </h2>
+      <p className="max-w-2xl t-meta text-ink-2">
+        A reescrita parte do texto enviado e vira uma versão nova; esta correção continua guardada. Cada versão enviada tem a própria correção.
+      </p>
+      {view.history.length > 0 && (
+        <ol className="flex flex-col">
+          {view.history.map((h, i) => (
+            <li key={h.versionId} className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-line-subtle py-2">
+              <span className="w-24 t-ui">Versão {i + 1}</span>
+              <span className="t-meta text-ink-2">{new Date(h.submittedAt).toLocaleDateString("pt-BR")}</span>
+              <span className="t-ui tabular">{h.lower !== null ? `${h.lower} a ${h.upper}` : "sem resultado ainda"}</span>
+              {h.isTest && <span className="rounded-full bg-mark-yellow px-2 py-0.5 t-meta text-on-mark">teste</span>}
+              {h.current && <span className="t-meta text-ink-2">(esta)</span>}
+            </li>
+          ))}
+        </ol>
+      )}
+      <div className="flex flex-wrap items-center gap-3">
+        <Button
+          type="button"
+          loading={pending}
+          onClick={() =>
+            start(async () => {
+              const r = await startRewrite({ essayId: view.essayId });
+              if (!r.ok) return setMsg(r.message);
+              router.push(`/redacao/escrever/${view.essayId}`);
+            })
+          }
+        >
+          {view.hasDraft ? "Continuar a reescrita" : "Reescrever"}
+        </Button>
+        <span aria-live="polite" className="t-meta">
+          {msg}
+        </span>
       </div>
     </section>
   );
