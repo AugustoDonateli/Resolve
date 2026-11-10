@@ -32,9 +32,18 @@ function hms(ms: number) {
  * Pular está disponível desde o primeiro quadro. O cronômetro da prova fica
  * parado durante toda a cena e só inicia em “Começar prova”.
  */
-export function EnvelopeOpening() {
+export function EnvelopeOpening({ exam }: {
+  exam?: { color: string; day: number; minutes: number; starting: boolean; onStart: () => void };
+} = {}) {
   const reduced = useReduced();
-  const [booklet, setBooklet] = useState<(typeof BOOKLETS)[number]>(BOOKLETS[0]);
+  const [demoBooklet, setBooklet] = useState<(typeof BOOKLETS)[number]>(BOOKLETS[0]);
+  const booklet = exam
+    ? {
+        ...(BOOKLETS.find((b) => b.label === exam.color) ?? { cover: "bg-surface text-ink", sub: "text-ink-2" }),
+        label: exam.color,
+      }
+    : demoBooklet;
+  const day = exam?.day ?? 1;
   const [phase, setPhase] = useState<"scene" | "ready" | "running">("scene");
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [now, setNow] = useState(0);
@@ -127,6 +136,10 @@ export function EnvelopeOpening() {
 
   const start = () => {
     skip();
+    if (exam) {
+      exam.onStart();
+      return;
+    }
     setPhase("running");
     setStartedAt(Date.now());
     setNow(Date.now());
@@ -148,7 +161,8 @@ export function EnvelopeOpening() {
     return () => window.removeEventListener("keydown", onKey);
   }, [skip]);
 
-  const remaining = startedAt ? PROVA_MS - (now - startedAt) : PROVA_MS;
+  const durationMs = exam ? exam.minutes * 60_000 : PROVA_MS;
+  const remaining = startedAt ? durationMs - (now - startedAt) : durationMs;
 
   return (
     <div>
@@ -160,7 +174,7 @@ export function EnvelopeOpening() {
             {phase === "running" ? "em curso" : "não iniciado"}
           </span>
         </div>
-        <DemoBadge>Caderno demonstrativo</DemoBadge>
+        {!exam && <DemoBadge>Caderno demonstrativo</DemoBadge>}
       </div>
 
       <div
@@ -170,7 +184,7 @@ export function EnvelopeOpening() {
         role="group"
       >
         <p className="sr-only" aria-live="polite">
-          {phase === "scene" ? "Abrindo o envelope do caderno." : `Caderno ${booklet.label}, 1º dia, demonstrativo. Pronto para começar.`}
+          {phase === "scene" ? "Abrindo o envelope do caderno." : `Caderno ${booklet.label}, ${day}º dia. Pronto para começar.`}
         </p>
         <div ref={cameraRef} aria-hidden="true" className="absolute inset-0 grid place-items-center" style={{ transformStyle: "preserve-3d" }}>
           <div ref={tiltRef} className="relative w-[min(52%,260px)] aspect-[0.76]" style={{ transformStyle: "preserve-3d" }}>
@@ -183,10 +197,10 @@ export function EnvelopeOpening() {
             >
               <div className="flex h-full flex-col">
                 <p className={clsx("text-[10px] font-medium uppercase leading-tight tracking-[0.1em] sm:text-[11px]", booklet.sub)}>Caderno de questões</p>
-                <p className="mt-2 font-display text-[clamp(26px,6vw,40px)] leading-none">1º dia</p>
+                <p className="mt-2 font-display text-[clamp(26px,6vw,40px)] leading-none">{day}º dia</p>
                 <p className="mt-1 text-[13px] font-medium">Caderno {booklet.label}</p>
                 <div className="mt-auto flex items-end justify-between gap-2">
-                  <span className={clsx("text-[11px] leading-tight", booklet.sub)}>Demonstração</span>
+                  <span className={clsx("text-[11px] leading-tight", booklet.sub)}>{exam ? "Dia D" : "Demonstração"}</span>
                   <span aria-hidden="true" className="flex gap-1">
                     {[0, 1, 2, 3, 4].map((i) => (
                       <span key={i} className={clsx("size-2.5 rounded-full border border-current", i === 1 && "bg-current")} />
@@ -234,7 +248,7 @@ export function EnvelopeOpening() {
         </div>
         <div className="absolute inset-x-0 bottom-0 flex justify-center p-4">
           {phase !== "running" ? (
-            <Button ref={startRef} onClick={start} icon={<Play aria-hidden className="size-4" />}>
+            <Button ref={startRef} onClick={start} loading={exam?.starting} icon={<Play aria-hidden className="size-4" />}>
               Começar prova
             </Button>
           ) : (

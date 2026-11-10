@@ -2,6 +2,7 @@ import "server-only";
 import { notFound } from "next/navigation";
 import { authEnabled } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
+import { loadQuestionAssets } from "./question-assets";
 import {
   fromStudyItem,
   type StudyItemRow,
@@ -99,34 +100,7 @@ export async function loadSession(id: string): Promise<SessionView> {
         (items ?? []).map((i) => i.id),
       ),
   ]);
-  // Figuras publicadas: asset_id dos blocos → link assinado (bucket privado, política só para figuras publicadas).
-  const assetIds = new Set<string>();
-  const walk = (blocks: { asset_id?: string }[] | null | undefined) =>
-    blocks?.forEach((b) => b.asset_id && assetIds.add(b.asset_id));
-  for (const s of (study ?? []) as StudyItemRow[]) {
-    walk(s.stimulus_blocks);
-    walk(s.command_blocks);
-    s.alternatives.forEach((a) => walk(a.content_blocks));
-  }
-  const assets: Record<string, { url: string | null; alt: string | null }> = {};
-  if (assetIds.size) {
-    const { data: rows } = await supabase
-      .from("assets")
-      .select("id, storage_path, alt_text")
-      .in("id", [...assetIds]);
-    const paths = (rows ?? []).map((r) => r.storage_path);
-    const { data: signed } = paths.length
-      ? await supabase.storage
-          .from("editorial")
-          .createSignedUrls(paths, 60 * 60)
-      : { data: [] };
-    const urlByPath = new Map((signed ?? []).map((s) => [s.path, s.signedUrl]));
-    for (const r of rows ?? [])
-      assets[r.id] = {
-        url: urlByPath.get(r.storage_path) ?? null,
-        alt: r.alt_text ?? null,
-      };
-  }
+  const assets = await loadQuestionAssets(supabase, (study ?? []) as StudyItemRow[]);
   const byVersion = new Map(
     ((study ?? []) as StudyItemRow[]).map((s) => [s.item_version_id, s]),
   );

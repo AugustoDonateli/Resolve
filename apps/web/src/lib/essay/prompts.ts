@@ -12,7 +12,7 @@ const PROMPT_COLS = "id, title, origin, edition, status, published_at, instructi
 const TEXT_COLS = "id, position, blocks, citation, page_or_locator, rights_status, verified_at";
 
 /** Busca um tema com os textos e assina as figuras. As políticas do banco decidem o que a conta vê. */
-export async function loadPrompt(supabase: Awaited<ReturnType<typeof createClient>>, id: string): Promise<PromptDetail | null> {
+export async function loadPrompt(supabase: Awaited<ReturnType<typeof createClient>>, id: string, figureSeconds = 60 * 30): Promise<PromptDetail | null> {
   if (!/^[0-9a-f-]{36}$/.test(id)) return null;
   const [{ data: p }, { data: texts }] = await Promise.all([
     supabase.from("essay_prompts").select(PROMPT_COLS).eq("id", id).maybeSingle(),
@@ -23,7 +23,7 @@ export async function loadPrompt(supabase: Awaited<ReturnType<typeof createClien
   const refs = list.flatMap((t) => t.blocks.filter((b) => b.type === "image" && b.asset_ref).map((b) => b.asset_ref!));
   const figureUrls: Record<string, string> = {};
   if (refs.length) {
-    const { data: signed } = await supabase.storage.from("editorial").createSignedUrls(refs, 60 * 30);
+    const { data: signed } = await supabase.storage.from("editorial").createSignedUrls(refs, figureSeconds);
     for (const s of signed ?? []) if (s.signedUrl && s.path) figureUrls[s.path] = s.signedUrl;
   }
   return { ...(p as Omit<PromptDetail, "texts" | "figureUrls">), texts: list, figureUrls };

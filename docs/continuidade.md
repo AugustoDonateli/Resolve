@@ -14,6 +14,14 @@ Nota única: o que funciona, o que falta e onde retomar. Objetivo em vigor: conc
 - **Área editorial**: propostas, dúvidas, etiquetas, cartões de conceito, temas e **publicação de conteúdo conferido com etiquetas pendentes** (`/editor/publicar`).
 - **Estudo pronto, aguardando questões publicadas**: sessão de treino com resposta preservada, Raio-X (mostra campos sem etiqueta como indisponíveis), caderno de erros e revisão espaçada, banco com filtros, triagem e conferência, ritmo.
 
+## Dia D implementado localmente
+
+- `/estudar/dia-d` usa os perfis versionados e a ordem e as letras do caderno oficial. O catálogo exige todas as posições válidas publicadas e, no primeiro dia, o tema de redação da aplicação. As posições oficialmente anuladas nos cadernos 5 (Amarelo) e 7 (Azul) de 2025 são mantidas no cartão e excluídas dos acertos.
+- O relógio do servidor começa com **Começar prova**. É possível treinar em horário livre ou fazer o ensaio às 13h30 de Brasília com o perfil regular de 2025, conforme o [Edital Inep 52/2025, §9.4](https://download.inep.gov.br/enem/edital_52_de_23_de_maio_de_2025.pdf).
+- Retomada, marcações e cartão são guardados por conta. A entrega trava o cartão e a redação salva. O resultado usa apenas o cartão para contar acertos, mostra os eventos reais no replay e indica TRI e correção da redação como indisponíveis.
+- A abertura usa a cena 3D existente, com capa do caderno selecionado e opção de pular. A mídia autoral final e o ensaio real de duração integral ainda estão pendentes.
+- Validação local em PostgreSQL e no Edge com largura de celular. Foram exercitados prazo acelerado, isolamento por conta, retomada após recarregar, entrega idempotente, gabarito oculto até encerrar, acertos pelo cartão, replay e salvamento automático da redação. A validação com um caderno real depende da migração e da conferência editorial no projeto.
+
 ## Pendências que dependem de Guto ou de algo externo
 
 1. **Publicar as 105 questões** em `/editor/publicar` → "Conteúdo conferido, etiquetas pendentes": marcar o checklist e publicar (precisa da conta de editor do Guto; a publicação fica registrada em nome de quem confirma). Testado em transação desfeita. Destrava Estudar, Revisar, Banco, Triagem e Ritmo.
@@ -24,11 +32,11 @@ Nota única: o que funciona, o que falta e onde retomar. Objetivo em vigor: conc
 ## Falta implementar (ordem sugerida pelo código atual)
 
 1. Redação restante: calibração (precisa de redações com nota humana, que Guto traz), banco de repertório, biblioteca nota 1000 com anotações e camadas (conteúdo de Guto), trilha Redação do zero, retorno do treino por peças (IA).
-2. **Dia D (simulado)**: perfil de prova versionado, duração, ordem, cartão-resposta, retomada, encerramento, replay da sessão real, abertura com caderno.
+2. **Dia D (simulado)**. Aplicar a migração `20261111120000_dia_d.sql` no projeto Resolve e conferir a disponibilidade por caderno. Completar a conferência e publicação dos itens válidos que faltarem e publicar o tema oficial para liberar o primeiro dia. Fazer o ensaio integral e concluir o acabamento da abertura e do replay.
 3. **TRI e diagnóstico**: sem parâmetros oficiais dos itens no banco; a tela deve dizer "indisponível" até carregar parâmetros do Inep e conferir o cálculo com dados de referência.
 4. Habilidades de prova restantes (comando primeiro com seleção de evidência, caça ao distrator); mapa de habilidades real quando houver tentativas.
 5. Expansões (plano adaptativo, previsão, feed finito, dados brasileiros, incidência e fichas, tutor, texto compartilhado, meta de curso, reta final, questão do dia, redação por foto, grupos e duelos).
 
 ## Retomar por aqui
 
-Item 2 de "Falta implementar" (Dia D), depois 3 e 4, em paralelo às pendências de Guto. Ambiente local: `apps/web/.env.local` com a URL e a chave publicável do projeto; senhas das contas de teste geradas por `tools/dev/test-accounts.mjs`.
+Validar o Dia D no projeto Resolve após aplicar a migração e completar ao menos um caderno. Seguir com os itens 3 e 4 enquanto a conferência editorial avança. O ambiente local usa `apps/web/.env.local` com a URL e a chave publicável do projeto. As senhas das contas de teste são geradas por `tools/dev/test-accounts.mjs`.

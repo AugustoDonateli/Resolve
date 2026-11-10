@@ -16,6 +16,15 @@ export default async function EstudarPage() {
   return (
     <>
       <ScreenHeader title="Estudar" kicker="Treino livre" />
+      <section className="mb-6 flex max-w-xl flex-wrap items-center justify-between gap-3 rounded-panel border border-line-subtle bg-surface p-4" aria-labelledby="dia-d">
+        <div>
+          <h2 id="dia-d" className="t-section">Dia D</h2>
+          <p className="t-meta text-ink-2">Simulado com caderno oficial, relógio e cartão-resposta.</p>
+        </div>
+        <Link href="/estudar/dia-d" className="inline-flex min-h-11 items-center rounded-control border border-line px-3 t-ui hover:bg-surface-subtle">
+          Abrir Dia D
+        </Link>
+      </section>
       {total > 0 ? (
         <div className="flex flex-col gap-6">
           <StartTraining counts={counts!} />
