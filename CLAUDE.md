@@ -7,6 +7,17 @@ Plataforma de preparação para o ENEM. Dono e primeiro usuário: Guto. Especifi
 2. Escolha a próxima tarefa liberada (dependências no backlog). Tarefas de até 4 h. Se for maior, divida com sufixo A/B e registre.
 3. Não reconstrua o planejamento. Não marque como concluído um teste que não rodou.
 
+## Ritmo de trabalho (pedido de Guto, sessão 12)
+- Emende uma tarefa na outra, com commit e push a cada tarefa. Pare só quando houver problema ou quando precisar de Guto.
+- Prioridade: o primeiro ciclo utilizável (resolver, Raio-X, caderno, revisão). O que depende de questão publicada pode ser construído antes e fica 🟡 até haver questão publicada.
+- Tarefas que usam a chave da API ficam para o fim (Guto ainda decide se vai pagar).
+- Verificação por risco:
+  - rigor completo (teste no banco em transação desfeita + matriz de acesso) só para dados, acesso, IA e custo;
+  - telas e lógica simples: testes unitários e, quando houver fluxo novo, um teste de ponta a ponta;
+  - `pnpm test:access` e `audit:ui` completos uma vez, no fim da sessão.
+- Documentação enxuta: uma linha por tarefa em `docs/progresso.md` e um handoff por sessão, que também guarda as verificações. Arquivo de decisão só quando houver uma escolha de verdade.
+- Antes de `audit:ui`, encerre servidores antigos (`pkill -f next-server`).
+
 ## Regras do produto que não se negociam
 - Banco principal só com questões reais conferidas. Conteúdo demonstrativo fica em `apps/web/src/lib/demo`, sempre com `<DemoBadge>`.
 - Nunca invente parâmetros, notas, fontes ou estatísticas. Dado ausente aparece como indisponível.
@@ -24,4 +35,4 @@ Projeto `resolve` (ref `osgajpnvhhwujfzjlfwf`). Migrações em `supabase/migrati
 A etiquetagem (`tools/ingest/tagging.py`) usa a chave própria `RESOLVE_ANTHROPIC_API_KEY` e o endereço fixo da API. Não use `ANTHROPIC_API_KEY`/`ANTHROPIC_BASE_URL` do ambiente de nuvem: são da sessão do Claude Code, não do produto.
 
 ## Ao encerrar
-Atualize `docs/progresso.md` e crie `docs/handoffs/AAAA-MM-DD-sessao-NN.md` com IDs concluídos, arquivos, verificações, pendências e o próximo ID liberado.
+Atualize `docs/progresso.md` e crie (ou complete) `docs/handoffs/AAAA-MM-DD-sessao-NN.md` com IDs concluídos, arquivos, verificações, pendências e o próximo ID liberado.
