@@ -99,14 +99,15 @@ language sql stable set search_path = '' as $$
   left join public.areas area on area.matrix_version_id = ep.matrix_version_id and area.code = section->>'area'
   left join public.item_versions iv on iv.id = bi.item_version_id and iv.review_status = 'published'
     and iv.area_id = area.id
-  left join public.sources answer_key on answer_key.id = b.answer_key_source_id
   cross join lateral (
-    -- Gabaritos dos dois cadernos cruzados em data/extraction/enem-2025-cruzamento.json.
-    select coalesce(iv.annulled, false) or coalesce(
-      case answer_key.sha256
-        when '2fe7e546c65632774f60cc0d2b66c8d4e917e8caf20ecbf638ac2937fea9cb4a' then pos.n in (115, 121, 178)
-        when '9e2d470af35378df532173414ec7077c3ce4df38c084a5f1258579fdf9270aef' then pos.n in (123, 132, 174)
-      end, false) as annulled
+    -- Anulada pelo gabarito oficial do próprio caderno (official_answer_keys), a mesma fonte da publicação.
+    select coalesce(iv.annulled, false) or exists (
+      select 1 from public.official_answer_keys k
+      where k.booklet_id = b.id and k.question_number = pos.n and k.answer = 'ANULADO'
+        and k.foreign_language is not distinct from
+          case when pos.n between (section->'foreign_language'->>'from')::int
+                           and (section->'foreign_language'->>'to')::int then lang.name end
+    ) as annulled
   ) slot
   left join lateral (
     select jsonb_object_agg(m.printed_letter, alt.stable_key) as letters,
