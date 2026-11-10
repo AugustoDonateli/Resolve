@@ -47,7 +47,7 @@ for (const view of VIEWS) {
 }
 
 test("fluxo por toque: questão → Raio-X", async ({ page }) => {
-  await page.goto("/estudar");
+  await page.goto("/estudar/demonstracao");
   await page.getByText("obriga quem anota").tap();
   await page.getByRole("button", { name: "Confirmar resposta" }).tap();
   await page.getByRole("button", { name: "Ver Raio-X" }).tap();

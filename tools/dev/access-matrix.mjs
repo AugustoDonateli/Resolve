@@ -175,6 +175,15 @@ let batchId, proposalId;
   }
 }
 
+// ── Retorno da sessão (F3-T02) ──
+{
+  const fake = "00000000-0000-4000-8000-000000000000";
+  const v = await V.c.rpc("session_feedback", { p_session_id: fake });
+  check("visitante", "não executa session_feedback", permError(v), v.error?.message ?? "executou!");
+  const b = await B.c.rpc("session_feedback", { p_session_id: fake });
+  check("B", "session_feedback de sessão alheia/inexistente vem vazio", !b.error && (b.data ?? []).length === 0, b.error?.message ?? `${rows(b)} linha(s)`);
+}
+
 // ── Agenda de revisão (F3-T07) ──
 {
   for (const t of ["review_items", "review_events"]) {

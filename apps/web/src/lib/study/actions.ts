@@ -180,3 +180,38 @@ export async function addCardToReview(input: unknown): Promise<Outcome<string>> 
   if (!p.success) return { ok: false, error: "dados inválidos", final: true };
   return rpc<string>("add_card_to_review", { p_card_id: p.data.cardId });
 }
+
+const trainingSchema = z.object({
+  actionId: uuid,
+  area: z.enum(["todas", "LC", "CH", "CN", "MT"]),
+  count: z.number().int().min(1).max(30),
+});
+
+/**
+ * Treino livre (F3-T02): sorteia questões publicadas (não anuladas) da área, primeiro as que a conta
+ * ainda não respondeu, e abre uma sessão com a lista congelada. Reenviar com o mesmo `actionId`
+ * devolve a mesma sessão.
+ */
+export async function startTraining(input: unknown): Promise<Outcome<string>> {
+  const p = trainingSchema.safeParse(input);
+  if (!p.success) return { ok: false, error: "dados inválidos", final: true };
+  const supabase = await createClient();
+  const { data: auth } = await supabase.auth.getUser();
+  if (!auth.user) return { ok: false, error: "resolve_not_signed_in", final: true };
+  let q = supabase.from("study_items").select("item_version_id").eq("annulled", false);
+  if (p.data.area !== "todas") q = q.eq("area", p.data.area);
+  const [{ data: pool }, { data: done }] = await Promise.all([q, supabase.from("attempts").select("item_version_id")]);
+  const answered = new Set((done ?? []).map((a) => a.item_version_id));
+  const shuffle = <T,>(xs: T[]) => xs.map((x) => [Math.random(), x] as const).sort((a, b) => a[0] - b[0]).map(([, x]) => x);
+  const ids = (pool ?? []).map((r) => r.item_version_id as string);
+  const chosen = [...shuffle(ids.filter((i) => !answered.has(i))), ...shuffle(ids.filter((i) => answered.has(i)))].slice(0, p.data.count);
+  if (!chosen.length) return { ok: false, error: "resolve_no_items", final: true };
+  return rpc<string>("start_session", {
+    p_client_action_id: p.data.actionId,
+    p_mode: "treino",
+    p_item_version_ids: chosen,
+    p_planned_minutes: null,
+    p_time_limit_minutes: null,
+    p_selection_reason: "escolha",
+  });
+}

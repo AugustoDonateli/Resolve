@@ -22,6 +22,7 @@ export default defineConfig({
     { name: "iphone", testMatch: /iphone\.spec\.ts/, dependencies: ["sessao"] },
     { name: "editor", testMatch: /editor\.spec\.ts/ },
     { name: "rotina", testMatch: /rotina\.spec\.ts/ },
+    { name: "estudo", testMatch: /estudo\.spec\.ts/ },
   ],
   webServer: {
     command: "pnpm start -p 3100",

@@ -13,7 +13,7 @@ export const VIEWS: View[] = [
   {
     id: "questao",
     label: "Questão longa com Raio-X",
-    path: "/estudar",
+    path: "/estudar/demonstracao",
     open: async (page) => {
       await page.getByText("obriga quem anota").click();
       await page.getByRole("button", { name: "Confirmar resposta" }).click();
