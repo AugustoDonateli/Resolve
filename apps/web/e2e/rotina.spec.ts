@@ -311,7 +311,7 @@ test("plano de hoje: blocos nos horários livres, sem encostar no compromisso, e
 }) => {
   const db = await studentDb();
   const wipe = async () => {
-    await db.from("study_blocks").delete().not("id", "is", null);
+    await db.from("study_blocks").delete().not("id", "is", null); // intervalos de foco saem em cascata
     await db.from("study_plan_days").delete().not("local_date", "is", null);
     await db.from("goals").delete().not("id", "is", null);
     await db.from("schedule_exceptions").delete().not("id", "is", null);
@@ -411,7 +411,8 @@ test("plano de hoje: blocos nos horários livres, sem encostar no compromisso, e
           .evaluate((el) => (el as HTMLInputElement).value)) ?? "";
       if (Number(label) !== first.start_minute) {
         target = Number(label);
-        await options.nth(i).check({ force: true });
+        await dialog.locator("label").nth(i).click();
+        await expect(options.nth(i)).toBeChecked();
         break;
       }
     }
@@ -482,6 +483,34 @@ test("plano de hoje: blocos nos horários livres, sem encostar no compromisso, e
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
       .analyze();
     expect(r.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);
+
+    // Foco e pausa (F4-T17): o tempo volta certo depois de recarregar; concluir registra.
+    await page.getByRole("button", { name: "Começar foco" }).first().click();
+    const focus = page.getByRole("group", { name: /^Foco:/ });
+    await expect(focus.getByText("Pronto para começar.")).toBeVisible({
+      timeout: 15_000,
+    });
+    await expect(
+      focus.getByText(/não bloqueia outros aplicativos/),
+    ).toBeVisible();
+    await focus.getByRole("button", { name: "Começar", exact: true }).click();
+    await expect(focus.getByText("Em foco.")).toBeVisible({ timeout: 15_000 });
+    await page.waitForTimeout(2500);
+    await focus.getByRole("button", { name: "Pausar" }).click();
+    await expect(focus.getByText("Pausado.")).toBeVisible({ timeout: 15_000 });
+    await page.reload();
+    const back = page.getByRole("group", { name: /^Foco:/ });
+    await expect(back.getByText("Pausado.")).toBeVisible({ timeout: 15_000 });
+    expect(await back.locator(".t-display").innerText()).toMatch(/^00:0[2-9]$/);
+    await back.getByRole("button", { name: "Concluir bloco" }).click();
+    await expect(page.getByText(/concluído\)/).first()).toBeVisible({
+      timeout: 15_000,
+    });
+    const { data: done } = await db
+      .from("study_blocks")
+      .select("status, actual_minutes")
+      .eq("status", "concluido");
+    expect(done?.length).toBe(1);
   } finally {
     await wipe();
   }
