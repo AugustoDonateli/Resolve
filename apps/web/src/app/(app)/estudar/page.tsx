@@ -20,6 +20,10 @@ export default async function EstudarPage() {
           <StartTraining counts={counts!} />
           <p className="t-meta text-ink-2">
             Só questões reais do Enem, conferidas e publicadas.{" "}
+            <Link href="/estudar/banco" className="underline">
+              Escolher no banco, com filtros
+            </Link>{" "}
+            ·{" "}
             <Link href="/estudar/demonstracao" className="underline">
               Ver a questão demonstrativa
             </Link>

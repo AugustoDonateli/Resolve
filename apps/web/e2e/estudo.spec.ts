@@ -146,3 +146,31 @@ test("revisar: fila do dia sem seleção manual e escolha de tempo", async ({
     .analyze();
   expect(r.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);
 });
+
+test("banco: filtros por URL e recuperação de combinação vazia", async ({
+  page,
+}) => {
+  await signIn(page);
+  await page.goto("/estudar/banco");
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Banco de questões" }),
+  ).toBeVisible();
+  const none = page.getByText(
+    "Ainda não há questões publicadas. O banco mostra só questões reais do Enem conferidas.",
+  );
+  if (await none.isVisible()) return; // sem publicadas: nada a filtrar (lógica coberta por bank.test.ts)
+  await page.goto("/estudar/banco?area=LC&habilidade=H99");
+  await expect(page.getByRole("heading", { name: /^\d+ quest/ })).toBeVisible();
+  await page.goto("/estudar/banco?habilidade=H30&area=MT&dia=d1");
+  const empty = page.getByText(
+    "Nenhuma questão publicada com essa combinação.",
+  );
+  if (await empty.isVisible()) {
+    await page.getByRole("link", { name: "Limpar todos os filtros" }).click();
+    await expect(page).toHaveURL(/\/estudar\/banco$/);
+  }
+  const r = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+    .analyze();
+  expect(r.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);
+});

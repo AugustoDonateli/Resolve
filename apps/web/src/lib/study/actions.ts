@@ -247,3 +247,11 @@ export async function startReview(input: unknown): Promise<Outcome<string>> {
   if (!ids.length) return { ok: false, error: "resolve_no_items", final: true };
   return rpc<string>("start_session", { p_client_action_id: p.data.actionId, p_mode: "revisao", p_item_version_ids: ids, p_planned_minutes: p.data.availableMinutes, p_time_limit_minutes: null, p_selection_reason: "revisao" });
 }
+
+/** Resolver as questões filtradas no banco (F3-T10): até 30, sorteadas; o banco só aceita publicadas. */
+export async function startWithItems(input: unknown): Promise<Outcome<string>> {
+  const p = z.object({ actionId: uuid, itemVersionIds: z.array(uuid).min(1).max(500) }).safeParse(input);
+  if (!p.success) return { ok: false, error: "dados inválidos", final: true };
+  const ids = [...new Set(p.data.itemVersionIds)].map((x) => [Math.random(), x] as const).sort((a, b) => a[0] - b[0]).map(([, x]) => x).slice(0, 30);
+  return rpc<string>("start_session", { p_client_action_id: p.data.actionId, p_mode: "treino", p_item_version_ids: ids, p_planned_minutes: null, p_time_limit_minutes: null, p_selection_reason: "escolha" });
+}
