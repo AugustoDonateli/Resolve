@@ -34,6 +34,9 @@ export interface SessionView {
   id: string;
   mode: string;
   status: string;
+  deadlineAt: string | null;
+  /** Questões marcadas para revisar (último evento de marcação de cada uma). */
+  marked: string[];
   entries: SessionEntry[];
 }
 
@@ -61,7 +64,7 @@ export async function loadSession(id: string): Promise<SessionView> {
   const supabase = await createClient();
   const { data: session } = await supabase
     .from("study_sessions")
-    .select("id, mode, status")
+    .select("id, mode, status, deadline_at")
     .eq("id", id)
     .maybeSingle();
   if (!session) notFound();
@@ -183,10 +186,23 @@ export async function loadSession(id: string): Promise<SessionView> {
         : null,
     });
   }
+  const { data: marks } = await supabase
+    .from("attempt_events")
+    .select("session_item_id, event_type, sequence")
+    .eq("session_id", id)
+    .in("event_type", ["marcada_para_revisar", "desmarcada_para_revisar"])
+    .order("sequence");
+  const last = new Map<string, string>();
+  for (const e of marks ?? [])
+    if (e.session_item_id) last.set(e.session_item_id, e.event_type);
   return {
     id: session.id,
     mode: session.mode,
     status: session.status,
+    deadlineAt: session.deadline_at,
+    marked: [...last]
+      .filter(([, t]) => t === "marcada_para_revisar")
+      .map(([k]) => k),
     entries,
   };
 }

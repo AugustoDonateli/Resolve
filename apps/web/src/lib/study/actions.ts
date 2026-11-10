@@ -267,3 +267,22 @@ export async function recordTriage(input: unknown): Promise<Outcome<TriageResult
   const row = r.value[0];
   return row ? { ok: true, value: row } : { ok: false, error: "resposta vazia", final: true };
 }
+
+/**
+ * Bloco de ritmo (F4-T06): sessão com prazo (modo simulado, sem pausa) e questões publicadas sorteadas,
+ * primeiro as não respondidas. O número de questões vem do alvo por questão.
+ */
+export async function startRhythm(input: unknown): Promise<Outcome<string>> {
+  const p = z.object({ actionId: uuid, minutes: z.union([z.literal(15), z.literal(45), z.literal(90), z.literal(180)]), count: z.number().int().min(1).max(180) }).safeParse(input);
+  if (!p.success) return { ok: false, error: "dados inválidos", final: true };
+  const supabase = await createClient();
+  const { data: auth } = await supabase.auth.getUser();
+  if (!auth.user) return { ok: false, error: "resolve_not_signed_in", final: true };
+  const [{ data: pool }, { data: done }] = await Promise.all([supabase.from("study_items").select("item_version_id").eq("annulled", false), supabase.from("attempts").select("item_version_id")]);
+  const answered = new Set((done ?? []).map((a) => a.item_version_id));
+  const shuffle = <T,>(xs: T[]) => xs.map((x) => [Math.random(), x] as const).sort((a, b) => a[0] - b[0]).map(([, x]) => x);
+  const ids = (pool ?? []).map((r) => r.item_version_id as string);
+  const chosen = [...shuffle(ids.filter((i) => !answered.has(i))), ...shuffle(ids.filter((i) => answered.has(i)))].slice(0, p.data.count);
+  if (!chosen.length) return { ok: false, error: "resolve_no_items", final: true };
+  return rpc<string>("start_session", { p_client_action_id: p.data.actionId, p_mode: "simulado", p_item_version_ids: chosen, p_planned_minutes: p.data.minutes, p_time_limit_minutes: p.data.minutes, p_selection_reason: "escolha" });
+}

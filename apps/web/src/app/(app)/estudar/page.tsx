@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BookOpen } from "lucide-react";
 import Link from "next/link";
+import { StartRhythm } from "@/components/question/start-rhythm";
 import { StartTraining } from "@/components/question/start-training";
 import { ScreenHeader } from "@/components/shell/app-shell";
 import { EmptyState } from "@/components/ui/empty-state";
@@ -30,6 +31,19 @@ export default async function EstudarPage() {
               deixar para depois ou chutar. Depois você resolve todas e compara.
             </p>
             <StartTraining counts={counts!} mode="triagem" />
+          </section>
+          <section
+            aria-labelledby="ritmo"
+            className="flex max-w-xl flex-col gap-3"
+          >
+            <h2 id="ritmo" className="t-section">
+              Blocos de ritmo
+            </h2>
+            <p className="t-meta text-ink-2">
+              Resolva contra o relógio, com alvo por questão, marcação para
+              revisar e gabarito só no fim.
+            </p>
+            <StartRhythm available={total} />
           </section>
           <p className="t-meta text-ink-2">
             Só questões reais do Enem, conferidas e publicadas.{" "}

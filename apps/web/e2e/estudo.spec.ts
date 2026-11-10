@@ -232,3 +232,31 @@ test("conferência da triagem: sessão alheia ou inexistente não abre", async (
   const res = await page.goto("/estudar/triagem/00000000-0000-4000-8000-000000000000/conferencia");
   expect(res?.status()).toBe(404);
 });
+
+test("ritmo: marcar, navegar e voltar preserva resposta; gabarito só no fim", async ({ page }) => {
+  test.setTimeout(120_000);
+  await signIn(page);
+  await page.goto("/estudar");
+  const form = page.getByRole("form", { name: "Começar bloco de ritmo" });
+  if (!(await form.isVisible())) {
+    test.info().annotations.push({ type: "pendente", description: "ritmo aguarda questões publicadas (F2-T16)" });
+    return;
+  }
+  await form.getByRole("button", { name: "Começar bloco" }).click();
+  await page.waitForURL(/\/estudar\/ritmo\//);
+  await expect(page.getByText(/Alvo: 3 min por questão/)).toBeVisible();
+  await page.getByRole("radio").first().click();
+  await page.getByRole("button", { name: "Confirmar resposta" }).click();
+  await expect(page.getByText("Resposta gravada. O gabarito aparece no fim do bloco.")).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByText("Correta", { exact: true })).toHaveCount(0);
+  await page.getByRole("button", { name: "Marcar para revisar" }).click();
+  const nav = page.getByRole("navigation", { name: "Questões do bloco" });
+  if ((await nav.getByRole("button").count()) > 1) {
+    await nav.getByRole("button").nth(1).click();
+    await nav.getByRole("button").nth(0).click();
+    await expect(page.getByRole("radio").first()).toBeChecked();
+    await expect(nav.getByRole("button").nth(0)).toHaveAccessibleName(/respondida, marcada para revisar/);
+  }
+  await page.getByRole("button", { name: "Encerrar bloco" }).click();
+  await expect(page.getByRole("heading", { name: "Bloco encerrado" })).toBeVisible({ timeout: 15_000 });
+});
