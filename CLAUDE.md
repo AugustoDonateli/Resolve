@@ -7,16 +7,17 @@ Plataforma de preparação para o ENEM. Dono e primeiro usuário: Guto. Especifi
 2. Escolha a próxima tarefa liberada (dependências no backlog). Tarefas de até 4 h. Se for maior, divida com sufixo A/B e registre.
 3. Não reconstrua o planejamento. Não marque como concluído um teste que não rodou.
 
-## Ritmo de trabalho (pedido de Guto, sessão 12)
-- Emende uma tarefa na outra, com commit e push a cada tarefa. Pare só quando houver problema ou quando precisar de Guto.
-- Prioridade: o primeiro ciclo utilizável (resolver, Raio-X, caderno, revisão). O que depende de questão publicada pode ser construído antes e fica 🟡 até haver questão publicada.
-- Tarefas que usam a chave da API ficam para o fim (Guto ainda decide se vai pagar).
-- Verificação por risco:
-  - rigor completo (teste no banco em transação desfeita + matriz de acesso) só para dados, acesso, IA e custo;
-  - telas e lógica simples: testes unitários e, quando houver fluxo novo, um teste de ponta a ponta;
-  - `pnpm test:access` e `audit:ui` completos uma vez, no fim da sessão.
-- Documentação enxuta: uma linha por tarefa em `docs/progresso.md` e um handoff por sessão, que também guarda as verificações. Arquivo de decisão só quando houver uma escolha de verdade.
-- Antes de `audit:ui`, encerre servidores antigos (`pkill -f next-server`).
+## Ritmo de trabalho (Guto, fim da sessão 12: "está lento demais")
+- Não siga o backlog item por item nem o ritual por tarefa. Trabalhe em blocos grandes e visíveis, guiados pelo que Guto pedir, e mostre capturas de tela.
+- Verificação mínima: segurança dos dados (políticas de acesso) continua obrigatória; fora isso, um teste rápido por área no fim do bloco. Nada de teste no banco em transação a cada tarefa nem de documentação a cada tarefa.
+- Documentação: só `docs/progresso.md` (uma linha por entrega) e um handoff curto no fim da sessão.
+- Sessões curtas: conversa longa encarece cada passo. Feche e abra outra quando o contexto crescer.
+- Migrações sem `delete`/`drop` (o conector do Supabase pede confirmação que não chega ao app).
+- Chave da API: por último. Redações nota 1000: Guto traz depois.
+
+## Estado declarado por Guto (sessão 12)
+- Guto diz que conferiu todas as questões extraídas contra o PDF, o tema oficial de redação e o app no iPhone (funcionou). No banco, nada foi aprovado nem publicado: 0 questões publicadas, tema em rascunho. A aprovação de etiquetas exige habilidade, distratores e resolução (ou justificativa) e checklist. Próximo passo combinado: decidir com Guto como publicar (por exemplo, aprovação simplificada no piloto, com justificativa padrão para os campos ausentes) e publicar, para destravar resolver, Raio-X, revisão, banco, triagem e ritmo, que já estão prontos.
+- Sem uso real ainda (a semana de uso, F3-T13, não começou).
 
 ## Regras do produto que não se negociam
 - Banco principal só com questões reais conferidas. Conteúdo demonstrativo fica em `apps/web/src/lib/demo`, sempre com `<DemoBadge>`.
