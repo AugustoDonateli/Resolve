@@ -11,8 +11,10 @@ import {
   submitAttempt,
 } from "@/lib/study/actions";
 import { buildRaioX, type RaioXView } from "@/lib/study/raiox";
+import { flushPending, pendingFor, savePending } from "@/lib/study/pending";
 import { ERROR_REASONS } from "@/lib/study/reasons";
-import { withSameAction } from "@/lib/study/retry";
+import { withSameAction, type Outcome } from "@/lib/study/retry";
+import type { SubmitResult } from "@/lib/study/actions";
 import type { SessionEntry, SessionView } from "@/lib/study/session";
 import { QuestionView } from "./question-view";
 import { RaioXPanel } from "./raiox-panel";
@@ -25,13 +27,33 @@ type Result = NonNullable<SessionEntry["feedback"]>;
 function actionIdFor(sessionItemId: string): string {
   const key = `resolve:acao:${sessionItemId}`;
   try {
-    const saved = sessionStorage.getItem(key);
+    const saved = localStorage.getItem(key);
     if (saved) return saved;
     const id = crypto.randomUUID();
-    sessionStorage.setItem(key, id);
+    localStorage.setItem(key, id);
     return id;
   } catch {
     return crypto.randomUUID();
+  }
+}
+
+/** Envia a resposta; sem conexão a ação do servidor lança erro, tratado como falha de rede (reenviável). */
+async function send(
+  actionId: string,
+  sessionItemId: string,
+  alternativeId: string,
+  ms: number,
+): Promise<Outcome<SubmitResult>> {
+  try {
+    return await submitAttempt({
+      actionId,
+      sessionItemId,
+      alternativeId,
+      activeMs: ms,
+      elapsedMs: ms,
+    });
+  } catch {
+    return { ok: false, error: "rede", final: false };
   }
 }
 
@@ -69,6 +91,77 @@ export function SessionRunner({ session }: { session: SessionView }) {
   const [raiox, setRaiox] = useState<Record<string, RaioXView>>({});
   const [loadingX, setLoadingX] = useState(false);
   const [confirmHelp, setConfirmHelp] = useState(false);
+  /** Respostas guardadas no aparelho que ainda não chegaram ao servidor (F3-T03). */
+  const [pending, setPending] = useState<Record<string, string>>({});
+
+  const applyResult = (e: SessionEntry, key: string, v: SubmitResult) => {
+    const keyById = Object.fromEntries(
+      Object.entries(e.alternativeIds).map(([k, id]) => [id, k]),
+    );
+    setResults((m) => ({
+      ...m,
+      [e.sessionItemId]: {
+        chosenKey: key,
+        correctKey: v.correct_alternative_id
+          ? (keyById[v.correct_alternative_id] ?? null)
+          : null,
+        isCorrect: v.is_correct,
+        errorEntryId: v.error_entry_id,
+        reason: v.error_entry_id ? "not_reported" : null,
+      },
+    }));
+    setPending((m) => {
+      const n = { ...m };
+      delete n[e.sessionItemId];
+      return n;
+    });
+  };
+
+  // Ao abrir a tela e sempre que a conexão volta: reenvia o que ficou guardado, com a mesma ação.
+  useEffect(() => {
+    let stop = false;
+    const flush = async () => {
+      let store: Storage;
+      try {
+        store = localStorage;
+      } catch {
+        return;
+      }
+      const list = pendingFor(store, session.id);
+      if (!list.length) return;
+      setPending(
+        Object.fromEntries(
+          list.map((p) => [p.sessionItemId, p.alternativeKey]),
+        ),
+      );
+      await flushPending(store, session.id, async (p) => {
+        const r = await send(
+          p.actionId,
+          p.sessionItemId,
+          p.alternativeId,
+          p.activeMs,
+        );
+        const e = session.entries.find(
+          (x) => x.sessionItemId === p.sessionItemId,
+        );
+        if (r.ok && e && !stop) applyResult(e, p.alternativeKey, r.value);
+        if (!r.ok && r.final && !stop)
+          setPending((m) => {
+            const n = { ...m };
+            delete n[p.sessionItemId];
+            return n;
+          });
+        return r.ok ? { ok: true } : { ok: false, final: r.final };
+      });
+    };
+    void flush();
+    window.addEventListener("online", flush);
+    return () => {
+      stop = true;
+      window.removeEventListener("online", flush);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- uma vez por sessão; applyResult só usa setters
+  }, [session.id]);
   const shownAt = useRef(0);
   const headingRef = useRef<HTMLHeadingElement>(null);
 
@@ -122,6 +215,7 @@ export function SessionRunner({ session }: { session: SessionView }) {
   }
 
   const result = results[entry.sessionItemId];
+  const pendingKey = result ? undefined : pending[entry.sessionItemId];
   const go = (i: number) => {
     setIndex(i);
     setValue(null);
@@ -158,40 +252,34 @@ export function SessionRunner({ session }: { session: SessionView }) {
     setSending(true);
     setError(null);
     const ms = Math.round(performance.now() - shownAt.current);
-    const r = await withSameAction(
-      actionIdFor(entry.sessionItemId),
-      (actionId) =>
-        submitAttempt({
-          actionId,
-          sessionItemId: entry.sessionItemId,
-          alternativeId: entry.alternativeIds[value],
-          activeMs: ms,
-          elapsedMs: ms,
-        }),
+    const actionId = actionIdFor(entry.sessionItemId);
+    const alternativeId = entry.alternativeIds[value]!;
+    const r = await withSameAction(actionId, (a) =>
+      send(a, entry.sessionItemId, alternativeId, ms),
     );
     setSending(false);
     if (!r.ok) {
+      if (!r.final) {
+        // Sem conexão: guarda no aparelho com a mesma ação; reenvia ao reabrir ou quando a rede voltar.
+        savePending(localStorage, {
+          sessionId: session.id,
+          sessionItemId: entry.sessionItemId,
+          actionId,
+          alternativeKey: value,
+          alternativeId,
+          activeMs: ms,
+          savedAt: new Date().toISOString(),
+        });
+        setPending((m) => ({ ...m, [entry.sessionItemId]: value }));
+        return;
+      }
       setError(
         ERRORS[r.error] ??
           "Não foi possível gravar a resposta. Sua escolha continua marcada; tente de novo.",
       );
       return;
     }
-    const keyById = Object.fromEntries(
-      Object.entries(entry.alternativeIds).map(([k, id]) => [id, k]),
-    );
-    setResults((m) => ({
-      ...m,
-      [entry.sessionItemId]: {
-        chosenKey: value,
-        correctKey: r.value.correct_alternative_id
-          ? (keyById[r.value.correct_alternative_id] ?? null)
-          : null,
-        isCorrect: r.value.is_correct,
-        errorEntryId: r.value.error_entry_id,
-        reason: r.value.error_entry_id ? "not_reported" : null,
-      },
-    }));
+    applyResult(entry, value, r.value);
   };
 
   const chooseReason = async (code: string) => {
@@ -227,7 +315,7 @@ export function SessionRunner({ session }: { session: SessionView }) {
       <QuestionView
         question={entry.question}
         answer={{
-          value: result ? result.chosenKey : value,
+          value: result ? result.chosenKey : (pendingKey ?? value),
           onValueChange: setValue,
           eliminated: result ? new Set() : eliminated,
           onToggleEliminate: (k) =>
@@ -237,13 +325,18 @@ export function SessionRunner({ session }: { session: SessionView }) {
               else n.add(k);
               return n;
             }),
-          confirmed: Boolean(result) || sending,
+          confirmed: Boolean(result) || Boolean(pendingKey) || sending,
           reveal: result?.correctKey ? { correctKey: result.correctKey } : null,
         }}
       />
 
       <div className="flex max-w-[72ch] flex-col gap-4">
-        {!result ? (
+        {pendingKey ? (
+          <p role="status" className="rounded-card border border-ink p-3 t-ui">
+            Sem conexão: sua resposta ficou guardada neste aparelho e será
+            enviada quando a conexão voltar. Pode seguir para a próxima.
+          </p>
+        ) : !result ? (
           <div className="flex flex-wrap items-center gap-3">
             <Button
               type="button"
@@ -373,7 +466,7 @@ export function SessionRunner({ session }: { session: SessionView }) {
               Anterior
             </Button>
           )}
-          {result && (
+          {(result || pendingKey) && (
             <Button type="button" onClick={() => go(index + 1)}>
               {index + 1 < total ? "Próxima questão" : "Ver resultado"}
             </Button>

@@ -93,6 +93,25 @@ test("estudar: estado vazio ou treino real com resposta preservada ao recarregar
       .filter({ hasText: /Você acertou|Resposta correta/ }),
   ).toHaveText(verdict);
   await expect(page.getByRole("radio").first()).toBeChecked();
+
+  // Queda de conexão (F3-T03): a resposta fica guardada e é enviada quando a rede volta, sem duplicar.
+  const next = page.getByRole("button", { name: /Próxima questão/ });
+  if (await next.isVisible()) {
+    await next.click();
+    await page.getByRole("radio").first().click();
+    await page.context().setOffline(true);
+    await page.getByRole("button", { name: "Confirmar resposta" }).click();
+    await expect(
+      page.getByText(/Sem conexão: sua resposta ficou guardada/),
+    ).toBeVisible({ timeout: 20_000 });
+    await page.context().setOffline(false);
+    await page.evaluate(() => window.dispatchEvent(new Event("online")));
+    await expect(
+      page
+        .getByRole("status")
+        .filter({ hasText: /Você acertou|Resposta correta/ }),
+    ).toBeVisible({ timeout: 20_000 });
+  }
 });
 
 test("estudar: sessão de outra conta ou inexistente não abre", async ({
