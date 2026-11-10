@@ -3,20 +3,23 @@ import { CalendarRange } from "lucide-react";
 import { DayPlanPanel } from "@/components/routine/day-plan";
 import { GoalsPanel } from "@/components/routine/goals-panel";
 import { SchedulePlanner } from "@/components/routine/schedule-planner";
+import { StreakCard } from "@/components/routine/streak-card";
 import { ScreenHeader } from "@/components/shell/app-shell";
 import { EmptyState } from "@/components/ui/empty-state";
 import { loadGoals } from "@/lib/routine/goals";
 import { loadDayPlan } from "@/lib/routine/plan";
 import { loadSchedule } from "@/lib/routine/schedule";
+import { loadStreak } from "@/lib/routine/streak";
 
 export const metadata: Metadata = { title: "Rotina" };
 export const dynamic = "force-dynamic";
 
 export default async function RotinaPage() {
-  const [data, goals, plan] = await Promise.all([
+  const [data, goals, plan, streak] = await Promise.all([
     loadSchedule(),
     loadGoals(),
     loadDayPlan(),
+    loadStreak(),
   ]);
   return (
     <>
@@ -24,6 +27,7 @@ export default async function RotinaPage() {
       {data && goals && plan ? (
         <div className="flex flex-col gap-12">
           <DayPlanPanel plan={plan} />
+          {streak && <StreakCard s={streak} />}
           <SchedulePlanner data={data} />
           <GoalsPanel goals={goals.goals} plans={goals.plans} />
         </div>

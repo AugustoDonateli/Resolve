@@ -329,6 +329,29 @@ let batchId, proposalId;
   check("B", "não grava plano do dia em nome de A", permError(ins), ins.error?.message ?? "gravou!");
 }
 
+// ── Folga e sequência (F4-T18) ──
+{
+  const v = await V.c.from("rest_days").select("*").limit(1);
+  check("visitante", "não lê rest_days", permError(v), v.error?.message ?? `${rows(v)} linha(s)`);
+  const vs = await V.c.rpc("streak_status");
+  check("visitante", "não executa streak_status", permError(vs), vs.error?.message ?? "executou!");
+  const st = await A.c.rpc("streak_status");
+  const today = st.data?.[0]?.today;
+  check("A", "lê a própria sequência (regra sequencia-v1)", st.data?.[0]?.rule_version === "sequencia-v1", st.error?.message ?? "");
+  if (today) {
+    // Folga de hoje fica no histórico: a conta de teste A acumula essa linha de propósito.
+    await A.c.from("rest_days").insert({ rest_date: today });
+    const del = await A.c.from("rest_days").delete().eq("rest_date", today).select();
+    check("A", "não apaga folga de hoje (histórico)", Boolean(del.error), del.error?.message ?? `${rows(del)} linha(s) apagada(s)!`);
+    const past = await A.c.from("rest_days").insert({ rest_date: "2020-01-06" }).select();
+    check("A", "não marca folga no passado", Boolean(past.error), past.error?.message ?? "marcou!");
+    const b = await B.c.from("rest_days").insert({ user_id: A.id, rest_date: today }).select();
+    check("B", "não marca folga em nome de A", Boolean(b.error), b.error?.message ?? "marcou!");
+    const bl = await B.c.from("rest_days").select("rest_date").eq("user_id", A.id);
+    check("B", "não lê folgas de A", denied(bl), bl.error?.message ?? `${rows(bl)} linha(s)`);
+  }
+}
+
 // ── Redação (F5-T02) ──
 {
   for (const t of ["essays", "essay_versions", "essay_jobs", "essay_evaluations", "essay_results", "essay_annotations", "essay_rubrics"]) {

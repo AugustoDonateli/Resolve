@@ -515,3 +515,38 @@ test("plano de hoje: blocos nos horários livres, sem encostar no compromisso, e
     await wipe();
   }
 });
+
+test("sequência e folga: regra explicada, folga de amanhã marcada e desmarcada", async ({
+  page,
+}) => {
+  await signIn(page);
+  await page.goto("/rotina");
+  const card = page.getByRole("region", { name: /^Sequência: \d+ dias?$/ });
+  await expect(card).toBeVisible();
+  await expect(
+    card.getByText(
+      /Folga\s+planejada, marcada para hoje ou para frente, não quebra a sequência/,
+    ),
+  ).toBeVisible();
+  await expect(
+    card.getByRole("list", { name: "Últimos 14 dias" }).getByRole("listitem"),
+  ).toHaveCount(14);
+  const mark = card.getByRole("button", { name: "Marcar folga amanhã" });
+  if (await mark.isVisible()) {
+    await mark.click();
+    const status = card.getByText(
+      /Folga de amanhã marcada\.|Até 2 folgas por semana/,
+    );
+    await expect(status).toBeVisible({ timeout: 15_000 });
+    if ((await status.innerText()).startsWith("Folga")) {
+      await card.getByRole("button", { name: "Desmarcar" }).last().click();
+      await expect(card.getByText("Folga desmarcada.")).toBeVisible({
+        timeout: 15_000,
+      });
+    }
+  }
+  const r = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+    .analyze();
+  expect(r.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);
+});
