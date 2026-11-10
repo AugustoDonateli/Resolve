@@ -25,7 +25,7 @@ export const VIEWS: View[] = [
   {
     id: "correcao",
     label: "Correção por competência",
-    path: "/redacao",
+    path: "/redacao/demonstracao",
     open: async (page) => {
       await page.getByRole("tab", { name: /C3/ }).click();
       await page.waitForTimeout(900);
