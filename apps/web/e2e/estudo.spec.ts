@@ -226,3 +226,9 @@ test("triagem: três decisões, página oculta não conta tempo, janela encerra 
     page.getByRole("heading", { name: /Triagem 2 de|Triagem concluída/ }),
   ).toBeVisible({ timeout: 15_000 });
 });
+
+test("conferência da triagem: sessão alheia ou inexistente não abre", async ({ page }) => {
+  await signIn(page);
+  const res = await page.goto("/estudar/triagem/00000000-0000-4000-8000-000000000000/conferencia");
+  expect(res?.status()).toBe(404);
+});

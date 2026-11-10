@@ -201,6 +201,14 @@ export function SessionRunner({ session }: { session: SessionView }) {
           >
             Novo treino
           </Link>
+          {session.entries.some((e) => e.triage) && (
+            <Link
+              href={`/estudar/triagem/${session.id}/conferencia`}
+              className="inline-flex min-h-11 items-center rounded-control border border-line px-4 t-ui hover:bg-surface-subtle"
+            >
+              Conferir a triagem
+            </Link>
+          )}
           {total > 0 && (
             <Button
               type="button"

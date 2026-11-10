@@ -101,6 +101,12 @@ export function TriageRunner({ session }: { session: SessionView }) {
         >
           Resolver as questões
         </Link>
+        <Link
+          href={`/estudar/triagem/${session.id}/conferencia`}
+          className="t-ui underline"
+        >
+          Ver a conferência
+        </Link>
       </section>
     );
   }
