@@ -11,6 +11,7 @@ import {
 import { saveDraft } from "@/lib/essay/draft-actions";
 import type { DraftView } from "@/lib/essay/drafts";
 import { pieceOf } from "@/lib/essay/pieces";
+import { SubmitForCorrection } from "./submit-for-correction";
 import { PieceTimer } from "./piece-timer";
 import { SheetPreview } from "./sheet-preview";
 
@@ -215,6 +216,14 @@ export function EssayEditor({ draft }: { draft: DraftView }) {
           ? "Versão enviada: não muda mais. A reescrita cria uma nova versão."
           : STATUS_TEXT[status]}
       </p>
+      {!piece && (
+        <SubmitForCorrection
+          essayId={draft.essayId}
+          versionId={draft.versionId}
+          submitted={readOnly}
+          canSubmit={!readOnly && status === "salvo" && !conflict && wordCount(text) >= 50}
+        />
+      )}
       {status === "erro" && !readOnly && (
         <Button
           type="button"
