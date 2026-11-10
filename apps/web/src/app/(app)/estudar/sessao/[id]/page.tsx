@@ -23,7 +23,10 @@ export default async function SessionPage({
       >
         <ChevronLeft aria-hidden="true" className="size-4" /> Estudar
       </Link>
-      <ScreenHeader title="Treino livre" kicker="Estudar" />
+      <ScreenHeader
+        title={session.mode === "revisao" ? "Revisão" : "Treino livre"}
+        kicker={session.mode === "revisao" ? "Revisar" : "Estudar"}
+      />
       <SessionRunner session={session} />
     </>
   );

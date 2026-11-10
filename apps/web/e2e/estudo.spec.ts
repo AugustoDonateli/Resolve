@@ -104,3 +104,26 @@ test("estudar: sessão de outra conta ou inexistente não abre", async ({
   );
   expect(res?.status()).toBe(404);
 });
+
+test("revisar: fila do dia sem seleção manual e escolha de tempo", async ({
+  page,
+}) => {
+  await signIn(page);
+  await page.goto("/revisar");
+  await expect(
+    page.getByRole("navigation", { name: "Tempo disponível" }),
+  ).toBeVisible();
+  const empty = page.getByRole("heading", { name: "Nada para revisar hoje" });
+  const batch = page.getByText(/cabem? em 30 min/);
+  await expect(empty.or(batch)).toBeVisible();
+  await page.getByRole("link", { name: "60 min" }).click();
+  await expect(page).toHaveURL(/min=60/);
+  await expect(page.getByRole("link", { name: "60 min" })).toHaveAttribute(
+    "aria-current",
+    "true",
+  );
+  const r = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+    .analyze();
+  expect(r.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);
+});

@@ -233,3 +233,17 @@ export async function requestHelp(input: unknown): Promise<Outcome<Explanation>>
   if (!logged.ok) return logged;
   return rpc<Explanation>("item_explanation", { p_session_item_id: p.data.sessionItemId });
 }
+
+/**
+ * Revisão do dia (F3-T08): abre uma sessão de revisão com as questões do lote (fila do banco, sem
+ * seleção manual). A confirmação de cada resposta atualiza a agenda; ajuda e repetição ficam na tentativa.
+ */
+export async function startReview(input: unknown): Promise<Outcome<string>> {
+  const p = z.object({ actionId: uuid, availableMinutes: z.number().int().min(1).max(600) }).safeParse(input);
+  if (!p.success) return { ok: false, error: "dados inválidos", final: true };
+  const q = await rpc<ReviewQueueRow[]>("review_queue", { p_available_minutes: p.data.availableMinutes });
+  if (!q.ok) return q;
+  const ids = q.value.filter((r) => r.in_batch && r.kind === "questao" && r.item_version_id).map((r) => r.item_version_id!);
+  if (!ids.length) return { ok: false, error: "resolve_no_items", final: true };
+  return rpc<string>("start_session", { p_client_action_id: p.data.actionId, p_mode: "revisao", p_item_version_ids: ids, p_planned_minutes: p.data.availableMinutes, p_time_limit_minutes: null, p_selection_reason: "revisao" });
+}
