@@ -15,6 +15,12 @@ export default function RedacaoPage() {
         >
           Temas
         </Link>
+        <Link
+          href="/redacao/minhas"
+          className="inline-flex min-h-11 items-center rounded-control border border-line bg-surface px-4 t-ui hover:bg-surface-subtle"
+        >
+          Minhas redações
+        </Link>
       </ScreenHeader>
       <Correction />
     </>

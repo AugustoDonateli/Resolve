@@ -23,6 +23,7 @@ export default defineConfig({
     { name: "editor", testMatch: /editor\.spec\.ts/ },
     { name: "rotina", testMatch: /rotina\.spec\.ts/ },
     { name: "estudo", testMatch: /estudo\.spec\.ts/ },
+    { name: "redacao", testMatch: /redacao\.spec\.ts/ },
   ],
   webServer: {
     command: "pnpm start -p 3100",
