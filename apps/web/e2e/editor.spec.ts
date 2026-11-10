@@ -596,3 +596,92 @@ test("cartões: rascunho com fonte, confirmação de publicar e remoção; aluno
     .eq("front", front);
   expect(gone).toEqual([]);
 });
+
+test("prévia do aluno: questão real com figuras intacta em 360/390/1440 e figura ampliável", async ({
+  browser,
+}) => {
+  const db = await editorDb();
+  const { data: batches } = await db
+    .from("ingest_batches")
+    .select("id")
+    .eq("publishable", true);
+  const { data: props } = await db
+    .from("item_proposals")
+    .select("id, payload")
+    .eq("question_number", 119)
+    .in(
+      "batch_id",
+      (batches ?? []).map((b) => b.id),
+    );
+  const q = (props ?? []).find(
+    (p) => (p.payload as { source: { booklet: number } }).source.booklet === 7,
+  );
+  expect(q, "Q119 do caderno 7 carregada").toBeTruthy();
+  const { ctx, page } = await editorPage(browser);
+  await page.goto(`/editor/proposta/${q!.id}`);
+  await page.getByRole("link", { name: "Prévia do aluno" }).click();
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Prévia do aluno" }),
+  ).toBeVisible();
+  for (const width of [360, 390, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await expect(
+      page.getByText(
+        "O diagrama que representa o circuito construído pelo eletrotécnico é:",
+      ),
+    ).toBeVisible();
+    await expect(page.getByRole("radio")).toHaveCount(5);
+    // figuras carregadas (texto-base e as cinco alternativas): rola até o fim para o carregamento preguiçoso
+    await page.locator("[data-alt]").last().scrollIntoViewIfNeeded();
+    await expect
+      .poll(
+        () =>
+          page
+            .locator("article img")
+            .evaluateAll(
+              (imgs) =>
+                imgs.filter(
+                  (i) =>
+                    (i as HTMLImageElement).complete &&
+                    (i as HTMLImageElement).naturalWidth > 0,
+                ).length,
+            ),
+        { message: `figuras carregadas em ${width}px`, timeout: 15_000 },
+      )
+      .toBe(6);
+    const overflow = await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth -
+        document.documentElement.clientWidth,
+    );
+    expect(overflow, `rolagem horizontal em ${width}px`).toBeLessThanOrEqual(0);
+    // alternativas inteiras dentro da coluna
+    const outside = await page
+      .locator("[data-alt]")
+      .evaluateAll(
+        (els) =>
+          els.filter(
+            (e) =>
+              e.getBoundingClientRect().right >
+              document.documentElement.clientWidth + 0.5,
+          ).length,
+      );
+    expect(outside, `alternativa cortada em ${width}px`).toBe(0);
+  }
+  await page.getByRole("button", { name: "Ampliar figura 1" }).click();
+  const dialog = page.getByRole("dialog", { name: "Figura 1 ampliada" });
+  await expect(dialog).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "Ampliar figura 1" }),
+  ).toBeFocused();
+  // marcar uma alternativa não revela gabarito
+  await page.getByRole("radio").nth(1).click();
+  await expect(page.getByText("Correta", { exact: true })).toHaveCount(0);
+  const r = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+    .analyze();
+  expect(r.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);
+  await ctx.close();
+});

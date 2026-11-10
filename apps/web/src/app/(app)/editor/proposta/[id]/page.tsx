@@ -37,6 +37,9 @@ export default async function ProposalPage({ params, searchParams }: { params: P
           <Link href={`/editor/proposta/${p.id}/etiquetas`} className="inline-flex min-h-11 items-center rounded-control border border-line bg-surface px-4 t-ui hover:bg-surface-subtle">
             Etiquetas e aprovação
           </Link>
+          <Link href={`/editor/proposta/${p.id}/previa`} className="inline-flex min-h-11 items-center rounded-control border border-line bg-surface px-4 t-ui hover:bg-surface-subtle">
+            Prévia do aluno
+          </Link>
         </div>
       </ScreenHeader>
       <ProposalReview
