@@ -19,6 +19,10 @@ export type LeftOutEntry =
 
 export interface DayPlan {
   today: string;
+  timezone: string;
+  /** Compromissos e horários livres de hoje, em minutos do dia (para a agenda e a remarcação). */
+  commitments: { title: string; start: number; end: number }[];
+  available: { start: number; end: number }[];
   blocks: DayBlock[];
   leftOut: LeftOutEntry[];
   generatedAt: string | null;
@@ -34,13 +38,15 @@ export async function loadDayPlan(): Promise<DayPlan | null> {
     .select("timezone")
     .eq("user_id", auth.user.id)
     .maybeSingle();
+  let timezone = profile?.timezone ?? "America/Sao_Paulo";
   let today: string;
   try {
-    today = dateInZone(new Date(), profile?.timezone ?? "America/Sao_Paulo");
+    today = dateInZone(new Date(), timezone);
   } catch {
-    today = dateInZone(new Date(), "America/Sao_Paulo");
+    timezone = "America/Sao_Paulo";
+    today = dateInZone(new Date(), timezone);
   }
-  const [b, d] = await Promise.all([
+  const [b, d, occ] = await Promise.all([
     supabase
       .from("study_blocks")
       .select("id, start_minute, planned_minutes, kind, title, reason, status")
@@ -51,9 +57,38 @@ export async function loadDayPlan(): Promise<DayPlan | null> {
       .select("left_out, generated_at")
       .eq("local_date", today)
       .maybeSingle(),
+    supabase.rpc("schedule_occurrences", { p_from: today, p_to: today }),
   ]);
+  const toMin = (local: string, edge: "start" | "end") => {
+    const d0 = local.slice(0, 10);
+    if (d0 < today) return 0;
+    if (d0 > today) return edge === "end" ? 1440 : 1440;
+    return Number(local.slice(11, 13)) * 60 + Number(local.slice(14, 16));
+  };
+  const rows = (occ.data ?? []) as {
+    kind: string;
+    title: string | null;
+    local_start: string;
+    local_end: string;
+  }[];
+  const commitments = rows
+    .filter((o) => o.kind === "compromisso")
+    .map((o) => ({
+      title: o.title ?? "Compromisso",
+      start: toMin(o.local_start, "start"),
+      end: toMin(o.local_end, "end"),
+    }));
+  const available = rows
+    .filter((o) => o.kind === "disponivel")
+    .map((o) => ({
+      start: toMin(o.local_start, "start"),
+      end: toMin(o.local_end, "end"),
+    }));
   return {
     today,
+    timezone,
+    commitments,
+    available,
     blocks: (b.data ?? []) as DayBlock[],
     leftOut: (d.data?.left_out ?? []) as LeftOutEntry[],
     generatedAt: d.data?.generated_at ?? null,

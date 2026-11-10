@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { fmtClock, fmtDuration } from "@/lib/demo/routine";
 import { generateDayPlan } from "@/lib/routine/plan-actions";
 import type { DayPlan } from "@/lib/routine/plan";
+import { DayAgenda } from "./day-agenda";
 
 const noop = () => () => {};
 const STATUS: Record<string, string> = {
@@ -64,6 +65,7 @@ export function DayPlanPanel({ plan }: { plan: DayPlan }) {
       ) : made ? (
         <p className="t-ui">Nenhum bloco coube hoje.</p>
       ) : null}
+      <DayAgenda plan={plan} />
       {plan.leftOut.length > 0 && (
         <div>
           <h3 className="mb-1 t-ui font-semibold">Ficou de fora</h3>

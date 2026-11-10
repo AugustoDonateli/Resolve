@@ -349,14 +349,12 @@ test("plano de hoje: blocos nos horários livres, sem encostar no compromisso, e
     ).toBeNull();
     expect(
       (
-        await db
-          .from("fixed_commitments")
-          .insert({
-            title: "Compromisso de teste",
-            weekday,
-            start_time: hhmm(cStart),
-            end_time: hhmm(cStart + 30),
-          })
+        await db.from("fixed_commitments").insert({
+          title: "Compromisso de teste",
+          weekday,
+          start_time: hhmm(cStart),
+          end_time: hhmm(cStart + 30),
+        })
       ).error,
     ).toBeNull();
     expect(
@@ -387,6 +385,88 @@ test("plano de hoje: blocos nos horários livres, sem encostar no compromisso, e
         false,
       );
     }
+    // Remarcação (F4-T16) por formulário: o horário do compromisso não é oferecido; outro horário grava.
+    const { data: before } = await db
+      .from("study_blocks")
+      .select("id, start_minute, planned_minutes")
+      .order("start_minute");
+    const first = before![0]!;
+    await page
+      .locator("[data-block]")
+      .filter({ hasText: "Treino livre" })
+      .first()
+      .click();
+    const dialog = page.getByRole("dialog", { name: /Remarcar/ });
+    await expect(dialog).toBeVisible();
+    await expect(
+      dialog.getByRole("radio", { name: hhmm(cStart), exact: true }),
+    ).toHaveCount(0);
+    const options = dialog.getByRole("radio");
+    const n = await options.count();
+    let target = -1;
+    for (let i = 0; i < n; i++) {
+      const label =
+        (await options
+          .nth(i)
+          .evaluate((el) => (el as HTMLInputElement).value)) ?? "";
+      if (Number(label) !== first.start_minute) {
+        target = Number(label);
+        await options.nth(i).check({ force: true });
+        break;
+      }
+    }
+    expect(target).toBeGreaterThanOrEqual(now); // nada no passado
+    await dialog.getByRole("button", { name: /Remarcar para/ }).click();
+    await expect
+      .poll(
+        async () =>
+          (
+            await db
+              .from("study_blocks")
+              .select("start_minute")
+              .eq("id", first.id)
+              .single()
+          ).data?.start_minute,
+        { timeout: 15_000 },
+      )
+      .toBe(target);
+    const moved = (
+      await db
+        .from("study_blocks")
+        .select("start_minute, planned_minutes")
+        .eq("id", first.id)
+        .single()
+    ).data!;
+    expect(
+      moved.start_minute < cStart + 30 &&
+        cStart < moved.start_minute + moved.planned_minutes,
+    ).toBe(false);
+
+    // Arrastar para cima do compromisso: recusado com explicação, nada gravado.
+    await page.reload();
+    const blockEl = page.locator(`[data-block="${first.id}"]`);
+    await page.setViewportSize({ width: 1280, height: 1400 });
+    await blockEl.scrollIntoViewIfNeeded();
+    const box = (await blockEl.boundingBox())!;
+    const dy = (cStart - target) * 1.6;
+    await page.mouse.move(box.x + box.width / 2, box.y + 8);
+    await page.mouse.down();
+    await page.mouse.move(box.x + box.width / 2, box.y + 8 + dy / 2, {
+      steps: 5,
+    });
+    await page.mouse.move(box.x + box.width / 2, box.y + 8 + dy, { steps: 5 });
+    await page.mouse.up();
+    await expect(page.getByRole("region", { name: "Agenda de hoje" })).toContainText(/colide com/i);
+    expect(
+      (
+        await db
+          .from("study_blocks")
+          .select("start_minute")
+          .eq("id", first.id)
+          .single()
+      ).data?.start_minute,
+    ).toBe(target);
+
     // refazer não duplica
     await page.getByRole("button", { name: "Refazer plano de hoje" }).click();
     await expect(page.getByText("Plano montado.")).toBeVisible({

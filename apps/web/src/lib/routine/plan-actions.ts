@@ -143,19 +143,121 @@ export async function generateDayPlan(): Promise<PlanResult> {
     left.push({
       note: "Não há horário livre a partir de agora. Cadastre horários livres em “Toda semana”.",
     });
-  const up = await supabase
-    .from("study_plan_days")
-    .upsert({
-      user_id: auth.user.id,
-      local_date: today,
-      left_out: left,
-      generated_at: new Date().toISOString(),
-    });
+  const up = await supabase.from("study_plan_days").upsert({
+    user_id: auth.user.id,
+    local_date: today,
+    left_out: left,
+    generated_at: new Date().toISOString(),
+  });
   if (up.error)
     return {
       ok: false,
       message: "Plano gravado, mas a explicação não foi salva.",
     };
+  revalidatePath("/rotina");
+  return { ok: true };
+}
+
+/**
+ * Remarcar um bloco do plano (F4-T16). Arrastar e formulário chamam esta mesma ação, que confere no
+ * servidor a mesma regra da tela (`canPlace`): dentro do dia, sem sobrepor compromissos nem outros blocos.
+ */
+export async function rescheduleBlock(input: unknown): Promise<PlanResult> {
+  const { z } = await import("zod");
+  const { canPlace } = await import("@/lib/demo/routine");
+  const p = z
+    .object({ id: z.string().uuid(), start: z.number().int().min(0).max(1439) })
+    .safeParse(input);
+  if (!p.success) return { ok: false, message: "Horário inválido." };
+  const supabase = await createClient();
+  const { data: auth } = await supabase.auth.getUser();
+  if (!auth.user) return { ok: false, message: "Entre para remarcar." };
+  const { data: block } = await supabase
+    .from("study_blocks")
+    .select("id, local_date, status, planned_minutes, title")
+    .eq("id", p.data.id)
+    .maybeSingle();
+  if (!block) return { ok: false, message: "Bloco não encontrado." };
+  if (block.status !== "planejado")
+    return {
+      ok: false,
+      message: "Só blocos ainda planejados podem ser remarcados.",
+    };
+  const day = block.local_date as string;
+  const tz =
+    (
+      await supabase
+        .from("study_blocks")
+        .select("timezone")
+        .eq("id", block.id)
+        .single()
+    ).data?.timezone ?? "America/Sao_Paulo";
+  let today = day;
+  try {
+    today = dateInZone(new Date(), tz);
+  } catch {
+    // fuso inválido: trata o dia do bloco como hoje
+  }
+  if (
+    day < today ||
+    (day === today && p.data.start < minuteInZone(new Date(), tz))
+  ) {
+    return { ok: false, message: "Esse horário já passou." };
+  }
+  const [occ, others] = await Promise.all([
+    supabase.rpc("schedule_occurrences", { p_from: day, p_to: day }),
+    supabase
+      .from("study_blocks")
+      .select("id, start_minute, planned_minutes, title")
+      .eq("local_date", day)
+      .neq("status", "dispensado"),
+  ]);
+  if (occ.error || others.error)
+    return { ok: false, message: "Não foi possível conferir a agenda agora." };
+  const fixed = (
+    (occ.data ?? []) as {
+      kind: string;
+      title: string | null;
+      local_start: string;
+      local_end: string;
+    }[]
+  )
+    .filter((o) => o.kind === "compromisso")
+    .map((o, i) => {
+      const s = toMinute(o.local_start, day, "start");
+      return {
+        id: `c${i}`,
+        kind: "compromisso" as const,
+        title: o.title ?? "Compromisso",
+        detail: "",
+        start: s,
+        minutes: toMinute(o.local_end, day, "end") - s,
+        fixed: true,
+      };
+    });
+  const blocks = (others.data ?? []).map((b) => ({
+    id: b.id,
+    kind: "treino" as const,
+    title: b.title,
+    detail: "",
+    start: b.start_minute,
+    minutes: b.planned_minutes,
+  }));
+  const check = canPlace(
+    [...blocks, ...fixed],
+    block.id,
+    p.data.start,
+    0,
+    1440,
+  );
+  if (!check.ok) return { ok: false, message: check.reason };
+  const { error } = await supabase
+    .from("study_blocks")
+    .update({ start_minute: p.data.start })
+    .eq("id", block.id)
+    .eq("status", "planejado");
+  if (error)
+    return { ok: false, message: "Não foi possível remarcar. Tente de novo." };
   revalidatePath("/rotina");
   return { ok: true };
 }
