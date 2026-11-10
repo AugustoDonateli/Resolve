@@ -305,3 +305,102 @@ test("metas e planos se-então: criar, editar, arquivar e restaurar", async ({
     await wipe();
   }
 });
+
+test("plano de hoje: blocos nos horários livres, sem encostar no compromisso, e o que ficou de fora", async ({
+  page,
+}) => {
+  const db = await studentDb();
+  const wipe = async () => {
+    await db.from("study_blocks").delete().not("id", "is", null);
+    await db.from("study_plan_days").delete().not("local_date", "is", null);
+    await db.from("goals").delete().not("id", "is", null);
+    await db.from("schedule_exceptions").delete().not("id", "is", null);
+    await db.from("fixed_commitments").delete().not("id", "is", null);
+    await db.from("availability_rules").delete().not("id", "is", null);
+  };
+  await wipe();
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "America/Sao_Paulo",
+    hour: "2-digit",
+    minute: "2-digit",
+    weekday: "short",
+    hourCycle: "h23",
+  }).formatToParts(new Date());
+  const now =
+    Number(parts.find((p) => p.type === "hour")!.value) * 60 +
+    Number(parts.find((p) => p.type === "minute")!.value);
+  test.skip(
+    now > 21 * 60,
+    "perto da meia-noite em São Paulo: sem espaço para planejar hoje",
+  );
+  const weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(
+    parts.find((p) => p.type === "weekday")!.value,
+  );
+  const hhmm = (m: number) =>
+    `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
+  const cStart = Math.ceil((now + 40) / 5) * 5;
+  try {
+    expect(
+      (
+        await db
+          .from("availability_rules")
+          .insert({ weekday, start_time: "00:00", end_time: "23:55" })
+      ).error,
+    ).toBeNull();
+    expect(
+      (
+        await db
+          .from("fixed_commitments")
+          .insert({
+            title: "Compromisso de teste",
+            weekday,
+            start_time: hhmm(cStart),
+            end_time: hhmm(cStart + 30),
+          })
+      ).error,
+    ).toBeNull();
+    expect(
+      (await db.from("goals").insert({ level: "diaria", target_minutes: 60 }))
+        .error,
+    ).toBeNull();
+    await signIn(page);
+    await page.goto("/rotina");
+    await page.getByRole("button", { name: "Montar plano de hoje" }).click();
+    await expect(page.getByText("Plano montado.")).toBeVisible({
+      timeout: 15_000,
+    });
+    const plan = page.getByRole("region", { name: "Plano de hoje" });
+    await expect(plan.getByText(/Treino livre/).first()).toBeVisible();
+    await expect(
+      plan.getByText(/Completa a meta de 60 min por dia/).first(),
+    ).toBeVisible();
+    const { data: blocks } = await db
+      .from("study_blocks")
+      .select("start_minute, planned_minutes");
+    expect((blocks ?? []).reduce((a, b) => a + b.planned_minutes, 0)).toBe(60);
+    for (const b of blocks ?? []) {
+      expect(b.start_minute).toBeGreaterThanOrEqual(now);
+      const overlaps =
+        b.start_minute < cStart + 30 &&
+        cStart < b.start_minute + b.planned_minutes;
+      expect(overlaps, `bloco ${b.start_minute} encosta no compromisso`).toBe(
+        false,
+      );
+    }
+    // refazer não duplica
+    await page.getByRole("button", { name: "Refazer plano de hoje" }).click();
+    await expect(page.getByText("Plano montado.")).toBeVisible({
+      timeout: 15_000,
+    });
+    const { data: again } = await db
+      .from("study_blocks")
+      .select("planned_minutes");
+    expect((again ?? []).reduce((a, b) => a + b.planned_minutes, 0)).toBe(60);
+    const r = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+      .analyze();
+    expect(r.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);
+  } finally {
+    await wipe();
+  }
+});

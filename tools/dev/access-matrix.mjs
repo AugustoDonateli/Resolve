@@ -310,6 +310,25 @@ let batchId, proposalId;
   }
 }
 
+// ── Plano do dia (F4-T15) ──
+{
+  for (const t of ["study_blocks", "study_plan_days"]) {
+    const v = await V.c.from(t).select("*").limit(1);
+    check("visitante", `não lê ${t}`, permError(v), v.error?.message ?? `${rows(v)} linha(s)`);
+  }
+  const mine = await A.c.from("study_blocks").insert({ local_date: "2026-11-10", timezone: "America/Sao_Paulo", start_minute: 600, planned_minutes: 25, kind: "treino", title: "Matriz de acesso" }).select("id").single();
+  check("A", "cria o próprio bloco", !mine.error && Boolean(mine.data?.id), mine.error?.message ?? "");
+  if (mine.data?.id) {
+    const r = await B.c.from("study_blocks").select("id").eq("id", mine.data.id);
+    check("B", "não lê bloco de A", denied(r), r.error?.message ?? `${rows(r)} linha(s)`);
+    const u = await B.c.from("study_blocks").update({ status: "dispensado" }).eq("id", mine.data.id).select();
+    check("B", "não altera bloco de A", denied(u), u.error?.message ?? `${rows(u)} linha(s)`);
+    await A.c.from("study_blocks").delete().eq("id", mine.data.id);
+  }
+  const ins = await B.c.from("study_plan_days").insert({ user_id: A.id, local_date: "2026-11-10", left_out: [] }).select();
+  check("B", "não grava plano do dia em nome de A", permError(ins), ins.error?.message ?? "gravou!");
+}
+
 // ── Redação (F5-T02) ──
 {
   for (const t of ["essays", "essay_versions", "essay_jobs", "essay_evaluations", "essay_results", "essay_annotations", "essay_rubrics"]) {
