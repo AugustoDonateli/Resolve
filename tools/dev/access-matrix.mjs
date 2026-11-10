@@ -230,6 +230,64 @@ let batchId, proposalId;
   check("A", "apaga a própria redação sem versão enviada", rows(del) === 1, del.error?.message ?? `${rows(del)} linha(s)`);
 }
 
+// ── Temas de redação (F5-T03) ──
+{
+  const draft = await E.c.from("essay_prompts").select("id").eq("status", "draft").eq("origin", "oficial").limit(1);
+  const draftId = draft.data?.[0]?.id;
+  check("E", "lê o rascunho do tema oficial", Boolean(draftId), draft.error?.message ?? "nenhum rascunho");
+  if (draftId) {
+    const t = await E.c.from("motivating_texts").select("blocks").eq("prompt_id", draftId);
+    const fig = (t.data ?? []).flatMap((x) => x.blocks).find((b) => b.type === "image")?.asset_ref;
+    for (const [who, s] of [["A", A], ["B", B]]) {
+      const r = await s.c.from("essay_prompts").select("id").eq("id", draftId);
+      check(who, "não lê tema em rascunho", denied(r), r.error?.message ?? `${rows(r)} linha(s)`);
+      const m = await s.c.from("motivating_texts").select("id").eq("prompt_id", draftId);
+      check(who, "não lê textos de tema em rascunho", denied(m), m.error?.message ?? `${rows(m)} linha(s)`);
+      if (fig) {
+        const dl = await s.c.storage.from("editorial").download(fig);
+        check(who, "não baixa figura de tema em rascunho", permError(dl) || Boolean(dl.error), dl.error?.message ?? "baixou!");
+      }
+      const bl = await s.c.rpc("essay_prompt_blockers", { p_prompt: draftId });
+      check(who, "não obtém impedimentos de tema (só editor)", bl.data === null, bl.error?.message ?? JSON.stringify(bl.data));
+      const up = await s.c.from("motivating_texts").update({ rights_status: "verificado" }).eq("prompt_id", draftId).select();
+      check(who, "não confere texto motivador", denied(up), up.error?.message ?? `${rows(up)} linha(s)`);
+    }
+    const vb = await V.c.rpc("essay_prompt_blockers", { p_prompt: draftId });
+    check("visitante", "não executa essay_prompt_blockers", permError(vb), vb.error?.message ?? "executou!");
+  }
+}
+
+// ── Fila de correção e orçamento (F5-T08) ──
+{
+  for (const t of ["ai_budgets", "ai_budget_policies", "ai_reservations", "ai_usage", "job_runs", "ai_model_policies"]) {
+    const v = await V.c.from(t).select("*").limit(1);
+    check("visitante", `não lê ${t}`, permError(v), v.error?.message ?? `${rows(v)} linha(s)`);
+  }
+  for (const t of ["ai_budgets", "ai_budget_policies", "ai_reservations"]) {
+    const r = await A.c.from(t).select("id").limit(1);
+    check("A", `não lê ${t} (só editor)`, denied(r), r.error?.message ?? `${rows(r)} linha(s)`);
+  }
+  for (const t of ["ai_usage", "job_runs", "ai_budgets", "ai_reservations"]) {
+    const w = await A.c.from(t).insert({}).select();
+    check("A", `não grava ${t} direto`, permError(w), w.error?.message ?? "gravou!");
+  }
+  const pol = await A.c.from("ai_model_policies").select("id, status").eq("id", "redacao-ref-v0");
+  check("A", "lê a política de modelo de referência", rows(pol) === 1, pol.error?.message ?? `${rows(pol)} linha(s)`);
+  const es = await A.c.from("essays").insert({}).select("id").single();
+  const ver = await A.c.from("essay_versions").insert({ essay_id: es.data?.id, paragraphs_json: [{ id: "p1", text: "Rascunho da matriz (fila)." }] }).select("id").single();
+  const vs = await V.c.rpc("submit_essay", { p_version_id: ver.data?.id, p_idempotency_key: "matriz-visitante" });
+  check("visitante", "não envia redação para correção", permError(vs), vs.error?.message ?? "enviou!");
+  const bs = await B.c.rpc("submit_essay", { p_version_id: ver.data?.id, p_idempotency_key: "matriz-de-b-0001" });
+  check("B", "não envia a versão de A para correção", /resolve_essay_not_found/.test(bs.error?.message ?? ""), bs.error?.message ?? "enviou!");
+  const st = await A.c.from("essay_versions").select("status").eq("id", ver.data?.id).single();
+  check("A", "rascunho continua rascunho depois da tentativa de B", st.data?.status === "rascunho", JSON.stringify(st.data));
+  const br = await B.c.rpc("retry_essay_job", { p_job_id: "00000000-0000-0000-0000-000000000000" });
+  check("B", "não pede nova tentativa de trabalho inexistente/alheio", /resolve_job_not_found/.test(br.error?.message ?? ""), br.error?.message ?? "pediu!");
+  const ju = await A.c.from("essay_jobs").update({ status: "pronto" }).eq("user_id", A.id).select();
+  check("A", "não muda o estado da própria correção", permError(ju) || denied(ju), ju.error?.message ?? `${rows(ju)} linha(s)`);
+  await A.c.from("essays").delete().eq("id", es.data?.id);
+}
+
 // ── Arquivos ──
 {
   const bytes = new Blob(["arquivo de teste da matriz de acesso"], { type: "text/plain" });
