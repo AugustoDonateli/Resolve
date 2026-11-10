@@ -4,17 +4,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useSyncExternalStore, useTransition } from "react";
 import { Button } from "@/components/ui/button";
+import { CardFeed } from "./card-feed";
 import { reviewCard, startReview } from "@/lib/study/actions";
-import type { ReviewCard, ReviewHome as Home } from "@/lib/study/review";
+import type { ReviewHome as Home } from "@/lib/study/review";
 import { withSameAction } from "@/lib/study/retry";
 
 const noop = () => () => {};
-const OUTCOME: Record<string, string> = {
-  lembrou: "Registrado. Volta mais tarde, num intervalo maior.",
-  nao_lembrou: "Registrado. Volta amanhã.",
-  antecipada: "Ainda não venceu: a agenda não mudou.",
-  concluida: "Cartão concluído: saiu da revisão.",
-};
 
 function actionIdFor(scope: string): string {
   const key = `resolve:acao:${scope}`;
@@ -84,6 +79,9 @@ export function ReviewHome({ home }: { home: Home }) {
             className="mt-4 inline-flex min-h-11 items-center rounded-control bg-primary px-4 t-ui text-on-primary hover:bg-primary-hover"
           >
             Ir para Estudar
+          </Link>
+          <Link href="/revisar/demonstracao" className="ml-4 mt-4 inline-flex min-h-11 items-center t-ui text-link underline">
+            Ver como funciona a revisão por cartões
           </Link>
         </section>
       ) : (
@@ -155,92 +153,20 @@ export function ReviewHome({ home }: { home: Home }) {
               <h2 id="rev-cartoes" className="t-section">
                 Cartões ({cards.length})
               </h2>
-              {cards.map((r) => (
-                <CardReviewer
-                  key={r.review_item_id}
-                  card={home.cards[r.card_id!]!}
-                  scope={`${r.review_item_id}-${r.due_date}`}
-                />
-              ))}
+              <CardFeed
+                cards={cards.map((r) => {
+                  const c = home.cards[r.card_id!]!;
+                  return { id: c.id, kind: c.kind === "formula" ? "formula" : "conceito", front: c.front, back: c.back, source: c.source ? `${c.source} · ${c.locator}` : null };
+                })}
+                onAnswer={async (c, recalled) => {
+                  const r = await withSameAction(actionIdFor(`cartao-${c.id}-${home.rows[0]?.local_date}`), (actionId) => reviewCard({ actionId, cardId: c.id, recalled }));
+                  return r.ok ? null : "Não foi possível registrar. Tente de novo.";
+                }}
+              />
             </section>
           )}
         </>
       )}
     </div>
-  );
-}
-
-function CardReviewer({ card, scope }: { card: ReviewCard; scope: string }) {
-  const [shown, setShown] = useState(false);
-  const [sending, setSending] = useState(false);
-  const [done, setDone] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const send = async (recalled: boolean) => {
-    setSending(true);
-    setError(null);
-    const r = await withSameAction(actionIdFor(`cartao-${scope}`), (actionId) =>
-      reviewCard({ actionId, cardId: card.id, recalled }),
-    );
-    setSending(false);
-    if (r.ok) setDone(OUTCOME[r.value.outcome] ?? "Registrado.");
-    else setError("Não foi possível registrar. Tente de novo.");
-  };
-  return (
-    <article className="flex flex-col gap-3 rounded-card border border-line-subtle bg-surface p-4">
-      <p className="t-meta text-ink-2">
-        {card.kind === "formula" ? "Fórmula" : "Conceito"}
-      </p>
-      <p className="t-reading font-semibold">{card.front}</p>
-      {shown ? (
-        <>
-          <p className="t-reading whitespace-pre-line">{card.back}</p>
-          <p className="t-meta text-ink-2">
-            Fonte: {card.source ?? "indisponível"} · {card.locator}
-          </p>
-          {done ? (
-            <p role="status" className="t-ui">
-              {done}
-            </p>
-          ) : (
-            <div className="flex flex-wrap gap-3">
-              <Button
-                type="button"
-                size="sm"
-                loading={sending}
-                onClick={() => send(true)}
-              >
-                Lembrei
-              </Button>
-              <Button
-                type="button"
-                size="sm"
-                variant="secondary"
-                disabled={sending}
-                onClick={() => send(false)}
-              >
-                Não lembrei
-              </Button>
-            </div>
-          )}
-        </>
-      ) : (
-        <Button
-          type="button"
-          size="sm"
-          variant="secondary"
-          className="self-start"
-          onClick={() => setShown(true)}
-        >
-          Mostrar verso
-        </Button>
-      )}
-      <div aria-live="polite">
-        {error && (
-          <p role="alert" className="t-ui">
-            {error}
-          </p>
-        )}
-      </div>
-    </article>
   );
 }
