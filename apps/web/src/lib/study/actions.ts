@@ -128,9 +128,12 @@ export async function setSessionStatus(input: unknown): Promise<Outcome<string>>
 }
 
 export interface ReviewQueueRow {
+  /** Questão (review_items) ou cartão revisado (card_review_items, F3-T09). */
+  kind: "questao" | "cartao";
   review_item_id: string;
-  item_id: string;
+  item_id: string | null;
   item_version_id: string | null;
+  card_id: string | null;
   due_date: string;
   days_overdue: number;
   stage: number;
@@ -150,4 +153,30 @@ export async function reviewQueue(input: unknown): Promise<Outcome<{ rows: Revie
   if (!r.ok) return r;
   const inBatch = r.value.filter((x) => x.in_batch).length;
   return { ok: true, value: { rows: r.value, inBatch, remaining: r.value.length - inBatch } };
+}
+
+const cardReviewSchema = z.object({ actionId: uuid, cardId: uuid, recalled: z.boolean() });
+
+export interface CardReviewResult {
+  outcome: "lembrou" | "nao_lembrou" | "antecipada" | "concluida";
+  stage: number;
+  due_date: string | null;
+  duplicate: boolean;
+}
+
+/** Revisão de cartão (F3-T09): "lembrei" ou "não lembrei". Gravada à parte das tentativas de questão (fora da TRI). */
+export async function reviewCard(input: unknown): Promise<Outcome<CardReviewResult>> {
+  const p = cardReviewSchema.safeParse(input);
+  if (!p.success) return { ok: false, error: "dados inválidos", final: true };
+  const r = await rpc<CardReviewResult[]>("review_card", { p_client_action_id: p.data.actionId, p_card_id: p.data.cardId, p_recalled: p.data.recalled });
+  if (!r.ok) return r;
+  const row = r.value[0];
+  return row ? { ok: true, value: row } : { ok: false, error: "resposta vazia", final: true };
+}
+
+/** Põe um cartão publicado na própria fila de revisão (vence no dia seguinte). */
+export async function addCardToReview(input: unknown): Promise<Outcome<string>> {
+  const p = z.object({ cardId: uuid }).safeParse(input);
+  if (!p.success) return { ok: false, error: "dados inválidos", final: true };
+  return rpc<string>("add_card_to_review", { p_card_id: p.data.cardId });
 }

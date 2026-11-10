@@ -37,6 +37,12 @@ export default async function EditorPage({
             Temas de redação
           </Link>
           <Link
+            href="/editor/cartoes"
+            className="inline-flex min-h-11 items-center rounded-control border border-line bg-surface px-4 t-ui hover:bg-surface-subtle"
+          >
+            Cartões
+          </Link>
+          <Link
             href="/editor/publicar"
             className="inline-flex min-h-11 items-center rounded-control border border-line bg-surface px-4 t-ui hover:bg-surface-subtle"
           >

@@ -13,6 +13,8 @@ export const FINAL_ERRORS = [
   "resolve_item_unavailable",
   "resolve_session_item_not_found",
   "resolve_time_invalid",
+  "resolve_card_not_in_review",
+  "resolve_card_unavailable",
 ] as const;
 
 export type Outcome<T> = { ok: true; value: T } | { ok: false; error: string; final: boolean };
