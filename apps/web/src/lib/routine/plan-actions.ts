@@ -59,7 +59,7 @@ export async function generateDayPlan(): Promise<PlanResult> {
       .is("archived_at", null),
     supabase
       .from("study_blocks")
-      .select("start_minute, planned_minutes")
+      .select("start_minute, planned_minutes, actual_minutes, status")
       .eq("local_date", today)
       .neq("status", "planejado"),
   ]);
@@ -90,10 +90,20 @@ export async function generateDayPlan(): Promise<PlanResult> {
     (queue.data ?? []) as { in_batch: boolean; minutes_per_item: number }[]
   ).filter((r) => r.in_batch);
   const g = goals.data ?? [];
+  // Blocos já em curso ou feitos hoje contam para a meta: refazer não planeja de novo esse tempo.
+  const keptMinutes = (kept.data ?? []).reduce(
+    (a, b) =>
+      a +
+      (b.status === "concluido"
+        ? (b.actual_minutes ?? b.planned_minutes)
+        : b.planned_minutes),
+    0,
+  );
+  const daily = g.find((x) => x.level === "diaria")?.target_minutes ?? null;
   const { tasks, notes } = buildTasks({
     reviewMinutes: batch.reduce((a, r) => a + r.minutes_per_item, 0),
     reviewCount: batch.length,
-    dailyGoal: g.find((x) => x.level === "diaria")?.target_minutes ?? null,
+    dailyGoal: daily === null ? null : Math.max(0, daily - keptMinutes),
     weeklyGoal: g.find((x) => x.level === "semanal")?.target_minutes ?? null,
     areaGoals: g
       .filter((x) => x.level === "area" && x.target_minutes)
@@ -260,4 +270,41 @@ export async function rescheduleBlock(input: unknown): Promise<PlanResult> {
     return { ok: false, message: "Não foi possível remarcar. Tente de novo." };
   revalidatePath("/rotina");
   return { ok: true };
+}
+
+export type FocusState = {
+  status: string;
+  active_seconds: number;
+  running: boolean;
+  planned_minutes: number;
+};
+
+/** Foco e pausa (F4-T17): começar, pausar, concluir ou só ler o estado. O tempo vem do relógio do servidor. */
+export async function focusAction(
+  input: unknown,
+): Promise<{ ok: true; state: FocusState } | { ok: false; message: string }> {
+  const { z } = await import("zod");
+  const p = z
+    .object({
+      blockId: z.string().uuid(),
+      action: z.enum(["comecar", "pausar", "concluir", "estado"]),
+    })
+    .safeParse(input);
+  if (!p.success) return { ok: false, message: "Ação inválida." };
+  const supabase = await createClient();
+  const { data, error } = await supabase.rpc("focus_action", {
+    p_block_id: p.data.blockId,
+    p_action: p.data.action,
+  });
+  if (error)
+    return {
+      ok: false,
+      message: /block_closed/.test(error.message)
+        ? "Este bloco já foi encerrado."
+        : "Não foi possível registrar agora. Tente de novo.",
+    };
+  const state = (data as FocusState[] | null)?.[0];
+  if (!state) return { ok: false, message: "Bloco não encontrado." };
+  if (p.data.action !== "estado") revalidatePath("/rotina");
+  return { ok: true, state };
 }

@@ -7,6 +7,7 @@ import { fmtClock, fmtDuration } from "@/lib/demo/routine";
 import { generateDayPlan } from "@/lib/routine/plan-actions";
 import type { DayPlan } from "@/lib/routine/plan";
 import { DayAgenda } from "./day-agenda";
+import { FocusBlock } from "./focus-block";
 
 const noop = () => () => {};
 const STATUS: Record<string, string> = {
@@ -59,6 +60,14 @@ export function DayPlanPanel({ plan }: { plan: DayPlan }) {
                 </span>
               </p>
               {b.reason && <p className="t-meta text-ink-2">{b.reason}</p>}
+              {(b.status === "planejado" || b.status === "em_curso") && (
+                <FocusBlock
+                  blockId={b.id}
+                  title={b.title}
+                  plannedMinutes={b.planned_minutes}
+                  status={b.status}
+                />
+              )}
             </li>
           ))}
         </ol>

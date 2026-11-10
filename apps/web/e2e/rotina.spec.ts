@@ -456,7 +456,9 @@ test("plano de hoje: blocos nos horários livres, sem encostar no compromisso, e
     });
     await page.mouse.move(box.x + box.width / 2, box.y + 8 + dy, { steps: 5 });
     await page.mouse.up();
-    await expect(page.getByRole("region", { name: "Agenda de hoje" })).toContainText(/colide com/i);
+    await expect(
+      page.getByRole("region", { name: "Agenda de hoje" }),
+    ).toContainText(/colide com/i);
     expect(
       (
         await db
