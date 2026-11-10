@@ -12,11 +12,10 @@
 --   * Agenda: mesma versão srs-v1 (1/3/7/14/30). "Não lembrei" reinicia; antes do vencimento não conta.
 --   * A fila do dia junta questões e cartões, mais atrasados primeiro, com o mesmo tempo por entrada.
 
--- Limpeza do teste de concorrência da F5-T08 (política temporária da conta de teste A e reservas já
--- liberadas). Não afeta nenhum outro ambiente.
-delete from public.ai_reservations r using public.ai_budgets b, public.ai_budget_policies p
- where b.id = r.user_budget_id and p.id = b.policy_id and p.source_note like 'teste de concorrência F5-T08%' and r.status = 'liberada';
-delete from public.ai_budget_policies where source_note like 'teste de concorrência F5-T08%';
+-- Política temporária do teste de concorrência da F5-T08 (conta de teste A): desativada, não apagada. As
+-- reservas já liberadas ficam como histórico. Esta migração não tem comandos destrutivos (delete/drop): o
+-- conector do Supabase pede confirmação para eles e o pedido não chega ao app (sessão 12).
+update public.ai_budget_policies set active = false where source_note like 'teste de concorrência F5-T08%' and active;
 
 create table public.concept_cards (
   id uuid primary key default gen_random_uuid(),
@@ -220,8 +219,12 @@ end;
 $$;
 
 -- Fila do dia com questões e cartões (substitui a da F3-T07, agora com o tipo de cada entrada).
-drop function public.review_queue(integer);
-drop function private.review_queue_for(uuid, timestamptz, integer);
+-- As versões da F3-T07 saem da API: renomeadas e movidas para private, sem permissão de execução.
+alter function public.review_queue(integer) rename to review_queue_f3t07_obsoleta;
+alter function public.review_queue_f3t07_obsoleta(integer) set schema private;
+alter function private.review_queue_for(uuid, timestamptz, integer) rename to review_queue_for_f3t07_obsoleta;
+revoke all on function private.review_queue_f3t07_obsoleta(integer), private.review_queue_for_f3t07_obsoleta(uuid, timestamptz, integer)
+  from public, anon, authenticated;
 create function private.review_queue_for(p_user uuid, p_now timestamptz, p_available_minutes integer)
 returns table (kind text, review_item_id uuid, item_id uuid, item_version_id uuid, card_id uuid, due_date date, days_overdue integer,
                stage smallint, queue_position integer, in_batch boolean, local_date date, minutes_per_item smallint)
