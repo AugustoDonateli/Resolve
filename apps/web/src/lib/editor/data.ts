@@ -245,3 +245,20 @@ export async function getPublicationQueue(): Promise<QueueRow[]> {
   const { data } = await supabase.rpc("publication_queue");
   return (data ?? []) as QueueRow[];
 }
+
+export interface ContentQueueRow {
+  proposal_id: string;
+  batch_notes: string | null;
+  question_number: number | null;
+  foreign_language: string | null;
+  area: string | null;
+  status: string;
+  blockers: string[];
+}
+
+/** Fila da publicação de conteúdo conferido (etiquetas pendentes). */
+export async function getContentPublicationQueue(): Promise<ContentQueueRow[]> {
+  const { supabase } = await requireEditor();
+  const { data } = await supabase.rpc("content_publication_queue");
+  return (data ?? []) as ContentQueueRow[];
+}

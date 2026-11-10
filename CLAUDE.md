@@ -2,12 +2,12 @@
 
 Plataforma de preparação para o ENEM. Dono e primeiro usuário: Guto (prova em 2027).
 
-**Pedido em vigor:** briefing de retomada de 10/11/2026 (sessão 13). Ele substitui o processo do plano antigo: a lista de 182 tarefas, IDs, estimativas, dependências administrativas, relatórios e etapas de aceite não são mais roteiro. `docs/plan/Resolve-pacote.md` continua como referência funcional — consulte pontualmente quando precisar de um detalhe, sem reler tudo.
+**Pedido em vigor:** concluir a plataforma (pedido de Guto de 10/11/2026): os seis núcleos (questões/estudo/revisão, diagnóstico e TRI, habilidades de prova, redação completa, rotina e foco, simulado e estratégia) e as expansões (plano adaptativo, previsão, feed finito, dados brasileiros, incidência e fichas, tutor, texto compartilhado, meta de curso, reta final, questão do dia, redação por foto, grupos e duelos), com acabamento verificado. Não há backlog por ID nem ritual por tarefa; `docs/plan/Resolve-pacote.md` é só referência funcional pontual. Uma tela reformulada ou uma lista de próximos passos não encerra o pedido.
 
 ## Ao começar
-1. Leia `docs/continuidade.md` (nota única de continuidade) e confira o estado do código e do banco.
-2. Rode o app (`pnpm dev`) e olhe as telas que vai mexer. Inspecione para agir, não para auditar.
-3. Escolha o próximo conjunto coerente de mudanças pelo estado real do produto e pelo que melhora a experiência. Prioridade atual: qualidade visual das telas existentes e conectar funcionalidades que já existem.
+1. Leia `docs/continuidade.md` (nota única: o que funciona, o que falta, ponto de retomada) e confira código e banco.
+2. Continue a implementação do ponto de retomada; não reinicie pesquisa, auditoria ou planejamento.
+3. Recurso que depende de algo externo (chave, dado, autorização, conteúdo): implemente o que der, marque a dependência concreta como pendente e siga para outra parte.
 
 ## Ritmo de trabalho
 - Trabalhe em blocos de mudanças visíveis e incorporados ao produto (nada de app paralelo nem demos soltas). Resolva escolhas rotineiras sozinho; pergunte só quando faltar informação que impede avançar.
