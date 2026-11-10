@@ -520,3 +520,79 @@ test("temas: aluno não chega à revisão e vê só temas publicados", async ({
     .analyze();
   expect(r.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);
 });
+
+test("cartões: rascunho com fonte, confirmação de publicar e remoção; aluno não chega", async ({
+  browser,
+}) => {
+  const front = `Cartão de teste automatizado ${Date.now()}`;
+  const db = await editorDb();
+  try {
+    const { ctx, page } = await editorPage(browser);
+    await page.goto("/editor/cartoes");
+    await expect(
+      page.getByRole("heading", { level: 1, name: "Cartões revisados" }),
+    ).toBeVisible();
+
+    // sem fonte: recusado antes de gravar
+    await page.getByLabel("Frente").fill(front);
+    await page.getByLabel("Verso").fill("Verso de teste.");
+    await page.getByLabel("Onde está na fonte").fill("teste");
+    await page.getByRole("button", { name: "Criar rascunho" }).click();
+    await expect(page.getByText("Escolha a fonte.")).toBeVisible();
+
+    // habilidade fora da matriz: recusada
+    await page
+      .getByRole("combobox", { name: "Fonte" })
+      .selectOption({ label: "Matrizes de Referência – Enem" });
+    await page.getByLabel("Habilidade da matriz (opcional)").fill("H99");
+    await page.getByRole("button", { name: "Criar rascunho" }).click();
+    await expect(
+      page.getByText(/Habilidade no formato|não encontrada/),
+    ).toBeVisible();
+
+    await page.getByLabel("Habilidade da matriz (opcional)").fill("H18");
+    await page.getByRole("button", { name: "Criar rascunho" }).click();
+    await expect(page.getByText("Rascunho criado.")).toBeVisible({
+      timeout: 15_000,
+    });
+    const item = page.getByRole("listitem").filter({ hasText: front });
+    await expect(item).toContainText("Rascunho · Linguagens · conceito · H18");
+    await expect(item).toContainText("Fonte: ");
+
+    await item.getByRole("button", { name: "Revisar e publicar" }).click();
+    await expect(item.getByRole("alertdialog")).toContainText(
+      "Publicado não muda",
+    );
+    await item.getByRole("button", { name: "Cancelar" }).click(); // o teste nunca publica
+
+    const r = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+      .analyze();
+    expect(r.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);
+
+    await item.getByRole("button", { name: "Remover rascunho" }).click();
+    await expect(
+      page.getByRole("listitem").filter({ hasText: front }),
+    ).toHaveCount(0, {
+      timeout: 15_000,
+    });
+    await ctx.close();
+
+    const sctx = await browser.newContext();
+    const sp = await sctx.newPage();
+    await signIn(sp, student);
+    expect((await sp.goto("/editor/cartoes"))?.status()).toBe(404);
+    await sctx.close();
+  } finally {
+    await db
+      .from("concept_cards")
+      .delete()
+      .eq("front", front)
+      .eq("status", "rascunho");
+  }
+  const { data: gone } = await db
+    .from("concept_cards")
+    .select("id")
+    .eq("front", front);
+  expect(gone).toEqual([]);
+});

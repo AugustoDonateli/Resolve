@@ -189,6 +189,50 @@ let batchId, proposalId;
   check("B", "fila de revisão só com o que é dele", !bq.error && Array.isArray(bq.data), bq.error?.message ?? `${rows(bq)} item(ns)`);
   const sc = await A.c.from("review_schedulers").select("version, intervals_days").eq("version", "srs-v1").single();
   check("A", "lê a agenda versionada (1, 3, 7, 14, 30)", JSON.stringify(sc.data?.intervals_days) === "[1,3,7,14,30]", sc.error?.message ?? JSON.stringify(sc.data));
+  check("B", "fila de revisão informa o tipo (questão ou cartão)", !bq.error && (bq.data ?? []).every((x) => ["questao", "cartao"].includes(x.kind)), bq.error?.message ?? "");
+}
+
+// ── Cartões revisados (F3-T09) ──
+// Só rascunho: cartão publicado não pode ser apagado, e a matriz não deixa rastro.
+{
+  for (const t of ["concept_cards", "card_review_items", "card_reviews"]) {
+    const v = await V.c.from(t).select("*").limit(1);
+    check("visitante", `não lê ${t}`, permError(v), v.error?.message ?? `${rows(v)} linha(s)`);
+  }
+  for (const t of ["card_review_items", "card_reviews"]) {
+    const b = await B.c.from(t).insert({}).select();
+    check("B", `não grava ${t} direto`, permError(b), b.error?.message ?? "gravou!");
+  }
+  for (const fn of ["review_card", "add_card_to_review"]) {
+    const args = fn === "review_card"
+      ? { p_client_action_id: crypto.randomUUID(), p_card_id: crypto.randomUUID(), p_recalled: true }
+      : { p_card_id: crypto.randomUUID() };
+    const v = await V.c.rpc(fn, args);
+    check("visitante", `não executa ${fn}`, permError(v), v.error?.message ?? "executou!");
+  }
+  const src = await E.c.from("sources").select("id").eq("kind", "matriz").limit(1);
+  const card = { area_code: "LC", front: "Cartão da matriz de acesso", back: "rascunho de teste", source_id: src.data?.[0]?.id, source_locator: "teste" };
+  const ins = await E.c.from("concept_cards").insert(card).select("id, status").single();
+  check("E", "cria cartão como rascunho", !ins.error && ins.data?.status === "rascunho", ins.error?.message ?? "");
+  const pub = await E.c.from("concept_cards").insert({ ...card, status: "publicado" }).select();
+  check("E", "não cria cartão já publicado", Boolean(pub.error), pub.error?.message ?? "criou!");
+  const draftId = ins.data?.id;
+  if (draftId) {
+    for (const [who, s] of [["A", A], ["B", B]]) {
+      const r = await s.c.from("concept_cards").select("id").eq("id", draftId);
+      check(who, "não lê cartão em rascunho", denied(r), r.error?.message ?? `${rows(r)} linha(s)`);
+      const up = await s.c.from("concept_cards").update({ status: "publicado" }).eq("id", draftId).select();
+      check(who, "não publica cartão", denied(up), up.error?.message ?? `${rows(up)} linha(s)`);
+      const add = await s.c.rpc("add_card_to_review", { p_card_id: draftId });
+      check(who, "não põe rascunho na fila", /resolve_card_unavailable/.test(add.error?.message ?? ""), add.error?.message ?? "pôs!");
+      const rv = await s.c.rpc("review_card", { p_client_action_id: crypto.randomUUID(), p_card_id: draftId, p_recalled: true });
+      check(who, "não revisa cartão fora da própria fila", /resolve_card_not_in_review/.test(rv.error?.message ?? ""), rv.error?.message ?? "revisou!");
+    }
+    const ai = await A.c.from("concept_cards").insert(card).select();
+    check("A", "não cria cartão", permError(ai), ai.error?.message ?? "criou!");
+    const del = await E.c.from("concept_cards").delete().eq("id", draftId).select();
+    check("E", "apaga o próprio rascunho de teste", rows(del) === 1, del.error?.message ?? `${rows(del)} linha(s)`);
+  }
 }
 
 // ── Redação (F5-T02) ──
