@@ -1,24 +1,31 @@
 # Continuidade
 
-Nota única de continuidade (substitui `progresso.md` e `handoffs/`, que ficam como histórico até a sessão 12).
+Nota única: o que funciona, o que falta e onde retomar. Objetivo em vigor: concluir a plataforma inteira (ver `CLAUDE.md`).
 
-## Estado em 10/11/2026 (sessão 13)
+## Funciona (com dados reais)
 
-- **Hoje (`/hoje`) usa dados reais.** Plano do dia, próxima atividade em destaque, foco com o relógio do servidor (tela cheia que nasce do cartão; pausar, voltar para Hoje sem encerrar, retomar depois de recarregar, concluir), agenda com remarcação, "Feito hoje", "Ficou de fora" e o plano se-então ativo. Sem horários livres, a tela leva à Rotina; sem plano, oferece "Montar plano de hoje". `demoDay()` segue em `lib/demo/routine.ts` só para os testes de `canPlace`.
-- **Rotina (`/rotina`) é planejar a semana:** próximos 7 dias em lista pautada, "Toda semana" ao lado; metas e planos se-então em duas colunas; sequência no fim. `day-plan.tsx` e `focus-block.tsx` saíram (substituídos por Hoje).
-- **Identidade:** título de tela em Newsreader (`t-title`), rótulos em versalete (`t-kicker`), linha sob o cabeçalho; anel de foco não aparece mais em títulos focados por script.
-- **Defeito corrigido:** bloco planejado que já começou aparecia cortado na agenda e a remarcação calculava com menos minutos do que o servidor conferia.
-- Verificado: `pnpm check` (88 + 7), e2e `rotina` (5/5, com o plano e o foco agora em `/hoje`), `auditoria` e `iphone` da vista Hoje (16 + fluxo por toque), capturas em 1440/390 px, claro e escuro.
+- **Conta, perfis e papéis** (aluno, editor), políticas de acesso testadas pela matriz (`pnpm test:access`).
+- **Hoje** (`/hoje`): plano do dia nos horários livres, próxima atividade, foco com tempo do servidor (pausar, voltar, retomar após recarregar, concluir), agenda com remarcação, feito hoje, ficou de fora, plano se-então, sequência.
+- **Rotina** (`/rotina`): horários semanais e exceções de um dia, metas diária/semanal/por área, planos se-então, folgas e sequência.
+- **Redação**: temas com textos motivadores (tema oficial 2025 em rascunho), editor com salvamento automático e recuperação, folha de 30 linhas (`folha-v1`), treino por peças, fila de correção com orçamento e reservas (consumidor testado), e o **avaliador real** (`lib/essay/claude-evaluator.ts`, SDK oficial, saída estruturada com notas, trechos conferidos no texto e os cinco elementos da intervenção).
+- **Área editorial**: propostas, dúvidas, etiquetas, cartões de conceito, temas e **publicação de conteúdo conferido com etiquetas pendentes** (`/editor/publicar`).
+- **Estudo pronto, aguardando questões publicadas**: sessão de treino com resposta preservada, Raio-X (mostra campos sem etiqueta como indisponíveis), caderno de erros e revisão espaçada, banco com filtros, triagem e conferência, ritmo.
 
-## Pendências reais
+## Pendências que dependem de Guto ou de algo externo
 
-1. **Publicar questões (decisão de Guto).** Banco: 0 itens publicados; 188 propostas (114 válidas, 74 em dúvida); tema de redação em rascunho. Guto já conferiu os PDFs. A aprovação de etiquetas exige habilidade, distratores e resolução (ou justificativa) e checklist. Falta escolher: publicar o piloto com esses campos marcados como indisponíveis (justificativa padrão) ou esperar a etiquetagem por IA (exige `RESOLVE_ANTHROPIC_API_KEY`). Isso destrava Estudar, Raio-X, Revisar, triagem e ritmo, que já estão prontos.
-2. Tema oficial em `/editor/temas`: conferir e publicar (Guto).
-3. Chave da API e confirmação do limite de US$ 5/mês.
-4. O fluxo por toque do iPhone é pulado quando a conta A está sem plano (os testes de rotina limpam a conta); o fluxo completo está em `rotina.spec`.
+1. **Publicar as 105 questões** em `/editor/publicar` → "Conteúdo conferido, etiquetas pendentes": marcar o checklist e publicar (precisa da conta de editor do Guto; a publicação fica registrada em nome de quem confirma). Testado em transação desfeita. Destrava Estudar, Revisar, Banco, Triagem e Ritmo.
+   - 80 propostas não entram: 74 com dúvida aberta (figura sem recorte, alternativa vazia, fórmula a conferir), 4 sem cruzamento conferido, 4 com gabarito ausente/anulado, 1 sem caderno; parte dos cruzamentos tem a letra E sem par.
+2. **Chave `RESOLVE_ANTHROPIC_API_KEY`** e **política de IA confirmada**: a política atual (`redacao-ref-v0`) é só referência (Sonnet 4.6, 1.500 tokens de saída). Para chamadas reais, criar uma política nova com o modelo escolhido e saída suficiente (o modelo pensa antes de responder; 1.500 tokens cortam) e confirmar o teto de US$ 5/mês. Destrava correção de redação, etiquetagem e retorno do treino por peças.
+3. **Tema oficial** em `/editor/temas`: conferir e publicar.
 
-## Próximos passos prováveis
+## Falta implementar (ordem sugerida pelo código atual)
 
-- Estudar/Revisar/Progresso: estados vazios mais úteis enquanto não há questões (hoje são um cartão solto).
-- Redação: correção ainda é demonstrativa em `/redacao`; levar a composição da folha e da correção para o fluxo real de "Minhas redações".
-- Movimentos marcantes (abertura, passagem entre etapas, replay) quando o fluxo de estudo real estiver publicado.
+1. **Worker da correção**: rodar `runOneStep` com o `ClaudeEvaluator` num processo com acesso de serviço ao banco (função agendada ou rota protegida); gravar justificativas e trechos em `essay_annotations`; regra de discrepância e terceira avaliação; tela de resultado com faixa só com calibração.
+2. **Dia D (simulado)**: perfil de prova versionado, duração, ordem, cartão-resposta, retomada, encerramento, replay da sessão real, abertura com caderno.
+3. **TRI e diagnóstico**: sem parâmetros oficiais dos itens no banco; a tela deve dizer "indisponível" até carregar parâmetros do Inep e conferir o cálculo com dados de referência.
+4. Habilidades de prova restantes (comando primeiro com seleção de evidência, caça ao distrator), relatório semanal, Progresso com evidências reais.
+5. Expansões (plano adaptativo, previsão, feed finito, dados brasileiros, incidência e fichas, tutor, texto compartilhado, meta de curso, reta final, questão do dia, redação por foto, grupos e duelos).
+
+## Retomar por aqui
+
+Item 1 de "Falta implementar" (worker da correção), em paralelo à publicação das questões por Guto. Ambiente local: `apps/web/.env.local` com a URL e a chave publicável do projeto; senhas das contas de teste geradas por `tools/dev/test-accounts.mjs`.
