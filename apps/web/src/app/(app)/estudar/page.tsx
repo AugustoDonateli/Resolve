@@ -10,21 +10,37 @@ import { publishedByArea } from "@/lib/study/session";
 export const metadata: Metadata = { title: "Estudar" };
 export const dynamic = "force-dynamic";
 
+const MODES = [
+  { href: "/estudar/dia-d", title: "Dia D", body: "Simulado com caderno oficial, relógio do servidor e cartão-resposta." },
+  { href: "/diagnostico", title: "Diagnóstico", body: "Até 20 questões por área e a estimativa por TRI quando houver parâmetros oficiais." },
+];
+
 export default async function EstudarPage() {
   const counts = await publishedByArea();
   const total = counts ? Object.values(counts).reduce((a, b) => a + b, 0) : 0;
   return (
     <>
       <ScreenHeader title="Estudar" kicker="Treino livre" />
-      <section className="mb-6 flex max-w-xl flex-wrap items-center justify-between gap-3 rounded-panel border border-line-subtle bg-surface p-4" aria-labelledby="dia-d">
-        <div>
-          <h2 id="dia-d" className="t-section">Dia D</h2>
-          <p className="t-meta text-ink-2">Simulado com caderno oficial, relógio e cartão-resposta.</p>
-        </div>
-        <Link href="/estudar/dia-d" className="inline-flex min-h-11 items-center rounded-control border border-line px-3 t-ui hover:bg-surface-subtle">
-          Abrir Dia D
-        </Link>
-      </section>
+      <nav aria-label="Modos de estudo" className="mb-10">
+        <ul className="flex flex-col border-t border-line-subtle">
+          {MODES.map((m) => (
+            <li key={m.href}>
+              <Link
+                href={m.href}
+                className="group flex min-h-16 items-center justify-between gap-4 border-b border-line-subtle py-3 hover:bg-surface-subtle/60"
+              >
+                <span>
+                  <span className="block t-ui text-ink">{m.title}</span>
+                  <span className="block t-meta text-ink-2">{m.body}</span>
+                </span>
+                <span aria-hidden className="t-ui text-ink-2 transition-transform duration-[var(--rs-dur-state)] group-hover:translate-x-1">
+                  →
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
       {total > 0 ? (
         <div className="flex flex-col gap-6">
           <StartTraining counts={counts!} />

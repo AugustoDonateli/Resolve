@@ -45,6 +45,9 @@ export default async function ProgressoPage() {
               Indisponível. A estimativa depende dos parâmetros oficiais de cada questão, que ainda não estão no banco, e de conferir o cálculo
               com dados de referência do Inep. Sem isso, qualquer número seria inventado.
             </p>
+            <Link href="/diagnostico" className="mt-3 inline-flex min-h-11 items-center t-ui text-link underline">
+              Abrir o diagnóstico
+            </Link>
           </div>
         </section>
       </div>

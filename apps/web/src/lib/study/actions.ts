@@ -217,6 +217,41 @@ export async function startTraining(input: unknown): Promise<Outcome<string>> {
   });
 }
 
+/**
+ * Diagnóstico opcional por área: abre uma sessão no modo "diagnostico" com até 20 questões publicadas
+ * da área, priorizando as que têm parâmetro válido no modelo registrado (só elas entram na estimativa)
+ * e as ainda não respondidas. Sem questões publicadas da área, não abre.
+ */
+export async function startDiagnostic(input: unknown): Promise<Outcome<string>> {
+  const p = z.object({ actionId: uuid, area: z.enum(["LC", "CH", "CN", "MT"]) }).safeParse(input);
+  if (!p.success) return { ok: false, error: "dados inválidos", final: true };
+  const supabase = await createClient();
+  const { data: auth } = await supabase.auth.getUser();
+  if (!auth.user) return { ok: false, error: "resolve_not_signed_in", final: true };
+  const [{ data: pool }, { data: done }, { data: withParams }] = await Promise.all([
+    supabase.from("study_items").select("item_version_id, item_id").eq("annulled", false).eq("area", p.data.area),
+    supabase.from("attempts").select("item_id"),
+    supabase.from("item_parameters").select("item_id").eq("valid", true),
+  ]);
+  const answered = new Set((done ?? []).map((a) => a.item_id));
+  const param = new Set((withParams ?? []).map((x) => x.item_id));
+  const rank = (r: { item_id: string }) => (param.has(r.item_id) ? 0 : 2) + (answered.has(r.item_id) ? 1 : 0);
+  const chosen = (pool ?? [])
+    .map((r) => [rank(r as { item_id: string }) + Math.random(), r.item_version_id as string] as const)
+    .sort((a, b) => a[0] - b[0])
+    .slice(0, 20)
+    .map(([, id]) => id);
+  if (!chosen.length) return { ok: false, error: "resolve_no_items", final: true };
+  return rpc<string>("start_session", {
+    p_client_action_id: p.data.actionId,
+    p_mode: "diagnostico",
+    p_item_version_ids: chosen,
+    p_planned_minutes: null,
+    p_time_limit_minutes: null,
+    p_selection_reason: "diagnostico",
+  });
+}
+
 /** Raio-X (F3-T04): só vem conteúdo depois da resposta ou da ajuda pedida; antes, `released: false`. */
 export async function getExplanation(input: unknown): Promise<Outcome<Explanation>> {
   const p = z.object({ sessionItemId: uuid }).safeParse(input);

@@ -10,10 +10,9 @@ Plataforma de preparação para o ENEM. Dono e primeiro usuário: Guto (prova em
 3. Recurso que depende de algo externo (chave, dado, autorização, conteúdo): implemente o que der, marque a dependência concreta como pendente e siga para outra parte.
 
 ## Ritmo de trabalho
-- Trabalhe em blocos de mudanças visíveis e incorporados ao produto (nada de app paralelo nem demos soltas). Resolva escolhas rotineiras sozinho; pergunte só quando faltar informação que impede avançar.
-- Confira no navegador e exercite o fluxo alterado. Para mudanças de aparência, isso basta. Ao mudar cálculos, salvamento, acesso a dados, políticas de acesso ou chamadas pagas, rode os testes relevantes. Não crie testes que repetem valores de CSS nem rode a suíte inteira a cada ajuste.
-- Sem plano, checklist, storyboard ou documento por botão. Ao fim de um bloco: relato curto (o que mudou, o que foi conferido, o que falta) e atualização da nota `docs/continuidade.md`.
-- Sessões curtas: conversa longa encarece cada passo.
+- Trabalhe em conjuntos de funcionalidades completos e incorporados ao produto (nada de app paralelo nem demos soltas), com liberdade de implementação e cuidado visual. Resolva escolhas rotineiras sozinho; pergunte só quando faltar informação que só Guto tem.
+- Verificações proporcionais ao que mudou: aparência se confere no navegador; cálculos, salvamento, acesso a dados, políticas de acesso e chamadas pagas pedem os testes pertinentes. Não crie testes que repetem valores de CSS.
+- Não encerre só porque uma tarefa acabou ou a conversa ficou longa. Havendo um limite real, deixe uma retomada objetiva em `docs/continuidade.md`.
 
 ## Regras do produto que não se negociam
 - Banco principal só com questões oficiais conferidas. Conteúdo demonstrativo fica em `apps/web/src/lib/demo`, sempre com `<DemoBadge>`.
@@ -34,4 +33,4 @@ Projeto `resolve` (ref `osgajpnvhhwujfzjlfwf`). Migrações em `supabase/migrati
 Consumo controlado. A etiquetagem (`tools/ingest/tagging.py`) usa a chave própria `RESOLVE_ANTHROPIC_API_KEY` e o endereço fixo da API. Não use `ANTHROPIC_API_KEY`/`ANTHROPIC_BASE_URL` do ambiente de nuvem: são da sessão do Claude Code, não do produto. Chave da API: por último. Redações nota 1000: Guto traz depois.
 
 ## Ao encerrar
-Atualize `docs/continuidade.md` (estado, pendências reais, próximos passos prováveis). `docs/progresso.md` e `docs/handoffs/` são histórico até a sessão 12 e não precisam mais ser mantidos.
+Atualize `docs/continuidade.md`, separando o que funciona, o que foi implementado mas não validado em uso real e o que falta (com o bloqueio específico). `docs/progresso.md` e `docs/handoffs/` são histórico até a sessão 12.
