@@ -111,7 +111,7 @@ def line_text(chars: list[dict], body: float) -> tuple[str, int, int]:
 
     big = [c for c in chars if c["text"].strip() and c["size"] >= body * 0.8]
     if not big:
-        return px_text(chars, x_tolerance=1.5, y_tolerance=30).replace("\n", " ").strip(), 0, 0
+        return re.sub(r"\s+", " ", px_text(chars, x_tolerance=1.5, y_tolerance=30, keep_blank_chars=True)).strip(), 0, 0
     tops = sorted(c["top"] for c in big)
     bottoms = sorted(c["bottom"] for c in big)
     base_top, base_bottom = tops[len(tops) // 2], bottoms[len(bottoms) // 2]
@@ -129,7 +129,9 @@ def line_text(chars: list[dict], body: float) -> tuple[str, int, int]:
                 left += 1
             t = new
         fixed.append(dict(c, text=t, top=base_top, bottom=base_bottom))
-    text = px_text(fixed, x_tolerance=1.5, y_tolerance=30).replace("\n", " ").strip()
+    # keep_blank_chars: o caractere de espaço do PDF separa as palavras mesmo quando o vão entre as letras
+    # vizinhas é menor que a tolerância (linhas justificadas apertadas grudavam palavras).
+    text = px_text(fixed, x_tolerance=1.5, y_tolerance=30, keep_blank_chars=True).replace("\n", " ").strip()
     return re.sub(r"\s+", " ", text), conv, left
 
 
@@ -206,7 +208,7 @@ def page_lines(page, pno: int) -> list[Line]:
     out: list[Line] = []
     for col, reg in regions:
         # y_tolerance maior junta sub/sobrescritos à linha de base (S₁ não vira linha solta)
-        raw = reg.extract_text_lines(keep_blank_chars=False, use_text_flow=False, return_chars=True)
+        raw = reg.extract_text_lines(keep_blank_chars=True, use_text_flow=False, return_chars=True)
         body_sz = body_size_of(raw)
         for ln in reassign_index_chars(raw, body_sz):
             text, n_conv, n_left = line_text(ln["chars"], body_sz)
