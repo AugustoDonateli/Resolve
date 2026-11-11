@@ -173,17 +173,44 @@ export function QuestionBlocks({
                 Figura indisponível.
               </span>
             );
-          default:
-            // quebras de linha do texto são do original (listas, linhas numeradas): preservadas
+          default: {
+            const numbered = numberedLines(b.text);
+            if (numbered)
+              // linhas numeradas do caderno: número na margem, texto com recuo (a referência "linha 12" continua valendo)
+              return (
+                <span key={b.id} className="block">
+                  {numbered.map(([n, line]) => (
+                    <span key={n} className="grid grid-cols-[2.25rem_minmax(0,1fr)] gap-x-2">
+                      <span aria-hidden className="select-none pt-[0.2em] text-right t-meta tabular text-ink-2">
+                        {n}
+                      </span>
+                      <span>
+                        <span className="sr-only">linha {n}: </span>
+                        {line}
+                      </span>
+                    </span>
+                  ))}
+                </span>
+              );
+            // quebras de linha do texto são do original (listas): preservadas
             return (
               <P key={b.id} className="block whitespace-pre-line">
                 {b.text}
               </P>
             );
+          }
         }
       })}
     </>
   );
+}
+
+/** Bloco de linhas numeradas ("12 texto"), uma por quebra de linha; null se não for esse o formato. */
+export function numberedLines(text: string | undefined): [string, string][] | null {
+  const lines = (text ?? "").split("\n");
+  if (lines.length < 2) return null;
+  const out = lines.map((l) => /^(\d{1,3}) (.*)$/.exec(l));
+  return out.every(Boolean) ? out.map((m) => [m![1]!, m![2]!]) : null;
 }
 
 /**
