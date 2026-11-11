@@ -5,12 +5,13 @@ import { ScreenHeader } from "@/components/shell/app-shell";
 import { EmptyState } from "@/components/ui/empty-state";
 import { BarChart3 } from "lucide-react";
 import { loadWeeklyReport } from "@/lib/routine/weekly";
+import { loadCourseGoals } from "@/lib/goals/data";
 
 export const metadata: Metadata = { title: "Progresso" };
 export const dynamic = "force-dynamic";
 
 export default async function ProgressoPage() {
-  const report = await loadWeeklyReport();
+  const [report, goals] = await Promise.all([loadWeeklyReport(), loadCourseGoals()]);
   if (!report)
     return (
       <>
@@ -23,6 +24,30 @@ export default async function ProgressoPage() {
       <ScreenHeader title="Progresso" kicker="O que você fez, sem estimativas" />
       <div className="flex flex-col gap-14">
         <WeeklyReport r={report} />
+
+        <section aria-labelledby="meta-curso" className="flex flex-col gap-2 border-t border-line-subtle pt-10">
+          <h2 id="meta-curso" className="t-section">
+            Meta de curso
+          </h2>
+          {goals && goals.length > 0 ? (
+            <ul className="flex flex-col gap-1">
+              {goals.map((g) => (
+                <li key={g.id} className="t-reading text-ink">
+                  {g.course} · {g.institution}
+                  <span className="t-meta text-ink-2">
+                    {g.cutoff === null ? " · sem nota de corte" : ` · corte ${g.cutoff.toLocaleString("pt-BR")} (informado por você)`}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="t-reading text-ink-2">Nenhuma meta ainda. Informe o curso, a nota de corte e os pesos, com a fonte.</p>
+          )}
+          <Link href="/progresso/meta" className="inline-flex min-h-11 items-center t-ui text-link underline">
+            {goals && goals.length > 0 ? "Abrir a meta e simular a média" : "Definir meta de curso"}
+          </Link>
+          <p className="t-meta text-ink-2">Previsão de nota: indisponível até haver parâmetros oficiais de TRI no banco.</p>
+        </section>
 
         <section aria-labelledby="habilidades" className="grid gap-6 border-t border-line-subtle pt-10 md:grid-cols-2">
           <div>

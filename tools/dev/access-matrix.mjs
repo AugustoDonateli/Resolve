@@ -508,6 +508,17 @@ let batchId, proposalId;
   }
   const tr = await B.c.from("essay_track_progress").insert({ user_id: A.id, step: "matriz" }).select();
   check("B", "não marca a trilha em nome de A", permError(tr), tr.error?.message ?? "marcou!");
+  const vg = await V.c.from("course_goals").select("*").limit(1);
+  check("visitante", "não lê course_goals", permError(vg), vg.error?.message ?? `${rows(vg)} linha(s)`);
+  const cg = await A.c.from("course_goals").insert({ course: "Curso da matriz", institution: "Teste automatizado" }).select("id").single();
+  check("A", "cria meta de curso", !cg.error, cg.error?.message ?? "");
+  if (cg.data?.id) {
+    const r = await B.c.from("course_goals").select("id").eq("id", cg.data.id);
+    check("B", "não lê meta de curso de A", denied(r), r.error?.message ?? `${rows(r)} linha(s)`);
+    await A.c.from("course_goals").update({ archived_at: new Date().toISOString() }).eq("id", cg.data.id);
+  }
+  const ns = await A.c.from("course_goals").insert({ course: "Curso", institution: "Sem fonte", cutoff: 700 }).select();
+  check("A", "nota de corte sem fonte é recusada", Boolean(ns.error), ns.error?.message ?? "gravou!");
   const ex = await B.c.from("profiles").update({ exam_day1: "2027-11-07" }).eq("user_id", A.id).select();
   check("B", "não muda a data da prova de A", denied(ex), ex.error?.message ?? `${rows(ex)} linha(s)`);
 }
