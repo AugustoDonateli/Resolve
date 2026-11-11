@@ -142,6 +142,7 @@ for (const [key, p] of byKey) {
     else if (d.kind.startsWith("fração") && job.formula_doubts[key]) { decision = "resolvida"; resolution = `${job.formula_doubts[key]} ${WHO}`; }
     else if (d.kind.startsWith("figura") && job.false_positive_figures[key]) { decision = "descartada"; resolution = `Não há figura na questão. ${job.false_positive_figures[key]} ${WHO}`; }
     else if (d.kind.startsWith("índices") && job.formula_doubts[key]) { decision = "resolvida"; resolution = `${job.formula_doubts[key]} ${WHO}`; }
+    if (!decision && job.other_doubts?.[key]) { decision = "resolvida"; resolution = `${job.other_doubts[key]} ${WHO}`; }
     if (!decision) continue;
     if (DRY) { log.push(`dúvida ${key} [${d.kind.slice(0, 30)}] → ${decision}`); continue; }
     const { error } = await db.from("doubt_queue").update({ status: decision, resolution, resolved_by: auth.user.id, resolved_at: new Date().toISOString() }).eq("id", d.id).eq("status", "aberta");

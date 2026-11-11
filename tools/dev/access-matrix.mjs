@@ -407,7 +407,20 @@ let batchId, proposalId;
 {
   const draft = await E.c.from("essay_prompts").select("id").eq("status", "draft").eq("origin", "oficial").limit(1);
   const draftId = draft.data?.[0]?.id;
-  check("E", "lê o rascunho do tema oficial", Boolean(draftId), draft.error?.message ?? "nenhum rascunho");
+  // O tema oficial de 2025 foi publicado em 11/11/2026; sem rascunho, valem as regras de tema publicado.
+  const pub = await E.c.from("essay_prompts").select("id").eq("status", "published").eq("origin", "oficial").limit(1);
+  const pubId = pub.data?.[0]?.id;
+  if (pubId) {
+    for (const [who, s] of [["A", A], ["B", B]]) {
+      const r = await s.c.from("essay_prompts").select("id").eq("id", pubId);
+      check(who, "lê tema publicado", rows(r) === 1, r.error?.message ?? `${rows(r)} linha(s)`);
+      const up = await s.c.from("motivating_texts").update({ rights_status: "pendente" }).eq("prompt_id", pubId).select();
+      check(who, "não altera texto de tema publicado", denied(up) || permError(up), up.error?.message ?? `${rows(up)} linha(s)`);
+    }
+    const eu = await E.c.from("motivating_texts").update({ rights_status: "pendente" }).eq("prompt_id", pubId).select();
+    check("E", "não altera texto de tema publicado", Boolean(eu.error) || rows(eu) === 0, eu.error?.message ?? `${rows(eu)} linha(s)`);
+  }
+  check("E", "lê o tema oficial (rascunho ou publicado)", Boolean(draftId || pubId), draft.error?.message ?? "nenhum tema");
   if (draftId) {
     const t = await E.c.from("motivating_texts").select("blocks").eq("prompt_id", draftId);
     const fig = (t.data ?? []).flatMap((x) => x.blocks).find((b) => b.type === "image")?.asset_ref;
@@ -519,6 +532,12 @@ let batchId, proposalId;
   }
   const ns = await A.c.from("course_goals").insert({ course: "Curso", institution: "Sem fonte", cutoff: 700 }).select();
   check("A", "nota de corte sem fonte é recusada", Boolean(ns.error), ns.error?.message ?? "gravou!");
+  const vc = await V.c.from("item_corrections").select("*").limit(1);
+  check("visitante", "não lê item_corrections", permError(vc), vc.error?.message ?? `${rows(vc)} linha(s)`);
+  const ac = await A.c.from("item_corrections").select("id").limit(1);
+  check("A", "não lê correções editoriais", denied(ac), ac.error?.message ?? `${rows(ac)} linha(s)`);
+  const ar = await A.c.rpc("correct_published_item", { p_item_version: "00000000-0000-0000-0000-000000000000", p_alternatives: {}, p_command_blocks: null, p_stimulus_blocks: null, p_note: "tentativa da matriz" });
+  check("A", "não corrige questão publicada", /resolve_not_editor/.test(ar.error?.message ?? ""), ar.error?.message ?? "corrigiu!");
   const ex = await B.c.from("profiles").update({ exam_day1: "2027-11-07" }).eq("user_id", A.id).select();
   check("B", "não muda a data da prova de A", denied(ex), ex.error?.message ?? `${rows(ex)} linha(s)`);
 }

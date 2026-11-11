@@ -38,3 +38,23 @@ RESOLVE_ANTHROPIC_API_KEY=... .venv/bin/python tagging.py raw/proposals/D2_CD7_Q
 - `corrigir_espacos.mjs <extração.json> "<filtro do lote>"`: restaura espaços entre palavras nas propostas já gravadas, trocando só trechos que são exatamente a junção de palavras da nova extração da mesma questão (nova revisão, sessão de editor; `DRY=1` lista sem gravar). Necessário porque a extração antiga descartava o caractere de espaço do PDF e grudava palavras em linhas justificadas apertadas (corrigido em `extract.py` com `keep_blank_chars`).
 - O job aceita também: várias figuras por questão (lista), alternativas que são figuras (`alternative`), quadros achatados reconstruídos como tabela em texto (`tables`, células separadas por " | "; o app desenha a tabela), troca de blocos por id (`block_fixes`, inclusive no comando), substituições literais conferidas no PDF (`replacements`) e a data do registro (`date`).
 - Registro do que foi aplicado no caderno 1 em `data/editorial/2026-11-10-*` e no caderno 7 em `data/editorial/2026-11-11-caderno7-*`; espaços restaurados em 11/11 (`data/editorial/2026-11-11-espacos-*.log`).
+
+## Nova edição (a partir de 11/11/2026)
+
+Fluxo usado para o Enem 2024, com o ano em `ENEM_ANO` (padrão 2025):
+
+```bash
+SSL_CERT_FILE=/root/.ccr/ca-bundle.crt .venv/bin/python fetch.py enem-2024          # sources/enem-2024.json → raw/enem-2024 + manifesto
+.venv/bin/python seed_edicao.py 2024 ../../supabase/migrations/<data>_edicao_2024.sql  # fontes, perfil (capas conferidas), aplicação e cadernos
+.venv/bin/python extract.py raw/enem-2024/2024_PV_impresso_D1_CD1.pdf --out raw/extraction/2024_D1_CD1.json   # idem D1_CD2, D2_CD7, D2_CD5
+.venv/bin/python checar_extracao.py raw/extraction/2024_*.json                       # defeitos conhecidos, antes de carregar
+ENEM_ANO=2024 .venv/bin/python contract.py raw/extraction/2024_D1_CD1.json raw/extraction/2024_D2_CD7.json
+ENEM_ANO=2024 .venv/bin/python crossmatch.py
+ENEM_ANO=2024 RESOLVE_EDITOR_EMAIL=... RESOLVE_EDITOR_PASSWORD=... .venv/bin/python load_editorial.py 2024_D1_CD1 2024_D2_CD7 --gabaritos --cruzamento
+```
+
+Depois, as figuras: recortar todas as questões com `recorte_por_cabecalho.py` (não só as que a extração sinalizou: em 2024 seis questões com imagem não tinham sido sinalizadas), descartar as faixas decorativas da margem, conferir em folhas e aplicar com `aplicar_revisao.mjs`.
+
+Defeitos corrigidos no extrator em 11/11: rodapé com "•" (2024) além de "|", contracapa colada na última alternativa, grau duplicado (°°) e ligadura "fi"/"fl" duplicada (`corrigir_ligaduras.mjs` corrige propostas antigas). Frações empilhadas em alternativas ainda saem embaralhadas: `checar_extracao.py` aponta ("fração embaralhada") e a transcrição é manual, olhando o PDF.
+
+Questão já publicada com erro: `correct_published_item` (função de editor) cria a versão seguinte com o texto corrigido, leva junto posição e letras impressas e aposenta a anterior; o motivo fica em `item_corrections`. Usada em 11/11 nas questões 157 e 178 do caderno 7 de 2025.

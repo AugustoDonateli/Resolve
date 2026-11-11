@@ -1,0 +1,87 @@
+{
+ "booklet_note": "%2024_PV_impresso_D2_CD7%",
+ "pdf_sha": "0993ae687a93dfbcda8e95ce8708883be9d5a55cabbe1f1a06b81a50c18c6cdc",
+ "date": "11/11/2026",
+ "figures": {},
+ "alt_only": {},
+ "letters": [],
+ "false_positive_figures": {},
+ "formula_doubts": {},
+ "text_fixes": {
+  "169": {
+   "alternatives": {
+    "A": "1/25 + 1/25 + 1/25",
+    "B": "24/25 + 23/24 + 1/23",
+    "C": "1/25 × 1/24 × 1/23",
+    "D": "24/25 × 23/25 × 1/25",
+    "E": "24/25 × 23/24 × 1/23"
+   }
+  },
+  "107": {
+   "stimulus": [
+    {
+     "type": "paragraph",
+     "text": "Com base em testes realizados em ratos, concluiu-se que os compostos nitrosos são substâncias mutagênicas, ou seja, produzem mutações nas células e possivelmente câncer. Esses compostos podem ser obtidos pela reação entre o nitrito de sódio, que é um conservante adicionado às carnes, e o ácido clorídrico. O ácido nitroso produzido irá reagir com compostos nitrogenados, como as aminas, dando origem aos compostos nitrosos."
+    }
+   ],
+   "stimulus_note": "texto-base separado do comando, conforme o PDF"
+  }
+ },
+ "block_fixes": {
+  "107": [
+   {
+    "field": "command_blocks",
+    "replace": [
+     "c1"
+    ],
+    "with": [
+     {
+      "id": "c1",
+      "type": "paragraph",
+      "text": "Em qual órgão esse processo será iniciado?"
+     }
+    ],
+    "note": "comando sem o texto-base"
+   }
+  ],
+  "169": [
+   {
+    "field": "command_blocks",
+    "replace": [
+     "c1"
+    ],
+    "with": [
+     {
+      "id": "c1",
+      "type": "paragraph",
+      "text": "A probabilidade de se descobrir o padrão dessa Cifra de César apenas na terceira tentativa é dada por"
+     }
+    ],
+    "note": "comando refeito a partir do PDF; os parágrafos anteriores vão para o texto-base"
+   },
+   {
+    "replace": [
+     "src"
+    ],
+    "with": [
+     {
+      "id": "s2",
+      "type": "paragraph",
+      "text": "Qualquer código que tenha um padrão de substituição de letras como o descrito é considerado uma Cifra de César ou um Código de César. Note que, para decifrar uma Cifra de César, basta descobrir por qual letra o “A” foi substituído, pois isso define todas as demais substituições a serem feitas."
+     },
+     {
+      "id": "s3",
+      "type": "paragraph",
+      "text": "Uma mensagem, em um alfabeto de 26 letras, foi codificada usando uma Cifra de César. Considere a probabilidade de se descobrir, aleatoriamente, o padrão utilizado nessa codificação, e que uma tentativa frustrada deverá ser eliminada nas tentativas seguintes."
+     },
+     {
+      "id": "src",
+      "type": "source",
+      "text": "Disponível em: www.codifica.ibict.br. Acesso em: 15 out. 2019."
+     }
+    ],
+    "note": "parágrafos que estavam no comando passaram para o texto-base, depois da figura"
+   }
+  ]
+ }
+}

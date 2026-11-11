@@ -13,6 +13,7 @@ Uso: python contract.py raw/extraction/D1_CD1.json raw/extraction/D2_CD7.json
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 import unicodedata
@@ -172,7 +173,7 @@ def main() -> int:
         summary["booklets"].append({"file": data["file"], "sha256": data["sha256"], "counts": counts, "doubt_kinds": kinds,
                                     "queue": [r for r in rows if r["status"] != "valida"]})
         print(f"{data['file']}: {counts} · dúvidas por tipo: {kinds}")
-    (REPO / "data" / "extraction" / "enem-2025-validacao-contrato.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (REPO / "data" / "extraction" / f"enem-{os.environ.get('ENEM_ANO', '2025')}-validacao-contrato.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return 0
 
 

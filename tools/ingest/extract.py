@@ -26,7 +26,7 @@ SOURCE_HINT = re.compile(r"(Disponível em|Acesso em|\(adaptado\)|\(fragmento\)|
 STOP_RE = re.compile(r"^(PROPOSTA DE REDA|INSTRUÇÕES PARA A REDA|FOLHA DE RASCUNHO|RASCUNHO)", re.I)
 NOISE_RE = re.compile(r"^(\*[0-9A-Z]+\*|(ENEM20\d\d)+.*|ENEN20\d\d.*|(?:E?N?E?M)?20\d\d(?:E?N?E?M?)?)$")
 # rodapé ("2 LINGUAGENS ... | 1º DIA | CADERNO 1 | AZUL") e restos da marca d'água
-FOOTER_RE = re.compile(r"(\|\s*\d+º DIA\s*\||CADERNO \d+\s*\|\s*[A-ZÁÉÍÓÚÂÊÔÃÕÇ]+|(?:EN[EM]M?20\d\d){2,}|M20\d\dENEM)")
+FOOTER_RE = re.compile(r"([|•]\s*\d+º DIA\s*[|•]|CADERNO \d+\s*[|•]\s*[A-ZÁÉÍÓÚÂÊÔÃÕÇ]+|(?:EN[EM]M?20\d\d){2,}|M20\d\dENEM|(?:ENE4202M){2,}|(?:4202MENE){2,})")
 
 
 @dataclass
@@ -61,7 +61,8 @@ def is_redacao_page(page) -> bool:
 
 def footer_top(page) -> float:
     """Topo do rodapé ("… | 1º DIA | CADERNO 1 | AZUL"), localizado na própria página."""
-    hits = page.search(r"\d+º\s*DIA\s*\|") or page.search(r"CADERNO\s+\d+\s*\|")
+    # 2025 separa com "|"; 2024 com "•"
+    hits = page.search(r"\d+º\s*DIA\s*[|•]") or page.search(r"CADERNO\s+\d+\s*[|•]")
     tops = [m["top"] for m in hits if m["top"] > page.height * 0.8]
     return (min(tops) - 4) if tops else page.height - 38
 
@@ -109,6 +110,16 @@ def line_text(chars: list[dict], body: float) -> tuple[str, int, int]:
     """Texto da linha com índices numéricos convertidos em Unicode. Devolve (texto, convertidos, não convertidos)."""
     from pdfplumber.utils import extract_text as px_text
 
+    # caracteres repetidos na mesma posição (a ligadura "fi" vem duplicada nos cadernos de 2024)
+    seen: set = set()
+    uniq = []
+    for c in chars:
+        k = (c["text"], round(c["x0"], 1), round(c["top"], 1))
+        if k in seen and c["text"].strip():
+            continue
+        seen.add(k)
+        uniq.append(c)
+    chars = uniq
     big = [c for c in chars if c["text"].strip() and c["size"] >= body * 0.8]
     if not big:
         return re.sub(r"\s+", " ", px_text(chars, x_tolerance=1.5, y_tolerance=30, keep_blank_chars=True)).strip(), 0, 0
@@ -132,7 +143,8 @@ def line_text(chars: list[dict], body: float) -> tuple[str, int, int]:
     # keep_blank_chars: o caractere de espaço do PDF separa as palavras mesmo quando o vão entre as letras
     # vizinhas é menor que a tolerância (linhas justificadas apertadas grudavam palavras).
     text = px_text(fixed, x_tolerance=1.5, y_tolerance=30, keep_blank_chars=True).replace("\n", " ").strip()
-    return re.sub(r"\s+", " ", text), conv, left
+    # o símbolo de grau vem duplicado em alguns cadernos (dois glifos sobrepostos)
+    return re.sub(r"\s+", " ", text).replace("°°", "°"), conv, left
 
 
 def bands(body, gutter: float, top: float, bottom: float) -> list[tuple[float, float, bool]]:
@@ -240,6 +252,9 @@ def segment(pdf) -> tuple[list[Question], list[str]]:
     for pno, page in enumerate(pdf.pages, start=1):
         if pno == 1:
             continue  # capa
+        if pno == len(pdf.pages) and not re.search(r"QUEST[ÃA]O\s+\d{2,3}", page.extract_text() or "", re.I):
+            current = None  # contracapa: grade de cores e instruções, nunca parte de uma questão
+            continue
         if is_redacao_page(page):
             current = None  # proposta de redação, instruções ou rascunho: fora de qualquer questão
             continue

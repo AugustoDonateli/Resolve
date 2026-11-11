@@ -82,6 +82,9 @@ class Api:
         return self._req("POST", f"/storage/v1/object/editorial/{path}", raw=data, ctype=ctype, headers={"x-upsert": "true"})
 
 
+ANO = os.environ.get("ENEM_ANO", "2025")  # edição: raw/enem-<ano>/, data/extraction/enem-<ano>-*.json
+
+
 def booklet_meta(name: str) -> dict:
     data = json.loads((ROOT / "raw" / "extraction" / f"{name}.json").read_text(encoding="utf-8"))
     return {"file": data["file"], "sha256": data["sha256"], "questions": data["questions"]}
@@ -113,9 +116,10 @@ def load_answer_keys(api: Api) -> dict:
     from crossmatch import parse_answer_key
 
     counts = {}
-    existing = {r["booklet_id"] for r in api.rest("GET", "official_answer_keys", query="?select=booklet_id")}
     for file, b in sorted(booklets_by_file(api).items()):
-        gb = ROOT / "raw" / "enem-2025" / b["gabarito_file"]
+        # um caderno por vez: a API devolve no máximo 1000 linhas por consulta
+        existing = {b["id"]} if api.rest("GET", "official_answer_keys", query=f"?select=booklet_id&booklet_id=eq.{b['id']}&limit=1") else set()
+        gb = ROOT / "raw" / f"enem-{ANO}" / b["gabarito_file"]
         if b["id"] in existing or not gb.exists():
             counts[file] = "já carregado" if b["id"] in existing else "PDF do gabarito ausente"
             continue
@@ -129,7 +133,7 @@ def load_answer_keys(api: Api) -> dict:
 
 def load_variant_checks(api: Api) -> dict:
     """Resultado do cruzamento entre cores (data/extraction/enem-2025-cruzamento.json)."""
-    report = json.loads((REPO / "data" / "extraction" / "enem-2025-cruzamento.json").read_text(encoding="utf-8"))
+    report = json.loads((REPO / "data" / "extraction" / f"enem-{ANO}-cruzamento.json").read_text(encoding="utf-8"))
     books = booklets_by_file(api)
     counts = {}
     for pair in report["pairs"]:
@@ -138,7 +142,7 @@ def load_variant_checks(api: Api) -> dict:
             counts[pair["day"]] = "já carregado"
             continue
         rows = [{"base_booklet_id": a, "base_position": r["position_a"], "foreign_language": r["foreign_language"], "other_booklet_id": b,
-                 "other_position": r["position_b"], "letter_map": r["letter_map"], "result": CHECK_CODE[r["check"]],
+                 "other_position": r["position_b"], "letter_map": {L: (r["letter_map"] or {}).get(L) for L in "ABCDE"}, "result": CHECK_CODE[r["check"]],
                  "fingerprint": r["fingerprint"], "tool": "tools/ingest/crossmatch.py"}
                 for r in pair["rows"] if r.get("position_b")]
         api.rest("POST", "variant_checks", rows)
@@ -175,7 +179,7 @@ def load_proposals(api: Api, batch_id: str, files: list[Path]) -> dict:
 def upload_pages(api: Api, booklet_file: str, sha: str, pages: set[int]) -> int:
     from PIL import Image  # noqa: F401  (Pillow faz o WebP)
 
-    doc = pdfium.PdfDocument(str(ROOT / "raw" / "enem-2025" / booklet_file))
+    doc = pdfium.PdfDocument(str(ROOT / "raw" / f"enem-{ANO}" / booklet_file))
     manifest = {"booklet_file": booklet_file, "booklet_sha256": sha, "scale": SCALE, "pages": {}}
     for pno in sorted(pages):
         page = doc[pno - 1]
@@ -211,7 +215,7 @@ def main() -> int:
         src = api.rest("GET", "sources", query=f"?select=id&sha256=eq.{meta['sha256']}")
         if not src:
             raise SystemExit(f"{meta['file']}: fonte não registrada (rode a carga de fontes da F2-T06).")
-        note = f"Enem 2025 · {meta['file']} · extract.py v0.1 + contract.py (item-proposal/v1)"
+        note = f"Enem {ANO} · {meta['file']} · extract.py v0.1 + contract.py (item-proposal/v1)"
         batch_id, new = ensure_batch(api, src[0]["id"], note)
         files = sorted((ROOT / "raw" / "proposals").glob(f"{name}_Q*.json"))
         counts = load_proposals(api, batch_id, files)
@@ -223,7 +227,7 @@ def main() -> int:
         src = api.rest("GET", "sources", query=f"?select=id&sha256=eq.{meta['sha256']}")
         fx_id, _ = ensure_batch(api, src[0]["id"], FIXTURE_NOTE, publishable=False)
         print(f"lote de teste: {load_proposals(api, fx_id, [ROOT / 'raw' / 'proposals' / f for f in FIXTURE_PICK])}")
-    if names:
+    if names and ANO == "2025":
         print(f"figuras do piloto enviadas: {upload_figures(api)}")
     return 0
 

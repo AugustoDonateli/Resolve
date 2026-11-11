@@ -1,0 +1,969 @@
+{
+  "contract": "item-proposal/v1",
+  "booklets": [
+    {
+      "file": "2024_PV_impresso_D1_CD1.pdf",
+      "sha256": "b0adc1dc79a002aba36f725f1ef792cf53e47ff75ee012638ef34a4e6fbb18f5",
+      "counts": {
+        "valida": 72,
+        "duvida": 23,
+        "rejeitada": 0
+      },
+      "doubt_kinds": {
+        "figura detectada sem recorte (F#-T#)": 23
+      },
+      "queue": [
+        {
+          "number": 3,
+          "foreign_language": "ingles",
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 5,
+          "foreign_language": "ingles",
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 5,
+          "foreign_language": "espanhol",
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 7,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 13,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 17,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 19,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 21,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 24,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 28,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 30,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 36,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 41,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 44,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 45,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 51,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 53,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 59,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 65,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 72,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 79,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 81,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 86,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "2024_PV_impresso_D2_CD7.pdf",
+      "sha256": "0993ae687a93dfbcda8e95ce8708883be9d5a55cabbe1f1a06b81a50c18c6cdc",
+      "counts": {
+        "valida": 17,
+        "duvida": 73,
+        "rejeitada": 0
+      },
+      "doubt_kinds": {
+        "figura detectada sem recorte (F#-T#)": 70,
+        "índices (sub/sobrescrito) em # linha(s)": 22,
+        "alternativa A sem conteúdo": 3,
+        "alternativa B sem conteúdo": 3,
+        "alternativa C sem conteúdo": 7,
+        "alternativa D sem conteúdo": 7,
+        "alternativa E sem conteúdo": 7,
+        "alternativa(s) sem texto ABCDE": 3,
+        "alternativa(s) sem texto C": 4,
+        "alternativas encontradas": 4,
+        "comando não identificado": 1,
+        "comando vazio": 1,
+        "fração empilhada em # alternativa(s)": 1
+      },
+      "queue": [
+        {
+          "number": 91,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 92,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 7 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 93,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 94,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 1 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 95,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 96,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 98,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 99,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "índices (sub/sobrescrito) em 1 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 100,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 6 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 101,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 102,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 103,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 104,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 109,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 110,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 111,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 112,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "alternativa A sem conteúdo",
+            "alternativa B sem conteúdo",
+            "alternativa C sem conteúdo",
+            "alternativa D sem conteúdo",
+            "alternativa E sem conteúdo",
+            "alternativa(s) sem texto ABCDE: provavelmente figura",
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 113,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 114,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 5 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 115,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 116,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 5 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 118,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 6 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 119,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 121,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "alternativa A sem conteúdo",
+            "alternativa B sem conteúdo",
+            "alternativa C sem conteúdo",
+            "alternativa D sem conteúdo",
+            "alternativa E sem conteúdo",
+            "alternativa(s) sem texto ABCDE: provavelmente figura",
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 122,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 123,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 124,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 125,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 127,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "alternativa C sem conteúdo",
+            "alternativa D sem conteúdo",
+            "alternativa E sem conteúdo",
+            "alternativa(s) sem texto C: provavelmente figura",
+            "alternativas encontradas: ABC",
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 128,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 2 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 129,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 130,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 131,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "alternativa A sem conteúdo",
+            "alternativa B sem conteúdo",
+            "alternativa C sem conteúdo",
+            "alternativa D sem conteúdo",
+            "alternativa E sem conteúdo",
+            "alternativa(s) sem texto ABCDE: provavelmente figura",
+            "comando não identificado",
+            "comando vazio",
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 132,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 2 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 133,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 1 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 134,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 135,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 7 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 136,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 1 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 138,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 139,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 141,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 142,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 5 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 144,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 145,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 147,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 148,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 3 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 149,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "índices (sub/sobrescrito) em 2 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 150,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 151,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "índices (sub/sobrescrito) em 1 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 152,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 8 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 153,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 154,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 155,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 1 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 158,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 159,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 5 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 161,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "alternativa C sem conteúdo",
+            "alternativa D sem conteúdo",
+            "alternativa E sem conteúdo",
+            "alternativa(s) sem texto C: provavelmente figura",
+            "alternativas encontradas: ABC",
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 163,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 164,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 1 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 165,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 166,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 167,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 168,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "alternativa C sem conteúdo",
+            "alternativa D sem conteúdo",
+            "alternativa E sem conteúdo",
+            "alternativa(s) sem texto C: provavelmente figura",
+            "alternativas encontradas: ABC",
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 169,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 170,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 5 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 171,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "índices (sub/sobrescrito) em 5 linha(s): convertidos quando numéricos; conferir fórmulas"
+          ]
+        },
+        {
+          "number": 172,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 173,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 174,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "alternativa C sem conteúdo",
+            "alternativa D sem conteúdo",
+            "alternativa E sem conteúdo",
+            "alternativa(s) sem texto C: provavelmente figura",
+            "alternativas encontradas: ABC",
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 175,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)",
+            "fração empilhada em 3 alternativa(s): reconstruída como a/b; conferir"
+          ]
+        },
+        {
+          "number": 176,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 177,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 178,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        },
+        {
+          "number": 180,
+          "foreign_language": null,
+          "status": "duvida",
+          "errors": [],
+          "doubts": [
+            "figura detectada sem recorte (F2-T08)"
+          ]
+        }
+      ]
+    }
+  ]
+}

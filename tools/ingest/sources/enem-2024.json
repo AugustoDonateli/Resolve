@@ -1,0 +1,81 @@
+{
+  "edition": "enem-2024",
+  "source_page": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gabaritos/2024",
+  "notes": [
+    "D1 e D2 da aplicação regular: cadernos 1 e 2 (dia 1) e 7 e 5 (dia 2), os pares usados no cruzamento entre cores."
+  ],
+  "files": [
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2024_PV_impresso_D1_CD1.pdf",
+      "kind": "prova",
+      "day_code": "D1",
+      "booklet": 1,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2024_PV_impresso_D1_CD2.pdf",
+      "kind": "prova",
+      "day_code": "D1",
+      "booklet": 2,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2024_PV_impresso_D2_CD7.pdf",
+      "kind": "prova",
+      "day_code": "D2",
+      "booklet": 7,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2024_PV_impresso_D2_CD5.pdf",
+      "kind": "prova",
+      "day_code": "D2",
+      "booklet": 5,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2024_GB_impresso_D1_CD1.pdf",
+      "kind": "gabarito",
+      "day_code": "D1",
+      "booklet": 1,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2024_GB_impresso_D1_CD2.pdf",
+      "kind": "gabarito",
+      "day_code": "D1",
+      "booklet": 2,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2024_GB_impresso_D2_CD7.pdf",
+      "kind": "gabarito",
+      "day_code": "D2",
+      "booklet": 7,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    },
+    {
+      "url": "https://download.inep.gov.br/enem/provas_e_gabaritos/2024_GB_impresso_D2_CD5.pdf",
+      "kind": "gabarito",
+      "day_code": "D2",
+      "booklet": 5,
+      "variant": "padrao",
+      "application": "regular",
+      "download": true
+    }
+  ]
+}

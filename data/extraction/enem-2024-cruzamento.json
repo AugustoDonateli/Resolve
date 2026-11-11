@@ -1,0 +1,3564 @@
+{
+  "status": "cruzamento_automatico_para_revisao",
+  "pairs": [
+    {
+      "day": "D1",
+      "a": {
+        "file": "2024_PV_impresso_D1_CD1.pdf",
+        "sha256": "b0adc1dc79a002aba36f725f1ef792cf53e47ff75ee012638ef34a4e6fbb18f5",
+        "answer_key_items": 95
+      },
+      "b": {
+        "file": "2024_PV_impresso_D1_CD2.pdf",
+        "sha256": "e37573f6c0a0254f972c40951bdbeabd2491957516cf77527da767df27aadaf1",
+        "answer_key_items": 95
+      },
+      "counts": {
+        "confere": 95
+      },
+      "items_in_other_position": 93,
+      "items_with_permuted_letters": 0,
+      "rows": [
+        {
+          "position_a": 1,
+          "foreign_language": "ingles",
+          "position_b": 3,
+          "match": "conteúdo idêntico",
+          "fingerprint": "4bb1e5d78fbd55b25452feafd3902f3d881cdd4478e9a73798a31b6d10a22076",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "4bb1e5d78fbd55b25452feafd3902f3d881cdd4478e9a73798a31b6d10a22076",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 2,
+          "foreign_language": "ingles",
+          "position_b": 2,
+          "match": "conteúdo idêntico",
+          "fingerprint": "a6a870fe544c23175338b31b1eb7aa3cdefbcd39e5fcddf91ebc84d5e471141b",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "a6a870fe544c23175338b31b1eb7aa3cdefbcd39e5fcddf91ebc84d5e471141b",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 3,
+          "foreign_language": "ingles",
+          "position_b": 1,
+          "match": "conteúdo idêntico",
+          "fingerprint": "938a36cc0f7240707f20c8d9a77fd9ec9ffeac4760a6014b307d6557a298f049",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "938a36cc0f7240707f20c8d9a77fd9ec9ffeac4760a6014b307d6557a298f049",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 4,
+          "foreign_language": "ingles",
+          "position_b": 5,
+          "match": "conteúdo idêntico",
+          "fingerprint": "abda28864342623b02c4129c9b92cb33b0d2c0592e8e18bbfba53d304e5864f4",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "abda28864342623b02c4129c9b92cb33b0d2c0592e8e18bbfba53d304e5864f4",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 5,
+          "foreign_language": "ingles",
+          "position_b": 4,
+          "match": "conteúdo idêntico",
+          "fingerprint": "bb2c708cd479c088f4b6479526a220ca6f71cf2db97a999403c394e869b162bf",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "bb2c708cd479c088f4b6479526a220ca6f71cf2db97a999403c394e869b162bf",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 1,
+          "foreign_language": "espanhol",
+          "position_b": 5,
+          "match": "conteúdo idêntico",
+          "fingerprint": "4794613eb676c1737f5300e36316b04ee392ac7747992fbed12f4a109920c80b",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "4794613eb676c1737f5300e36316b04ee392ac7747992fbed12f4a109920c80b",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 2,
+          "foreign_language": "espanhol",
+          "position_b": 2,
+          "match": "conteúdo idêntico",
+          "fingerprint": "4b4255d040d49026f502b72dd27a99a9b5d44802f4968b0e4b29d0887da39330",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "4b4255d040d49026f502b72dd27a99a9b5d44802f4968b0e4b29d0887da39330",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 3,
+          "foreign_language": "espanhol",
+          "position_b": 1,
+          "match": "conteúdo idêntico",
+          "fingerprint": "cd3a28f974e38e26c6f50e91d8e81a9c418bf3036fdc35ee22ab7cac0ee5efa1",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "cd3a28f974e38e26c6f50e91d8e81a9c418bf3036fdc35ee22ab7cac0ee5efa1",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 4,
+          "foreign_language": "espanhol",
+          "position_b": 3,
+          "match": "conteúdo idêntico",
+          "fingerprint": "f8854105b01c7f059cdef697dfe3c0e74dca6a5c67d89a7f499c5b2a72b8fd2d",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "f8854105b01c7f059cdef697dfe3c0e74dca6a5c67d89a7f499c5b2a72b8fd2d",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 5,
+          "foreign_language": "espanhol",
+          "position_b": 4,
+          "match": "conteúdo idêntico",
+          "fingerprint": "e8ac92340bd9471eb0167d484dbcf120d7a5b959ffb974384cfb44d888f77cdc",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "e8ac92340bd9471eb0167d484dbcf120d7a5b959ffb974384cfb44d888f77cdc",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 6,
+          "foreign_language": null,
+          "position_b": 9,
+          "match": "conteúdo idêntico",
+          "fingerprint": "1a60360ad1523e5f922584462e103d7853e2c15af0c21395561a4b9446ec87c5",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "1a60360ad1523e5f922584462e103d7853e2c15af0c21395561a4b9446ec87c5",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 7,
+          "foreign_language": null,
+          "position_b": 10,
+          "match": "conteúdo idêntico",
+          "fingerprint": "ea0870f465d829daef5a39edeb70069147bb19db164489556a714891d01ff7eb",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "ea0870f465d829daef5a39edeb70069147bb19db164489556a714891d01ff7eb",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 8,
+          "foreign_language": null,
+          "position_b": 11,
+          "match": "conteúdo idêntico",
+          "fingerprint": "033657a9542042cdcccc75a3061d77b3a067df19ccaaf2847a62f7fd51315fa9",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "033657a9542042cdcccc75a3061d77b3a067df19ccaaf2847a62f7fd51315fa9",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 9,
+          "foreign_language": null,
+          "position_b": 40,
+          "match": "conteúdo idêntico",
+          "fingerprint": "21cfb57de47d3fb0c15b14f51cb579980ac33fdf8fa8b53c2091a15332a45fd8",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "21cfb57de47d3fb0c15b14f51cb579980ac33fdf8fa8b53c2091a15332a45fd8",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 10,
+          "foreign_language": null,
+          "position_b": 41,
+          "match": "conteúdo idêntico",
+          "fingerprint": "852bfca5bc783e03c8efb212cfc1c1de1423372989304d6bf155eadf114c563d",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "852bfca5bc783e03c8efb212cfc1c1de1423372989304d6bf155eadf114c563d",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 11,
+          "foreign_language": null,
+          "position_b": 42,
+          "match": "conteúdo idêntico",
+          "fingerprint": "dd5804b82be4c2d7d53617be2048b2311b9c403380a96b53fac08ec97d8fed08",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "dd5804b82be4c2d7d53617be2048b2311b9c403380a96b53fac08ec97d8fed08",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 12,
+          "foreign_language": null,
+          "position_b": 25,
+          "match": "conteúdo idêntico",
+          "fingerprint": "581347a120d6d737114b615bc9a1d79563fd6a8bb68d938a73fcf15cd922396c",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "581347a120d6d737114b615bc9a1d79563fd6a8bb68d938a73fcf15cd922396c",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 13,
+          "foreign_language": null,
+          "position_b": 26,
+          "match": "conteúdo idêntico",
+          "fingerprint": "38c7f1eefcf63bdb929bfe564dcf7816b60f29790e351f4f790fe85597cc14e0",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "38c7f1eefcf63bdb929bfe564dcf7816b60f29790e351f4f790fe85597cc14e0",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 14,
+          "foreign_language": null,
+          "position_b": 27,
+          "match": "conteúdo idêntico",
+          "fingerprint": "b4c28b69cdc52f733d63a27fc7e6e8a5edd09cdd7905b478b0b7ff5d67c42f3f",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "b4c28b69cdc52f733d63a27fc7e6e8a5edd09cdd7905b478b0b7ff5d67c42f3f",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 15,
+          "foreign_language": null,
+          "position_b": 31,
+          "match": "conteúdo idêntico",
+          "fingerprint": "3229ee8d4356a9be11d423f042fc667adbc2ec1c846753e2370b6df490de87b6",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "3229ee8d4356a9be11d423f042fc667adbc2ec1c846753e2370b6df490de87b6",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 16,
+          "foreign_language": null,
+          "position_b": 32,
+          "match": "conteúdo idêntico",
+          "fingerprint": "3641f56f22b9b731e06af55b5943d223ae1e8a85706e379dc5740d9c184859f5",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "3641f56f22b9b731e06af55b5943d223ae1e8a85706e379dc5740d9c184859f5",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 17,
+          "foreign_language": null,
+          "position_b": 33,
+          "match": "conteúdo idêntico",
+          "fingerprint": "0053337c76822ee85d1d0c2b096dae1ad6bf2e1227f69cf61cfff4e51842cf98",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "0053337c76822ee85d1d0c2b096dae1ad6bf2e1227f69cf61cfff4e51842cf98",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 18,
+          "foreign_language": null,
+          "position_b": 43,
+          "match": "conteúdo idêntico",
+          "fingerprint": "d10fc5b86995b9d3d8f86eddc27d06708b0a4ba915ad03c78bf6bfa0759eed21",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "d10fc5b86995b9d3d8f86eddc27d06708b0a4ba915ad03c78bf6bfa0759eed21",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 19,
+          "foreign_language": null,
+          "position_b": 44,
+          "match": "conteúdo idêntico",
+          "fingerprint": "43f4d8c39f311153dc89d62084bca7a581836df37fcc0853711e83ff4fa7df69",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "43f4d8c39f311153dc89d62084bca7a581836df37fcc0853711e83ff4fa7df69",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 20,
+          "foreign_language": null,
+          "position_b": 45,
+          "match": "conteúdo idêntico",
+          "fingerprint": "8e02c6412831c3d8b32ae32b998621c734d2b6dd545b6b37cf63a8ab24a5c8fa",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "8e02c6412831c3d8b32ae32b998621c734d2b6dd545b6b37cf63a8ab24a5c8fa",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 21,
+          "foreign_language": null,
+          "position_b": 20,
+          "match": "conteúdo idêntico",
+          "fingerprint": "5825a367a9f0538f0a72b92e422b6da734922c065a8f17b4cd44554fe5ff6adc",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "5825a367a9f0538f0a72b92e422b6da734922c065a8f17b4cd44554fe5ff6adc",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 22,
+          "foreign_language": null,
+          "position_b": 21,
+          "match": "conteúdo idêntico",
+          "fingerprint": "ce5a7be23de909d8249028e7b8deeb15b94fd1f062f753f7622b1f7a2ca1fbdf",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "ce5a7be23de909d8249028e7b8deeb15b94fd1f062f753f7622b1f7a2ca1fbdf",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 23,
+          "foreign_language": null,
+          "position_b": 37,
+          "match": "conteúdo idêntico",
+          "fingerprint": "6425b6759bf953d3ea49d9c17bdf2f39bc890aaaa570c33cdcb0c2b4d9034b1e",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "6425b6759bf953d3ea49d9c17bdf2f39bc890aaaa570c33cdcb0c2b4d9034b1e",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 24,
+          "foreign_language": null,
+          "position_b": 38,
+          "match": "conteúdo idêntico",
+          "fingerprint": "f14be7aab7c56ff6718633570c0e4188711f8983e9409cbe5f6e8b44f99bce40",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "f14be7aab7c56ff6718633570c0e4188711f8983e9409cbe5f6e8b44f99bce40",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 25,
+          "foreign_language": null,
+          "position_b": 39,
+          "match": "conteúdo idêntico",
+          "fingerprint": "a167474dbae7e7e3a23e257d5d060a3a1ba21237492c107205f1594a430638cf",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "a167474dbae7e7e3a23e257d5d060a3a1ba21237492c107205f1594a430638cf",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 26,
+          "foreign_language": null,
+          "position_b": 34,
+          "match": "conteúdo idêntico",
+          "fingerprint": "22ecc9a3ac5bb68055a8d81810892a343d2013b982f19c4bed1b794099ce5d96",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "22ecc9a3ac5bb68055a8d81810892a343d2013b982f19c4bed1b794099ce5d96",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 27,
+          "foreign_language": null,
+          "position_b": 35,
+          "match": "conteúdo idêntico",
+          "fingerprint": "e79d2d4816f5f97b769b3137ce8b7dcfb651f56634253ab32e0b9b6f15a0eeff",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "e79d2d4816f5f97b769b3137ce8b7dcfb651f56634253ab32e0b9b6f15a0eeff",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 28,
+          "foreign_language": null,
+          "position_b": 36,
+          "match": "conteúdo idêntico",
+          "fingerprint": "2e09b5bd8962be39113b2fd06c0705b6a28190bcbdb2006aa87b1a75f0b83ea2",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "2e09b5bd8962be39113b2fd06c0705b6a28190bcbdb2006aa87b1a75f0b83ea2",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 29,
+          "foreign_language": null,
+          "position_b": 28,
+          "match": "conteúdo idêntico",
+          "fingerprint": "acdb0dd166c65339ccf8c89107ba4ba5fb9a7fd632c9bfbd42dd4299847e8cc3",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "acdb0dd166c65339ccf8c89107ba4ba5fb9a7fd632c9bfbd42dd4299847e8cc3",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 30,
+          "foreign_language": null,
+          "position_b": 29,
+          "match": "conteúdo idêntico",
+          "fingerprint": "51caa73f780ace63efc5a2e91e3fb7547141add3429fb9d6cfe7c0ccafe983af",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "51caa73f780ace63efc5a2e91e3fb7547141add3429fb9d6cfe7c0ccafe983af",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 31,
+          "foreign_language": null,
+          "position_b": 30,
+          "match": "conteúdo idêntico",
+          "fingerprint": "b4e143f388ca01fa10ce8e5bd99c00fa68c51596b094ef6651992362f08b9103",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "b4e143f388ca01fa10ce8e5bd99c00fa68c51596b094ef6651992362f08b9103",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 32,
+          "foreign_language": null,
+          "position_b": 12,
+          "match": "conteúdo idêntico",
+          "fingerprint": "144b15ec38986346d3e31f43bf63b7b2269a9361c6b14ece4787ad62cdb97c3f",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "144b15ec38986346d3e31f43bf63b7b2269a9361c6b14ece4787ad62cdb97c3f",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 33,
+          "foreign_language": null,
+          "position_b": 13,
+          "match": "conteúdo idêntico",
+          "fingerprint": "cc7f2056f65da3b6cd9d4d63606d6a4d8a00e9f7c5000f2e569bf4cc03ef5ccf",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "cc7f2056f65da3b6cd9d4d63606d6a4d8a00e9f7c5000f2e569bf4cc03ef5ccf",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 34,
+          "foreign_language": null,
+          "position_b": 14,
+          "match": "conteúdo idêntico",
+          "fingerprint": "23d17bb5bb47302ec33a8b555f39650fb713039454de342f8daa05c108a2481d",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "23d17bb5bb47302ec33a8b555f39650fb713039454de342f8daa05c108a2481d",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 35,
+          "foreign_language": null,
+          "position_b": 18,
+          "match": "conteúdo idêntico",
+          "fingerprint": "73bd1b9501386ace3bb78432515a69509737670d8f31afc1ddc93beac85475a7",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "73bd1b9501386ace3bb78432515a69509737670d8f31afc1ddc93beac85475a7",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 36,
+          "foreign_language": null,
+          "position_b": 19,
+          "match": "conteúdo idêntico",
+          "fingerprint": "c90291523cd0e0b8afd7e0c3234f141480600e0f5f48d046223fa9dd9b993bef",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "c90291523cd0e0b8afd7e0c3234f141480600e0f5f48d046223fa9dd9b993bef",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 37,
+          "foreign_language": null,
+          "position_b": 22,
+          "match": "conteúdo idêntico",
+          "fingerprint": "5393604747c03f6be73d1b6140cae098fdcb4f1440a22971d6a6dd9ccc108671",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "5393604747c03f6be73d1b6140cae098fdcb4f1440a22971d6a6dd9ccc108671",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 38,
+          "foreign_language": null,
+          "position_b": 23,
+          "match": "conteúdo idêntico",
+          "fingerprint": "7e35b890bd2a72567f3018e96e70f9aec1a2d9051a2ccaf40381296433c3073b",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "7e35b890bd2a72567f3018e96e70f9aec1a2d9051a2ccaf40381296433c3073b",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 39,
+          "foreign_language": null,
+          "position_b": 24,
+          "match": "conteúdo idêntico",
+          "fingerprint": "3678f21f0d43870a78829f34d3b8f6a2ad83704816e747443a9bd65d66e9aa44",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "3678f21f0d43870a78829f34d3b8f6a2ad83704816e747443a9bd65d66e9aa44",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 40,
+          "foreign_language": null,
+          "position_b": 6,
+          "match": "conteúdo idêntico",
+          "fingerprint": "fe4024dbfbd8126aefaf5a1de6484eaa946ee4fb92ed6690d29ec3f2ef8a6580",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "fe4024dbfbd8126aefaf5a1de6484eaa946ee4fb92ed6690d29ec3f2ef8a6580",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 41,
+          "foreign_language": null,
+          "position_b": 7,
+          "match": "conteúdo idêntico",
+          "fingerprint": "26842257d611f4ad295766619d38e39cfec2da22c8e480b0e56ca9dfd969d8aa",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "26842257d611f4ad295766619d38e39cfec2da22c8e480b0e56ca9dfd969d8aa",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 42,
+          "foreign_language": null,
+          "position_b": 8,
+          "match": "conteúdo idêntico",
+          "fingerprint": "5cad0ce949b03a7b5886c83b738db5f7dfaf038013a75c187c553cc23c97479a",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "5cad0ce949b03a7b5886c83b738db5f7dfaf038013a75c187c553cc23c97479a",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 43,
+          "foreign_language": null,
+          "position_b": 15,
+          "match": "conteúdo idêntico",
+          "fingerprint": "a562bd4d65b8a8db6ce051b062ff21cef17293949f5d18890126db6a3ea9e6c2",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "a562bd4d65b8a8db6ce051b062ff21cef17293949f5d18890126db6a3ea9e6c2",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 44,
+          "foreign_language": null,
+          "position_b": 16,
+          "match": "conteúdo idêntico",
+          "fingerprint": "87d045c43bb3e5db74b73b2f6d9275b36a731c647e863fbbd0e8cba0b99be4e4",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "87d045c43bb3e5db74b73b2f6d9275b36a731c647e863fbbd0e8cba0b99be4e4",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 45,
+          "foreign_language": null,
+          "position_b": 17,
+          "match": "conteúdo idêntico",
+          "fingerprint": "531b7ea0f9f42a1311b43d6b5e1471a1375e957402536780c125f7f74298587a",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "531b7ea0f9f42a1311b43d6b5e1471a1375e957402536780c125f7f74298587a",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 46,
+          "foreign_language": null,
+          "position_b": 53,
+          "match": "conteúdo idêntico",
+          "fingerprint": "9e045e7edf85d25cb638d8cfa8afffcff7e2aa4692af38e8691a4712c7fad158",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "9e045e7edf85d25cb638d8cfa8afffcff7e2aa4692af38e8691a4712c7fad158",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 47,
+          "foreign_language": null,
+          "position_b": 54,
+          "match": "conteúdo idêntico",
+          "fingerprint": "6c5027d7366ed2b3b85b24a8bdce41dd3dcaac6e8cd50d4db2417d5e7ad606a7",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "6c5027d7366ed2b3b85b24a8bdce41dd3dcaac6e8cd50d4db2417d5e7ad606a7",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 48,
+          "foreign_language": null,
+          "position_b": 55,
+          "match": "conteúdo idêntico",
+          "fingerprint": "b01d0f9660e16c169035227ba2bc8413f1fea10aec8374a3e2b6c4dbb2cf1fdc",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "b01d0f9660e16c169035227ba2bc8413f1fea10aec8374a3e2b6c4dbb2cf1fdc",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 49,
+          "foreign_language": null,
+          "position_b": 56,
+          "match": "conteúdo idêntico",
+          "fingerprint": "c1c052e318ebf65ba593c5f376781080216fd628a5562fc214e01a864760ce33",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "c1c052e318ebf65ba593c5f376781080216fd628a5562fc214e01a864760ce33",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 50,
+          "foreign_language": null,
+          "position_b": 61,
+          "match": "conteúdo idêntico",
+          "fingerprint": "c3b8493d45debd89d9b714ab9aa13091d2f0c56d1e3aae297e77a8631512f99a",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "c3b8493d45debd89d9b714ab9aa13091d2f0c56d1e3aae297e77a8631512f99a",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 51,
+          "foreign_language": null,
+          "position_b": 62,
+          "match": "conteúdo idêntico",
+          "fingerprint": "b5491821f2c9d649a8aae5fd3e0d6066f5d95b99cc01340b56215ed10e68afc3",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "b5491821f2c9d649a8aae5fd3e0d6066f5d95b99cc01340b56215ed10e68afc3",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 52,
+          "foreign_language": null,
+          "position_b": 63,
+          "match": "conteúdo idêntico",
+          "fingerprint": "967d561b1261e5eae856c24142e56b1549cfa22572482f46b9933fd887a2f4d8",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "967d561b1261e5eae856c24142e56b1549cfa22572482f46b9933fd887a2f4d8",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 53,
+          "foreign_language": null,
+          "position_b": 64,
+          "match": "conteúdo idêntico",
+          "fingerprint": "a3210aac285aa1a9b245de562203a160f05d03f7988b57cb4de2d87fceeb445f",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "a3210aac285aa1a9b245de562203a160f05d03f7988b57cb4de2d87fceeb445f",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 54,
+          "foreign_language": null,
+          "position_b": 65,
+          "match": "conteúdo idêntico",
+          "fingerprint": "6a3890c032a9fc3e0a08725fe3344539a50eb7bf7ca476777dcbc3111c2757c2",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "6a3890c032a9fc3e0a08725fe3344539a50eb7bf7ca476777dcbc3111c2757c2",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 55,
+          "foreign_language": null,
+          "position_b": 66,
+          "match": "conteúdo idêntico",
+          "fingerprint": "d2189e8ac73fa1840c3c3f182f914c7300ea825c398157c2aec924062834285b",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "d2189e8ac73fa1840c3c3f182f914c7300ea825c398157c2aec924062834285b",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 56,
+          "foreign_language": null,
+          "position_b": 67,
+          "match": "conteúdo idêntico",
+          "fingerprint": "a8f30d80891299898ec193bb699fde798bd359c7ae6b0d15931651c778aeb33f",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "a8f30d80891299898ec193bb699fde798bd359c7ae6b0d15931651c778aeb33f",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 57,
+          "foreign_language": null,
+          "position_b": 68,
+          "match": "conteúdo idêntico",
+          "fingerprint": "f3c11be350a531360cfeea8f4a3adbac77f2c64f824808b487d86747e0dd7a50",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "f3c11be350a531360cfeea8f4a3adbac77f2c64f824808b487d86747e0dd7a50",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 58,
+          "foreign_language": null,
+          "position_b": 57,
+          "match": "conteúdo idêntico",
+          "fingerprint": "4f6ea8a1227dc1c72295d2c5e4f7434ff82284c806c82fa9c2905376e57b7765",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "4f6ea8a1227dc1c72295d2c5e4f7434ff82284c806c82fa9c2905376e57b7765",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 59,
+          "foreign_language": null,
+          "position_b": 58,
+          "match": "conteúdo idêntico",
+          "fingerprint": "0cd697848e93393033a25d0a611c730487ca370f69599f2fbd2d7147f0c1b5cf",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "0cd697848e93393033a25d0a611c730487ca370f69599f2fbd2d7147f0c1b5cf",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 60,
+          "foreign_language": null,
+          "position_b": 59,
+          "match": "conteúdo idêntico",
+          "fingerprint": "8f655152c6fb6396d0142d5692a22ea16829fee6a9d02fd84daad890a50dbc98",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "8f655152c6fb6396d0142d5692a22ea16829fee6a9d02fd84daad890a50dbc98",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 61,
+          "foreign_language": null,
+          "position_b": 60,
+          "match": "conteúdo idêntico",
+          "fingerprint": "f34b3c53a044baf42d59bd0272551e97eda01c2e9cbd6a68777c233d26cb59e7",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "f34b3c53a044baf42d59bd0272551e97eda01c2e9cbd6a68777c233d26cb59e7",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 62,
+          "foreign_language": null,
+          "position_b": 49,
+          "match": "conteúdo idêntico",
+          "fingerprint": "dd676bd79dce14f6228510b9f5543ac813adb9a0337b4fd7515c8f3df9315ecf",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "dd676bd79dce14f6228510b9f5543ac813adb9a0337b4fd7515c8f3df9315ecf",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 63,
+          "foreign_language": null,
+          "position_b": 50,
+          "match": "conteúdo idêntico",
+          "fingerprint": "0c492678a5d065e0b0fee74f8fed1aa0b04403cec396a26bb0294306388b7553",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "0c492678a5d065e0b0fee74f8fed1aa0b04403cec396a26bb0294306388b7553",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 64,
+          "foreign_language": null,
+          "position_b": 51,
+          "match": "conteúdo idêntico",
+          "fingerprint": "ba43dc7d13c20a2fd9749fd2ce4d762313a12ee4ce4858b994141ce2b194a4ae",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "ba43dc7d13c20a2fd9749fd2ce4d762313a12ee4ce4858b994141ce2b194a4ae",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 65,
+          "foreign_language": null,
+          "position_b": 52,
+          "match": "conteúdo idêntico",
+          "fingerprint": "17859b98847f27e03c40e4307c466113adf23d9b302b8b5f0dcfa0653aa45de7",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "17859b98847f27e03c40e4307c466113adf23d9b302b8b5f0dcfa0653aa45de7",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 66,
+          "foreign_language": null,
+          "position_b": 84,
+          "match": "conteúdo idêntico",
+          "fingerprint": "e76176bcd7652b6cb35d06acc33bc43612b70e0413ba13636e20572206693863",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "e76176bcd7652b6cb35d06acc33bc43612b70e0413ba13636e20572206693863",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 67,
+          "foreign_language": null,
+          "position_b": 85,
+          "match": "conteúdo idêntico",
+          "fingerprint": "fb3c454a01c21616736dfa12dc19c200816a1a79c33e9edd6e011a78572016bb",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "fb3c454a01c21616736dfa12dc19c200816a1a79c33e9edd6e011a78572016bb",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 68,
+          "foreign_language": null,
+          "position_b": 86,
+          "match": "conteúdo idêntico",
+          "fingerprint": "1e2986f6c3a54b316629c13bf256c9c6cb54d9fb7653d32f168eb8c8a8e6f824",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "1e2986f6c3a54b316629c13bf256c9c6cb54d9fb7653d32f168eb8c8a8e6f824",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 69,
+          "foreign_language": null,
+          "position_b": 87,
+          "match": "conteúdo idêntico",
+          "fingerprint": "57b54e94967d7e7ac7ded7dd33cfc3f28dd0cc32ebebeba1c6011795cbce8d0b",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "57b54e94967d7e7ac7ded7dd33cfc3f28dd0cc32ebebeba1c6011795cbce8d0b",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 70,
+          "foreign_language": null,
+          "position_b": 88,
+          "match": "conteúdo idêntico",
+          "fingerprint": "6e00a749c1f2b18abfd66baa800c90d68b76f8c0c1358dae96d25e8bf4ca70ab",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "6e00a749c1f2b18abfd66baa800c90d68b76f8c0c1358dae96d25e8bf4ca70ab",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 71,
+          "foreign_language": null,
+          "position_b": 89,
+          "match": "conteúdo idêntico",
+          "fingerprint": "82e133e8c6203f786ea9ec7652bc4d0ddf5baff6e91b70a7215a5d531ea8b62c",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "82e133e8c6203f786ea9ec7652bc4d0ddf5baff6e91b70a7215a5d531ea8b62c",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 72,
+          "foreign_language": null,
+          "position_b": 90,
+          "match": "conteúdo idêntico",
+          "fingerprint": "ed2104a49d31f6fb73d61918e2dc88c41940010e121c8134a4edd136c4d53aa9",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "ed2104a49d31f6fb73d61918e2dc88c41940010e121c8134a4edd136c4d53aa9",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 73,
+          "foreign_language": null,
+          "position_b": 80,
+          "match": "conteúdo idêntico",
+          "fingerprint": "baa54232938a2d4415cdb595a2531ef336d6583c837bd78e7f2092a670fe7eea",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "baa54232938a2d4415cdb595a2531ef336d6583c837bd78e7f2092a670fe7eea",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 74,
+          "foreign_language": null,
+          "position_b": 81,
+          "match": "conteúdo idêntico",
+          "fingerprint": "51fb777fdb1ebc58c1810b6ff960aff601ee41e5c378de32d833b8a26c0c19c0",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "51fb777fdb1ebc58c1810b6ff960aff601ee41e5c378de32d833b8a26c0c19c0",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 75,
+          "foreign_language": null,
+          "position_b": 82,
+          "match": "conteúdo idêntico",
+          "fingerprint": "25fe572f6d4e88c6adaf47c2b4843808954f19fc36417c57c4b6516b62ac45a8",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "25fe572f6d4e88c6adaf47c2b4843808954f19fc36417c57c4b6516b62ac45a8",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 76,
+          "foreign_language": null,
+          "position_b": 83,
+          "match": "conteúdo idêntico",
+          "fingerprint": "5d28c251c7e97395771daf35d0d225fc1c3c5c78c75601611d5f29cfac9a2078",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "5d28c251c7e97395771daf35d0d225fc1c3c5c78c75601611d5f29cfac9a2078",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 77,
+          "foreign_language": null,
+          "position_b": 79,
+          "match": "conteúdo idêntico",
+          "fingerprint": "ac29674df9a90607bbd751f1f7ed1eefca0ae41bea36e97eb0bb73b9f547c2ca",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "ac29674df9a90607bbd751f1f7ed1eefca0ae41bea36e97eb0bb73b9f547c2ca",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 78,
+          "foreign_language": null,
+          "position_b": 77,
+          "match": "conteúdo idêntico",
+          "fingerprint": "d5d6fb526b9e2748c5a00fc37d0dc7f7f3c4e9edcccfd2b0bdd8383e8bfbfb9d",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "d5d6fb526b9e2748c5a00fc37d0dc7f7f3c4e9edcccfd2b0bdd8383e8bfbfb9d",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 79,
+          "foreign_language": null,
+          "position_b": 78,
+          "match": "conteúdo idêntico",
+          "fingerprint": "04c5b7cf7f2aa54009a6168c47e57480722d819bd05a87fe7b69d2abfea85400",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "04c5b7cf7f2aa54009a6168c47e57480722d819bd05a87fe7b69d2abfea85400",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 80,
+          "foreign_language": null,
+          "position_b": 73,
+          "match": "conteúdo idêntico",
+          "fingerprint": "d8540480e864bda1b609b39f0d5a122c2911e648cc2003fbd87bf1f29f846b83",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "d8540480e864bda1b609b39f0d5a122c2911e648cc2003fbd87bf1f29f846b83",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 81,
+          "foreign_language": null,
+          "position_b": 74,
+          "match": "conteúdo idêntico",
+          "fingerprint": "4566c509c27a8caf5e28d427523284802e7bf5512f3ffaacc7d340d3a817e302",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "4566c509c27a8caf5e28d427523284802e7bf5512f3ffaacc7d340d3a817e302",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 82,
+          "foreign_language": null,
+          "position_b": 75,
+          "match": "conteúdo idêntico",
+          "fingerprint": "2895e05d922ba7eea2f784ae3cf7c479937971bf8e7c241a5838f8fc736d7ca8",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "2895e05d922ba7eea2f784ae3cf7c479937971bf8e7c241a5838f8fc736d7ca8",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 83,
+          "foreign_language": null,
+          "position_b": 76,
+          "match": "conteúdo idêntico",
+          "fingerprint": "89f82042964c74f8a13ab37804f813aba61bd140aa281f1ce3c4e98faa0c11ee",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "89f82042964c74f8a13ab37804f813aba61bd140aa281f1ce3c4e98faa0c11ee",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 84,
+          "foreign_language": null,
+          "position_b": 46,
+          "match": "conteúdo idêntico",
+          "fingerprint": "aa4b056b3697069886661317d856e4ec6c3211da1131ab8c24a9089571a805c0",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "aa4b056b3697069886661317d856e4ec6c3211da1131ab8c24a9089571a805c0",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 85,
+          "foreign_language": null,
+          "position_b": 47,
+          "match": "conteúdo idêntico",
+          "fingerprint": "7e850987dc06b607bc871542eae3a78e818926e6bc1d2b886af6dc2e82d09d38",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "7e850987dc06b607bc871542eae3a78e818926e6bc1d2b886af6dc2e82d09d38",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 86,
+          "foreign_language": null,
+          "position_b": 48,
+          "match": "conteúdo idêntico",
+          "fingerprint": "6a28a1a34d32ba1d0fb4227add4710bb10a926fefd7476a0fe87a9c4e50d569f",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "6a28a1a34d32ba1d0fb4227add4710bb10a926fefd7476a0fe87a9c4e50d569f",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 87,
+          "foreign_language": null,
+          "position_b": 69,
+          "match": "conteúdo idêntico",
+          "fingerprint": "fb3fd63764dc07e2d9a59cfe276efc59604c4fd7dc0b23b0cbe270e5f69a83d7",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "fb3fd63764dc07e2d9a59cfe276efc59604c4fd7dc0b23b0cbe270e5f69a83d7",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 88,
+          "foreign_language": null,
+          "position_b": 70,
+          "match": "conteúdo idêntico",
+          "fingerprint": "da0e16c64469965566923af1f9d9415a073fd87e760a51beb06e9389ac548616",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "da0e16c64469965566923af1f9d9415a073fd87e760a51beb06e9389ac548616",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 89,
+          "foreign_language": null,
+          "position_b": 71,
+          "match": "conteúdo idêntico",
+          "fingerprint": "63264cad6780315226647f9d34cadac30b63a47d5d29a869358e9e645c83bea3",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "63264cad6780315226647f9d34cadac30b63a47d5d29a869358e9e645c83bea3",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 90,
+          "foreign_language": null,
+          "position_b": 72,
+          "match": "conteúdo idêntico",
+          "fingerprint": "ce4c7e785fb7bc577074627a2b0ace2c3eca2d852a21f51f27f5817226e1c6a5",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "ce4c7e785fb7bc577074627a2b0ace2c3eca2d852a21f51f27f5817226e1c6a5",
+          "check": "confere",
+          "same_fingerprint": true
+        }
+      ]
+    },
+    {
+      "day": "D2",
+      "a": {
+        "file": "2024_PV_impresso_D2_CD7.pdf",
+        "sha256": "0993ae687a93dfbcda8e95ce8708883be9d5a55cabbe1f1a06b81a50c18c6cdc",
+        "answer_key_items": 90
+      },
+      "b": {
+        "file": "2024_PV_impresso_D2_CD5.pdf",
+        "sha256": "ec4e704ab4017762ffb1eba84c55285a429d3d02ed0e58258c1171315cb34937",
+        "answer_key_items": 90
+      },
+      "counts": {
+        "confere": 89,
+        "anulada nas duas": 1
+      },
+      "items_in_other_position": 87,
+      "items_with_permuted_letters": 0,
+      "rows": [
+        {
+          "position_a": 91,
+          "foreign_language": null,
+          "position_b": 119,
+          "match": "conteúdo idêntico",
+          "fingerprint": "dc00805230d42677a08cdeec16bbdbd566c81e7abf28bf657de0fd1b987fab1b",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "dc00805230d42677a08cdeec16bbdbd566c81e7abf28bf657de0fd1b987fab1b",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 92,
+          "foreign_language": null,
+          "position_b": 120,
+          "match": "conteúdo idêntico",
+          "fingerprint": "4ce2913b82106ed502a0e82284df1e9e6d2822d9867ba0bc43f4562cbd329da2",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "4ce2913b82106ed502a0e82284df1e9e6d2822d9867ba0bc43f4562cbd329da2",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 93,
+          "foreign_language": null,
+          "position_b": 121,
+          "match": "conteúdo idêntico",
+          "fingerprint": "9998ca348f1e632fba6e4c7fe5b0f5e98c1e5e409e53f723c2d38041ee0bdb94",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "9998ca348f1e632fba6e4c7fe5b0f5e98c1e5e409e53f723c2d38041ee0bdb94",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 94,
+          "foreign_language": null,
+          "position_b": 112,
+          "match": "conteúdo idêntico",
+          "fingerprint": "73599a5a105147b7e75d59b1157d77cbfd4ee7b1c6d81f10fe9318c14db80720",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "73599a5a105147b7e75d59b1157d77cbfd4ee7b1c6d81f10fe9318c14db80720",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 95,
+          "foreign_language": null,
+          "position_b": 113,
+          "match": "conteúdo idêntico",
+          "fingerprint": "4b1476d82ef1ca572dda7fc70f5912631a483a899e0377a507ce7711a37ea2a9",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "4b1476d82ef1ca572dda7fc70f5912631a483a899e0377a507ce7711a37ea2a9",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 96,
+          "foreign_language": null,
+          "position_b": 114,
+          "match": "conteúdo idêntico",
+          "fingerprint": "f982a1ee8ab69f35c4db1668b1627da70c32c5a7d0718c52e9be90e2fa89a276",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "f982a1ee8ab69f35c4db1668b1627da70c32c5a7d0718c52e9be90e2fa89a276",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 97,
+          "foreign_language": null,
+          "position_b": 115,
+          "match": "conteúdo idêntico",
+          "fingerprint": "8f7c3b79019892c8527e131149105258feea100d538b41f3a22e2c90abe4be6f",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "8f7c3b79019892c8527e131149105258feea100d538b41f3a22e2c90abe4be6f",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 98,
+          "foreign_language": null,
+          "position_b": 116,
+          "match": "conteúdo idêntico",
+          "fingerprint": "02d0c5cf7e2eb0d723c38b4940bc5ad94093ec066c00288d8e57b2471583944d",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "02d0c5cf7e2eb0d723c38b4940bc5ad94093ec066c00288d8e57b2471583944d",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 99,
+          "foreign_language": null,
+          "position_b": 117,
+          "match": "conteúdo idêntico",
+          "fingerprint": "6ae8325392336562db3ebe94a43a5969615e52d45ec3ee684c6818f81f135f44",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "6ae8325392336562db3ebe94a43a5969615e52d45ec3ee684c6818f81f135f44",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 100,
+          "foreign_language": null,
+          "position_b": 118,
+          "match": "conteúdo idêntico",
+          "fingerprint": "327a763c2dc982d26791d87cda378340a854b36afa533f828d188daa3b18c9f9",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "327a763c2dc982d26791d87cda378340a854b36afa533f828d188daa3b18c9f9",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 101,
+          "foreign_language": null,
+          "position_b": 124,
+          "match": "conteúdo idêntico",
+          "fingerprint": "66eb82bcb9fd4f1333eaf587b0168a3c959b4af323b1f3f81a387eb993ceffe5",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "66eb82bcb9fd4f1333eaf587b0168a3c959b4af323b1f3f81a387eb993ceffe5",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 102,
+          "foreign_language": null,
+          "position_b": 125,
+          "match": "conteúdo idêntico",
+          "fingerprint": "2ce7084d0ad0bf5433b059a8eef6c0914528bbec867c056a47028ad4997fa337",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "2ce7084d0ad0bf5433b059a8eef6c0914528bbec867c056a47028ad4997fa337",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 103,
+          "foreign_language": null,
+          "position_b": 126,
+          "match": "conteúdo idêntico",
+          "fingerprint": "d192a7772ace861089432227a41c6413acf23e670e2ab01953f345c35291232c",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "d192a7772ace861089432227a41c6413acf23e670e2ab01953f345c35291232c",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 104,
+          "foreign_language": null,
+          "position_b": 127,
+          "match": "conteúdo idêntico",
+          "fingerprint": "27b1a1f25172ca093c5dbebc9c978eb819d0ad0e5b9474180a6abc12d5dacb05",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "27b1a1f25172ca093c5dbebc9c978eb819d0ad0e5b9474180a6abc12d5dacb05",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 105,
+          "foreign_language": null,
+          "position_b": 128,
+          "match": "conteúdo idêntico",
+          "fingerprint": "d748b2050d67c4448f74afec00139a3089090259f2081e9edc746298ad9a793c",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "d748b2050d67c4448f74afec00139a3089090259f2081e9edc746298ad9a793c",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 106,
+          "foreign_language": null,
+          "position_b": 129,
+          "match": "conteúdo idêntico",
+          "fingerprint": "850ed5814018badb5a883ed3f728a5f1276bd2abffc02b4565bd903223927fe2",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "850ed5814018badb5a883ed3f728a5f1276bd2abffc02b4565bd903223927fe2",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 107,
+          "foreign_language": null,
+          "position_b": 130,
+          "match": "conteúdo idêntico",
+          "fingerprint": "ddd251ecb194342fd0c10e7c58d8a6396ee8a6ad413cb45a28b0a2ce7b94bc35",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "ddd251ecb194342fd0c10e7c58d8a6396ee8a6ad413cb45a28b0a2ce7b94bc35",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 108,
+          "foreign_language": null,
+          "position_b": 131,
+          "match": "conteúdo idêntico",
+          "fingerprint": "7b33c5f8261ebcf53d76fbba3f477a0a4a0f77357d3f5b78238dd9adc5df8ce5",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "7b33c5f8261ebcf53d76fbba3f477a0a4a0f77357d3f5b78238dd9adc5df8ce5",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 109,
+          "foreign_language": null,
+          "position_b": 132,
+          "match": "conteúdo idêntico",
+          "fingerprint": "70ae03a25ce5b555d82f722953256025d6185a86949f8590d56abaefd41aa02e",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "70ae03a25ce5b555d82f722953256025d6185a86949f8590d56abaefd41aa02e",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 110,
+          "foreign_language": null,
+          "position_b": 133,
+          "match": "conteúdo idêntico",
+          "fingerprint": "31603a13eda54ff055b61f97ce460bb52c0bfe2b95c0fbf75b540cebcdb8aac4",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "31603a13eda54ff055b61f97ce460bb52c0bfe2b95c0fbf75b540cebcdb8aac4",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 111,
+          "foreign_language": null,
+          "position_b": 134,
+          "match": "conteúdo idêntico",
+          "fingerprint": "67d849ae0054300c84cab5f0689bb3dae2702e7d4f7e0d189f7df55e3526c5d9",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "67d849ae0054300c84cab5f0689bb3dae2702e7d4f7e0d189f7df55e3526c5d9",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 112,
+          "foreign_language": null,
+          "position_b": 135,
+          "match": "conteúdo idêntico",
+          "fingerprint": "88efacfa12aa280a53b95d4ef3af18b398417ebde6194c66bd01516bf534acd7",
+          "letter_map_method": "texto + comparação visual das figuras: ABCDE",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "88efacfa12aa280a53b95d4ef3af18b398417ebde6194c66bd01516bf534acd7",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 113,
+          "foreign_language": null,
+          "position_b": 122,
+          "match": "conteúdo idêntico",
+          "fingerprint": "ffdc2f3e3ac18801aafd3f94d643167c3113063b59c9b81a546c1341d3a41f26",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "ffdc2f3e3ac18801aafd3f94d643167c3113063b59c9b81a546c1341d3a41f26",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 114,
+          "foreign_language": null,
+          "position_b": 123,
+          "match": "conteúdo idêntico",
+          "fingerprint": "8a10d4cc85d8a9f7cd982a958018bb3d9babd3747484c09dc8057e37754bcc6a",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "8a10d4cc85d8a9f7cd982a958018bb3d9babd3747484c09dc8057e37754bcc6a",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 115,
+          "foreign_language": null,
+          "position_b": 91,
+          "match": "conteúdo idêntico",
+          "fingerprint": "54decaf13a007849d84dc990426911295fd33f1d44d702b9c412eba30c5c3514",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "54decaf13a007849d84dc990426911295fd33f1d44d702b9c412eba30c5c3514",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 116,
+          "foreign_language": null,
+          "position_b": 92,
+          "match": "conteúdo idêntico",
+          "fingerprint": "906ce924478da0c5381827d2321d12f23cb58aa81b775d98dba57867d95e8a67",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "906ce924478da0c5381827d2321d12f23cb58aa81b775d98dba57867d95e8a67",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 117,
+          "foreign_language": null,
+          "position_b": 93,
+          "match": "conteúdo idêntico",
+          "fingerprint": "868c39b417f71a3b0226a3cfc24f267a65d9b6b877c0e849470b7c36f3aac7f8",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "868c39b417f71a3b0226a3cfc24f267a65d9b6b877c0e849470b7c36f3aac7f8",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 118,
+          "foreign_language": null,
+          "position_b": 94,
+          "match": "conteúdo idêntico",
+          "fingerprint": "23ed69c41c2980e9e4eb505b345ff459f46c2278f7fae922be63412931300460",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "23ed69c41c2980e9e4eb505b345ff459f46c2278f7fae922be63412931300460",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 119,
+          "foreign_language": null,
+          "position_b": 104,
+          "match": "conteúdo idêntico",
+          "fingerprint": "eebbda20184f10c06d522f129cb7d51c19a748b42c997ea3ed8c858981fca585",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "eebbda20184f10c06d522f129cb7d51c19a748b42c997ea3ed8c858981fca585",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 120,
+          "foreign_language": null,
+          "position_b": 105,
+          "match": "conteúdo idêntico",
+          "fingerprint": "45d258bc91e50d4ad58f810f78251d5473083d915b64fade9a033fbcb00c6e69",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "45d258bc91e50d4ad58f810f78251d5473083d915b64fade9a033fbcb00c6e69",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 121,
+          "foreign_language": null,
+          "position_b": 106,
+          "match": "conteúdo idêntico",
+          "fingerprint": "665c7783ce583d9596a08a8aa58f40dca51c0429180013f7a08945eb300ed05c",
+          "letter_map_method": "texto + comparação visual das figuras: AC",
+          "letter_map": {
+            "A": "A",
+            "B": null,
+            "C": "C",
+            "D": null,
+            "E": null
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "665c7783ce583d9596a08a8aa58f40dca51c0429180013f7a08945eb300ed05c",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 122,
+          "foreign_language": null,
+          "position_b": 95,
+          "match": "conteúdo idêntico",
+          "fingerprint": "d6210a451bca59a965c3231502c4886226f35d5ab42accf6f8c4297c58e76022",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "d6210a451bca59a965c3231502c4886226f35d5ab42accf6f8c4297c58e76022",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 123,
+          "foreign_language": null,
+          "position_b": 96,
+          "match": "conteúdo idêntico",
+          "fingerprint": "47daebdb1a6124e7e86d76bd81a862d92b6016017f6447407a5b5ab446f07834",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "47daebdb1a6124e7e86d76bd81a862d92b6016017f6447407a5b5ab446f07834",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 124,
+          "foreign_language": null,
+          "position_b": 97,
+          "match": "conteúdo idêntico",
+          "fingerprint": "fa9617aafb4bb9691626ac470551bcac39fc53ce2a1b5cdfb46bb06868eb8ec3",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "fa9617aafb4bb9691626ac470551bcac39fc53ce2a1b5cdfb46bb06868eb8ec3",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 125,
+          "foreign_language": null,
+          "position_b": 98,
+          "match": "conteúdo idêntico",
+          "fingerprint": "29a50986ff40a92b009f96b1fd3c8eddb2f25d814bd22a891911eb1967a24ced",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "29a50986ff40a92b009f96b1fd3c8eddb2f25d814bd22a891911eb1967a24ced",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 126,
+          "foreign_language": null,
+          "position_b": 99,
+          "match": "conteúdo idêntico",
+          "fingerprint": "3b609b0696fe7396de0558fd129b7610fafe67bbdb5b944942d6f700efda3edf",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "3b609b0696fe7396de0558fd129b7610fafe67bbdb5b944942d6f700efda3edf",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 127,
+          "foreign_language": null,
+          "position_b": 100,
+          "match": "conteúdo idêntico",
+          "fingerprint": "badae88574ff0535b2e81ab10ea43b00e0e5f61352003d02f089be40a122b2c0",
+          "letter_map_method": "texto + comparação visual das figuras: CDE",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "badae88574ff0535b2e81ab10ea43b00e0e5f61352003d02f089be40a122b2c0",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 128,
+          "foreign_language": null,
+          "position_b": 101,
+          "match": "conteúdo idêntico",
+          "fingerprint": "b7fce1df062b945e84a1c23c9547711180048aa212b0319097709845681df66a",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "b7fce1df062b945e84a1c23c9547711180048aa212b0319097709845681df66a",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 129,
+          "foreign_language": null,
+          "position_b": 102,
+          "match": "conteúdo idêntico",
+          "fingerprint": "79495cefe4351d89472e357112a2dc1dceae8c302c1921eaeb84f1fd00983325",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "ANULADO",
+          "answer_b": "ANULADO",
+          "fingerprint_b": "79495cefe4351d89472e357112a2dc1dceae8c302c1921eaeb84f1fd00983325",
+          "check": "anulada nas duas",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 130,
+          "foreign_language": null,
+          "position_b": 103,
+          "match": "conteúdo idêntico",
+          "fingerprint": "8bc83ca0b3596d3824940b9c7f525aa9b615af7fa50130ec1b6c9786a5481629",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "8bc83ca0b3596d3824940b9c7f525aa9b615af7fa50130ec1b6c9786a5481629",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 131,
+          "foreign_language": null,
+          "position_b": 109,
+          "match": "conteúdo idêntico",
+          "fingerprint": "66679ff6e3a365e3e28eefcd3a666c20b5c94be2f1d303ff66703b00b9eb466f",
+          "letter_map_method": "texto + comparação visual das figuras: ABCDE",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "66679ff6e3a365e3e28eefcd3a666c20b5c94be2f1d303ff66703b00b9eb466f",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 132,
+          "foreign_language": null,
+          "position_b": 110,
+          "match": "conteúdo idêntico",
+          "fingerprint": "ac81ff9e2d86d3d19b31ba01d1250ff7c36fa2276fa7e94c58823ff472a79c2d",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "ac81ff9e2d86d3d19b31ba01d1250ff7c36fa2276fa7e94c58823ff472a79c2d",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 133,
+          "foreign_language": null,
+          "position_b": 111,
+          "match": "conteúdo idêntico",
+          "fingerprint": "b997080b6e8f02d4ce73c7438c270c1ee4df309b0f6f81bba8c425f07b65aba7",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "b997080b6e8f02d4ce73c7438c270c1ee4df309b0f6f81bba8c425f07b65aba7",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 134,
+          "foreign_language": null,
+          "position_b": 107,
+          "match": "conteúdo idêntico",
+          "fingerprint": "6f3cc8482664c90655e4e8a85e2c98132e6af6d26aa72140de7d5de1752d5c3e",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "6f3cc8482664c90655e4e8a85e2c98132e6af6d26aa72140de7d5de1752d5c3e",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 135,
+          "foreign_language": null,
+          "position_b": 108,
+          "match": "conteúdo idêntico",
+          "fingerprint": "ef6c5306bf531bf5097f8db20af5fdebe828b250884d49fc4837ca237f9e2b0e",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "ef6c5306bf531bf5097f8db20af5fdebe828b250884d49fc4837ca237f9e2b0e",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 136,
+          "foreign_language": null,
+          "position_b": 163,
+          "match": "conteúdo idêntico",
+          "fingerprint": "2d3c65708dd9ca5249aa12a16d74621b090d6c8f84eb8a120225816f3da99faa",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "2d3c65708dd9ca5249aa12a16d74621b090d6c8f84eb8a120225816f3da99faa",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 137,
+          "foreign_language": null,
+          "position_b": 164,
+          "match": "conteúdo idêntico",
+          "fingerprint": "089ec6f60e5cb2d4ef9ee4cd32411cda32d6f5c28d981baf8d38e13e85c877ff",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "089ec6f60e5cb2d4ef9ee4cd32411cda32d6f5c28d981baf8d38e13e85c877ff",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 138,
+          "foreign_language": null,
+          "position_b": 165,
+          "match": "conteúdo idêntico",
+          "fingerprint": "447d21be4b8aa6f32cf0fd26461c40042803e1e5b66fd9ba3a5b95775a3224f0",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "447d21be4b8aa6f32cf0fd26461c40042803e1e5b66fd9ba3a5b95775a3224f0",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 139,
+          "foreign_language": null,
+          "position_b": 166,
+          "match": "conteúdo idêntico",
+          "fingerprint": "3774d2542c2b2408190b5466c28faf473fe122f44afd7fb307fe74911feec75d",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "3774d2542c2b2408190b5466c28faf473fe122f44afd7fb307fe74911feec75d",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 140,
+          "foreign_language": null,
+          "position_b": 167,
+          "match": "conteúdo idêntico",
+          "fingerprint": "a20a13dd42f21e8e72067ec7e1a28654886624f0719aea87c7fe19b8ff1e7d5e",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "a20a13dd42f21e8e72067ec7e1a28654886624f0719aea87c7fe19b8ff1e7d5e",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 141,
+          "foreign_language": null,
+          "position_b": 168,
+          "match": "conteúdo idêntico",
+          "fingerprint": "eef7e98d9fed3a2da6962e00725e0f8e2fe03fac97490014160a39a54440e843",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "eef7e98d9fed3a2da6962e00725e0f8e2fe03fac97490014160a39a54440e843",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 142,
+          "foreign_language": null,
+          "position_b": 169,
+          "match": "conteúdo idêntico",
+          "fingerprint": "f6e12d7cbfde3a8db8d6e8b71bcab6342b1bbde21dbeb9e2bc871cf94bdad378",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "f6e12d7cbfde3a8db8d6e8b71bcab6342b1bbde21dbeb9e2bc871cf94bdad378",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 143,
+          "foreign_language": null,
+          "position_b": 170,
+          "match": "conteúdo idêntico",
+          "fingerprint": "6be9f0c222dbf168b28b586d2d5e5f5f909280709ec604f4cbedc2f229fe29aa",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "6be9f0c222dbf168b28b586d2d5e5f5f909280709ec604f4cbedc2f229fe29aa",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 144,
+          "foreign_language": null,
+          "position_b": 171,
+          "match": "conteúdo idêntico",
+          "fingerprint": "88f624224ac4437763c8e60d3630028696b84609d531a0d9e0f6146b82e2d49f",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "88f624224ac4437763c8e60d3630028696b84609d531a0d9e0f6146b82e2d49f",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 145,
+          "foreign_language": null,
+          "position_b": 172,
+          "match": "conteúdo idêntico",
+          "fingerprint": "c3b050955992c72b4e5bd31dee297a0653a94e37d4aa142af7164355b3f6e554",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "c3b050955992c72b4e5bd31dee297a0653a94e37d4aa142af7164355b3f6e554",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 146,
+          "foreign_language": null,
+          "position_b": 177,
+          "match": "conteúdo idêntico",
+          "fingerprint": "bf7f677a1ab32edda9846fccc3fe09e2a86ac2082788a5cca0982e0f0f064799",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "bf7f677a1ab32edda9846fccc3fe09e2a86ac2082788a5cca0982e0f0f064799",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 147,
+          "foreign_language": null,
+          "position_b": 178,
+          "match": "conteúdo idêntico",
+          "fingerprint": "2d4926b13dc2977ff616b0feb38fad33660b19fb54a7f789b138aa044717b0b8",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "2d4926b13dc2977ff616b0feb38fad33660b19fb54a7f789b138aa044717b0b8",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 148,
+          "foreign_language": null,
+          "position_b": 179,
+          "match": "conteúdo idêntico",
+          "fingerprint": "cdcc757cd4a463d7cd5e9b99bee1884a50c225b5f13faf092027b2f8ed04ff4b",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "cdcc757cd4a463d7cd5e9b99bee1884a50c225b5f13faf092027b2f8ed04ff4b",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 149,
+          "foreign_language": null,
+          "position_b": 180,
+          "match": "conteúdo idêntico",
+          "fingerprint": "1157b8057bd9b6c8aaca7e6b25c065cc650ebbc6232b1a44ecf7c84225fcbe31",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "1157b8057bd9b6c8aaca7e6b25c065cc650ebbc6232b1a44ecf7c84225fcbe31",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 150,
+          "foreign_language": null,
+          "position_b": 173,
+          "match": "conteúdo idêntico",
+          "fingerprint": "cedbdf648d62c1b3bbd13b1c96ae570ec248408f2b5106f676643e86775e5692",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "cedbdf648d62c1b3bbd13b1c96ae570ec248408f2b5106f676643e86775e5692",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 151,
+          "foreign_language": null,
+          "position_b": 174,
+          "match": "conteúdo idêntico",
+          "fingerprint": "3b9b6061f4b854f94f3374bf583472f9811b96c60b608806fdeadf22f04e837f",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "3b9b6061f4b854f94f3374bf583472f9811b96c60b608806fdeadf22f04e837f",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 152,
+          "foreign_language": null,
+          "position_b": 175,
+          "match": "conteúdo idêntico",
+          "fingerprint": "30b6a3ab5ad6a2009668dd42ca67bbedb8dd864ff1c028b605844e0f2ce908b3",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "30b6a3ab5ad6a2009668dd42ca67bbedb8dd864ff1c028b605844e0f2ce908b3",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 153,
+          "foreign_language": null,
+          "position_b": 176,
+          "match": "conteúdo idêntico",
+          "fingerprint": "82758e1c59c870004c53e2e3adb8619cd63d5df722a182ecfefd17b7837a95fc",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "82758e1c59c870004c53e2e3adb8619cd63d5df722a182ecfefd17b7837a95fc",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 154,
+          "foreign_language": null,
+          "position_b": 154,
+          "match": "conteúdo idêntico",
+          "fingerprint": "bce1d2704831e3993846428889b47d2a0c11b54df5e06cc9ba9f7abd9e78aa11",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "bce1d2704831e3993846428889b47d2a0c11b54df5e06cc9ba9f7abd9e78aa11",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 155,
+          "foreign_language": null,
+          "position_b": 155,
+          "match": "conteúdo idêntico",
+          "fingerprint": "9eac6f939f3f542b9d3226f3228d1caf6ce7be681f74fb1c56b292876af279d2",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "9eac6f939f3f542b9d3226f3228d1caf6ce7be681f74fb1c56b292876af279d2",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 156,
+          "foreign_language": null,
+          "position_b": 156,
+          "match": "conteúdo idêntico",
+          "fingerprint": "8a232c4e2553e2aaba98e886f1919851e0553d6224ca855da2dea776e5ca70d8",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "8a232c4e2553e2aaba98e886f1919851e0553d6224ca855da2dea776e5ca70d8",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 157,
+          "foreign_language": null,
+          "position_b": 160,
+          "match": "conteúdo idêntico",
+          "fingerprint": "86814861d9afe5a8df637b3dce556da1971a91ff29645ef5ef4f257a449a6608",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "86814861d9afe5a8df637b3dce556da1971a91ff29645ef5ef4f257a449a6608",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 158,
+          "foreign_language": null,
+          "position_b": 159,
+          "match": "conteúdo idêntico",
+          "fingerprint": "6a866a021ffe9a4c45018ee6b9ad1aca08bb364de87a60df37277bcb983c22ff",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "6a866a021ffe9a4c45018ee6b9ad1aca08bb364de87a60df37277bcb983c22ff",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 159,
+          "foreign_language": null,
+          "position_b": 158,
+          "match": "conteúdo idêntico",
+          "fingerprint": "5e84664db0e8b89cc6116f1ec7f004cb63a18e4421a54096b3bd28f13284e21d",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "5e84664db0e8b89cc6116f1ec7f004cb63a18e4421a54096b3bd28f13284e21d",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 160,
+          "foreign_language": null,
+          "position_b": 157,
+          "match": "conteúdo idêntico",
+          "fingerprint": "5ab61e62b85f8e5628f55096f989cb2aa838db38f90ce3390937777b1e4ac946",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "5ab61e62b85f8e5628f55096f989cb2aa838db38f90ce3390937777b1e4ac946",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 161,
+          "foreign_language": null,
+          "position_b": 153,
+          "match": "conteúdo idêntico",
+          "fingerprint": "8a4066dda1544e3c74579034407c1b9b288645d3c5a720421e0c4266945c3981",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": null
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "8a4066dda1544e3c74579034407c1b9b288645d3c5a720421e0c4266945c3981",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 162,
+          "foreign_language": null,
+          "position_b": 143,
+          "match": "conteúdo idêntico",
+          "fingerprint": "4b8c0f2044a03e2ace475970c5339362860adc8fd776099b013b1a3a8f09907e",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "4b8c0f2044a03e2ace475970c5339362860adc8fd776099b013b1a3a8f09907e",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 163,
+          "foreign_language": null,
+          "position_b": 144,
+          "match": "conteúdo idêntico",
+          "fingerprint": "ceca5945fea25c47b594b5ea3a2a8adb91c5127e035d74145237daf46b8828c8",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "ceca5945fea25c47b594b5ea3a2a8adb91c5127e035d74145237daf46b8828c8",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 164,
+          "foreign_language": null,
+          "position_b": 145,
+          "match": "conteúdo idêntico",
+          "fingerprint": "587db6008b4719903b7a0da135ea6a6463a11ea5e5869575a2ae81e28df38205",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "587db6008b4719903b7a0da135ea6a6463a11ea5e5869575a2ae81e28df38205",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 165,
+          "foreign_language": null,
+          "position_b": 140,
+          "match": "conteúdo idêntico",
+          "fingerprint": "0a0070cec8fcd82a5a23ad7f7de1d1706633a5fb6436acc61182bba85df71b4a",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "0a0070cec8fcd82a5a23ad7f7de1d1706633a5fb6436acc61182bba85df71b4a",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 166,
+          "foreign_language": null,
+          "position_b": 141,
+          "match": "conteúdo idêntico",
+          "fingerprint": "51adf0f651bcedb9738f68a3d92c7f2e9c687d5ecb628b7d28c8014e0a955141",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "51adf0f651bcedb9738f68a3d92c7f2e9c687d5ecb628b7d28c8014e0a955141",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 167,
+          "foreign_language": null,
+          "position_b": 142,
+          "match": "conteúdo idêntico",
+          "fingerprint": "9300cbfac3a225685a75ab37305a68b65d5f102d1e3ddd189f602420efe315c4",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "9300cbfac3a225685a75ab37305a68b65d5f102d1e3ddd189f602420efe315c4",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 168,
+          "foreign_language": null,
+          "position_b": 146,
+          "match": "conteúdo idêntico",
+          "fingerprint": "2f3b9278cee8fa8ae338b714735a894dd6cef4b328a512e5d5e44990897d583d",
+          "letter_map_method": "texto + comparação visual das figuras: CDE",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "2f3b9278cee8fa8ae338b714735a894dd6cef4b328a512e5d5e44990897d583d",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 169,
+          "foreign_language": null,
+          "position_b": 149,
+          "match": "conteúdo idêntico",
+          "fingerprint": "c79e48da550c1976313baeace5884a4a74c8a5048463ffe251982dfd487ecf30",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "c79e48da550c1976313baeace5884a4a74c8a5048463ffe251982dfd487ecf30",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 170,
+          "foreign_language": null,
+          "position_b": 150,
+          "match": "conteúdo idêntico",
+          "fingerprint": "44d66090276ec6c739c186d3bcf3e149eb863f9924f001f3b107ad9a2e6e234d",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "44d66090276ec6c739c186d3bcf3e149eb863f9924f001f3b107ad9a2e6e234d",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 171,
+          "foreign_language": null,
+          "position_b": 147,
+          "match": "conteúdo idêntico",
+          "fingerprint": "ecca5601d5c5dedb49768be619301c2d6633f3718f6b8b7800b16203b2962654",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "ecca5601d5c5dedb49768be619301c2d6633f3718f6b8b7800b16203b2962654",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 172,
+          "foreign_language": null,
+          "position_b": 148,
+          "match": "conteúdo idêntico",
+          "fingerprint": "d5b74ac892d4fc9ac38c540903f4da6e33f862a3dd4771d8eb0cae16610739c2",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "d5b74ac892d4fc9ac38c540903f4da6e33f862a3dd4771d8eb0cae16610739c2",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 173,
+          "foreign_language": null,
+          "position_b": 161,
+          "match": "conteúdo idêntico",
+          "fingerprint": "3b007db8d3429d5c4d563cb0e51a87ff9c5b188ab79df62aec8e0aad7fb8f1bc",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "A",
+          "answer_b": "A",
+          "fingerprint_b": "3b007db8d3429d5c4d563cb0e51a87ff9c5b188ab79df62aec8e0aad7fb8f1bc",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 174,
+          "foreign_language": null,
+          "position_b": 162,
+          "match": "conteúdo idêntico",
+          "fingerprint": "07c75d1f18116fc6ad93d7d9f5665ba151e728ddbf1edf1efd6fb553f32f8644",
+          "letter_map_method": "texto + comparação visual das figuras: CD",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "07c75d1f18116fc6ad93d7d9f5665ba151e728ddbf1edf1efd6fb553f32f8644",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 175,
+          "foreign_language": null,
+          "position_b": 151,
+          "match": "conteúdo idêntico",
+          "fingerprint": "211f281c2b6e280b3634cf137697ff29199f8e6c52b502df2af928fed3aaeb4c",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "D",
+          "answer_b": "D",
+          "fingerprint_b": "211f281c2b6e280b3634cf137697ff29199f8e6c52b502df2af928fed3aaeb4c",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 176,
+          "foreign_language": null,
+          "position_b": 152,
+          "match": "conteúdo idêntico",
+          "fingerprint": "91319e8695ff6a958db50bf9d4da2e5e23e78658a3eb8e81140cf0b83fb6ce10",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "B",
+          "answer_b": "B",
+          "fingerprint_b": "91319e8695ff6a958db50bf9d4da2e5e23e78658a3eb8e81140cf0b83fb6ce10",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 177,
+          "foreign_language": null,
+          "position_b": 136,
+          "match": "conteúdo idêntico",
+          "fingerprint": "7db111ff0683e60807d71581e5eedb620430fe64f630d1c41f0ce2a753de9fdf",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "7db111ff0683e60807d71581e5eedb620430fe64f630d1c41f0ce2a753de9fdf",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 178,
+          "foreign_language": null,
+          "position_b": 137,
+          "match": "conteúdo idêntico",
+          "fingerprint": "bccfcbde55068550258ebb1704f3f996f6970d4cb22ba7da73e45517a6c64c65",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "bccfcbde55068550258ebb1704f3f996f6970d4cb22ba7da73e45517a6c64c65",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 179,
+          "foreign_language": null,
+          "position_b": 138,
+          "match": "conteúdo idêntico",
+          "fingerprint": "9874b85b44ad2988919db96712a45acc590180470b91c6dc5bd390e20f435ccb",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "C",
+          "answer_b": "C",
+          "fingerprint_b": "9874b85b44ad2988919db96712a45acc590180470b91c6dc5bd390e20f435ccb",
+          "check": "confere",
+          "same_fingerprint": true
+        },
+        {
+          "position_a": 180,
+          "foreign_language": null,
+          "position_b": 139,
+          "match": "conteúdo idêntico",
+          "fingerprint": "c65957135e7a6f68519def2eb8cee66b59c293c8280b22e90eaa4aef626ba5b1",
+          "letter_map": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E"
+          },
+          "answer_a": "E",
+          "answer_b": "E",
+          "fingerprint_b": "c65957135e7a6f68519def2eb8cee66b59c293c8280b22e90eaa4aef626ba5b1",
+          "check": "confere",
+          "same_fingerprint": true
+        }
+      ]
+    }
+  ]
+}

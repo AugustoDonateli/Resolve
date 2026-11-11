@@ -15,6 +15,7 @@ from __future__ import annotations
 import difflib
 import hashlib
 import json
+import os
 import re
 import sys
 import unicodedata
@@ -26,7 +27,8 @@ from extract import segment, structure
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parents[1]
-RAW = ROOT / "raw" / "enem-2025"
+ANO = os.environ.get("ENEM_ANO", "2025")  # edição (os PDFs ficam em raw/enem-<ano>/)
+RAW = ROOT / "raw" / f"enem-{ANO}"
 PAIRS = [("D1", "1", "2"), ("D2", "7", "5")]
 
 
@@ -75,7 +77,7 @@ def fingerprint(q: dict) -> str:
 
 
 def extract(day: str, booklet: str) -> dict:
-    path = RAW / f"2025_PV_impresso_{day}_CD{booklet}.pdf"
+    path = RAW / f"{ANO}_PV_impresso_{day}_CD{booklet}.pdf"
     qs, _ = segment(pdfplumber.open(str(path)))
     return {"file": path.name, "sha256": hashlib.sha256(path.read_bytes()).hexdigest(), "questions": [structure(q) for q in qs]}
 
@@ -271,8 +273,8 @@ def main() -> int:
     for day, ca, cb in PAIRS:
         A, B = extract(day, ca), extract(day, cb)
         extracted[(day, "a")], extracted[(day, "b")] = A, B
-        ka = parse_answer_key(RAW / f"2025_GB_impresso_{day}_CD{ca}.pdf")
-        kb = parse_answer_key(RAW / f"2025_GB_impresso_{day}_CD{cb}.pdf")
+        ka = parse_answer_key(RAW / f"{ANO}_GB_impresso_{day}_CD{ca}.pdf")
+        kb = parse_answer_key(RAW / f"{ANO}_GB_impresso_{day}_CD{cb}.pdf")
         rows = []
         for qa, qb, how in match_items(A["questions"], B["questions"]):
             row = {"position_a": qa["number"], "foreign_language": qa["foreign_language"], "position_b": qb["number"] if qb else None, "match": how,
@@ -314,7 +316,7 @@ def main() -> int:
         print(f"{day}: {A['file']} × {B['file']} · {len(rows)} itens · {counts} · posição diferente: {moved} · letras permutadas: {permuted}")
     if "--review" in sys.argv:
         print("folhas de conferência:", ", ".join(review_sheets(report, extracted)))
-    (REPO / "data" / "extraction" / "enem-2025-cruzamento.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (REPO / "data" / "extraction" / f"enem-{ANO}-cruzamento.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return 0
 
 

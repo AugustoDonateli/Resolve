@@ -1,0 +1,1014 @@
+{
+ "booklet_note": "%2024_PV_impresso_D2_CD7%",
+ "pdf_sha": "0993ae687a93dfbcda8e95ce8708883be9d5a55cabbe1f1a06b81a50c18c6cdc",
+ "figures": {
+  "91": {
+   "crop": "91_p2_1.png",
+   "alt": "Ilustração de um carro em corte lateral batendo de frente numa barreira listrada, com dois bonecos de teste sentados. Três itens indicados: \"Crumple zone (Região deformável)\", a frente amassada; \"Air bag\", inflado diante do motorista; \"Seat belts (Cintos de segurança)\", nos dois bonecos."
+  },
+  "92": {
+   "crop": "92_p2_2.png",
+   "alt": "Esquema de uma célula com dois compartimentos separados por uma \"Membrana\". À esquerda, o \"Ânodo\", onde entra \"Matéria orgânica (CH3COO⁻)\" e sai CO2; à direita, o \"Cátodo\", onde entra O2 e sai H2O. Íons H⁺ atravessam a membrana do ânodo para o cátodo, e elétrons (e⁻) vão do ânodo ao cátodo por um fio externo. Abaixo, as semirreações: CH3COO⁻ (aq) + 2 H2O (l) → 2 CO2 (g) + 7 H⁺ (aq) + 8 e⁻; 4 H⁺ (aq) + O2 (g) + 4 e⁻ → 2 H2O (l)."
+  },
+  "94": {
+   "crop": "94_p3_2.png",
+   "alt": "Fórmula estrutural de uma molécula com os grupos destacados por linhas tracejadas: um anel benzênico central ligado a um grupo N–H que pertence a uma \"sulfonamida\" (S com dois O e um grupo \"metila\", H3C); ligado, por um oxigênio de \"éter\", a um segundo anel, a \"fenila\"; e, na posição oposta, a um grupo \"nitro\" (N⁺ com um O ligado por dupla e um O⁻)."
+  },
+  "96": {
+   "crop": "96_p3_1.png",
+   "alt": "Desenho de um pneu com roda, visto de frente, com dois eixos tracejados que se cruzam no centro. Próximo ao centro, um pouco acima e à direita, está o ponto laranja \"CM\" (centro de massa). Na borda da roda há cinco pontos amarelos numerados: 1 (no alto), 5 (no alto, à direita), 2 (à esquerda), 3 (embaixo, à esquerda) e 4 (embaixo)."
+  },
+  "98": {
+   "crop": "98_p4_1.png",
+   "alt": "Árvore filogenética dos mamíferos. \"Mammalia\" se divide em \"Prototheria\", que leva a \"Monotremata\" (desenho de um ornitorrinco), e \"Theria\", que se divide em \"Metatheria\", levando a \"Marsupialia\" (um canguru com filhote), e \"Eutheria\", levando a \"Placentalia\" (um elefante)."
+  },
+  "100": {
+   "crop": "100_p4_2.png",
+   "alt": "No alto, um objeto em forma de disco com uma raposa de brinquedo sobre uma abertura no topo. Embaixo, o mesmo objeto em corte: dois espelhos curvos, E1 embaixo e E2 em cima, com 23 cm de largura total e altura de 3,8 cm até a borda e mais 3,8 cm até o topo; no centro do topo há uma abertura de 5 cm. Uma raposa está no fundo, no centro de E1, e raios de luz refletem nos dois espelhos até formar uma imagem na abertura de cima."
+  },
+  "101": {
+   "crop": "101_p5_2.png",
+   "alt": "Sala de aula vista em perspectiva: um professor fala junto ao quadro, na posição 0, e cinco alunos estão sentados em carteiras alinhadas entre 2 e 10 metros dele. Acima, gráfico do Nível sonoro (dB), de 0 a 60, em função da Distância (m), de 0 a 10: a curva começa perto de 60 dB a 1 m, cai para cerca de 46 dB a 4 m e chega a cerca de 37 dB a 10 m, decrescendo cada vez mais devagar."
+  },
+  "103": {
+   "crop": "103_p5_1.png",
+   "alt": "Esquema de um aquecedor solar: \"Radiação solar\" incide sobre o \"Coletor solar de tubo a vácuo\" (vários tubos paralelos inclinados). Ele está ligado a um \"Reservatório de água\" cilíndrico com \"Isolamento térmico de poliuretano\": a \"Água fria\" desce do reservatório para o coletor e a \"Água quente\" sobe do coletor para o reservatório."
+  },
+  "104": {
+   "crop": "104_p5_1.png",
+   "alt": "Fluxograma com cinco caixas ligadas por setas: \"Urbanização\" → \"Ausência de saneamento básico\" → \"Contaminação da água\" → \"Redução da biodiversidade aquática\" → \"Riscos para a saúde humana\"."
+  },
+  "110": {
+   "crop": "110_p7_2.png",
+   "alt": "Duas fotografias de cobras com anéis vermelhos, pretos e brancos, muito parecidas. À esquerda, \"Coral-verdadeira (Micrurus decoratus)\"; à direita, \"Falsa-coral (Erythrolamprus aesculapii)\"."
+  },
+  "112": [
+   {
+    "crop": "112_p7_2.png",
+    "alternative": "A",
+    "alt": "Heredograma: mãe representada por círculo com um ponto vermelho no centro e pai por quadrado branco. Quatro filhos: uma filha com círculo branco, uma filha com círculo todo vermelho, um filho com quadrado todo azul e um filho com quadrado branco."
+   },
+   {
+    "crop": "112_p7_3.png",
+    "alternative": "B",
+    "alt": "Heredograma: mãe com círculo com ponto vermelho e pai com quadrado branco. Quatro filhos: uma filha com círculo branco, uma filha com círculo com ponto vermelho, um filho com quadrado branco e um filho com quadrado todo azul."
+   },
+   {
+    "crop": "112_p7_4.png",
+    "alternative": "C",
+    "alt": "Heredograma: mãe com círculo com ponto vermelho e pai com quadrado branco. Quatro filhos: duas filhas com círculo com ponto vermelho e dois filhos com quadrado branco."
+   },
+   {
+    "crop": "112_p7_5.png",
+    "alternative": "D",
+    "alt": "Heredograma: mãe com círculo com ponto vermelho e pai com quadrado branco. Quatro filhos: duas filhas com círculo branco e dois filhos com quadrado todo azul."
+   },
+   {
+    "crop": "112_p7_6.png",
+    "alternative": "E",
+    "alt": "Heredograma: mãe com círculo com ponto vermelho e pai com quadrado branco. Quatro filhos: duas filhas com círculo todo vermelho e dois filhos com quadrado branco."
+   }
+  ],
+  "113": {
+   "crop": "113_p8_1.png",
+   "alt": "Infográfico em dois painéis. \"Procariontes no ciclo do nitrogênio\": 1, \"Procariontes fixadores de nitrogênio: convertem N2 em amônia (NH3)\", a partir do \"Nitrogênio atmosférico (N2)\"; \"Procariontes nitrificantes: convertem NH3 em nitritos (NO2⁻) e nitratos (NO3⁻)\", absorvidos pelas plantas; 2, \"Procariontes desnitrificantes: convertem nitratos em N2\", que volta à atmosfera. \"Procariontes no ciclo do carbono\": a partir do \"Carbono atmosférico (CO2)\", 4, \"Plantas: fixam CO2\"; 3, \"Procariontes fotossintetizantes: fixam CO2\"; 5, \"Procariontes decompositores: convertem o carbono fixado em CO2\", que volta à atmosfera."
+  },
+  "114": {
+   "crop": "114_p8_adj.png",
+   "alt": "Gráfico da composição dos gases do escapamento em função da Razão ar/combustível (massa/massa), de 10 a 20, com uma linha tracejada na razão estequiométrica, perto de 14,7 (à esquerda, \"Deficiência\" de ar; à direita, \"Excesso\"). Eixo da esquerda: O2, CO e CO2 em % de volume, de 0 a 14. Eixo da direita: NO (10³ vppm) e HC como C6 (10² vppm), de 0 a 7. Valores aproximados: CO2 sobe de 7,4 a um máximo de 14,2 perto de 15 e cai para 11 em 19,5; CO cai de 12 (em 10,4) para cerca de 1 na razão estequiométrica e fica perto de zero depois; O2 fica perto de zero até 13 e sobe até 5,7 em 19,6. HC (eixo da direita) cai de 7,2 para cerca de 3,8 na razão estequiométrica e para 1,3 perto de 18, subindo um pouco depois; NO (eixo da direita) sobe de quase zero até um máximo de 3,6 perto de 15,8 e cai para 0,7 em 19,8."
+  },
+  "115": {
+   "crop": "115_p9_2.png",
+   "alt": "Desenho de duas amebas, cada uma com prolongamentos irregulares (pseudópodes), e setas para baixo mostrando o que acontece com elas. \"Grupo controle\": a ameba continua com pseudópodes. \"Ameba tratada com citocalasina B\": a ameba fica arredondada, sem pseudópodes."
+  },
+  "118": [
+   {
+    "crop": "118_p9_1.png",
+    "alt": "Equilíbrio químico: Ca5(PO4)3OH (s) + H⁺ (aq) ⇌ 5 Ca²⁺ (aq) + 3 PO4³⁻ (aq) + H2O (l). O sentido direto é indicado como \"Desmineralização\" e o inverso como \"Mineralização\"."
+   },
+   {
+    "crop": "118_p9_2.png",
+    "alt": "Tabela com três colunas, Creme dental, Agente de polimento e pH: I, Bicarbonato de sódio, 9,5; II, Carbonato de cálcio, 11,0; III, Citrato de potássio, 7,7; IV, Dióxido de silício, 6,9; V, Fosfato de cálcio, 7,3."
+   }
+  ],
+  "119": {
+   "crop": "119_p10_1.png",
+   "alt": "Retângulo tracejado com as boias 1 (embaixo, à esquerda), 2 (embaixo, à direita), 3 (em cima, à direita) e 4 (em cima, à esquerda). Os lados de cima e de baixo medem 800 m e os laterais, 400 m. Perto do lado de baixo, uma seta vn aponta para cima e para a direita; perto do lado de cima, outra seta vn aponta para cima e para a esquerda; junto ao lado direito, a seta vc (corrente marinha) aponta para baixo."
+  },
+  "121": [
+   {
+    "crop": "121_p10_2.png",
+    "alt": "Tirinha de Calvin e Haroldo em quatro quadros. 1: Calvin balança num balanço. 2: ele se solta no alto, gritando \"Iaauuuuuu\". 3: Calvin voa pelo ar, de cabeça para baixo. 4: Calvin cai de cabeça no chão e diz: \"Houston, estamos com um problema na trajetória orbital.\" Crédito: WATTERSON, B. Disponível em: https://tiras-do-calvin.tumblr.com. Acesso em: 19 nov. 2021 (adaptado)."
+   },
+   {
+    "crop": "121_p10_adjA.png",
+    "alternative": "A",
+    "alt": "Seta inclinada, apontando para cima e para a direita."
+   },
+   {
+    "crop": "121_p10_adjB.png",
+    "alternative": "B",
+    "alt": "Seta horizontal, apontando para a esquerda."
+   },
+   {
+    "crop": "121_p10_adjC.png",
+    "alternative": "C",
+    "alt": "Seta inclinada, apontando para cima e para a esquerda."
+   },
+   {
+    "crop": "121_p10_adjD.png",
+    "alternative": "D",
+    "alt": "Seta vertical, apontando para cima."
+   },
+   {
+    "crop": "121_p10_adjE.png",
+    "alternative": "E",
+    "alt": "Seta horizontal, apontando para a direita."
+   }
+  ],
+  "127": [
+   {
+    "crop": "127_p12_2.png",
+    "alt": "Duas barras verticais paralelas: A, à esquerda, com sinais +, e B, à direita, com sinais −. Entre elas, linhas de campo horizontais, paralelas e igualmente espaçadas, com setas de A para B."
+   },
+   {
+    "crop": "127_p12_4.png",
+    "alternative": "A",
+    "alt": "Barras A (+) e B (−) com um anel no meio. As linhas de campo continuam retas e paralelas, de A para B, atravessando o anel como se ele não existisse."
+   },
+   {
+    "crop": "127_p12_6.png",
+    "alternative": "B",
+    "alt": "Barras A (+) e B (−) com um anel no meio. As linhas de campo são retas e paralelas, atravessam o anel, e as setas apontam de B para A."
+   },
+   {
+    "crop": "127_p12_7.png",
+    "alternative": "C",
+    "alt": "Barras A (+) e B (−) com um anel no meio. As linhas de campo, com setas de B para A, se curvam em direção ao anel e se cruzam dentro dele."
+   },
+   {
+    "crop": "127_p12_3.png",
+    "alternative": "D",
+    "alt": "Barras A (+) e B (−) com um anel no meio. As linhas de campo, com setas de A para B, se curvam em direção ao anel e se cruzam dentro dele."
+   },
+   {
+    "crop": "127_p12_5.png",
+    "alternative": "E",
+    "alt": "Barras A (+) e B (−) com um anel no meio. As linhas de campo, com setas de A para B, chegam à superfície do anel e saem dela do outro lado, sem nenhuma linha dentro do anel; perto dele, as linhas se curvam."
+   }
+  ],
+  "128": {
+   "crop": "128_p13_2.png",
+   "alt": "Esquema de um dispositivo em camadas sob chuva. Um detalhe ampliado mostra uma \"Camada fina de água\" sobre uma \"Camada fina de grafeno\". Na água, íons Bⁿ⁻ ficam na parte de cima e íons Aᵐ⁺ junto ao grafeno; no grafeno, há elétrons (e⁻). Setas indicam \"Alto potencial elétrico\" na água e \"Baixo potencial elétrico\" no grafeno."
+  },
+  "130": [
+   {
+    "crop": "130_p13_1.png",
+    "alt": "Diagrama pressão (P) por volume (V) de um ciclo com os pontos 0, 1, 2, 3 e 4. De 0 a 1, linha tracejada horizontal no nível mais baixo; de 1 a 2, curva que sobe à esquerda; de 2 a 3, linha vertical para cima; de 3 a 4, curva que desce à direita; de 4 a 1, linha vertical para baixo. A área fechada 1-2-3-4, sombreada, é indicada como W."
+   },
+   {
+    "crop": "130_p13_2.png",
+    "alt": "Tabela com três colunas, Etapa, Processo e Descrição: I, 0 a 1, admissão isobárica da mistura ar-combustível no cilindro do motor; II, 1 a 2, compressão adiabática da mistura; III, 2 a 3, introdução de energia na forma de calor da combustão; IV, 3 a 4, expansão adiabática; V, 4 a 1, liberação de energia na forma de calor; VI, 1 a 0, liberação dos gases resultantes da combustão. Crédito: Disponível em: www.mspc.eng.br. Acesso em: 24 fev. 2013 (adaptado)."
+   }
+  ],
+  "131": [
+   {
+    "crop": "131_p14_1.png",
+    "alt": "Símbolo do LED: um triângulo amarelo apontando para a direita encostado numa barra, com duas pequenas setas saindo dele, e uma seta vermelha para a direita com a legenda \"Sentido permitido da corrente\"."
+   },
+   {
+    "crop": "131_p14_2.png",
+    "alternative": "A",
+    "alt": "Circuito com uma bateria (polo + em cima) e um resistor no fio de cima, em série com dois LEDs ligados em paralelo entre si, ambos com o triângulo apontando para baixo."
+   },
+   {
+    "crop": "131_p14_3.png",
+    "alternative": "B",
+    "alt": "Circuito com uma bateria (polo + em cima) e dois ramos em paralelo, cada um com um resistor em cima e um LED embaixo, ambos os LEDs com o triângulo apontando para baixo."
+   },
+   {
+    "crop": "131_p14_4.png",
+    "alternative": "C",
+    "alt": "Circuito com uma bateria (polo + em cima) e dois ramos em paralelo, cada um com um resistor em cima e um LED embaixo, ambos os LEDs com o triângulo apontando para cima."
+   },
+   {
+    "crop": "131_p14_5.png",
+    "alternative": "D",
+    "alt": "Circuito com uma bateria (polo + em cima) e um único caminho em série: um resistor no fio de cima, dois LEDs no lado direito, um acima do outro, ambos com o triângulo apontando para baixo, e outro resistor no fio de baixo."
+   },
+   {
+    "crop": "131_p14_6.png",
+    "alternative": "E",
+    "alt": "Circuito com uma bateria (polo + em cima) e um resistor no fio de cima, em série com dois LEDs ligados em paralelo entre si, ambos com o triângulo apontando para cima."
+   }
+  ],
+  "132": {
+   "crop": "132_p14_2.png",
+   "alt": "Circuito retangular: no fio de cima, as lâmpadas L1 (à esquerda) e L2 (à direita), com o ponto P entre elas; de P sai o fio de um amperímetro (A) cuja ponta S está solta. No meio, um fio resistivo horizontal de Q (esquerda) a R (direita), de 48 cm, com os pontos A, B, C, D e E igualmente espaçados. Embaixo, uma fonte de tensão VQR ligada entre Q e R."
+  },
+  "134": {
+   "crop": "134_p15_2.png",
+   "alt": "Ilustração de uma árvore com raízes no solo e balões ampliados indicando processos: Fitovolatilização (nas folhas, saindo para o ar), Fitoextração (nas folhas e nas raízes), Fitodegradação (nas folhas e nas raízes), Fitoestimulação (no solo, junto às raízes) e Fitoestabilização (no solo). Ao lado, um quadro com as definições: Fitoestabilização, imobilização dos contaminantes através de sorção por raízes, precipitação, complexação ou redução de valência; Fitovolatilização, retirada de poluentes pelas plantas e transferência para uma forma volátil; Fitodegradação, degradação dos contaminantes orgânicos por ação enzimática; Fitoestimulação, estimulação dos microrganismos degradadores de contaminantes orgânicos; Fitoextração, remoção de poluentes pelas raízes e sua transferência e acúmulo na parte aérea das plantas."
+  },
+  "136": {
+   "crop": "136_p16_1.png",
+   "alt": "Desenho de um microscópio óptico, com a \"Lente ocular\" indicada no alto do tubo e as \"Lentes objetivas\" indicadas embaixo do tubo, acima da platina."
+  },
+  "138": {
+   "crop": "138_p16_2.png",
+   "alt": "Teclado numérico de telefone: 1; 2 ABC; 3 DEF; 4 GHI; 5 JKL; 6 MNO; 7 PQRS; 8 TUV; 9 WXYZ; uma tecla com traço; 0; outra tecla com traço."
+  },
+  "139": {
+   "crop": "139_p17_2.png",
+   "alt": "Tabela de Preços dos componentes (R$) por loja: loja I, X por 3,00 e Y por 1,00; loja II, X por 2,00 e Y por 4,00."
+  },
+  "141": [
+   {
+    "crop": "141_p17_1.png",
+    "alt": "Gráfico da Grandeza II em função da Grandeza I, formado por segmentos de reta entre os pontos (0, 0), (2, 3) e (4, 4)."
+   },
+   {
+    "crop": "141_p17_2.png",
+    "alt": "Gráfico da Grandeza III em função da Grandeza II, formado por segmentos de reta entre os pontos (0, 4), (3, 1) e (4, 3)."
+   }
+  ],
+  "142": {
+   "crop": "142_p18_1.png",
+   "alt": "Tabela com duas colunas, Etapas e Visor de escrita. 1ª etapa: inseriu três figuras do tipo carinha sorridente no visor de escrita da mensagem; o visor mostra 3 carinhas. 2ª etapa: copiou o que havia inserido anteriormente e colou (inseriu o que havia copiado) ao lado; o visor mostra 6 carinhas. 3ª etapa: copiou o que tinha no visor na 2ª etapa e colou ao lado; o visor mostra 12 carinhas."
+  },
+  "144": {
+   "crop": "144_p18_2.png",
+   "alt": "Trapézio retângulo PQRS azul, com o lado PS vertical encostado numa vareta vertical, ângulos retos em P e em S, o lado QP em cima (mais curto) e o lado RS embaixo (mais longo); setas curvas na vareta indicam o giro em torno dela."
+  },
+  "147": {
+   "crop": "147_p19_2.png",
+   "alt": "Máquina caça-níquel com a placa \"Encontre três quantidades iguais\" e seis janelas numeradas de I a VI: I, 4 elevado a 1/2; II, 4 inteiros e 1/2; III, 10/45; IV, 18/4; V, 4,5; VI, 4/5."
+  },
+  "148": {
+   "crop": "148_p19_1.png",
+   "alt": "Gráfico \"Temperatura da caneca (em grau Celsius)\" em função do Tempo (em minuto), de 0 a 20. A curva decresce, cada vez mais devagar, de 100 em t = 0 até 40 em t = 20; passa por cerca de 80 em t = 4 e de 60 em t = 10."
+  },
+  "150": [
+   {
+    "crop": "150_p20_1.png",
+    "alt": "Vista de cima de um retângulo verde de 6 m por 3 m, com duas portas no lado de baixo. No meio, uma fileira vertical de círculos azuis igualmente espaçados, do lado de cima ao de baixo, com reticências indicando que a fileira continua."
+   },
+   {
+    "crop": "150_p20_2.png",
+    "alt": "Tabela com três colunas, Loja, Raio (cm) e Preço por unidade (R$): I, 5, 60; II, 10, 70; III, 12, 75; IV, 15, 90; V, 20, 120."
+   }
+  ],
+  "152": {
+   "crop": "152_p20_2.png",
+   "alt": "Gráfico de linhas, em bilhão de dólares (de 9 a 18), de junho de 2009 a junho de 2010, com Importações (cinza) e Exportações (preto) e a área entre elas sombreada. As exportações começam perto de 14,5, oscilam entre 12,7 e 14,5 até dezembro de 2009, caem para cerca de 11,3 em janeiro de 2010, sobem até cerca de 17,6 em maio e terminam em 17,1 em junho de 2010. As importações começam perto de 10, sobem até cerca de 12,8, caem para 11,5 em janeiro de 2010, sobem até cerca de 15 e terminam em 14,8 em junho de 2010. As exportações ficam acima das importações em quase todo o período, exceto perto de janeiro de 2010. Crédito: Fonte: Ministério do Desenvolvimento. Disponível em: http://blogs.estadao.com.br. Acesso em: 20 fev. 2013 (adaptado)."
+  },
+  "154": {
+   "crop": "154_p21_2.png",
+   "alt": "Tabela com duas colunas, Tipo de serviço e Tempo necessário para a leitura completa do contrato (em minuto): A, 36; B, 17; C, 27; D, 13; E, 13; F, 13."
+  },
+  "155": {
+   "crop": "155_p21_2.png",
+   "alt": "Vista de cima: semicírculo de raio R com o ponto S no centro do lado reto (em cima). A partir de S, um setor circular azul, de ângulo α, se abre para baixo até a borda do semicírculo."
+  },
+  "158": {
+   "crop": "158_p22_1.png",
+   "alt": "Cartaz amarelo: \"PROMOÇÃO: Compre pelo menos 35 litros de defensivos do TIPO A e ganhe a máscara para aplicação.\" Abaixo: \"Defensivo Tipo A - R$ 4,20/litro\"; \"Defensivo Tipo B - R$ 3,00/litro\"; \"Máscara para aplicação - R$ 12,50\"."
+  },
+  "161": [
+   {
+    "crop": "161_p23_2.png",
+    "alt": "Tanque em forma de paralelepípedo, de altura H e comprimento L, com uma \"Entrada para abastecimento\" no teto, à direita. Dentro, dois anteparos perpendiculares à base dividem o comprimento em três partes iguais (L/3 cada): o primeiro, mais à esquerda, tem altura H/4, e o segundo, altura H/2."
+   },
+   {
+    "crop": "161_p23_3.png",
+    "alternative": "A",
+    "alt": "Gráfico da Maior altura (m), sem valores no eixo e com linhas de grade igualmente espaçadas, em função do Tempo (h), de 0 a 12. Em unidades da grade: sobe de 0 a 3 entre 0 e 2 h, fica em 3 até 4 h, sobe para 4 em 6 h e sobe até 6 em 12 h."
+   },
+   {
+    "crop": "161_p23_5.png",
+    "alternative": "B",
+    "alt": "Gráfico da Maior altura (m), sem valores no eixo e com linhas de grade igualmente espaçadas, em função do Tempo (h), de 0 a 12. Em unidades da grade: sobe de 0 a 3 entre 0 e 2 h, fica em 3 até 6 h e sobe até 6 em 12 h."
+   },
+   {
+    "crop": "161_p23_7.png",
+    "alternative": "C",
+    "alt": "Gráfico da Maior altura (m), sem valores no eixo e com linhas de grade igualmente espaçadas, em função do Tempo (h), de 0 a 12. Em unidades da grade: sobe de 0 a 3 entre 0 e 2 h, fica em 3 até 10 h e sobe até 6 em 12 h."
+   },
+   {
+    "crop": "161_p23_4.png",
+    "alternative": "D",
+    "alt": "Gráfico da Maior altura (m), sem valores no eixo e com linhas de grade igualmente espaçadas, em função do Tempo (h), de 0 a 12. Em unidades da grade: segmentos horizontais separados: 3 de 0 a 2 h, 1 de 2 a 4 h, 3 de 4 a 6 h e 6 de 6 a 12 h."
+   },
+   {
+    "crop": "161_p23_6.png",
+    "alternative": "E",
+    "alt": "Gráfico da Maior altura (m), sem valores no eixo e com linhas de grade igualmente espaçadas, em função do Tempo (h), de 0 a 12. Em unidades da grade: linha em degraus: começa em 3 em t = 0, fica em 3 até 2 h, desce para 1 e fica até 4 h, volta a 3 até 6 h e sobe para 6, ficando assim até 12 h."
+   }
+  ],
+  "163": {
+   "crop": "163_p24_1.png",
+   "alt": "Duas polias ligadas por uma correia: a menor, de centro A e raio r = 4 cm, à esquerda; a maior, de centro B e raio R = 8 cm, à direita. Os dois trechos retos da correia, em cima e embaixo, medem 15 cm cada. Na polia menor, o arco em contato com a correia corresponde a um ângulo central de 150°. Setas verdes indicam o sentido de giro das polias."
+  },
+  "164": {
+   "crop": "164_p24_2.png",
+   "alt": "Triângulo equilátero de vértices P1 (em cima), P2 (embaixo, à direita) e P3 (embaixo, à esquerda), com lados de 10 km. No centro, o ponto H, ligado aos três vértices por segmentos marcados como iguais."
+  },
+  "167": {
+   "crop": "167_p25_1.png",
+   "alt": "Dois celulares lado a lado, com a diagonal da tela indicada: \"Celular 1\", 3 1/2 polegadas; \"Celular 2\", maior, 4 5/6 polegadas. Crédito: Disponível em: www.tecmundo.com.br. Acesso em: 5 nov. 2014 (adaptado)."
+  },
+  "168": [
+   {
+    "crop": "168_p26_2.png",
+    "alternative": "A",
+    "alt": "Gráfico de Amplitude (cm) em função do Tempo (min), de 0 a 20: nos primeiros 9 minutos, 3 oscilações de amplitude pequena; de 9 a 20 minutos, as oscilações ficam mais rápidas (cerca de uma por minuto) e com amplitude cerca de duas vezes maior, constante."
+   },
+   {
+    "crop": "168_p26_4.png",
+    "alternative": "B",
+    "alt": "Gráfico de Amplitude (cm) em função do Tempo (min), de 0 a 20: nos primeiros 9 minutos, 3 oscilações de amplitude pequena; a partir de 9 minutos, as oscilações ficam mais rápidas e começam com amplitude maior, que vai diminuindo até o fim."
+   },
+   {
+    "crop": "168_p26_6.png",
+    "alternative": "C",
+    "alt": "Gráfico de Amplitude (cm) em função do Tempo (min), de 0 a 20: oscilações sempre com o mesmo ritmo (uma a cada 3 minutos, cerca de 6 no total), com amplitude que diminui aos poucos ao longo do tempo."
+   },
+   {
+    "crop": "168_p26_3.png",
+    "alternative": "D",
+    "alt": "Gráfico de Amplitude (cm) em função do Tempo (min), de 0 a 20: nos primeiros 9 minutos, 3 oscilações; de 9 a 20 minutos, as oscilações ficam mais rápidas (cerca de uma por minuto), com a mesma amplitude do início."
+   },
+   {
+    "crop": "168_p26_5.png",
+    "alternative": "E",
+    "alt": "Gráfico de Amplitude (cm) em função do Tempo (min), de 0 a 20: nos primeiros 9 minutos, oscilações rápidas (cerca de uma por minuto); de 9 a 20 minutos, oscilações mais lentas (uma a cada 3 minutos), com a mesma amplitude."
+   }
+  ],
+  "169": {
+   "crop": "169_p27_2.png",
+   "alt": "Duas fileiras de letras ligadas por setas. Embaixo, \"Letra do texto original\": A a Z. Em cima, \"Letra do texto codificado\": A a Z seguido de A, B, C, deslocada de modo que cada letra original aponta para a letra três posições adiante (A → D, B → E, … X → A, Y → B, Z → C)."
+  },
+  "172": {
+   "crop": "172_p28_2.png",
+   "alt": "Linha reta entre o Terminal 1 (à esquerda) e o Terminal 2 (à direita), dividida em 10 partes iguais por marcas. Cinco câmeras, I a V, ficam abaixo da linha, cada uma com um triângulo azul indicando o trecho coberto: I, os primeiros 2/10 do trecho a partir do Terminal 1; II, os 3/10 seguintes; III, o 1/10 seguinte; IV, o 1/10 seguinte; V, os 3/10 finais, até o Terminal 2."
+  },
+  "173": {
+   "crop": "173_p29_2.png",
+   "alt": "Gráfico de colunas empilhadas da Quantidade de funcionários por Setor. Administrativo, 80 funcionários: 20% até 25 anos, 30% entre 25 e 45 anos e 50% a partir de 45 anos. Logística, 120: 25% até 25 anos, 40% entre 25 e 45 anos e 35% a partir de 45 anos. Produção, 200: 40% até 25 anos, 35% entre 25 e 45 anos e 25% a partir de 45 anos."
+  },
+  "174": [
+   {
+    "crop": "174_p29_1.png",
+    "alt": "Duas paredes verticais quadriculadas, paralelas, sobre uma base quadriculada. Uma trajetória em linha poligonal vermelha: A, no alto da parede da direita (canto superior de trás); B e C, um logo abaixo do outro, na parede da esquerda; D e E, em um plano paralelo à base, entre as paredes (trechos tracejados); F, na frente da base, embaixo."
+   },
+   {
+    "crop": "174_p29_2.png",
+    "alternative": "A",
+    "alt": "Quadrado quadriculado 4 por 4 com um caminho em segmentos; posições dadas por (coluna, linha), contando da esquerda (0 a 4) e de cima (0 a 4): de (4, 0) a (0, 1); de (0, 1) a (4, 1), na horizontal; de (4, 1) a (2, 4)."
+   },
+   {
+    "crop": "174_p29_5.png",
+    "alternative": "B",
+    "alt": "Quadrado quadriculado 4 por 4 com um caminho em segmentos; posições dadas por (coluna, linha), contando da esquerda (0 a 4) e de cima (0 a 4): de (4, 0) a (0, 1); de (0, 1) a (4, 2); de (4, 2) a (2, 4)."
+   },
+   {
+    "crop": "174_p29_6.png",
+    "alternative": "C",
+    "alt": "Quadrado quadriculado 4 por 4 com um caminho em segmentos; posições dadas por (coluna, linha), contando da esquerda (0 a 4) e de cima (0 a 4): de (4, 0) a (0, 1); de (0, 1) a (4, 2); de (4, 2) a (4, 3), na vertical; de (4, 3) a (2, 4)."
+   },
+   {
+    "crop": "174_p29_3.png",
+    "alternative": "D",
+    "alt": "Quadrado quadriculado 4 por 4 com um caminho em segmentos; posições dadas por (coluna, linha), contando da esquerda (0 a 4) e de cima (0 a 4): de (4, 0) a (0, 1); de (0, 1) a (0, 2), na vertical; de (0, 2) a (4, 2), na horizontal; de (4, 2) a (4, 3), na vertical; de (4, 3) a (2, 4)."
+   },
+   {
+    "crop": "174_p29_4.png",
+    "alternative": "E",
+    "alt": "Quadrado quadriculado 4 por 4 com um caminho em segmentos; posições dadas por (coluna, linha), contando da esquerda (0 a 4) e de cima (0 a 4): de (4, 0) a (0, 1); de (0, 1) a (4, 1), na horizontal; de (4, 1) a (4, 2), na vertical; de (4, 2) a (2, 4)."
+   }
+  ],
+  "175": {
+   "crop": "175_p30_1.png",
+   "alt": "Duas folhas retangulares de 10 cm por 20 cm enroladas em cilindros. \"Embalagem 1\": a folha enrolada pelo lado de 10 cm, formando um cilindro fino de 20 cm de altura. \"Embalagem 2\": a folha enrolada pelo lado de 20 cm, formando um cilindro mais largo de 10 cm de altura."
+  },
+  "176": {
+   "crop": "176_p30_2.png",
+   "alt": "Gráfico de dispersão da Receita anual (em milhão de reais), de 0 a 7, por Ano, de 2014 a 2021, com uma reta de tendência crescente. Pontos aproximados: 2014, 3,4; 2015, 5,0; 2016, 4,9; 2017, 4,6; 2018, 5,6; 2019, 6,0; 2020, 5,2; 2021, 6,7. A reta passa por cerca de 3,9 em 2014 e 6,4 em 2021."
+  },
+  "177": {
+   "crop": "177_p31_adj.png",
+   "alt": "Tabela: para 30 mochilas, custo total de R$ 1 050,00; para 50 mochilas, R$ 1 650,00; para 100 mochilas, R$ 3 150,00."
+  },
+  "178": {
+   "crop": "178_p31_2.png",
+   "alt": "Tabela da média mensal da umidade relativa do ar (%): maio, 66; junho, 64; julho, 54; agosto, 46; setembro, 60; outubro, 64."
+  },
+  "122": {
+   "crop": "122_p11_adj.png",
+   "alt": "Tirinha em três quadros, dentro de um iglu. 1: uma esquimó pergunta a outra, diante de uma geladeira: \"Ué, você comprou uma geladeira?!\"; a outra responde: \"É\". 2: \"Pra quê?!\" — \"É para as crianças.\", enquanto uma delas tira uma forma de gelo do congelador. 3: \"Elas adoram brincar de casinha.\"; duas crianças constroem um pequeno iglu com cubos de gelo. Assinatura de Laerte."
+  },
+  "123": {
+   "crop": "123_p11_1.png",
+   "alt": "Fórmulas estruturais. Composto 1: anel benzênico com um grupo carboxila (C com O ligado por dupla e OH) e, no carbono vizinho, um grupo OH. Composto 2: anel de cinco carbonos com um O ligado por dupla; num carbono vizinho, uma cadeia de cinco carbonos com uma ligação dupla (cis); no carbono seguinte do anel, um grupo CH2–COOH."
+  },
+  "124": {
+   "crop": "124_p11_1.png",
+   "alt": "Três tubos de ensaio numerados com líquido amarelo e pequenas partículas vermelhas. Tubo 1: partículas concentradas no alto do líquido. Tubo 2: partículas concentradas no fundo. Tubo 3: partículas espalhadas por todo o líquido, um pouco mais concentradas no alto."
+  },
+  "125": {
+   "crop": "125_p12_1.png",
+   "alt": "Placa verde de saída de emergência com fundo claro: silhueta verde de uma pessoa correndo em direção a uma porta aberta, à esquerda."
+  }
+ },
+ "alt_figures": {},
+ "alt_only": {},
+ "text_fixes": {
+  "148": {
+   "alternatives": {
+    "C": "a = 20; b = (0,5)^(1/10)",
+    "D": "a = 20; b = (40)^(1/10) / 80"
+   }
+  },
+  "149": {
+   "alternatives": {
+    "C": "6√6",
+    "D": "6∛6",
+    "E": "3∛12"
+   }
+  },
+  "166": {
+   "alternatives": {
+    "A": "d(Q) = (1/4) d(R)",
+    "B": "d(Q) = (1/2) d(R)",
+    "C": "d(Q) = (3/4) d(R)",
+    "D": "d(Q) = (3/2) d(R)",
+    "E": "d(Q) = (2/3) d(R)"
+   }
+  },
+  "171": {
+   "alternatives": {
+    "A": "hexágono regular, pois a área do jardim, em metro quadrado, será k²√3 / 24.",
+    "B": "hexágono regular, pois a área do jardim, em metro quadrado, será 3k²√3 / 2.",
+    "C": "quadrado, pois a área do jardim, em metro quadrado, será k² / 16.",
+    "D": "triângulo equilátero, pois a área do jardim, em metro quadrado, será k²√3 / 36.",
+    "E": "triângulo equilátero, pois a área do jardim, em metro quadrado, será k²√3 / 4."
+   }
+  },
+  "180": {
+   "alternatives": {
+    "A": "(7! / 4!) × (6! / 4!)",
+    "B": "[7! / (3! × 4!)] × [6! / (2! × 4!)]",
+    "C": "[7! / (3! × 4!)] + [6! / (2! × 4!)] + [5! / (1! × 4!)]",
+    "D": "{[7! / (3! × 4!)] + [6! / (2! × 4!)]} × {[7! / (4! × 3!)] + [6! / (1! × 5!)]} × {[7! / (5! × 2!)] + [6! / (0! × 6!)]}",
+    "E": "{[7! / (3! × 4!)] × [6! / (2! × 4!)]} + {[7! / (4! × 3!)] × [6! / (1! × 5!)]} + {[7! / (5! × 2!)] × [6! / (0! × 6!)]}"
+   }
+  },
+  "159": {
+   "alternatives": {
+    "A": "mL · s · cm²",
+    "B": "(mL / s) · cm²",
+    "C": "mL / (cm² · s)",
+    "D": "(cm² · s) / mL",
+    "E": "cm² / (mL · s)"
+   }
+  }
+ },
+ "letters": [],
+ "false_positive_figures": {
+  "93": "sem figura; o objeto detectado é a faixa decorativa da margem ou parte de uma fórmula.",
+  "95": "sem figura; o objeto detectado é a faixa decorativa da margem ou parte de uma fórmula.",
+  "102": "sem figura; o objeto detectado é a faixa decorativa da margem ou parte de uma fórmula.",
+  "109": "sem figura; o objeto detectado é a faixa decorativa da margem ou parte de uma fórmula.",
+  "111": "sem figura; o objeto detectado é a faixa decorativa da margem ou parte de uma fórmula.",
+  "116": "sem figura; o objeto detectado é a faixa decorativa da margem ou parte de uma fórmula.",
+  "129": "sem figura; o objeto detectado é a faixa decorativa da margem ou parte de uma fórmula.",
+  "133": "sem figura; o objeto detectado é a faixa decorativa da margem ou parte de uma fórmula.",
+  "135": "sem figura; o objeto detectado é a faixa decorativa da margem ou parte de uma fórmula.",
+  "145": "sem figura; o objeto detectado é a faixa decorativa da margem ou parte de uma fórmula.",
+  "153": "sem figura; o objeto detectado é a faixa decorativa da margem ou parte de uma fórmula.",
+  "159": "sem figura; o objeto detectado é a faixa decorativa da margem ou parte de uma fórmula.",
+  "165": "sem figura; o objeto detectado é a faixa decorativa da margem ou parte de uma fórmula.",
+  "166": "sem figura; o objeto detectado é a faixa decorativa da margem ou parte de uma fórmula.",
+  "170": "sem figura; o objeto detectado é a faixa decorativa da margem ou parte de uma fórmula.",
+  "180": "sem figura; o objeto detectado é a faixa decorativa da margem ou parte de uma fórmula.",
+  "149": "sem figura; os objetos detectados são as raízes das alternativas, transcritas no texto.",
+  "171": "sem figura; os objetos detectados são as frações das alternativas, transcritas no texto."
+ },
+ "formula_doubts": {
+  "92": "Conferido no PDF oficial, linha a linha: índices e expoentes iguais ao texto da proposta.",
+  "94": "Conferido no PDF oficial, linha a linha: índices e expoentes iguais ao texto da proposta.",
+  "99": "Conferido no PDF oficial, linha a linha: índices e expoentes iguais ao texto da proposta.",
+  "100": "Conferido no PDF oficial, linha a linha: índices e expoentes iguais ao texto da proposta.",
+  "114": "Conferido no PDF oficial, linha a linha: índices e expoentes iguais ao texto da proposta.",
+  "116": "Conferido no PDF oficial, linha a linha: índices e expoentes iguais ao texto da proposta.",
+  "133": "Conferido no PDF oficial, linha a linha: índices e expoentes iguais ao texto da proposta.",
+  "135": "Conferido no PDF oficial, linha a linha: índices e expoentes iguais ao texto da proposta.",
+  "136": "Conferido no PDF oficial, linha a linha: índices e expoentes iguais ao texto da proposta.",
+  "142": "Conferido no PDF oficial, linha a linha: índices e expoentes iguais ao texto da proposta.",
+  "151": "Conferido no PDF oficial, linha a linha: índices e expoentes iguais ao texto da proposta.",
+  "155": "Conferido no PDF oficial, linha a linha: índices e expoentes iguais ao texto da proposta.",
+  "164": "Conferido no PDF oficial, linha a linha: índices e expoentes iguais ao texto da proposta.",
+  "118": "Conferido no PDF oficial (p. 9): Ca₅(PO₄)₃OH no texto; a equação, embaralhada pela extração, foi substituída pela imagem do PDF.",
+  "128": "Conferido no PDF oficial (p. 13): íons Aᵐ⁺ e Bⁿ⁻ e e⁻; os expoentes literais foram restaurados.",
+  "132": "Conferido no PDF oficial (p. 14): L₁ e L₂ corretos; V_QR marcado.",
+  "148": "Conferido no PDF oficial (p. 19): T(t) = a + 80 bᵗ; alternativas C e D reescritas com os expoentes fracionários.",
+  "149": "Conferido no PDF oficial (p. 19): alternativas 6, 18, 6√6, 6∛6 e 3∛12, reescritas com os radicais.",
+  "152": "Conferido no PDF oficial (p. 20): S₁, S₂ e S₃ corretos.",
+  "159": "Conferido no PDF oficial (p. 22): alternativas reescritas com as frações de unidades.",
+  "170": "Conferido no PDF oficial (p. 27): M₁, M₂, E₁ e E₂ corretos; a expressão M₂ − M₁ = (2/3) log(E₂/E₁) foi refeita.",
+  "171": "Conferido no PDF oficial (p. 28): alternativas reescritas com as frações e radicais.",
+  "175": "Conferido no PDF oficial (p. 30): alternativas 4 000 π, 2 000 π, 4 000/π, 1 000/π e 500/π."
+ },
+ "date": "11/11/2026",
+ "block_fixes": {
+  "166": [
+   {
+    "replace": [
+     "s3"
+    ],
+    "with": [],
+    "note": "a frase do comando saiu do texto-base"
+   },
+   {
+    "field": "command_blocks",
+    "replace": [
+     "c1"
+    ],
+    "with": [
+     {
+      "id": "c1",
+      "type": "paragraph",
+      "text": "A expressão que relaciona d(Q) e d(R) é"
+     }
+    ],
+    "note": "comando refeito a partir do PDF"
+   }
+  ],
+  "180": [
+   {
+    "replace": [
+     "s2"
+    ],
+    "with": [],
+    "note": "a frase do comando saiu do texto-base"
+   },
+   {
+    "field": "command_blocks",
+    "replace": [
+     "c1"
+    ],
+    "with": [
+     {
+      "id": "c1",
+      "type": "paragraph",
+      "text": "A expressão numérica que representa o número máximo de maneiras distintas de formar essa equipe é"
+     }
+    ],
+    "note": "comando refeito a partir do PDF"
+   }
+  ],
+  "169": [
+   {
+    "replace": [
+     "s2",
+     "s3"
+    ],
+    "with": [],
+    "note": "linhas soltas da figura (alfabetos e rótulos) saíram do texto; a figura e o texto alternativo trazem o conteúdo"
+   }
+  ],
+  "112": [
+   {
+    "replace": [
+     "s2",
+     "s3",
+     "s4",
+     "s5",
+     "s6",
+     "s7"
+    ],
+    "with": [
+     {
+      "id": "s2",
+      "type": "paragraph",
+      "text": "Considere a legenda:\n• círculo com um ponto vermelho no centro: mulher heterozigota portadora do gene para daltonismo;\n• círculo branco: mulher não daltônica;\n• círculo vermelho: mulher daltônica;\n• quadrado branco: homem não daltônico;\n• quadrado azul: homem daltônico."
+     }
+    ],
+    "note": "legenda reunida, com a descrição de cada símbolo (os símbolos não estavam no texto)"
+   }
+  ],
+  "118": [
+   {
+    "replace": [
+     "s2",
+     "s3",
+     "s4",
+     "s5",
+     "s6",
+     "fig1b"
+    ],
+    "with": [
+     {
+      "id": "fig1b",
+      "type": "image",
+      "asset_ref": "fig1"
+     }
+    ],
+    "note": "equação em caixas, embaralhada pela extração, substituída pela imagem do PDF com texto alternativo"
+   },
+   {
+    "replace": [
+     "s8",
+     "s9",
+     "s10",
+     "s11",
+     "s12",
+     "s13",
+     "fig2b"
+    ],
+    "with": [
+     {
+      "id": "fig2b",
+      "type": "image",
+      "asset_ref": "fig2"
+     }
+    ],
+    "note": "tabela achatada pela extração removida do texto; o quadro entra como imagem, no mesmo lugar, com texto alternativo completo"
+   }
+  ],
+  "119": [
+   {
+    "replace": [
+     "s1",
+     "s2",
+     "s3",
+     "src",
+     "fig1b"
+    ],
+    "with": [
+     {
+      "id": "s1",
+      "type": "paragraph",
+      "text": "Para os circuitos de maratonas aquáticas realizadas em mares calmos e próximos à praia, é montado um sistema de boias que determinam o trajeto a ser seguido pelos nadadores. Uma das dificuldades desse tipo de circuito é compensar os efeitos da corrente marinha. O diagrama contém o circuito em que deve ser realizada uma volta no sentido anti-horário. As quatro boias estão numeradas de 1 a 4. Existe uma corrente marinha de velocidade v_c, cujo módulo é 30 metros por minuto, paralela à praia em toda a área do circuito. Nas arestas mais longas, o nadador precisará nadar na direção apontada pelos vetores v_n dos pontos 1 até 2 e de 3 até 4. Considere que a velocidade do nadador é de 50 metros por minuto, em relação à água, durante todo o circuito."
+     },
+     {
+      "id": "fig1b",
+      "type": "image",
+      "asset_ref": "fig1"
+     }
+    ],
+    "note": "parágrafo refeito a partir do PDF: os índices dos vetores tinham partido o texto e um \"n\" solto virou fonte"
+   }
+  ],
+  "130": [
+   {
+    "replace": [
+     "s2",
+     "s3",
+     "s4",
+     "s5",
+     "s6",
+     "s7",
+     "s8",
+     "s9",
+     "s10",
+     "s11",
+     "s12",
+     "s13",
+     "fig1b",
+     "fig2b"
+    ],
+    "with": [
+     {
+      "id": "fig1b",
+      "type": "image",
+      "asset_ref": "fig1"
+     },
+     {
+      "id": "s2",
+      "type": "paragraph",
+      "text": "As etapas representadas no diagrama estão descritas no quadro."
+     },
+     {
+      "id": "fig2b",
+      "type": "image",
+      "asset_ref": "fig2"
+     }
+    ],
+    "note": "tabela achatada pela extração removida do texto; o quadro entra como imagem, no mesmo lugar, com texto alternativo completo; o diagrama vem antes do quadro, como no PDF"
+   }
+  ],
+  "131": [
+   {
+    "replace": [
+     "s1",
+     "s2",
+     "s3",
+     "s4",
+     "s5",
+     "src",
+     "fig1b"
+    ],
+    "with": [
+     {
+      "id": "s1",
+      "type": "paragraph",
+      "text": "O LED é um dispositivo eletrônico que conduz corrente elétrica em um único sentido, sendo caracterizado por uma tensão e uma corrente máxima de funcionamento, I_máx. Um LED acende apenas se a corrente que o percorre está no sentido permitido e se a diferença de potencial à qual está submetido é igual ou superior à sua tensão de funcionamento. A figura ilustra o símbolo do LED usado na representação de circuitos."
+     },
+     {
+      "id": "fig1b",
+      "type": "image",
+      "asset_ref": "fig1"
+     },
+     {
+      "id": "s3",
+      "type": "paragraph",
+      "text": "Um estudante de física analisa as propriedades do LED em um circuito simples de corrente contínua. Ele dispõe dos seguintes materiais: uma bateria ideal de 4,5 V; dois LEDs de tensão 3,0 V e I_máx = 1,0 mA cada; e dois resistores de 1,5 kΩ cada."
+     }
+    ],
+    "note": "texto refeito a partir do PDF: o índice de I_máx tinha partido os parágrafos"
+   },
+   {
+    "field": "command_blocks",
+    "replace": [
+     "c1"
+    ],
+    "with": [
+     {
+      "id": "c1",
+      "type": "paragraph",
+      "text": "O circuito que o estudante pode montar, para que ambos os LEDs fiquem acesos e cada um seja percorrido por I_máx, é"
+     }
+    ],
+    "note": "comando refeito a partir do PDF (estava vazio)"
+   }
+  ],
+  "139": [
+   {
+    "replace": [
+     "s2",
+     "s3",
+     "s4",
+     "fig1b"
+    ],
+    "with": [
+     {
+      "id": "fig1b",
+      "type": "image",
+      "asset_ref": "fig1"
+     }
+    ],
+    "note": "tabela achatada pela extração removida do texto; o quadro entra como imagem, no mesmo lugar, com texto alternativo completo"
+   }
+  ],
+  "144": [
+   {
+    "replace": [
+     "s2",
+     "s3",
+     "s4",
+     "s5",
+     "s6",
+     "s7"
+    ],
+    "with": [
+     {
+      "id": "s2",
+      "type": "paragraph",
+      "text": "• recortou o trapézio retângulo PQRS de um material rígido;\n• afixou o lado PS do trapézio em uma vareta fixa retilínea (eixo de rotação);\n• girou o trapézio 360° em torno da vareta e obteve um sólido de revolução."
+     }
+    ],
+    "note": "lista reunida, um item por linha"
+   }
+  ],
+  "150": [
+   {
+    "replace": [
+     "s3",
+     "s4",
+     "fig2b"
+    ],
+    "with": [
+     {
+      "id": "fig2b",
+      "type": "image",
+      "asset_ref": "fig2"
+     }
+    ],
+    "note": "tabela achatada pela extração removida do texto; o quadro entra como imagem, no mesmo lugar, com texto alternativo completo"
+   }
+  ],
+  "154": [
+   {
+    "replace": [
+     "s3",
+     "s4",
+     "s5",
+     "s6",
+     "s7",
+     "s8",
+     "s9",
+     "fig1b"
+    ],
+    "with": [
+     {
+      "id": "fig1b",
+      "type": "image",
+      "asset_ref": "fig1"
+     }
+    ],
+    "note": "tabela achatada pela extração removida do texto; o quadro entra como imagem, no mesmo lugar, com texto alternativo completo"
+   }
+  ],
+  "156": [
+   {
+    "replace": [
+     "s2",
+     "s3"
+    ],
+    "with": [
+     {
+      "id": "s2",
+      "type": "paragraph",
+      "text": "• tarifa base F: valor fixo, em real, cobrado no início da viagem;\n• tempo T: tempo, em minuto, de duração da viagem;\n• distância D: distância percorrida, em quilômetro."
+     }
+    ],
+    "note": "lista reunida, um item por linha"
+   }
+  ],
+  "165": [
+   {
+    "replace": [
+     "s2",
+     "s3",
+     "s4",
+     "s5",
+     "s6"
+    ],
+    "with": [
+     {
+      "id": "s2",
+      "type": "paragraph",
+      "text": "O engenheiro de tráfego da prefeitura calculou a probabilidade de um ônibus encontrar cada um deles vermelho, obtendo 15/60. A partir daí, estabeleceu uma mesma redução na quantidade do tempo, em segundo, em que cada sinal ficará vermelho, de maneira que a probabilidade de um ônibus encontrar ambos os sinais vermelhos numa mesma viagem seja igual a 4/100, considerando os eventos independentes."
+     }
+    ],
+    "note": "parágrafo refeito a partir do PDF: as frações empilhadas tinham partido o texto"
+   }
+  ],
+  "167": [
+   {
+    "replace": [
+     "s1",
+     "s2",
+     "s3",
+     "s4",
+     "s5"
+    ],
+    "with": [
+     {
+      "id": "s1",
+      "type": "paragraph",
+      "text": "Atualmente, há telefones celulares com telas de diversos tamanhos e em formatos retangulares. Alguns deles apresentam telas medindo 3 1/2 polegadas, com determinadas especificações técnicas. Além disso, em muitos modelos, com a inclusão de novas funções no celular, suas telas ficaram maiores, sendo muito comum encontrarmos atualmente telas medindo 4 5/6 polegadas, conforme a figura."
+     }
+    ],
+    "note": "parágrafo refeito a partir do PDF: os números mistos tinham partido o texto"
+   }
+  ],
+  "170": [
+   {
+    "replace": [
+     "s2",
+     "s3"
+    ],
+    "with": [
+     {
+      "id": "s2",
+      "type": "formula",
+      "text": "M₂ − M₁ = (2/3) log(E₂/E₁)"
+     }
+    ],
+    "note": "expressão refeita a partir do PDF (a extração tinha produzido glifos não mapeados)"
+   }
+  ],
+  "172": [
+   {
+    "replace": [
+     "s3",
+     "s4",
+     "s5",
+     "s6",
+     "s7",
+     "s8",
+     "s9",
+     "s10"
+    ],
+    "with": [
+     {
+      "id": "s3",
+      "type": "paragraph",
+      "text": "• câmera I: 1/5 do percurso;\n• câmera II: 3/10 do percurso;\n• câmera III: 1/10 do percurso;\n• câmera IV: 1/10 do percurso;\n• câmera V: 3/10 do percurso."
+     }
+    ],
+    "note": "lista refeita a partir do PDF: as frações empilhadas tinham partido os itens"
+   }
+  ],
+  "177": [
+   {
+    "replace": [
+     "s2",
+     "s3",
+     "s4",
+     "fig1b"
+    ],
+    "with": [
+     {
+      "id": "fig1b",
+      "type": "image",
+      "asset_ref": "fig1"
+     }
+    ],
+    "note": "tabela achatada pela extração removida do texto; o quadro entra como imagem, no mesmo lugar, com texto alternativo completo"
+   }
+  ],
+  "178": [
+   {
+    "replace": [
+     "s2",
+     "s3",
+     "s4",
+     "fig1b"
+    ],
+    "with": [
+     {
+      "id": "fig1b",
+      "type": "image",
+      "asset_ref": "fig1"
+     }
+    ],
+    "note": "tabela achatada pela extração removida do texto; o quadro entra como imagem, no mesmo lugar, com texto alternativo completo"
+   }
+  ],
+  "179": [
+   {
+    "replace": [
+     "s2",
+     "s3",
+     "s4"
+    ],
+    "with": [
+     {
+      "id": "s2",
+      "type": "paragraph",
+      "text": "• engenheiro I: 4 dias, numa jornada de 5 horas e meia por dia;\n• engenheiro II: 5 dias, numa jornada de 4 horas por dia;\n• engenheiro III: 6 dias, numa jornada de 2 horas e meia por dia."
+     }
+    ],
+    "note": "lista reunida, um item por linha"
+   }
+  ]
+ },
+ "replacements": {
+  "128": {
+   "pairs": [
+    [
+     "Am⁺",
+     "Aᵐ⁺"
+    ],
+    [
+     "Bn⁻",
+     "Bⁿ⁻"
+    ]
+   ],
+   "note": "expoentes literais m e n dos íons restaurados (Aᵐ⁺ e Bⁿ⁻), conforme o PDF"
+  },
+  "132": {
+   "pairs": [
+    [
+     "VQR",
+     "V_QR"
+    ]
+   ],
+   "note": "índice de V_QR marcado"
+  },
+  "148": {
+   "pairs": [
+    [
+     "a + 80 bt",
+     "a + 80 bᵗ"
+    ]
+   ],
+   "note": "expoente t restaurado em T(t) = a + 80 bᵗ"
+  },
+  "152": {
+   "pairs": [
+    [
+     "S₂e S₃",
+     "S₂ e S₃"
+    ]
+   ],
+   "note": "espaço restaurado"
+  }
+ },
+ "other_doubts": {
+  "131": "Comando refeito a partir do PDF oficial (p. 14); as alternativas são os circuitos, recortados como figuras."
+ }
+}

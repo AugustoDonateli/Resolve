@@ -1,0 +1,87 @@
+{
+ "booklet_note": "%2024_PV_impresso_D1_CD1%",
+ "pdf_sha": "b0adc1dc79a002aba36f725f1ef792cf53e47ff75ee012638ef34a4e6fbb18f5",
+ "figures": {
+  "1/ingles": {
+   "crop": "1_ingles_p2_1.png",
+   "alt": "Dois cartazes de citações, sob o título \"QUOTES\". No primeiro, um retrato em preto e branco de Albert Einstein com a frase: \"Out of clutter, find simplicity. From discord, find harmony. In the middle of difficulty lies opportunity. - Albert Einstein -\". No segundo, um retrato colorido de Bob Marley sobre faixas verde, amarela e vermelha, com a frase dentro de uma gota: \"Some people feel the rain. Others just get wet\" e a assinatura \"Bob Marley\"."
+  },
+  "3/ingles": {
+   "crop": "3_ingles_p2_1.png",
+   "alt": "Imagem imitando uma janela de computador de exclusão de arquivos, com o título \"70% Deleted\". Da esquerda para a direita, o planeta Terra e árvores cada vez menores e mais secas, até um galho seco; abaixo, uma barra de progresso com cerca de 70% preenchida. Textos: \"Estimated time left: 2 decades (713KB Million items removed)\"; \"Removed by: World:\\Users\\.....\"; \"Remove rate: 1000/Sec\". Botões: Open, Open Folder (apagados) e Cancel."
+  },
+  "5/ingles": {
+   "crop": "5_ingles_p3_2.png",
+   "alt": "Carta em papel timbrado da editora The Viking Press, Inc., de Nova York, com o desenho de um barco viking no topo. Texto: \"March 9th, 1981. Ms. Walker, While your piece 'The Color Purple' presents a compelling and thoroughly moving narrative, we were bothered by your decision to end every sentence with an exclamation point. As a reader, this was extremely jarring. I am afraid, for this reason, we are forced to make the difficult decision to pass on your manuscript. Best of luck.\" Segue uma assinatura e o nome Stephanie Allen-Nichols."
+  },
+  "21": {
+   "crop": "21_p10_1.png",
+   "alt": "Fotografia, sobre fundo preto, de um adorno indígena em forma de arco feito de penas coloridas (azuis, verdes, amarelas, laranja e marrons) presas a uma base de fios brancos, com duas franjas de cordão pendendo na parte de baixo e penas vermelhas no alto."
+  },
+  "25": {
+   "crop": "25_p11_1.png",
+   "alt": "Pintura colorida, de pinceladas soltas, de um jardim com plantas, flores vermelhas e árvores, tendo ao fundo montanhas e céu azul. Três meninas de vestidos claros brincam entre as plantas, na parte de baixo da tela. Assinatura do pintor no canto inferior esquerdo."
+  },
+  "33": {
+   "crop": "33_p14_1.png",
+   "alt": "Peça de campanha em fundo roxo e rosa. À esquerda, uma mulher sorridente segura um moletom laranja com a estampa \"Vou deixar que você se vá\". À direita: \"Deixe suas roupas aquecerem quem mais precisa.\"; \"CAMPANHA DO AGASALHO\"; \"Doe roupas, calçados e cobertores em bom estado. Sua doação ajuda muita gente.\". Abaixo, o crédito: \"Disponível em: https://defesacivil.rs.gov.br. Acesso em: 11 mar. 2024 (adaptado).\""
+  },
+  "36": [
+   {
+    "crop": "36_p15_2.png",
+    "alt": "Primeira fotografia: escultura em pedra de uma cabeça estreita e alongada, com nariz longo e reto, olhos amendoados quase fechados, boca pequena e pescoço comprido, sobre uma base em forma de bloco."
+   },
+   {
+    "crop": "36_p15_3.png",
+    "alt": "Segunda fotografia: escultura antiga em mármore de uma cabeça oval e lisa, com apenas o nariz em relevo e sem outros traços do rosto, sobre um pescoço cilíndrico."
+   }
+  ],
+  "43": {
+   "crop": "43_p18_adj.png",
+   "alt": "Fotografia em preto e branco de longa exposição: dezenas de faixas claras e finas, em forma de arco, atravessam o céu de um lado ao outro, umas acima das outras, sobre uma linha de horizonte escura."
+  },
+  "53": {
+   "crop": "53_p21_1.png",
+   "alt": "Gráfico sem valores numéricos, de Velocidade em função do Tempo de duração, com duas curvas que começam e terminam no eixo do tempo. \"Inundação brusca\" (tracejada azul): sobe rapidamente até um pico alto e cai logo, durando pouco. \"Inundação gradual\" (pontilhada vermelha): sobe devagar até um pico mais baixo e cai devagar, durando bem mais."
+  },
+  "77": {
+   "crop": "77_p28_2.png",
+   "alt": "Três capas da revista \"Travel in Brazil\". Na primeira, uma mulher sorridente com turbante e colares, à frente de figuras de carnaval em vermelho. Na segunda, um vaqueiro de chapéu montado num cavalo. Na terceira, desenho de duas figuras masculinas de chapéu e roupas de couro ao lado de uma mulher de saia azul com bolinhas. Abaixo, o crédito: VIEIRA, A. P. L. O Departamento de Imprensa e Propaganda e a política editorial do Estado Novo (1937-1945). Rio de Janeiro: Unirio, 2019."
+  },
+  "86": [
+   {
+    "crop": "86_p30_2.png",
+    "alt": "Imagem de satélite \"Dubai, 2000.\": faixa de litoral reto, com o mar à esquerda e terreno desértico à direita; a cidade de Dubai aparece marcada no alto, à direita, e há poucas construções no mar perto da costa. Escala de 20 km."
+   },
+   {
+    "crop": "86_p30_3.png",
+    "alt": "Imagem de satélite \"Dubai, 2020.\", da mesma região: a área urbana ocupa quase todo o litoral e avança pelo deserto, e surgem no mar grandes ilhas artificiais, duas em forma de palmeira e um conjunto de pequenas ilhas formando um mapa-múndi. Escala de 20 km."
+   }
+  ]
+ },
+ "alt_figures": {},
+ "alt_only": {},
+ "text_fixes": {},
+ "letters": [],
+ "false_positive_figures": {
+  "5/espanhol": "só texto; a imagem detectada é a faixa decorativa da margem da página.",
+  "7": "só texto; a imagem detectada é a faixa decorativa da margem da página.",
+  "13": "só texto; a imagem detectada é a faixa decorativa da margem da página.",
+  "17": "só texto; a imagem detectada é a faixa decorativa da margem da página.",
+  "19": "só texto; a imagem detectada é a faixa decorativa da margem da página.",
+  "24": "só texto; a imagem detectada é a faixa decorativa da margem da página.",
+  "28": "só texto; a imagem detectada é a faixa decorativa da margem da página.",
+  "30": "só texto; a imagem detectada é a faixa decorativa da margem da página.",
+  "41": "só texto; a imagem detectada é a faixa decorativa da margem da página.",
+  "44": "só texto; a imagem detectada é a faixa decorativa da margem da página.",
+  "45": "só texto; a imagem detectada é a faixa decorativa da margem da página.",
+  "51": "só texto; a imagem detectada é a faixa decorativa da margem da página.",
+  "59": "só texto; a imagem detectada é a faixa decorativa da margem da página.",
+  "65": "só texto; a imagem detectada é a faixa decorativa da margem da página.",
+  "72": "só texto; a imagem detectada é a faixa decorativa da margem da página.",
+  "79": "só texto; a imagem detectada é a faixa decorativa da margem da página.",
+  "81": "só texto; a imagem detectada é a faixa decorativa da margem da página."
+ },
+ "formula_doubts": {},
+ "date": "11/11/2026"
+}
