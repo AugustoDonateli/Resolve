@@ -461,6 +461,57 @@ let batchId, proposalId;
   await A.c.from("essays").delete().eq("id", es.data?.id);
 }
 
+// ── Grupos e duelos, repertório, trilha, questão do dia e data da prova ──
+{
+  for (const t of ["study_groups", "study_group_members", "duels", "duel_entries", "repertoire_items", "essay_track_progress"]) {
+    const v = await V.c.from(t).select("*").limit(1);
+    check("visitante", `não lê ${t}`, permError(v), v.error?.message ?? `${rows(v)} linha(s)`);
+  }
+  const vd = await V.c.rpc("daily_question", { p_local_date: "2026-11-10" });
+  check("visitante", "não pede a questão do dia", permError(vd), vd.error?.message ?? "respondeu!");
+  // Grupo fixo da matriz (reaproveitado entre execuções: grupos não são apagados).
+  let gid = (await A.c.from("study_groups").select("id").eq("name", "Matriz de acesso").eq("created_by", A.id).maybeSingle()).data?.id;
+  if (!gid) {
+    const cg = await A.c.rpc("create_group", { p_name: "Matriz de acesso", p_nickname: "Conta A" });
+    check("A", "cria grupo pela função", !cg.error && Boolean(cg.data), cg.error?.message ?? "");
+    gid = cg.data;
+  }
+  const code = (await A.c.from("study_groups").select("invite_code").eq("id", gid).single()).data?.invite_code;
+  check("A", "vê o código do próprio grupo", typeof code === "string" && code.length === 8);
+  await B.c.rpc("leave_group", { p_group: gid });
+  const bg = await B.c.from("study_groups").select("id").eq("id", gid);
+  check("B", "não vê grupo de que não participa", denied(bg), bg.error?.message ?? `${rows(bg)} linha(s)`);
+  const bm = await B.c.from("study_group_members").select("nickname").eq("group_id", gid);
+  check("B", "não vê membros de grupo alheio", denied(bm), bm.error?.message ?? `${rows(bm)} linha(s)`);
+  const bi = await B.c.from("study_group_members").insert({ group_id: gid, user_id: B.id, nickname: "Intrusa" }).select();
+  check("B", "não entra no grupo sem o código", permError(bi), bi.error?.message ?? "entrou!");
+  const bd = await B.c.rpc("create_duel", { p_group: gid, p_area: null, p_count: 5 });
+  check("B", "não lança duelo em grupo alheio", /resolve_not_member/.test(bd.error?.message ?? ""), bd.error?.message ?? "lançou!");
+  const ai = await A.c.from("duels").insert({ group_id: gid, created_by: A.id, item_version_ids: [], closes_at: new Date().toISOString() }).select();
+  check("A", "não grava duelo direto na tabela", permError(ai), ai.error?.message ?? "gravou!");
+  const bj = await B.c.rpc("join_group", { p_code: code, p_nickname: "Conta B" });
+  check("B", "entra com o código", !bj.error && bj.data === gid, bj.error?.message ?? "");
+  const bm2 = await B.c.from("study_group_members").select("nickname").eq("group_id", gid).is("left_at", null);
+  check("B", "depois de entrar vê só apelidos dos membros", rows(bm2) >= 2, bm2.error?.message ?? `${rows(bm2)} linha(s)`);
+  await B.c.rpc("leave_group", { p_group: gid });
+  const bg2 = await B.c.from("study_groups").select("id").eq("id", gid);
+  check("B", "depois de sair não vê mais o grupo", denied(bg2), bg2.error?.message ?? `${rows(bg2)} linha(s)`);
+
+  const rep = await A.c.from("repertoire_items").insert({ kind: "conceito", content: "Item da matriz de acesso", source: "teste automatizado da matriz" }).select("id").single();
+  check("A", "cria item de repertório", !rep.error, rep.error?.message ?? "");
+  if (rep.data?.id) {
+    const r = await B.c.from("repertoire_items").select("id").eq("id", rep.data.id);
+    check("B", "não lê repertório de A", denied(r), r.error?.message ?? `${rows(r)} linha(s)`);
+    const u = await B.c.from("repertoire_items").update({ content: "alterado por B" }).eq("id", rep.data.id).select();
+    check("B", "não altera repertório de A", denied(u), u.error?.message ?? `${rows(u)} linha(s)`);
+    await A.c.from("repertoire_items").update({ archived_at: new Date().toISOString() }).eq("id", rep.data.id);
+  }
+  const tr = await B.c.from("essay_track_progress").insert({ user_id: A.id, step: "matriz" }).select();
+  check("B", "não marca a trilha em nome de A", permError(tr), tr.error?.message ?? "marcou!");
+  const ex = await B.c.from("profiles").update({ exam_day1: "2027-11-07" }).eq("user_id", A.id).select();
+  check("B", "não muda a data da prova de A", denied(ex), ex.error?.message ?? `${rows(ex)} linha(s)`);
+}
+
 // ── Arquivos ──
 {
   const bytes = new Blob(["arquivo de teste da matriz de acesso"], { type: "text/plain" });

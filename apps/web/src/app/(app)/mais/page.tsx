@@ -10,6 +10,7 @@ export const metadata: Metadata = { title: "Mais" };
 
 const LINKS = [
   { href: "/rotina", label: "Rotina e metas", desc: "Semana, compromissos e planos se-então" },
+  { href: "/grupos", label: "Grupos e duelos", desc: "Estudar com colegas: as mesmas questões, cada um no seu tempo" },
   { href: "/progresso", label: "Progresso", desc: "Constelação de habilidades" },
   { href: "/prototipos", label: "Protótipos de movimento", desc: "Passagem, envelope e replay (F1)" },
   { href: "/componentes", label: "Componentes", desc: "Estados de botões, campos e alternativas" },
