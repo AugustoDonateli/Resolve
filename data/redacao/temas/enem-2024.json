@@ -1,0 +1,141 @@
+{
+  "contract": "essay-prompt/v1",
+  "origin": "oficial",
+  "edition": "Enem 2024 — 1º dia (aplicação regular)",
+  "source": {
+    "file": "2024_PV_impresso_D1_CD1.pdf",
+    "sha256": "b0adc1dc79a002aba36f725f1ef792cf53e47ff75ee012638ef34a4e6fbb18f5",
+    "page": 19,
+    "locator": "Caderno 1 Azul, p. 19"
+  },
+  "cross_checked_with": [
+    "2024_PV_impresso_D1_CD2.pdf"
+  ],
+  "theme": "Desafios para a valorização da herança africana no Brasil",
+  "instruction": "A partir da leitura dos textos motivadores e com base nos conhecimentos construídos ao longo de sua formação, redija texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema “Desafios para a valorização da herança africana no Brasil”, apresentando proposta de intervenção que respeite os direitos humanos. Selecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defesa de seu ponto de vista.",
+  "texts": [
+    {
+      "position": 1,
+      "roman": "I",
+      "blocks": [
+        {
+          "id": "t1b1",
+          "type": "paragraph",
+          "text": "Herança – o legado de crenças, conhecimentos, técnicas, costumes, tradições, transmitido por um grupo social de geração para geração; cultura."
+        }
+      ],
+      "citation": "HOUAISS, A.; VILLAR, M. S. Dicionário Houaiss da língua portuguesa. Rio de Janeiro: Objetiva, 2009 (adaptado)."
+    },
+    {
+      "position": 2,
+      "roman": "II",
+      "blocks": [
+        {
+          "id": "t2b1",
+          "type": "paragraph",
+          "text": "As culturas africanas e afro-brasileiras foram relegadas ao campo do folclore com o propósito de confiná-las ao gueto fossilizado da memória. Folclorizar, nesse caso, é reduzir uma cultura a um conjunto de representações estereotipadas, via de regra, alheias ao contexto que produziu essa cultura."
+        }
+      ],
+      "citation": "OLIVEIRA, E. D. A epistemologia da ancestralidade. Entrelugares: revista de sociopoética e abordagens afins, 2009."
+    },
+    {
+      "position": 3,
+      "roman": "III",
+      "blocks": [
+        {
+          "id": "t3f1",
+          "type": "image",
+          "bbox": [
+            81.76,
+            364.59,
+            296.9,
+            479.8
+          ],
+          "text": "Fotografia de um livro aberto. Na página da esquerda, uma pequena escultura escura de uma figura humana curvada, que puxa, com cordas presas ao corpo, um grande fardo amarrado. Na página da direita: “CAPÍTULO OITO”; “QUANDO NÃO SOUBERES PARA ONDE IR, OLHA PARA TRÁS E SAIBA PELO MENOS DE ONDE VENS.”; “Provérbio africano”.",
+          "png_sha256": "4dc53a6bbff8dfefcf2e52df63d449b5ce725e9df7de52903dc4db4fc7dad1c7",
+          "asset_ref": "temas/figuras/4dc53a6bbff8dfefcf2e52df63d449b5ce725e9df7de52903dc4db4fc7dad1c7.png"
+        }
+      ],
+      "citation": "PAULINO, R. Ainda a lamentar. In: GONÇALVES, A. M. Um defeito de cor: romance. Rio de Janeiro: Record, 2024 (adaptado)."
+    },
+    {
+      "position": 4,
+      "roman": "IV",
+      "blocks": [
+        {
+          "id": "t4b1",
+          "type": "heading",
+          "text": "História afro-brasileira nas escolas: professoras comentam avanços e dificuldades"
+        },
+        {
+          "id": "t4b3",
+          "type": "paragraph",
+          "text": "As aulas sobre escravidão eram motivo de vergonha para uma professora quando ela estudava em uma escola municipal na zona sul de São Paulo. “Era o meu pior momento na escola”, lembra a ex-aluna. Naquela época, a história da população negra no Brasil era reduzida ao horror do período escravocrata. Não se falava na escola sobre temas como a história e a cultura afro-brasileira, muito menos sobre as grandes personalidades negras do país, como Luiz Gama e Carolina Maria de Jesus."
+        },
+        {
+          "id": "t4b4",
+          "type": "paragraph",
+          "text": "A pedagoga, que é negra, tem orgulho de oferecer uma experiência diferente da que viveu em sala de aula para seus alunos. Agora os livros infantis levados para as turmas têm protagonistas pretos. Temas como a beleza do cabelo crespo e o combate ao racismo fazem parte do dia a dia da escola."
+        }
+      ],
+      "citation": "Disponível em: https://jornal.unesp.br. Acesso em: 3 jun. 2024 (adaptado)."
+    },
+    {
+      "position": 5,
+      "roman": "V",
+      "blocks": [
+        {
+          "id": "t5b1",
+          "type": "heading",
+          "text": "Histórias para ninar gente grande"
+        },
+        {
+          "id": "t5b2",
+          "type": "paragraph",
+          "text": "G.R.E.S. Estação Primeira de Mangueira (samba-enredo de 2019)"
+        },
+        {
+          "id": "t5b2v",
+          "type": "paragraph",
+          "text": "Brasil, meu nego\nDeixa eu te contar\nA história que a história não conta\nO avesso do mesmo lugar\nNa luta é que a gente se encontra\nBrasil, meu dengo\nA Mangueira chegou\nCom versos que o livro apagou\nDesde 1500 tem mais invasão do que descobrimento\nTem sangue retinto pisado\nAtrás do herói emoldurado\nMulheres, tamoios, mulatos\nEu quero um país que não está no retrato\nBrasil, o teu nome é Dandara\nE a tua cara é de cariri\nNão veio do céu\nNem das mãos de Isabel\nA liberdade é um dragão no mar de Aracati\nSalve os caboclos de julho\nQuem foi de aço nos anos de chumbo\nBrasil, chegou a vez\nDe ouvir as Marias, Mahins, Marielles, malês"
+        }
+      ],
+      "citation": "Disponível em: www.mangueira.com.br. Acesso em: 30 maio 2024 (fragmento)."
+    },
+    {
+      "position": 6,
+      "roman": "VI",
+      "blocks": [
+        {
+          "id": "t6b1",
+          "type": "heading",
+          "text": "Alunos de escola municipal conhecem pontos do Rio que retratam relação com a África"
+        },
+        {
+          "id": "t6f1",
+          "type": "image",
+          "bbox": [
+            342.9,
+            549.73,
+            551.66,
+            674.72
+          ],
+          "text": "Fotografia de um grupo de estudantes de uniforme, de costas, diante de um muro com grafites coloridos; no centro do muro, um grande rosto de homem negro, Zumbi dos Palmares. Legenda: “Alunos admiram grafite de Zumbi dos Palmares na Pedra do Sal.” Crédito da foto: Brenno Carvalho / O Globo.",
+          "png_sha256": "dff3bb62af16e5729c43ca292c50442f09b5df2346e350c915aa0513f3ff3e23",
+          "asset_ref": "temas/figuras/dff3bb62af16e5729c43ca292c50442f09b5df2346e350c915aa0513f3ff3e23.png"
+        },
+        {
+          "id": "t6b3",
+          "type": "paragraph",
+          "text": "Alunos admiram grafite de Zumbi dos Palmares na Pedra do Sal."
+        }
+      ],
+      "citation": "Disponível em: www.oglobo.com. Acesso em: 29 maio 2024 (adaptado)."
+    }
+  ],
+  "page_image": {
+    "asset_ref": "temas/paginas/b0adc1dc79a002aba36f725f1ef792cf53e47ff75ee012638ef34a4e6fbb18f5-19.webp",
+    "sha256": "dd7f7a5c34446de263695692acc7f9e376bf243703dfa7bb759f4146a414d1eb"
+  },
+  "note": "Texto alternativo das figuras é proposta de transcrição: conferir na revisão editorial antes de publicar. Ajustes manuais conferidos no PDF (11/11/2026): subtítulo do samba-enredo separado dos versos; legenda do Texto VI numa linha; crédito vertical da foto (Brenno Carvalho / O Globo) levado ao texto alternativo."
+}

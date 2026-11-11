@@ -2,7 +2,7 @@
 
 Nota única: o que funciona, o que foi feito mas ainda não passou por uso real, o que falta e onde retomar. Objetivo em vigor: concluir a plataforma inteira (ver `CLAUDE.md`).
 
-Estado do banco em 11/11/2026: **182 questões publicadas** (cadernos 1 e 7 do Enem 2025: LC 50, CH 45, CN 43, MT 44), com conteúdo conferido e etiquetas pendentes. A publicação foi autorizada por Guto nesta conversa e feita com a conta de editor de teste; está registrada na nota do lote (`data/editorial/2026-11-11-publicacao.log`). As 3 questões anuladas do caderno 7 ficam fora do banco. Tema oficial de 2025 ("Perspectivas acerca do envelhecimento na sociedade brasileira") publicado em 11/11, também por autorização de Guto. Os 6 textos motivadores, os créditos e as 2 figuras foram conferidos contra a p. 20 do PDF oficial. 0 parâmetros de TRI.
+Estado do banco em 11/11/2026: **366 questões publicadas**: Enem 2025, cadernos 1 e 7 (182), e Enem 2024, cadernos 1 e 7 (184). Todas com conteúdo conferido contra os PDFs oficiais e etiquetas pendentes, publicadas com a conta de editor de teste por autorização de Guto (registro em `data/editorial/2026-11-11-*publicacao.log`). As anuladas ficam fora do banco. Temas oficiais de 2025 e 2024 publicados; o Dia D tem 12 cadernos completos (2024 e 2025, dias 1 e 2). 0 parâmetros de TRI.
 
 ## 1. Funciona (verificado com dados reais ou de ponta a ponta no projeto)
 
@@ -76,6 +76,12 @@ Estado do banco em 11/11/2026: **182 questões publicadas** (cadernos 1 e 7 do E
    - O extrator já está corrigido para espaços.
    - Mesmo assim, repita as checagens que pegaram defeitos nos cadernos 1 e 7: palavras longas grudadas, `(cid:`, `°°`, "aproximação para p", alternativa muito maior que as irmãs, texto-base vazio, listas no comando.
 9. **Fichas de cinco minutos** (F7-T30) e **links de aulas curadas** (F7-T31): a ficha atual é a da habilidade, com texto oficial. Fichas com regra, motivo e exemplo são conteúdo editorial a escrever com fonte. Os cartões de conceito já existem como estrutura.
+
+## Edições e correções
+
+- Fluxo de nova edição descrito em `tools/ingest/README.md` ("Nova edição"); 2024 foi feito assim. Próximas: 2023, 2022… (mesmo padrão de endereço no Inep).
+- Questão publicada com erro: `correct_published_item` (editor) cria versão nova e aposenta a anterior; usada nas questões 157 e 178 do caderno 7 de 2025.
+- Ainda manual: transcrever frações empilhadas embaralhadas (`checar_extracao.py` aponta) e escrever o texto alternativo das figuras.
 
 ## Retomar por aqui
 

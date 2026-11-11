@@ -27,20 +27,55 @@ import pypdfium2 as pdfium
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parents[1]
-RAW = ROOT / "raw" / "enem-2025"
-MAIN = "2025_PV_impresso_D1_CD1.pdf"
-OTHERS = ["2025_PV_impresso_D1_CD2.pdf", "2025_PV_impresso_D1_CD3.pdf", "2025_PV_impresso_D1_CD4.pdf"]
+import os
+ANO = os.environ.get("ENEM_ANO", "2025")
+RAW = ROOT / "raw" / f"enem-{ANO}"
+MAIN = f"{ANO}_PV_impresso_D1_CD1.pdf"
+# outras cores do dia 1 que estiverem baixadas (para conferir que a proposta é idêntica)
+OTHERS = [f.name for f in sorted(RAW.glob(f"{ANO}_PV_impresso_D1_CD[234].pdf"))]
 OUT = REPO / "data" / "redacao" / "temas"
 ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"]
 DPI_SCALE = 3  # 72 pt × 3 = 216 dpi, como os recortes das questões (F2-T08)
 
 # Texto alternativo PROPOSTO (transcrição do que se vê na figura; conferir na revisão editorial).
-ALT_PROPOSTO = {
+ALT_PROPOSTO_2025 = {
     "II": "Dois pictogramas brancos sobre fundo azul. À esquerda, uma pessoa curvada que se apoia numa bengala. "
           "À direita, uma pessoa de postura ereta ao lado da inscrição “60+”.",
     "IV": "Gráfico de rosca sobre pessoas de 65 a 74 anos: 34% contribuem para os gastos, mas não são os mantenedores "
           "principais; 38% são a principal renda, mas contam com outras rendas; 28% sustentam a casa sozinhos.",
 }
+
+
+ALT_PROPOSTO_2024 = {
+    "III": "Fotografia de um livro aberto. Na página da esquerda, uma pequena escultura escura de uma figura humana curvada, "
+           "que puxa, com cordas presas ao corpo, um grande fardo amarrado. Na página da direita: “CAPÍTULO OITO”; "
+           "“QUANDO NÃO SOUBERES PARA ONDE IR, OLHA PARA TRÁS E SAIBA PELO MENOS DE ONDE VENS.”; “Provérbio africano”.",
+    "VI": "Fotografia de um grupo de estudantes de uniforme, de costas, diante de um muro com grafites coloridos; no centro "
+          "do muro, um grande rosto de homem negro, Zumbi dos Palmares. Legenda: “Alunos admiram grafite de Zumbi dos Palmares "
+          "na Pedra do Sal.” Crédito da foto: Brenno Carvalho / O Globo.",
+}
+ALT_PROPOSTO = ALT_PROPOSTO_2024 if ANO == "2024" else ALT_PROPOSTO_2025
+
+
+def tidy(blocks: list[dict]) -> list[dict]:
+    """Junta títulos partidos em duas linhas e sequências de linhas curtas soltas (versos, legenda) num só bloco."""
+    out: list[dict] = []
+    for b in blocks:
+        prev = out[-1] if out else None
+        if prev and b["type"] == "heading" and prev["type"] == "heading":
+            prev["text"] = f"{prev['text']} {b['text']}"
+            continue
+        short = b["type"] == "paragraph" and "\n" not in b["text"] and len(b["text"]) < 60
+        if prev and short and prev["type"] == "paragraph" and prev.get("_short"):
+            prev["text"] = f"{prev['text']}\n{b['text']}"
+            continue
+        nb = dict(b)
+        if short:
+            nb["_short"] = True
+        out.append(nb)
+    for b in out:
+        b.pop("_short", None)
+    return out
 
 
 def norm(t: str) -> str:
@@ -85,10 +120,20 @@ def extract(path: Path, with_figures: bool = False) -> dict:
     page = pdf.pages[pi]
     words = page.extract_words()
     head = next(w for w in words if w["text"] == "PROPOSTA")
-    rule = next(l for l in page.lines if abs(l["x0"] - l["x1"]) < 1 and l["bottom"] - l["top"] > 300)
-    x_mid, y_top, y_bot = rule["x0"], rule["top"], rule["bottom"]
-    instr = page.crop((40, head["bottom"] + 2, page.width - 40, y_top - 1)).extract_text() or ""
+    rule = next((l for l in page.lines if abs(l["x0"] - l["x1"]) < 1 and l["bottom"] - l["top"] > 300), None)
+    if rule:  # 2025: proposta no alto, régua vertical entre as colunas
+        x_mid, y_top, y_bot = rule["x0"], rule["top"], rule["bottom"]
+        instr = page.crop((40, head["bottom"] + 2, page.width - 40, y_top - 1)).extract_text() or ""
+    else:  # 2024: instruções no alto, textos entre dois fios horizontais, proposta embaixo; colunas pelo "TEXTO" da direita
+        hlines = sorted((l for l in page.lines if abs(l["top"] - l["bottom"]) < 1 and l["x1"] - l["x0"] > 300), key=lambda l: l["top"])
+        y_top = next(l["top"] for l in hlines if l["top"] < head["top"] - 100) + 2
+        y_bot = head["top"] - 6
+        right = min(w["x0"] for w in words if w["text"] == "TEXTO" and w["x0"] > page.width / 3 and y_top < w["top"] < y_bot)
+        x_mid = right - 4
+        instr = page.crop((40, head["bottom"] + 2, page.width - 40, page.height - 45)).extract_text() or ""
     instruction = join_lines(instr.splitlines())
+    # 2024: o recorte até o rodapé pega a marca d'água e o rodapé; a instrução termina em "ponto de vista."
+    instruction = re.split(r"(?<=ponto de vista\.)", instruction)[0].strip()
     m = re.search(r"sobre o tema “([^”]+)”", instruction)
     if not m:
         raise SystemExit("tema entre aspas não encontrado na instrução")
@@ -139,7 +184,10 @@ def extract(path: Path, with_figures: bool = False) -> dict:
         blocks = []
         figs = t.get("figures", [])
         for k, b in enumerate(t["blocks"]):
-            b["text"] = join_lines(b.pop("lines"))
+            ls = b.pop("lines")
+            # versos (poema, letra de canção): linhas curtas, sem hífen de quebra; ficam uma por linha
+            verse = len(ls) >= 6 and sum(len(x) for x in ls) / len(ls) < 40 and not any(x.endswith("-") for x in ls)
+            b["text"] = "\n".join(x.strip() for x in ls) if verse else join_lines(ls)
             b["id"] = f"t{pos}b{k + 1}"
         for k, f in enumerate(figs):
             f["id"] = f"t{pos}f{k + 1}"
@@ -151,11 +199,14 @@ def extract(path: Path, with_figures: bool = False) -> dict:
             else:
                 blocks.append({"id": obj["id"], "type": "image", "bbox": [round(v, 2) for v in obj["bbox"]],
                                "text": ALT_PROPOSTO.get(roman, "")})
-        citation = join_lines(t["citation"])
+        blocks = tidy(blocks)
+        # crédito de foto impresso na vertical sai invertido ("obolG O / ohlavraC"): fica só no texto alternativo
+        citation = join_lines([c for c in t["citation"] if not re.search(r"\b(obolG|ohlavraC|otoF)\b", c)])
+        citation = re.sub(r"\s*\S*(obolG|ohlavraC|onne|otoF)\S*", "", citation).strip()
         for b in blocks:
             if b["type"] == "image":
                 continue
-            ws = b["text"].split()
+            ws = b["text"].replace("\n", " ").split()
             chunks = [" ".join(ws[j : j + 3]) for j in range(0, max(1, len(ws) - 2), 3)]
             missing = [c for c in chunks if norm(c) not in page_text]
             if missing:
@@ -205,11 +256,11 @@ def main() -> int:
     sha = hashlib.sha256((RAW / MAIN).read_bytes()).hexdigest()
     page_webp = main_res.pop("_page_webp")
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "enem-2025-pagina.webp").write_bytes(page_webp)
+    (OUT / f"enem-{ANO}-pagina.webp").write_bytes(page_webp)
     out = {
         "contract": "essay-prompt/v1",
         "origin": "oficial",
-        "edition": "Enem 2025 — 1º dia (aplicação regular)",
+        "edition": f"Enem {ANO} — 1º dia (aplicação regular)",
         "source": {"file": MAIN, "sha256": sha, "page": main_res["page"], "locator": f"Caderno 1 Azul, p. {main_res['page']}"},
         "cross_checked_with": OTHERS,
         "theme": main_res["theme"],
@@ -219,7 +270,7 @@ def main() -> int:
                        "sha256": hashlib.sha256(page_webp).hexdigest()},
         "note": "Texto alternativo das figuras é proposta de transcrição: conferir na revisão editorial antes de publicar.",
     }
-    (OUT / "enem-2025.json").write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (OUT / f"enem-{ANO}.json").write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(out["theme"])
     for t in out["texts"]:
         kinds = [b["type"] for b in t["blocks"]]
