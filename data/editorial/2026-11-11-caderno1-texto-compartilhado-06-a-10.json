@@ -1,0 +1,217 @@
+{
+ "booklet_note": "%D1_CD1%",
+ "pdf_sha": "a0f19f878d4ef3ba94c3e0f5ef9e57c13fb046d4bb362f72651898b473ddb7c8",
+ "date": "11/11/2026",
+ "figures": {},
+ "alt_only": {},
+ "letters": [],
+ "false_positive_figures": {},
+ "formula_doubts": {},
+ "text_fixes": {
+  "6": {
+   "stimulus": [
+    {
+     "type": "source",
+     "text": "Texto para as questões de 06 a 10."
+    },
+    {
+     "type": "heading",
+     "text": "De próprio punho"
+    },
+    {
+     "type": "paragraph",
+     "text": "A escrita e suas tecnologias sofrem interessantes metamorfoses, numa ciranda que vai do simples bilhete aos originais de um livro"
+    },
+    {
+     "type": "paragraph",
+     "text": "1 Estranhei muito na primeira vez que escutei a expressão “de próprio punho”. Parecia\n2 que eu ia bater em alguém. Não era bem o caso. Foi numa situação bancária, dessas bem\n3 burocráticas, e eu devia escrever algo bem breve, mas com minhas mãos. Na verdade,\n4 o que importava era a autenticidade da minha caligrafia, que à época ainda era mais\n5 fluente e firme. Depois dos teclados de computador, ela rateia bastante. Minha letra,\n6 hoje, tem uma espécie de alternância: dia sim, dia não, trêmula e firme, forte e fraca,\n7 mais rotunda e mais cheia de arestas."
+    },
+    {
+     "type": "paragraph",
+     "text": "8 É claro que já escrevi muito mais de próprio punho ou, numa palavra mais bonita,\n9 manuscrevi (prefiro a mão ao punho, embora ele também seja usado na tarefa). Mas isso\n10 não é um feito individual. Em larga medida, é social. Muita gente sente o mesmo que\n11 eu, isto é, escreve bem menos usando as mãos, ou melhor, empregando algum tipo de\n12 tecnologia (lápis, caneta etc.) para escrever com grafite ou tinta ou giz ou carvão ou\n13 sangue e o que mais. É importante lembrar que ainda há gente que não sabe escrever\n14 neste país, neste planeta, mas muita gente sabe e tem um combo de tecnologias mais\n15 ou menos à disposição para isso. Sou dessas pessoas privilegiadas que têm várias\n16 possibilidades, e uma delas nunca deixou de ser o uso das minhas mãos. Ainda hoje,\n17 são elas que batucam meu teclado de computador ou que tocam suavemente duas ou\n18 três telas sensíveis. Mas não expressam mais a minha letra. No lugar, aparecem Times\n19 New Roman, Arial, Calibri e mais uma centena de “letras” à minha escolha. Eu e Deus\n20 e o mundo."
+    },
+    {
+     "type": "paragraph",
+     "text": "21 A despeito desse rol de chances e ferramentas para escrever, o manuscrito nunca\n22 deixou de pintar aqui e ali, muitas vezes como obrigação. Na escola, por exemplo, até\n23 hoje ele é soberano. No Enem também. Curioso, não? Fico pensando em que espaços\n24 e ocasiões ainda uso minha letra. Olhando ao redor, na minha casa, minha letra está\n25 em espaços muito delimitados e específicos: bilhetes. Eles estão principalmente na\n26 cozinha, em especial na porta da geladeira, a fim de manter a comunicação com meus\n27 coabitantes, sempre muito esquecidos ou relapsos. Mas também há bilhetes em post its\n28 na minha mesa do escritório, textinhos em garranchos por meio dos quais me comunico\n29 comigo mesma, a evitar um comportamento esquecido e relapso."
+    },
+    {
+     "type": "paragraph",
+     "text": "30 No escritório, costumo ser mais suave comigo mesma, mas também muito mais\n31 lacônica, a ponto de nem eu me entender, se passar o tempo. Em todos os casos vai\n32 minha letra, menos e mais redonda, a lápis e a tinta azul, em post its rosa-choque, colados\n33 precariamente, e todos com destino à lixeira, em breve. Justo porque eles funcionam\n34 como lembretes de tarefas e coisas que devem ser vencidas e, claro, substituídas por\n35 outras, num fluxo infinito, às vezes ansiogênico, com que a maioria dos adultos (e mais\n36 ainda as adultas) precisa conviver."
+    },
+    {
+     "type": "paragraph",
+     "text": "37 As formas de escrever mudam, as necessidades também, e o resultado é um elenco\n38 complexo, em que nada dispensa nada, a depender da tarefa ou da importância das coisas\n39 ou de suas funções, claro. A escrita e suas tecnologias incríveis vão se reposicionando,\n40 mudando de status, numa ciranda interessante e importante que pode ser vista à luz de\n41 certa diversidade que encontra suas oportunidades e seus efeitos, aqui e ali. Não adianta\n42 muito pensar sempre como se tudo fosse excludente. Estão aí minha farta comunicação\n43 por bilhetes, minha gaveta alegre de post its de toda cor, esperando para serem usados,\n44 e o cheque do cartório, em que quase tudo já é digital. “Do punho ao pixel” não é uma\n45 frase filosoficamente correta. O negócio é mais “o punho e o pixel”."
+    },
+    {
+     "type": "source",
+     "text": "RIBEIRO, A. E. Disponível em: https://rascunho.com.br. Acesso em: 16 jan. 2024 (adaptado)."
+    }
+   ],
+   "stimulus_note": "texto compartilhado das questões 06 a 10 (p. 6 do PDF) incluído com as 45 linhas numeradas; a importação não o tinha capturado"
+  },
+  "7": {
+   "stimulus": [
+    {
+     "type": "source",
+     "text": "Texto para as questões de 06 a 10."
+    },
+    {
+     "type": "heading",
+     "text": "De próprio punho"
+    },
+    {
+     "type": "paragraph",
+     "text": "A escrita e suas tecnologias sofrem interessantes metamorfoses, numa ciranda que vai do simples bilhete aos originais de um livro"
+    },
+    {
+     "type": "paragraph",
+     "text": "1 Estranhei muito na primeira vez que escutei a expressão “de próprio punho”. Parecia\n2 que eu ia bater em alguém. Não era bem o caso. Foi numa situação bancária, dessas bem\n3 burocráticas, e eu devia escrever algo bem breve, mas com minhas mãos. Na verdade,\n4 o que importava era a autenticidade da minha caligrafia, que à época ainda era mais\n5 fluente e firme. Depois dos teclados de computador, ela rateia bastante. Minha letra,\n6 hoje, tem uma espécie de alternância: dia sim, dia não, trêmula e firme, forte e fraca,\n7 mais rotunda e mais cheia de arestas."
+    },
+    {
+     "type": "paragraph",
+     "text": "8 É claro que já escrevi muito mais de próprio punho ou, numa palavra mais bonita,\n9 manuscrevi (prefiro a mão ao punho, embora ele também seja usado na tarefa). Mas isso\n10 não é um feito individual. Em larga medida, é social. Muita gente sente o mesmo que\n11 eu, isto é, escreve bem menos usando as mãos, ou melhor, empregando algum tipo de\n12 tecnologia (lápis, caneta etc.) para escrever com grafite ou tinta ou giz ou carvão ou\n13 sangue e o que mais. É importante lembrar que ainda há gente que não sabe escrever\n14 neste país, neste planeta, mas muita gente sabe e tem um combo de tecnologias mais\n15 ou menos à disposição para isso. Sou dessas pessoas privilegiadas que têm várias\n16 possibilidades, e uma delas nunca deixou de ser o uso das minhas mãos. Ainda hoje,\n17 são elas que batucam meu teclado de computador ou que tocam suavemente duas ou\n18 três telas sensíveis. Mas não expressam mais a minha letra. No lugar, aparecem Times\n19 New Roman, Arial, Calibri e mais uma centena de “letras” à minha escolha. Eu e Deus\n20 e o mundo."
+    },
+    {
+     "type": "paragraph",
+     "text": "21 A despeito desse rol de chances e ferramentas para escrever, o manuscrito nunca\n22 deixou de pintar aqui e ali, muitas vezes como obrigação. Na escola, por exemplo, até\n23 hoje ele é soberano. No Enem também. Curioso, não? Fico pensando em que espaços\n24 e ocasiões ainda uso minha letra. Olhando ao redor, na minha casa, minha letra está\n25 em espaços muito delimitados e específicos: bilhetes. Eles estão principalmente na\n26 cozinha, em especial na porta da geladeira, a fim de manter a comunicação com meus\n27 coabitantes, sempre muito esquecidos ou relapsos. Mas também há bilhetes em post its\n28 na minha mesa do escritório, textinhos em garranchos por meio dos quais me comunico\n29 comigo mesma, a evitar um comportamento esquecido e relapso."
+    },
+    {
+     "type": "paragraph",
+     "text": "30 No escritório, costumo ser mais suave comigo mesma, mas também muito mais\n31 lacônica, a ponto de nem eu me entender, se passar o tempo. Em todos os casos vai\n32 minha letra, menos e mais redonda, a lápis e a tinta azul, em post its rosa-choque, colados\n33 precariamente, e todos com destino à lixeira, em breve. Justo porque eles funcionam\n34 como lembretes de tarefas e coisas que devem ser vencidas e, claro, substituídas por\n35 outras, num fluxo infinito, às vezes ansiogênico, com que a maioria dos adultos (e mais\n36 ainda as adultas) precisa conviver."
+    },
+    {
+     "type": "paragraph",
+     "text": "37 As formas de escrever mudam, as necessidades também, e o resultado é um elenco\n38 complexo, em que nada dispensa nada, a depender da tarefa ou da importância das coisas\n39 ou de suas funções, claro. A escrita e suas tecnologias incríveis vão se reposicionando,\n40 mudando de status, numa ciranda interessante e importante que pode ser vista à luz de\n41 certa diversidade que encontra suas oportunidades e seus efeitos, aqui e ali. Não adianta\n42 muito pensar sempre como se tudo fosse excludente. Estão aí minha farta comunicação\n43 por bilhetes, minha gaveta alegre de post its de toda cor, esperando para serem usados,\n44 e o cheque do cartório, em que quase tudo já é digital. “Do punho ao pixel” não é uma\n45 frase filosoficamente correta. O negócio é mais “o punho e o pixel”."
+    },
+    {
+     "type": "source",
+     "text": "RIBEIRO, A. E. Disponível em: https://rascunho.com.br. Acesso em: 16 jan. 2024 (adaptado)."
+    }
+   ],
+   "stimulus_note": "texto compartilhado das questões 06 a 10 (p. 6 do PDF) incluído com as 45 linhas numeradas; a importação não o tinha capturado"
+  },
+  "8": {
+   "stimulus": [
+    {
+     "type": "source",
+     "text": "Texto para as questões de 06 a 10."
+    },
+    {
+     "type": "heading",
+     "text": "De próprio punho"
+    },
+    {
+     "type": "paragraph",
+     "text": "A escrita e suas tecnologias sofrem interessantes metamorfoses, numa ciranda que vai do simples bilhete aos originais de um livro"
+    },
+    {
+     "type": "paragraph",
+     "text": "1 Estranhei muito na primeira vez que escutei a expressão “de próprio punho”. Parecia\n2 que eu ia bater em alguém. Não era bem o caso. Foi numa situação bancária, dessas bem\n3 burocráticas, e eu devia escrever algo bem breve, mas com minhas mãos. Na verdade,\n4 o que importava era a autenticidade da minha caligrafia, que à época ainda era mais\n5 fluente e firme. Depois dos teclados de computador, ela rateia bastante. Minha letra,\n6 hoje, tem uma espécie de alternância: dia sim, dia não, trêmula e firme, forte e fraca,\n7 mais rotunda e mais cheia de arestas."
+    },
+    {
+     "type": "paragraph",
+     "text": "8 É claro que já escrevi muito mais de próprio punho ou, numa palavra mais bonita,\n9 manuscrevi (prefiro a mão ao punho, embora ele também seja usado na tarefa). Mas isso\n10 não é um feito individual. Em larga medida, é social. Muita gente sente o mesmo que\n11 eu, isto é, escreve bem menos usando as mãos, ou melhor, empregando algum tipo de\n12 tecnologia (lápis, caneta etc.) para escrever com grafite ou tinta ou giz ou carvão ou\n13 sangue e o que mais. É importante lembrar que ainda há gente que não sabe escrever\n14 neste país, neste planeta, mas muita gente sabe e tem um combo de tecnologias mais\n15 ou menos à disposição para isso. Sou dessas pessoas privilegiadas que têm várias\n16 possibilidades, e uma delas nunca deixou de ser o uso das minhas mãos. Ainda hoje,\n17 são elas que batucam meu teclado de computador ou que tocam suavemente duas ou\n18 três telas sensíveis. Mas não expressam mais a minha letra. No lugar, aparecem Times\n19 New Roman, Arial, Calibri e mais uma centena de “letras” à minha escolha. Eu e Deus\n20 e o mundo."
+    },
+    {
+     "type": "paragraph",
+     "text": "21 A despeito desse rol de chances e ferramentas para escrever, o manuscrito nunca\n22 deixou de pintar aqui e ali, muitas vezes como obrigação. Na escola, por exemplo, até\n23 hoje ele é soberano. No Enem também. Curioso, não? Fico pensando em que espaços\n24 e ocasiões ainda uso minha letra. Olhando ao redor, na minha casa, minha letra está\n25 em espaços muito delimitados e específicos: bilhetes. Eles estão principalmente na\n26 cozinha, em especial na porta da geladeira, a fim de manter a comunicação com meus\n27 coabitantes, sempre muito esquecidos ou relapsos. Mas também há bilhetes em post its\n28 na minha mesa do escritório, textinhos em garranchos por meio dos quais me comunico\n29 comigo mesma, a evitar um comportamento esquecido e relapso."
+    },
+    {
+     "type": "paragraph",
+     "text": "30 No escritório, costumo ser mais suave comigo mesma, mas também muito mais\n31 lacônica, a ponto de nem eu me entender, se passar o tempo. Em todos os casos vai\n32 minha letra, menos e mais redonda, a lápis e a tinta azul, em post its rosa-choque, colados\n33 precariamente, e todos com destino à lixeira, em breve. Justo porque eles funcionam\n34 como lembretes de tarefas e coisas que devem ser vencidas e, claro, substituídas por\n35 outras, num fluxo infinito, às vezes ansiogênico, com que a maioria dos adultos (e mais\n36 ainda as adultas) precisa conviver."
+    },
+    {
+     "type": "paragraph",
+     "text": "37 As formas de escrever mudam, as necessidades também, e o resultado é um elenco\n38 complexo, em que nada dispensa nada, a depender da tarefa ou da importância das coisas\n39 ou de suas funções, claro. A escrita e suas tecnologias incríveis vão se reposicionando,\n40 mudando de status, numa ciranda interessante e importante que pode ser vista à luz de\n41 certa diversidade que encontra suas oportunidades e seus efeitos, aqui e ali. Não adianta\n42 muito pensar sempre como se tudo fosse excludente. Estão aí minha farta comunicação\n43 por bilhetes, minha gaveta alegre de post its de toda cor, esperando para serem usados,\n44 e o cheque do cartório, em que quase tudo já é digital. “Do punho ao pixel” não é uma\n45 frase filosoficamente correta. O negócio é mais “o punho e o pixel”."
+    },
+    {
+     "type": "source",
+     "text": "RIBEIRO, A. E. Disponível em: https://rascunho.com.br. Acesso em: 16 jan. 2024 (adaptado)."
+    }
+   ],
+   "stimulus_note": "texto compartilhado das questões 06 a 10 (p. 6 do PDF) incluído com as 45 linhas numeradas; a importação não o tinha capturado"
+  },
+  "9": {
+   "stimulus": [
+    {
+     "type": "source",
+     "text": "Texto para as questões de 06 a 10."
+    },
+    {
+     "type": "heading",
+     "text": "De próprio punho"
+    },
+    {
+     "type": "paragraph",
+     "text": "A escrita e suas tecnologias sofrem interessantes metamorfoses, numa ciranda que vai do simples bilhete aos originais de um livro"
+    },
+    {
+     "type": "paragraph",
+     "text": "1 Estranhei muito na primeira vez que escutei a expressão “de próprio punho”. Parecia\n2 que eu ia bater em alguém. Não era bem o caso. Foi numa situação bancária, dessas bem\n3 burocráticas, e eu devia escrever algo bem breve, mas com minhas mãos. Na verdade,\n4 o que importava era a autenticidade da minha caligrafia, que à época ainda era mais\n5 fluente e firme. Depois dos teclados de computador, ela rateia bastante. Minha letra,\n6 hoje, tem uma espécie de alternância: dia sim, dia não, trêmula e firme, forte e fraca,\n7 mais rotunda e mais cheia de arestas."
+    },
+    {
+     "type": "paragraph",
+     "text": "8 É claro que já escrevi muito mais de próprio punho ou, numa palavra mais bonita,\n9 manuscrevi (prefiro a mão ao punho, embora ele também seja usado na tarefa). Mas isso\n10 não é um feito individual. Em larga medida, é social. Muita gente sente o mesmo que\n11 eu, isto é, escreve bem menos usando as mãos, ou melhor, empregando algum tipo de\n12 tecnologia (lápis, caneta etc.) para escrever com grafite ou tinta ou giz ou carvão ou\n13 sangue e o que mais. É importante lembrar que ainda há gente que não sabe escrever\n14 neste país, neste planeta, mas muita gente sabe e tem um combo de tecnologias mais\n15 ou menos à disposição para isso. Sou dessas pessoas privilegiadas que têm várias\n16 possibilidades, e uma delas nunca deixou de ser o uso das minhas mãos. Ainda hoje,\n17 são elas que batucam meu teclado de computador ou que tocam suavemente duas ou\n18 três telas sensíveis. Mas não expressam mais a minha letra. No lugar, aparecem Times\n19 New Roman, Arial, Calibri e mais uma centena de “letras” à minha escolha. Eu e Deus\n20 e o mundo."
+    },
+    {
+     "type": "paragraph",
+     "text": "21 A despeito desse rol de chances e ferramentas para escrever, o manuscrito nunca\n22 deixou de pintar aqui e ali, muitas vezes como obrigação. Na escola, por exemplo, até\n23 hoje ele é soberano. No Enem também. Curioso, não? Fico pensando em que espaços\n24 e ocasiões ainda uso minha letra. Olhando ao redor, na minha casa, minha letra está\n25 em espaços muito delimitados e específicos: bilhetes. Eles estão principalmente na\n26 cozinha, em especial na porta da geladeira, a fim de manter a comunicação com meus\n27 coabitantes, sempre muito esquecidos ou relapsos. Mas também há bilhetes em post its\n28 na minha mesa do escritório, textinhos em garranchos por meio dos quais me comunico\n29 comigo mesma, a evitar um comportamento esquecido e relapso."
+    },
+    {
+     "type": "paragraph",
+     "text": "30 No escritório, costumo ser mais suave comigo mesma, mas também muito mais\n31 lacônica, a ponto de nem eu me entender, se passar o tempo. Em todos os casos vai\n32 minha letra, menos e mais redonda, a lápis e a tinta azul, em post its rosa-choque, colados\n33 precariamente, e todos com destino à lixeira, em breve. Justo porque eles funcionam\n34 como lembretes de tarefas e coisas que devem ser vencidas e, claro, substituídas por\n35 outras, num fluxo infinito, às vezes ansiogênico, com que a maioria dos adultos (e mais\n36 ainda as adultas) precisa conviver."
+    },
+    {
+     "type": "paragraph",
+     "text": "37 As formas de escrever mudam, as necessidades também, e o resultado é um elenco\n38 complexo, em que nada dispensa nada, a depender da tarefa ou da importância das coisas\n39 ou de suas funções, claro. A escrita e suas tecnologias incríveis vão se reposicionando,\n40 mudando de status, numa ciranda interessante e importante que pode ser vista à luz de\n41 certa diversidade que encontra suas oportunidades e seus efeitos, aqui e ali. Não adianta\n42 muito pensar sempre como se tudo fosse excludente. Estão aí minha farta comunicação\n43 por bilhetes, minha gaveta alegre de post its de toda cor, esperando para serem usados,\n44 e o cheque do cartório, em que quase tudo já é digital. “Do punho ao pixel” não é uma\n45 frase filosoficamente correta. O negócio é mais “o punho e o pixel”."
+    },
+    {
+     "type": "source",
+     "text": "RIBEIRO, A. E. Disponível em: https://rascunho.com.br. Acesso em: 16 jan. 2024 (adaptado)."
+    }
+   ],
+   "stimulus_note": "texto compartilhado das questões 06 a 10 (p. 6 do PDF) incluído com as 45 linhas numeradas; a importação não o tinha capturado"
+  },
+  "10": {
+   "stimulus": [
+    {
+     "type": "source",
+     "text": "Texto para as questões de 06 a 10."
+    },
+    {
+     "type": "heading",
+     "text": "De próprio punho"
+    },
+    {
+     "type": "paragraph",
+     "text": "A escrita e suas tecnologias sofrem interessantes metamorfoses, numa ciranda que vai do simples bilhete aos originais de um livro"
+    },
+    {
+     "type": "paragraph",
+     "text": "1 Estranhei muito na primeira vez que escutei a expressão “de próprio punho”. Parecia\n2 que eu ia bater em alguém. Não era bem o caso. Foi numa situação bancária, dessas bem\n3 burocráticas, e eu devia escrever algo bem breve, mas com minhas mãos. Na verdade,\n4 o que importava era a autenticidade da minha caligrafia, que à época ainda era mais\n5 fluente e firme. Depois dos teclados de computador, ela rateia bastante. Minha letra,\n6 hoje, tem uma espécie de alternância: dia sim, dia não, trêmula e firme, forte e fraca,\n7 mais rotunda e mais cheia de arestas."
+    },
+    {
+     "type": "paragraph",
+     "text": "8 É claro que já escrevi muito mais de próprio punho ou, numa palavra mais bonita,\n9 manuscrevi (prefiro a mão ao punho, embora ele também seja usado na tarefa). Mas isso\n10 não é um feito individual. Em larga medida, é social. Muita gente sente o mesmo que\n11 eu, isto é, escreve bem menos usando as mãos, ou melhor, empregando algum tipo de\n12 tecnologia (lápis, caneta etc.) para escrever com grafite ou tinta ou giz ou carvão ou\n13 sangue e o que mais. É importante lembrar que ainda há gente que não sabe escrever\n14 neste país, neste planeta, mas muita gente sabe e tem um combo de tecnologias mais\n15 ou menos à disposição para isso. Sou dessas pessoas privilegiadas que têm várias\n16 possibilidades, e uma delas nunca deixou de ser o uso das minhas mãos. Ainda hoje,\n17 são elas que batucam meu teclado de computador ou que tocam suavemente duas ou\n18 três telas sensíveis. Mas não expressam mais a minha letra. No lugar, aparecem Times\n19 New Roman, Arial, Calibri e mais uma centena de “letras” à minha escolha. Eu e Deus\n20 e o mundo."
+    },
+    {
+     "type": "paragraph",
+     "text": "21 A despeito desse rol de chances e ferramentas para escrever, o manuscrito nunca\n22 deixou de pintar aqui e ali, muitas vezes como obrigação. Na escola, por exemplo, até\n23 hoje ele é soberano. No Enem também. Curioso, não? Fico pensando em que espaços\n24 e ocasiões ainda uso minha letra. Olhando ao redor, na minha casa, minha letra está\n25 em espaços muito delimitados e específicos: bilhetes. Eles estão principalmente na\n26 cozinha, em especial na porta da geladeira, a fim de manter a comunicação com meus\n27 coabitantes, sempre muito esquecidos ou relapsos. Mas também há bilhetes em post its\n28 na minha mesa do escritório, textinhos em garranchos por meio dos quais me comunico\n29 comigo mesma, a evitar um comportamento esquecido e relapso."
+    },
+    {
+     "type": "paragraph",
+     "text": "30 No escritório, costumo ser mais suave comigo mesma, mas também muito mais\n31 lacônica, a ponto de nem eu me entender, se passar o tempo. Em todos os casos vai\n32 minha letra, menos e mais redonda, a lápis e a tinta azul, em post its rosa-choque, colados\n33 precariamente, e todos com destino à lixeira, em breve. Justo porque eles funcionam\n34 como lembretes de tarefas e coisas que devem ser vencidas e, claro, substituídas por\n35 outras, num fluxo infinito, às vezes ansiogênico, com que a maioria dos adultos (e mais\n36 ainda as adultas) precisa conviver."
+    },
+    {
+     "type": "paragraph",
+     "text": "37 As formas de escrever mudam, as necessidades também, e o resultado é um elenco\n38 complexo, em que nada dispensa nada, a depender da tarefa ou da importância das coisas\n39 ou de suas funções, claro. A escrita e suas tecnologias incríveis vão se reposicionando,\n40 mudando de status, numa ciranda interessante e importante que pode ser vista à luz de\n41 certa diversidade que encontra suas oportunidades e seus efeitos, aqui e ali. Não adianta\n42 muito pensar sempre como se tudo fosse excludente. Estão aí minha farta comunicação\n43 por bilhetes, minha gaveta alegre de post its de toda cor, esperando para serem usados,\n44 e o cheque do cartório, em que quase tudo já é digital. “Do punho ao pixel” não é uma\n45 frase filosoficamente correta. O negócio é mais “o punho e o pixel”."
+    },
+    {
+     "type": "source",
+     "text": "RIBEIRO, A. E. Disponível em: https://rascunho.com.br. Acesso em: 16 jan. 2024 (adaptado)."
+    }
+   ],
+   "stimulus_note": "texto compartilhado das questões 06 a 10 (p. 6 do PDF) incluído com as 45 linhas numeradas; a importação não o tinha capturado"
+  }
+ }
+}

@@ -116,7 +116,7 @@ function StimulusText({
     >
       {blocks.map((b) =>
         b.type === "paragraph" && b.text ? (
-          <p key={b.id} data-block-id={b.id}>
+          <p key={b.id} data-block-id={b.id} className="whitespace-pre-line">
             <MarkedText text={b.text} mine={mine.filter((r) => r.block_id === b.id)} editorial={editorial.filter((r) => r.block_id === b.id)} />
           </p>
         ) : (

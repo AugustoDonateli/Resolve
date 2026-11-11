@@ -174,8 +174,9 @@ export function QuestionBlocks({
               </span>
             );
           default:
+            // quebras de linha do texto são do original (listas, linhas numeradas): preservadas
             return (
-              <P key={b.id} className="block">
+              <P key={b.id} className="block whitespace-pre-line">
                 {b.text}
               </P>
             );
