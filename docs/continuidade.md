@@ -2,7 +2,7 @@
 
 Nota única: o que funciona, o que foi feito mas ainda não passou por uso real, o que falta e onde retomar. Objetivo em vigor: concluir a plataforma inteira (ver `CLAUDE.md`).
 
-Estado do banco em 11/11/2026: **0 questões publicadas** (120 propostas aptas aguardam o clique de publicação de Guto), 0 temas publicados, 0 parâmetros de TRI, 108 dúvidas editoriais abertas. Por isso quase tudo que depende de questão real foi verificado só por testes, transações desfeitas e telas vazias.
+Estado do banco em 11/11/2026: **0 questões publicadas**; **182 propostas aptas** aguardam o clique de publicação de Guto (caderno 1: 95/95; caderno 7: 87/90, as 3 restantes são anuladas no gabarito oficial). 0 temas publicados, 0 parâmetros de TRI, 0 dúvidas editoriais abertas nos dois cadernos. Por isso quase tudo que depende de questão real foi verificado só por testes, transações desfeitas e telas vazias.
 
 ## 1. Funciona (verificado com dados reais ou de ponta a ponta no projeto)
 
@@ -27,7 +27,13 @@ Estado do banco em 11/11/2026: **0 questões publicadas** (120 propostas aptas a
 - **Grupos e duelos** (`/grupos`): criar, entrar por código, apelido, sair, convite. Políticas testadas em transação e na matriz.
 - **Matriz e incidência** (`/estudar/matriz`): as 120 habilidades oficiais com página e fonte, por área e competência, e a ficha de cada habilidade.
 - **TRI**: motor EAP 3PL configurável, testado contra integração fina e com cenários não aditivos. O diagnóstico diz "indisponível" (sem parâmetros oficiais) e tem demonstração marcada.
-- **Área editorial**: propostas, dúvidas, etiquetas, cartões, temas, publicação de conteúdo conferido. Caderno 1 conferido contra o PDF oficial: 95/95 aptas.
+- **Área editorial**: propostas, dúvidas, etiquetas, cartões, temas, publicação de conteúdo conferido; a prévia do aluno desenha tabelas e linhas numeradas.
+- **Cadernos 1 e 7 conferidos contra os PDFs oficiais** (registros em `data/editorial/2026-11-1*`):
+  - palavras grudadas: corrigidas em 80 propostas; a causa foi corrigida em `extract.py`;
+  - texto compartilhado das questões 06 a 10 do caderno 1: estava ausente e foi incluído;
+  - caderno 7: figuras, alternativas em imagem, tabelas, fórmulas, símbolos (°, π), comandos e listas;
+  - letras do cruzamento com o caderno 5 conferidas no PDF oficial.
+  - O Dia D do dia 2 (caderno 7) fica completo assim que as 87 forem publicadas: o dia 2 não tem redação, e as anuladas entram como anuladas.
 - **Auditoria visual e de acessibilidade**: `pnpm --filter @resolve/web audit:ui` com 81 aprovados e 2 pulados (fluxos que dependem de plano do dia na conta de teste). `pnpm check`: 120 testes do app + 7 do pacote de UI.
 
 ## 2. Implementado, mas não validado em uso real (falta conteúdo publicado ou chave)
@@ -47,7 +53,10 @@ Estado do banco em 11/11/2026: **0 questões publicadas** (120 propostas aptas a
 
 ## 3. Falta, com o bloqueio específico
 
-1. **Publicar as 120 questões aptas** (Guto, conta de editor): `/editor/publicar` → "Conteúdo conferido, etiquetas pendentes". Destrava quase tudo da seção 2. Publicar também o **tema oficial** em `/editor/temas` (destrava o Dia D dia 1).
+1. **Publicar as 182 questões aptas** (Guto, conta de editor): `/editor/publicar` → "Conteúdo conferido, etiquetas pendentes", marcar o checklist e publicar.
+   - Destrava quase tudo da seção 2 e o **Dia D do dia 2** (caderno 7).
+   - Para o Dia D do dia 1, falta também publicar o **tema oficial** em `/editor/temas`.
+   - A conferência foi feita por Claude, com a conta de editor de teste; cada revisão registra a autoria. Antes de publicar, vale dar uma olhada na prévia do aluno de algumas questões (por exemplo, 6, 165 e 138).
 2. **Chave `RESOLVE_ANTHROPIC_API_KEY`** como segredo da Edge Function `corrigir-redacao` e **política de IA** nova (modelo e saída suficiente; a `redacao-ref-v0` corta em 1.500 tokens). Destrava:
    - correção real;
    - etiquetagem;
@@ -59,12 +68,14 @@ Estado do banco em 11/11/2026: **0 questões publicadas** (120 propostas aptas a
 5. **Notas de corte verificáveis** (EXT-CURSO, F7-T37): sem fonte importada. A meta de curso funciona com dados informados pela conta e com fonte.
 6. **Redações nota 1000 e corpus de calibração**: Guto traz. Biblioteca nota 1000 e calibração aguardam.
 7. **Notificação / WhatsApp da questão do dia** (EXT-CANAL): a questão do dia existe só dentro do app.
-8. **Editorial — caderno 7**: 62 propostas com dúvida (47 de figura, 8 de alternativa, 13 de fórmula). As ferramentas estão em `tools/ingest` (`audit_figuras.py`, `recorte_por_cabecalho.py`, `aplicar_revisao.mjs`, com README). Conferir contra o PDF oficial como foi feito no caderno 1.
+8. **Outros cadernos** (cores 2 a 6 e 8 a 12): ainda não foram importados como propostas. Use as ferramentas de `tools/ingest`, descritas no README.
+   - O extrator já está corrigido para espaços.
+   - Mesmo assim, repita as checagens que pegaram defeitos nos cadernos 1 e 7: palavras longas grudadas, `(cid:`, `°°`, "aproximação para p", alternativa muito maior que as irmãs, texto-base vazio, listas no comando.
 9. **Fichas de cinco minutos** (F7-T30) e **links de aulas curadas** (F7-T31): a ficha atual é a da habilidade, com texto oficial. Fichas com regra, motivo e exemplo são conteúdo editorial a escrever com fonte. Os cartões de conceito já existem como estrutura.
 
 ## Retomar por aqui
 
-Item 8 (caderno 7 contra o PDF oficial) enquanto Guto não publica. Depois que as questões forem publicadas, percorrer a seção 2 com as contas de teste: estudo, comando, distrator, questão do dia, texto compartilhado, duelo entre A e B, treino por habilidade.
+Enquanto Guto não publica: novos cadernos (item 8) ou recursos independentes. Depois que as questões forem publicadas, percorrer a seção 2 com as contas de teste: estudo, comando, distrator, questão do dia, texto compartilhado, duelo entre A e B, treino por habilidade.
 
 Lembretes:
 - Migrações sem `delete`/`drop`; tabela nova revoga `anon` e entra na matriz.
