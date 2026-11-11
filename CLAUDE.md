@@ -10,6 +10,7 @@ Plataforma de preparação para o ENEM. Dono e primeiro usuário: Guto (prova em
 3. Recurso que depende de algo externo (chave, dado, autorização, conteúdo): implemente o que der, marque a dependência concreta como pendente e siga para outra parte.
 
 ## Ritmo de trabalho
+- **Autorização permanente de Guto (11/11/2026):** aplicar tudo direto no site principal, sem pedir que ele teste antes. Depois das verificações pertinentes (build, testes, matriz de acesso quando muda o banco), levar o trabalho à branch padrão do repositório (`claude/new-session-vhzm54`, de onde a Vercel publica) por avanço direto, e publicar conteúdo conferido contra as fontes oficiais. Registrar na nota do lote que a publicação foi autorizada por ele.
 - Trabalhe em conjuntos de funcionalidades completos e incorporados ao produto (nada de app paralelo nem demos soltas), com liberdade de implementação e cuidado visual. Resolva escolhas rotineiras sozinho; pergunte só quando faltar informação que só Guto tem.
 - Verificações proporcionais ao que mudou: aparência se confere no navegador; cálculos, salvamento, acesso a dados, políticas de acesso e chamadas pagas pedem os testes pertinentes. Não crie testes que repetem valores de CSS.
 - Não encerre só porque uma tarefa acabou ou a conversa ficou longa. Havendo um limite real, deixe uma retomada objetiva em `docs/continuidade.md`.
