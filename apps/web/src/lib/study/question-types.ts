@@ -27,6 +27,8 @@ export interface QuestionAlternative {
 
 export interface StudyQuestion {
   area: "LC" | "CH" | "CN" | "MT";
+  /** Texto-base compartilhado com outras questões da mesma sessão (números na sessão, a partir de 1). */
+  shared?: { positions: number[]; first: boolean } | null;
   origin: string;
   stimulus: QuestionBlock[];
   command: QuestionBlock[];
@@ -114,6 +116,7 @@ export interface StudyItemRow {
   stimulus_blocks: RawBlock[] | null;
   command_blocks: RawBlock[];
   alternatives: { key: string; content_blocks: RawBlock[] }[];
+  stimulus_version_id?: string | null;
   appearances:
     | { booklet: number; day: number; color: string; position: number }[]
     | null;

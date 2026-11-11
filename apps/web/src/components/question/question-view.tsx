@@ -151,6 +151,11 @@ export function QuestionBlocks({
   );
 }
 
+/** [3, 4, 5] → "3, 4 e 5". */
+function sharedList(ps: number[]) {
+  return ps.length < 2 ? String(ps[0] ?? "") : `${ps.slice(0, -1).join(", ")} e ${ps[ps.length - 1]}`;
+}
+
 export interface AnswerState {
   value: string | null;
   onValueChange: (key: string) => void;
@@ -186,11 +191,29 @@ export function QuestionView({
         <span className="t-meta text-ink-2">· {question.origin}</span>
         {badge}
       </div>
-      {question.stimulus.length > 0 && (
-        <div className="mb-5 flex flex-col gap-4 t-reading text-ink">
-          <QuestionBlocks blocks={question.stimulus} />
-        </div>
-      )}
+      {question.stimulus.length > 0 &&
+        (question.shared && !question.shared.first ? (
+          <details className="group mb-5 rounded-card border border-line-subtle bg-surface-subtle">
+            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 py-2 t-ui text-ink">
+              <span>
+                Mesmo texto da questão {question.shared.positions[0]}{" "}
+                <span className="t-meta text-ink-2">(texto para as questões {sharedList(question.shared.positions)})</span>
+              </span>
+              <span className="t-meta text-link group-open:hidden">Mostrar</span>
+              <span className="hidden t-meta text-link group-open:inline">Recolher</span>
+            </summary>
+            <div className="flex flex-col gap-4 border-t border-line-subtle bg-surface px-4 py-4 t-reading text-ink">
+              <QuestionBlocks blocks={question.stimulus} />
+            </div>
+          </details>
+        ) : (
+          <div className="mb-5 flex flex-col gap-4 t-reading text-ink">
+            {question.shared && (
+              <p className="t-meta font-medium text-ink-2">Texto para as questões {sharedList(question.shared.positions)}</p>
+            )}
+            <QuestionBlocks blocks={question.stimulus} />
+          </div>
+        ))}
       <div
         id={`${id}-cmd`}
         className="mb-4 flex flex-col gap-3 t-reading font-medium text-ink"

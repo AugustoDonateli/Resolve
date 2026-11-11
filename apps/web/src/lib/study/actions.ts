@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { CLIENT_EVENT_TYPES } from "./events";
 import { ERROR_REASONS } from "./reasons";
 import { classify, type Outcome } from "./retry";
+import { packSharedTexts } from "./shared-text";
 import type { Explanation } from "./raiox";
 
 /**
@@ -199,13 +200,15 @@ export async function startTraining(input: unknown): Promise<Outcome<string>> {
   const supabase = await createClient();
   const { data: auth } = await supabase.auth.getUser();
   if (!auth.user) return { ok: false, error: "resolve_not_signed_in", final: true };
-  let q = supabase.from("study_items").select("item_version_id").eq("annulled", false);
+  let q = supabase.from("study_items").select("item_version_id, stimulus_version_id").eq("annulled", false);
   if (p.data.area !== "todas") q = q.eq("area", p.data.area);
   const [{ data: pool }, { data: done }] = await Promise.all([q, supabase.from("attempts").select("item_version_id")]);
   const answered = new Set((done ?? []).map((a) => a.item_version_id));
   const shuffle = <T,>(xs: T[]) => xs.map((x) => [Math.random(), x] as const).sort((a, b) => a[0] - b[0]).map(([, x]) => x);
   const ids = (pool ?? []).map((r) => r.item_version_id as string);
-  const chosen = [...shuffle(ids.filter((i) => !answered.has(i))), ...shuffle(ids.filter((i) => answered.has(i)))].slice(0, p.data.count);
+  const stimulusOf = new Map((pool ?? []).map((r) => [r.item_version_id as string, (r.stimulus_version_id as string | null) ?? null]));
+  // Questões do mesmo texto-base entram juntas (texto compartilhado).
+  const chosen = packSharedTexts([...shuffle(ids.filter((i) => !answered.has(i))), ...shuffle(ids.filter((i) => answered.has(i)))], stimulusOf, p.data.count);
   if (!chosen.length) return { ok: false, error: "resolve_no_items", final: true };
   return rpc<string>("start_session", {
     p_client_action_id: p.data.actionId,

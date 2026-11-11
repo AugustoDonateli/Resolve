@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { authEnabled } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
 import { loadQuestionAssets } from "./question-assets";
+import { markSharedTexts } from "./shared-text";
 import {
   fromStudyItem,
   type StudyItemRow,
@@ -84,7 +85,7 @@ export async function loadSession(id: string): Promise<SessionView> {
     supabase
       .from("study_items")
       .select(
-        "item_version_id, area, stimulus_blocks, command_blocks, alternatives, appearances",
+        "item_version_id, area, stimulus_blocks, command_blocks, alternatives, appearances, stimulus_version_id",
       )
       .in("item_version_id", versionIds),
     supabase
@@ -160,6 +161,7 @@ export async function loadSession(id: string): Promise<SessionView> {
         : null,
     });
   }
+  markSharedTexts(entries, byVersion);
   const { data: marks } = await supabase
     .from("attempt_events")
     .select("session_item_id, event_type, sequence")
