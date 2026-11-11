@@ -1,41 +1,72 @@
 # Continuidade
 
-Nota única: o que funciona, o que falta e onde retomar. Objetivo em vigor: concluir a plataforma inteira (ver `CLAUDE.md`).
+Nota única: o que funciona, o que foi feito mas ainda não passou por uso real, o que falta e onde retomar. Objetivo em vigor: concluir a plataforma inteira (ver `CLAUDE.md`).
 
-## Funciona (com dados reais)
+Estado do banco em 11/11/2026: **0 questões publicadas** (120 propostas aptas aguardam o clique de publicação de Guto), 0 temas publicados, 0 parâmetros de TRI, 108 dúvidas editoriais abertas. Por isso quase tudo que depende de questão real foi verificado só por testes, transações desfeitas e telas vazias.
 
-- **Conta, perfis e papéis** (aluno, editor), políticas de acesso testadas pela matriz (`pnpm test:access`).
-- **Hoje** (`/hoje`): plano do dia nos horários livres, próxima atividade, foco com tempo do servidor (pausar, voltar, retomar após recarregar, concluir), agenda com remarcação, feito hoje, ficou de fora, plano se-então, sequência.
-- **Rotina** (`/rotina`): horários semanais e exceções de um dia, metas diária/semanal/por área, planos se-então, folgas e sequência.
-- **Redação**: temas com textos motivadores (tema oficial 2025 em rascunho), editor com salvamento automático e recuperação, folha de 30 linhas (`folha-v1`), treino por peças, **envio para correção** (versão congela), **correção em etapas** A → B → regra de discrepância (`discrepancia-plano-v1`: >100 no total ou >80 numa competência; fonte oficial do Inep pendente) → C quando necessário, resultado como divergência entre avaliações ("não calibrado"), comentários ancorados ao trecho com traço de caneta, cinco elementos da intervenção, **reescrita e evolução** por versão.
-  - Serviço: Edge Function `corrigir-redacao` (implantada) + núcleo `supabase/functions/_shared/essay-core.ts` (testado no app com avaliador de teste) + funções `worker_*` só para `service_role` + agenda a cada 5 min (pg_cron) que só chama com fila. Sem a chave, a função responde "pendente" e não pega trabalho.
-  - A conta de teste A pode ter uma correção feita pelo **avaliador de teste** (marcada na tela como teste, zero tokens). Nenhuma correção real foi feita.
-- **Progresso** (`/progresso`): relatório dos últimos 7 dias (minutos feitos pelo foco × planejados, blocos, respostas, revisões, redações, por área e meta semanal), tabela equivalente; mapa de habilidades e TRI declarados como indisponíveis, com o motivo.
-- **Área editorial**: propostas, dúvidas, etiquetas, cartões de conceito, temas e **publicação de conteúdo conferido com etiquetas pendentes** (`/editor/publicar`).
-- **Estudo pronto, aguardando questões publicadas**: sessão de treino com resposta preservada, Raio-X (mostra campos sem etiqueta como indisponíveis), caderno de erros e revisão espaçada, banco com filtros, triagem e conferência, ritmo.
+## 1. Funciona (verificado com dados reais ou de ponta a ponta no projeto)
 
-## Dia D (simulado)
+- **Conta, perfis e papéis** (aluno, editor). Matriz de acesso contra o projeto: **259/259** (`pnpm test:access`), cobrindo também grupos, repertório, trilha, meta de curso, questão do dia e data da prova.
+- **Hoje** (`/hoje`): plano nos horários livres, foco com relógio do servidor, agenda com remarcação, feito hoje, ficou de fora, se-então, sequência. Agora também:
+  - bloco com **"Abrir a atividade"** (revisão, redação ou treino já na área do bloco);
+  - **contagem até a prova** e chip de **reta final**;
+  - cartão da **questão do dia** (sem questões publicadas, diz isso).
+- **Plano adaptativo** (`adaptativo-v1`, regra da plataforma): o treino livre vai para a área com maior taxa de erro em 14 dias (mínimo de 10 respostas por área); sem dados suficientes, para a área há mais tempo sem treino. O motivo aparece no bloco. Testado (unidade).
+- **Reta final** (`reta-final-v1`): data do 1º dia informada em Rotina, marcada como provisória até o edital. Nos últimos 60 dias, o plano troca o treino livre por "Bloco de ritmo". Conferido no navegador refazendo o plano com uma data de teste, depois removida.
+- **Rotina** (`/rotina`): horários, exceções, metas, se-então, folgas, sequência, **data da prova**.
+- **Redação**:
+  - página inicial com caminhos;
+  - temas, editor com salvamento e recuperação, folha de 30 linhas;
+  - treino por peças;
+  - envio, correção em etapas A → B → discrepância → C, reescrita e evolução;
+  - trilha "Redação do zero";
+  - repertório pessoal com fonte obrigatória;
+  - **redação por foto**: enviar a foto da folha (reduzida no aparelho, até 4), ver ao lado do editor e digitar olhando para ela. Conferido no navegador: envio, exibição e remoção.
+- **Revisar**: **feed finito de cartões por gestos** (vira, arrasta, teclado, botões, tela final). Conferido no celular com a demonstração `/revisar/demonstracao`.
+- **Progresso**: relatório de 7 dias e **meta de curso** (`/progresso/meta`): curso, instituição, corte e pesos informados com fonte obrigatória, média ponderada numa régua 0–1000 e quanto falta na quinta nota. Conferido no navegador; a conta bate com o cálculo à mão.
+- **Grupos e duelos** (`/grupos`): criar, entrar por código, apelido, sair, convite. Políticas testadas em transação e na matriz.
+- **Matriz e incidência** (`/estudar/matriz`): as 120 habilidades oficiais com página e fonte, por área e competência, e a ficha de cada habilidade.
+- **TRI**: motor EAP 3PL configurável, testado contra integração fina e com cenários não aditivos. O diagnóstico diz "indisponível" (sem parâmetros oficiais) e tem demonstração marcada.
+- **Área editorial**: propostas, dúvidas, etiquetas, cartões, temas, publicação de conteúdo conferido. Caderno 1 conferido contra o PDF oficial: 95/95 aptas.
+- **Auditoria visual e de acessibilidade**: `pnpm --filter @resolve/web audit:ui` com 81 aprovados e 2 pulados (fluxos que dependem de plano do dia na conta de teste). `pnpm check`: 120 testes do app + 7 do pacote de UI.
 
-- Incorporado do commit `d2288f1` (Codex) e com a migração `20261111120000_dia_d.sql` **aplicada** no projeto (só acrescenta tabelas privadas e funções; nenhum dado existente muda).
-- `/estudar/dia-d`: perfis versionados, ordem e letras do caderno oficial, cartão-resposta separado do rascunho, relógio do servidor, treino em horário livre ou ensaio às 13h30 de Brasília (Edital Inep 52/2025, §9.4), retomada, entrega que trava o cartão, acertos só pelo cartão, replay dos eventos reais, TRI e correção da redação como indisponíveis, abertura com a cena 3D existente (pode pular).
-- **Correção feita na integração:** o patch marcava anuladas por uma lista fixa que trocava o caderno 5 pelo 11 (e deixava de fora os cadernos 6, 8 e 12). Agora a anulação vem de `official_answer_keys` (`ANULADO`) de cada caderno: 3 anuladas em cada caderno do dia 2, nenhuma no dia 1.
-- Conferido no projeto: catálogo com 18 cadernos (dia 1: 330 min com redação; dia 2: 300 min), largada recusada enquanto o caderno não está completo, tabelas privadas inacessíveis à conta de aluno. **Bloqueio:** nenhum caderno tem as 90 posições publicadas; o dia 1 também precisa do tema oficial publicado. O fluxo completo da prova (largada, cartão, entrega, replay) foi validado pelo Codex em PostgreSQL local; falta repetir no projeto com um caderno completo.
+## 2. Implementado, mas não validado em uso real (falta conteúdo publicado ou chave)
 
-## Pendências que dependem de Guto ou de algo externo
+| Recurso | Como foi verificado | O que falta para validar |
+| --- | --- | --- |
+| Estudo, Raio-X, caderno de erros, revisão espaçada, banco, triagem, ritmo | testes e transações | questões publicadas |
+| **Comando primeiro** e **caça ao distrator** (`/estudar/comando`, `/estudar/distrator`) | funções testadas em transação; demonstrações no navegador | questões publicadas; a comparação com o gabarito editorial só sai com etiquetas aprovadas |
+| **Questão do dia** (`daily_question`) | sem questões, devolve vazio sem erro | questões publicadas |
+| **Texto compartilhado** | testes de agrupamento e marcação; aparência conferida numa página temporária | questões publicadas que compartilham texto-base |
+| **Duelos** (lançar, jogar, placar revelado só depois de terminar) | políticas e placar testados em transação; faixa do placar conferida com dados de exemplo | ao menos 5 questões publicadas e duas contas jogando |
+| **Treino por habilidade** e incidência | telas mostram "indisponível" | etiquetas de habilidade revisadas em questões publicadas |
+| **Feed de cartões reais** | demonstração no navegador | cartões de conceito publicados (hoje: 0) |
+| **Dia D** completo no projeto | fluxo validado em PostgreSQL local (Codex); catálogo e recusa conferidos no projeto | um caderno com as 90 posições publicadas e o tema oficial do dia 1 |
+| Correção de redação real | avaliador de teste, sem tokens | chave e política de IA |
+| TRI com números | motor testado com parâmetros fictícios marcados | parâmetros oficiais do Inep por item |
 
-1. **Publicar as 105 questões** em `/editor/publicar` → "Conteúdo conferido, etiquetas pendentes": marcar o checklist e publicar (precisa da conta de editor do Guto; a publicação fica registrada em nome de quem confirma). Testado em transação desfeita. Destrava Estudar, Revisar, Banco, Triagem e Ritmo.
-   - 80 propostas não entram: 74 com dúvida aberta (figura sem recorte, alternativa vazia, fórmula a conferir), 4 sem cruzamento conferido, 4 com gabarito ausente/anulado, 1 sem caderno; parte dos cruzamentos tem a letra E sem par.
-2. **Chave `RESOLVE_ANTHROPIC_API_KEY`** como segredo da Edge Function `corrigir-redacao` (Supabase → Edge Functions → Secrets) e **política de IA confirmada**: a política atual (`redacao-ref-v0`) é só referência (Sonnet 4.6, 1.500 tokens de saída). Para chamadas reais, criar uma política nova com o modelo escolhido e saída suficiente (o modelo pensa antes de responder; 1.500 tokens cortam) e confirmar o teto de US$ 5/mês. Destrava correção de redação, etiquetagem e retorno do treino por peças.
-3. **Tema oficial** em `/editor/temas`: conferir e publicar.
+## 3. Falta, com o bloqueio específico
 
-## Falta implementar (ordem sugerida pelo código atual)
-
-1. Redação restante: calibração (precisa de redações com nota humana, que Guto traz), banco de repertório, biblioteca nota 1000 com anotações e camadas (conteúdo de Guto), trilha Redação do zero, retorno do treino por peças (IA).
-2. **Dia D**: quando um caderno ficar completo, repetir o fluxo inteiro no projeto e concluir o acabamento da abertura e do replay.
-3. **TRI e diagnóstico**: sem parâmetros oficiais dos itens no banco; a tela deve dizer "indisponível" até carregar parâmetros do Inep e conferir o cálculo com dados de referência.
-4. Habilidades de prova restantes (comando primeiro com seleção de evidência, caça ao distrator); mapa de habilidades real quando houver tentativas.
-5. Expansões (plano adaptativo, previsão, feed finito, dados brasileiros, incidência e fichas, tutor, texto compartilhado, meta de curso, reta final, questão do dia, redação por foto, grupos e duelos).
+1. **Publicar as 120 questões aptas** (Guto, conta de editor): `/editor/publicar` → "Conteúdo conferido, etiquetas pendentes". Destrava quase tudo da seção 2. Publicar também o **tema oficial** em `/editor/temas` (destrava o Dia D dia 1).
+2. **Chave `RESOLVE_ANTHROPIC_API_KEY`** como segredo da Edge Function `corrigir-redacao` e **política de IA** nova (modelo e saída suficiente; a `redacao-ref-v0` corta em 1.500 tokens). Destrava:
+   - correção real;
+   - etiquetagem;
+   - retorno do treino por peças;
+   - leitura automática da foto da redação;
+   - **tutor** (F7-T32–34). O tutor não foi construído: não há como implementar nem avaliar o contrato sem chamadas reais.
+3. **Parâmetros oficiais de TRI** (microdados do Inep, inacessíveis daqui). Destrava a estimativa por área e a **previsão** (F7-T23–25). A previsão exige ainda histórico mínimo de estimativas comparáveis.
+4. **Dados brasileiros agregados** (F7-T28): precisam dos microdados (mesmo bloqueio do item 3). Nada foi construído para não sugerir dado ausente.
+5. **Notas de corte verificáveis** (EXT-CURSO, F7-T37): sem fonte importada. A meta de curso funciona com dados informados pela conta e com fonte.
+6. **Redações nota 1000 e corpus de calibração**: Guto traz. Biblioteca nota 1000 e calibração aguardam.
+7. **Notificação / WhatsApp da questão do dia** (EXT-CANAL): a questão do dia existe só dentro do app.
+8. **Editorial — caderno 7**: 62 propostas com dúvida (47 de figura, 8 de alternativa, 13 de fórmula). As ferramentas estão em `tools/ingest` (`audit_figuras.py`, `recorte_por_cabecalho.py`, `aplicar_revisao.mjs`, com README). Conferir contra o PDF oficial como foi feito no caderno 1.
+9. **Fichas de cinco minutos** (F7-T30) e **links de aulas curadas** (F7-T31): a ficha atual é a da habilidade, com texto oficial. Fichas com regra, motivo e exemplo são conteúdo editorial a escrever com fonte. Os cartões de conceito já existem como estrutura.
 
 ## Retomar por aqui
 
-Item 3 (TRI e diagnóstico: o cálculo 3PL com prior, cenários que recalculam o conjunto inteiro de respostas e testes contra valores de referência podem ser feitos já; a tela continua "indisponível" até existirem parâmetros oficiais), depois item 4 (comando primeiro e caça ao distrator) e o restante de redação e expansões. Ambiente local: `apps/web/.env.local` com a URL e a chave publicável do projeto; senhas das contas de teste geradas por `tools/dev/test-accounts.mjs`.
+Item 8 (caderno 7 contra o PDF oficial) enquanto Guto não publica. Depois que as questões forem publicadas, percorrer a seção 2 com as contas de teste: estudo, comando, distrator, questão do dia, texto compartilhado, duelo entre A e B, treino por habilidade.
+
+Lembretes:
+- Migrações sem `delete`/`drop`; tabela nova revoga `anon` e entra na matriz.
+- Antes de cada commit: `git checkout apps/web/next-env.d.ts; rm -f apps/web/AGENTS.md`.
+- Ambiente local: `apps/web/.env.local` e senhas das contas de teste por `tools/dev/test-accounts.mjs`.
