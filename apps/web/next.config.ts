@@ -19,6 +19,8 @@ const nextConfig: NextConfig = {
   transpilePackages: ["@resolve/ui"],
   reactStrictMode: true,
   poweredByHeader: false,
+  // Foto da redação: o aparelho reduz a imagem antes de enviar; 4 MB cobre a folha inteira legível.
+  experimental: { serverActions: { bodySizeLimit: "4mb" } },
 };
 
 export default nextConfig;
