@@ -17,7 +17,9 @@ const MODES = [
   { href: "/diagnostico", title: "Diagnóstico", body: "Até 20 questões por área e a estimativa por TRI quando houver parâmetros oficiais." },
 ];
 
-export default async function EstudarPage() {
+export default async function EstudarPage({ searchParams }: { searchParams: Promise<{ area?: string }> }) {
+  const { area } = await searchParams;
+  const initialArea = area && ["LC", "CH", "CN", "MT"].includes(area) ? area : "todas";
   const counts = await publishedByArea();
   const total = counts ? Object.values(counts).reduce((a, b) => a + b, 0) : 0;
   return (
@@ -44,8 +46,8 @@ export default async function EstudarPage() {
         </ul>
       </nav>
       {total > 0 ? (
-        <div className="flex flex-col gap-6">
-          <StartTraining counts={counts!} />
+        <div id="treino" className="flex scroll-mt-20 flex-col gap-6">
+          <StartTraining counts={counts!} initialArea={initialArea} />
           <section
             aria-labelledby="treinos-habilidade"
             className="flex max-w-xl flex-col gap-3"
@@ -63,7 +65,7 @@ export default async function EstudarPage() {
             aria-labelledby="ritmo"
             className="flex max-w-xl flex-col gap-3"
           >
-            <h2 id="ritmo" className="t-section">
+            <h2 id="ritmo" className="scroll-mt-24 t-section">
               Blocos de ritmo
             </h2>
             <p className="t-meta text-ink-2">

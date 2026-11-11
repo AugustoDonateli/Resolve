@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowRight, CalendarRange } from "lucide-react";
 import Link from "next/link";
+import { ExamDayForm } from "@/components/routine/exam-day-form";
 import { GoalsPanel } from "@/components/routine/goals-panel";
 import { SchedulePlanner } from "@/components/routine/schedule-planner";
 import { StreakCard } from "@/components/routine/streak-card";
@@ -8,6 +9,7 @@ import { ScreenHeader } from "@/components/shell/app-shell";
 import { EmptyState } from "@/components/ui/empty-state";
 import { loadGoals } from "@/lib/routine/goals";
 import { loadSchedule } from "@/lib/routine/schedule";
+import { loadDayPlan } from "@/lib/routine/plan";
 import { loadStreak } from "@/lib/routine/streak";
 
 export const metadata: Metadata = { title: "Rotina" };
@@ -18,10 +20,11 @@ export const dynamic = "force-dynamic";
  * O dia em si — plano, foco e agenda — fica em Hoje.
  */
 export default async function RotinaPage() {
-  const [data, goals, streak] = await Promise.all([
+  const [data, goals, streak, day] = await Promise.all([
     loadSchedule(),
     loadGoals(),
     loadStreak(),
+    loadDayPlan(),
   ]);
   return (
     <>
@@ -43,6 +46,11 @@ export default async function RotinaPage() {
           <div className="border-t border-line-subtle pt-10">
             <GoalsPanel goals={goals.goals} plans={goals.plans} />
           </div>
+          {day && (
+            <div className="border-t border-line-subtle pt-10">
+              <ExamDayForm examDay={day.examDay} today={day.today} />
+            </div>
+          )}
           {streak && (
             <div className="border-t border-line-subtle pt-10">
               <StreakCard s={streak} />

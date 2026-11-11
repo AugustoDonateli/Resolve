@@ -403,3 +403,24 @@ export async function getSkillFeedback(input: unknown): Promise<Outcome<SkillFee
   if (!p.success) return { ok: false, error: "dados inválidos", final: true };
   return rpc<SkillFeedback>("skill_feedback", { p_session_item: p.data.sessionItemId });
 }
+
+/**
+ * Questão do dia: confere no servidor que a questão pedida é mesmo a do dia (fuso do perfil) e abre
+ * uma sessão de uma questão. Reenviar com o mesmo `actionId` devolve a mesma sessão.
+ */
+export async function startDailyQuestion(input: unknown): Promise<Outcome<string>> {
+  const p = z.object({ actionId: uuid, itemVersionId: uuid, today: z.string().regex(/^\d{4}-\d{2}-\d{2}$/) }).safeParse(input);
+  if (!p.success) return { ok: false, error: "dados inválidos", final: true };
+  const supabase = await createClient();
+  const { data } = await supabase.rpc("daily_question", { p_local_date: p.data.today });
+  const row = (data as { item_version_id: string }[] | null)?.[0];
+  if (!row || row.item_version_id !== p.data.itemVersionId) return { ok: false, error: "resolve_no_items", final: true };
+  return rpc<string>("start_session", {
+    p_client_action_id: p.data.actionId,
+    p_mode: "treino",
+    p_item_version_ids: [row.item_version_id],
+    p_planned_minutes: null,
+    p_time_limit_minutes: null,
+    p_selection_reason: "plano",
+  });
+}

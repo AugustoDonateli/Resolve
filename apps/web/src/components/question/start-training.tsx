@@ -14,9 +14,11 @@ const noop = () => () => {};
 export function StartTraining({
   counts,
   mode = "treino",
+  initialArea = "todas",
 }: {
   counts: Record<string, number>;
   mode?: "treino" | "triagem";
+  initialArea?: string;
 }) {
   const router = useRouter();
   const hydrated = useSyncExternalStore(
@@ -25,7 +27,7 @@ export function StartTraining({
     () => false,
   );
   const [pending, start] = useTransition();
-  const [area, setArea] = useState("todas");
+  const [area, setArea] = useState(initialArea);
   const [count, setCount] = useState("10");
   const [error, setError] = useState<string | null>(null);
   const total = Object.values(counts).reduce((a, b) => a + b, 0);

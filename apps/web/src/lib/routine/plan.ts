@@ -1,6 +1,7 @@
 import "server-only";
 import { authEnabled } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
+import { daysUntil } from "./exam";
 import { dateInZone, minuteInZone } from "./schedule-types";
 
 export interface DayBlock {
@@ -30,6 +31,9 @@ export interface DayPlan {
   generatedAt: string | null;
   /** Minuto atual no fuso do perfil (a mesma referência do plano). */
   nowMinute: number;
+  /** 1º dia da prova informado pela conta (provisório) e dias até lá. */
+  examDay: string | null;
+  daysToExam: number | null;
 }
 
 export async function loadDayPlan(): Promise<DayPlan | null> {
@@ -39,7 +43,7 @@ export async function loadDayPlan(): Promise<DayPlan | null> {
   if (!auth.user) return null;
   const { data: profile } = await supabase
     .from("profiles")
-    .select("timezone")
+    .select("timezone, exam_day1")
     .eq("user_id", auth.user.id)
     .maybeSingle();
   let timezone = profile?.timezone ?? "America/Sao_Paulo";
@@ -97,5 +101,7 @@ export async function loadDayPlan(): Promise<DayPlan | null> {
     leftOut: (d.data?.left_out ?? []) as LeftOutEntry[],
     generatedAt: d.data?.generated_at ?? null,
     nowMinute: minuteInZone(new Date(), timezone),
+    examDay: profile?.exam_day1 ?? null,
+    daysToExam: profile?.exam_day1 ? daysUntil(today, profile.exam_day1) : null,
   };
 }

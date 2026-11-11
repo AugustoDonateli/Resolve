@@ -4,6 +4,11 @@
  * cabe volta com o motivo — nada é cortado em silêncio.
  * Horários em minutos desde 00:00 do dia local.
  */
+import { FINAL_STRETCH_DAYS } from "./exam";
+
+/** Título dos blocos de ritmo da reta final (a tela usa para levar ao bloco de ritmo). */
+export const RHYTHM_TITLE = "Bloco de ritmo";
+
 export interface Window {
   start: number;
   end: number;
@@ -155,6 +160,10 @@ export interface PlanInputs {
   dailyGoal: number | null;
   weeklyGoal: number | null;
   areaGoals: { area: string; weeklyMinutes: number }[];
+  /** Área escolhida pelo plano adaptativo para o treino livre (null = sem histórico). */
+  focus?: TrainingFocus | null;
+  /** Dias até o 1º dia (data informada pela conta); dentro da reta final o treino livre vira ritmo. */
+  daysToExam?: number | null;
 }
 
 const round5 = (v: number) => Math.round(v / 5) * 5;
@@ -209,17 +218,91 @@ export function buildTasks(i: PlanInputs): {
   } else {
     const rest = daily - i.reviewMinutes - areaTotal;
     if (rest >= 15) {
-      tasks.push({
-        id: "treino-livre",
-        kind: "treino",
-        title: "Treino livre",
-        minutes: rest,
-        minBlock: 15,
-        maxBlock: 50,
-        priority: 3,
-        reason: `Completa a meta de ${daily} min ${i.dailyGoal ? "por dia" : "(semanal ÷ 7)"}.`,
-      });
+      const goal = `Completa a meta de ${daily} min ${i.dailyGoal ? "por dia" : "(semanal ÷ 7)"}.`;
+      const final = i.daysToExam != null && i.daysToExam >= 0 && i.daysToExam <= FINAL_STRETCH_DAYS;
+      tasks.push(
+        final
+          ? {
+              id: "ritmo",
+              kind: "treino",
+              title: RHYTHM_TITLE,
+              minutes: rest,
+              minBlock: 15,
+              maxBlock: 50,
+              priority: 3,
+              reason: `${goal} Reta final (faltam ${i.daysToExam} ${i.daysToExam === 1 ? "dia" : "dias"}, data informada por você): questões contra o relógio, gabarito no fim.`,
+            }
+          : i.focus
+          ? {
+              id: `foco-${i.focus.area}`,
+              kind: "treino",
+              title: `Treino de ${AREA_NAME[i.focus.area]}`,
+              minutes: rest,
+              minBlock: 15,
+              maxBlock: 50,
+              priority: 3,
+              reason: `${goal} Área escolhida: ${i.focus.reason}`,
+            }
+          : {
+              id: "treino-livre",
+              kind: "treino",
+              title: "Treino livre",
+              minutes: rest,
+              minBlock: 15,
+              maxBlock: 50,
+              priority: 3,
+              reason: goal,
+            },
+      );
     }
   }
   return { tasks, notes };
+}
+
+/** Desempenho recente de uma área (respostas de primeira tentativa nos últimos 14 dias). */
+export interface AreaStat {
+  area: "LC" | "CH" | "CN" | "MT";
+  answers: number;
+  wrong: number;
+  /** Dias desde a última resposta na área; null = nunca respondeu. */
+  daysSinceLast: number | null;
+}
+
+export interface TrainingFocus {
+  area: AreaStat["area"];
+  reason: string;
+}
+
+/** Regra da plataforma (não é regra do Inep): mínimo de respostas para comparar taxas de erro. */
+export const ADAPTIVE_RULE = { id: "adaptativo-v1", minAnswers: 10, windowDays: 14 } as const;
+
+/**
+ * Plano adaptativo (adaptativo-v1): escolhe a área do treino livre. Entre as áreas com pelo menos
+ * `minAnswers` respostas na janela, vai para a de maior taxa de erro (empate: a que está há mais tempo
+ * sem treino). Se nenhuma tem respostas suficientes, vai para a área há mais tempo sem treino, desde
+ * que exista algum histórico; sem histórico nenhum, não escolhe (o treino continua livre).
+ */
+export function chooseTrainingFocus(stats: AreaStat[]): TrainingFocus | null {
+  if (!stats.some((s) => s.answers > 0)) return null;
+  const stale = (s: AreaStat) => s.daysSinceLast ?? Number.POSITIVE_INFINITY;
+  const rated = stats.filter((s) => s.answers >= ADAPTIVE_RULE.minAnswers);
+  if (rated.length) {
+    const best = [...rated].sort(
+      (a, b) => b.wrong / b.answers - a.wrong / a.answers || stale(b) - stale(a) || a.area.localeCompare(b.area),
+    )[0]!;
+    const pct = Math.round((best.wrong / best.answers) * 100);
+    const others = rated.length > 1 ? " a maior taxa entre as áreas com respostas suficientes" : " a única área com respostas suficientes para comparar";
+    return {
+      area: best.area,
+      reason: `${best.wrong} erros em ${best.answers} respostas nos últimos ${ADAPTIVE_RULE.windowDays} dias (${pct}%):${others}.`,
+    };
+  }
+  const best = [...stats].sort((a, b) => stale(b) - stale(a) || a.area.localeCompare(b.area))[0]!;
+  return {
+    area: best.area,
+    reason:
+      best.daysSinceLast === null
+        ? `Nenhuma resposta em ${AREA_NAME[best.area]} nos últimos ${ADAPTIVE_RULE.windowDays} dias; ainda não há respostas suficientes (${ADAPTIVE_RULE.minAnswers} por área) para comparar erros.`
+        : `Área há mais tempo sem treino (${best.daysSinceLast} ${best.daysSinceLast === 1 ? "dia" : "dias"}); ainda não há respostas suficientes (${ADAPTIVE_RULE.minAnswers} por área) para comparar erros.`,
+  };
 }

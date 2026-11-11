@@ -20,6 +20,7 @@ import {
   useRef,
   useState,
   useTransition,
+  type ReactNode,
 } from "react";
 import { duration, ease } from "@resolve/ui/motion";
 import { useReduced } from "@/components/prefs/prefs";
@@ -38,7 +39,9 @@ import {
   generateDayPlan,
   type FocusState,
 } from "@/lib/routine/plan-actions";
+import { RHYTHM_TITLE } from "@/lib/routine/planner";
 import { minuteInZone } from "@/lib/routine/schedule-types";
+import { ExamCountdown } from "@/components/today/exam-countdown";
 import type { StreakView } from "@/lib/routine/streak";
 import { DayAgenda } from "./day-agenda";
 import { activeMs, FocusView, type FocusClock } from "./focus-view";
@@ -87,10 +90,13 @@ export function Today({
   plan,
   ifThen,
   streak,
+  daily,
 }: {
   plan: DayPlan;
   ifThen: IfThenPlan | null;
   streak: StreakView | null;
+  /** Questão do dia (já renderizada pela página). */
+  daily?: ReactNode;
 }) {
   const router = useRouter();
   const reduced = useReduced();
@@ -303,7 +309,10 @@ export function Today({
         style={{ transformOrigin: "50% 0%" }}
       >
         <ScreenHeader title="Hoje" kicker={longDate(plan.today)}>
-          {streak && <StreakChip s={streak} />}
+          <div className="flex flex-wrap items-center gap-2">
+            <ExamCountdown examDay={plan.examDay} days={plan.daysToExam} />
+            {streak && <StreakChip s={streak} />}
+          </div>
         </ScreenHeader>
 
         <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(300px,360px)] lg:gap-12">
@@ -453,7 +462,8 @@ export function Today({
             <IfThenNote plan={ifThen} />
           </div>
 
-          <aside className="flex min-w-0 flex-col gap-6" aria-label="Agenda">
+          <aside className="flex min-w-0 flex-col gap-6" aria-label="Questão do dia e agenda">
+            {daily}
             {plan.blocks.length > 0 ? (
               <DayAgenda plan={plan} openRequest={rescheduleReq} />
             ) : (
@@ -632,6 +642,12 @@ function HeroCard({
           >
             {running ? "Continuar foco" : "Começar foco"}
           </Button>
+          <Link
+            href={activityHref(block)}
+            className="inline-flex min-h-11 items-center gap-2 rounded-control border border-line bg-surface px-4 t-ui text-ink hover:bg-surface-subtle"
+          >
+            Abrir a atividade <ArrowRight aria-hidden className="size-4" />
+          </Link>
           {!running && (
             <Button
               variant="secondary"
@@ -654,6 +670,14 @@ function HeroCard({
       </div>
     </motion.article>
   );
+}
+
+/** Onde a atividade do bloco acontece: revisão, redação ou treino (já na área do bloco, se houver). */
+function activityHref(block: DayBlock): string {
+  if (block.kind === "revisao") return "/revisar";
+  if (block.kind === "redacao") return "/redacao";
+  if (block.title === RHYTHM_TITLE) return "/estudar#ritmo";
+  return block.area_code && block.area_code !== "RED" ? `/estudar?area=${block.area_code}#treino` : "/estudar#treino";
 }
 
 function LaterRow({

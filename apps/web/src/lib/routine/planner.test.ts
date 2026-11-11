@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildTasks, freeWindows, planDay, type PlanTask } from "./planner";
+import { buildTasks, chooseTrainingFocus, freeWindows, planDay, type PlanTask } from "./planner";
 
 const h = (hh: number, mm = 0) => hh * 60 + mm;
 const task = (
@@ -145,5 +145,43 @@ describe("tarefas do dia", () => {
       areaGoals: [],
     });
     expect(tasks.map((t) => [t.id, t.minutes])).toEqual([["treino-livre", 60]]);
+  });
+});
+
+describe("plano adaptativo (adaptativo-v1)", () => {
+  const st = (area: "LC" | "CH" | "CN" | "MT", answers: number, wrong: number, daysSinceLast: number | null) => ({ area, answers, wrong, daysSinceLast });
+  it("sem histórico não escolhe área", () => {
+    expect(chooseTrainingFocus([st("LC", 0, 0, null), st("MT", 0, 0, null)])).toBeNull();
+  });
+  it("vai para a maior taxa de erro entre áreas com respostas suficientes", () => {
+    const f = chooseTrainingFocus([st("LC", 20, 4, 1), st("MT", 12, 6, 2), st("CN", 3, 3, 0)]);
+    expect(f?.area).toBe("MT");
+    expect(f?.reason).toContain("6 erros em 12 respostas");
+  });
+  it("empate de taxa: a área há mais tempo sem treino", () => {
+    expect(chooseTrainingFocus([st("LC", 10, 5, 1), st("CH", 10, 5, 6)])?.area).toBe("CH");
+  });
+  it("sem respostas suficientes: a área há mais tempo sem treino (nunca respondida primeiro)", () => {
+    const f = chooseTrainingFocus([st("LC", 4, 1, 0), st("MT", 2, 2, 3), st("CN", 0, 0, null), st("CH", 1, 0, 5)]);
+    expect(f?.area).toBe("CN");
+    expect(f?.reason).toContain("ainda não há respostas suficientes");
+  });
+  it("o treino livre leva a área escolhida e o motivo", () => {
+    const { tasks } = buildTasks({ reviewMinutes: 0, reviewCount: 0, dailyGoal: 60, weeklyGoal: null, areaGoals: [], focus: { area: "MT", reason: "x." } });
+    expect(tasks[0]).toMatchObject({ id: "foco-MT", title: "Treino de Matemática" });
+    expect(tasks[0]!.reason).toContain("Área escolhida: x.");
+  });
+});
+
+describe("reta final no plano", () => {
+  const base = { reviewMinutes: 0, reviewCount: 0, dailyGoal: 60, weeklyGoal: null, areaGoals: [] };
+  it("nos últimos 60 dias o treino livre vira bloco de ritmo, mesmo com área escolhida", () => {
+    const { tasks } = buildTasks({ ...base, daysToExam: 30, focus: { area: "MT", reason: "x." } });
+    expect(tasks[0]).toMatchObject({ id: "ritmo", title: "Bloco de ritmo" });
+    expect(tasks[0]!.reason).toContain("faltam 30 dias");
+  });
+  it("fora da janela (ou depois da prova) o plano segue normal", () => {
+    expect(buildTasks({ ...base, daysToExam: 61 }).tasks[0]!.id).toBe("treino-livre");
+    expect(buildTasks({ ...base, daysToExam: -2 }).tasks[0]!.id).toBe("treino-livre");
   });
 });

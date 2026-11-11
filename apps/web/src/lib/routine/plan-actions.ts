@@ -2,7 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { buildTasks, freeWindows, planDay, type Window } from "./planner";
+import { ADAPTIVE_RULE, buildTasks, chooseTrainingFocus, freeWindows, planDay, type AreaStat, type Window } from "./planner";
+import { daysUntil } from "./exam";
 import { dateInZone, minuteInZone } from "./schedule-types";
 
 export type PlanResult = { ok: true } | { ok: false; message: string };
@@ -27,7 +28,7 @@ export async function generateDayPlan(): Promise<PlanResult> {
   if (!auth.user) return { ok: false, message: "Entre para planejar o dia." };
   const { data: profile } = await supabase
     .from("profiles")
-    .select("timezone")
+    .select("timezone, exam_day1")
     .eq("user_id", auth.user.id)
     .maybeSingle();
   let tz = profile?.timezone ?? "America/Sao_Paulo";
@@ -39,7 +40,8 @@ export async function generateDayPlan(): Promise<PlanResult> {
     today = dateInZone(new Date(), tz);
   }
   const now = minuteInZone(new Date(), tz);
-  const [occ, queue, goals, kept] = await Promise.all([
+  const since = new Date(Date.now() - ADAPTIVE_RULE.windowDays * 86_400_000).toISOString();
+  const [occ, queue, goals, kept, recent] = await Promise.all([
     supabase.rpc("schedule_occurrences", { p_from: today, p_to: today }),
     supabase.rpc("review_queue", { p_available_minutes: 30 }),
     supabase
@@ -51,6 +53,12 @@ export async function generateDayPlan(): Promise<PlanResult> {
       .select("start_minute, planned_minutes, actual_minutes, status")
       .eq("local_date", today)
       .neq("status", "planejado"),
+    supabase
+      .from("attempts")
+      .select("item_version_id, is_correct, submitted_at")
+      .eq("is_repeat", false)
+      .eq("help_seen", false)
+      .gte("submitted_at", since),
   ]);
   if (occ.error || queue.error || goals.error)
     return {
@@ -89,7 +97,10 @@ export async function generateDayPlan(): Promise<PlanResult> {
     0,
   );
   const daily = g.find((x) => x.level === "diaria")?.target_minutes ?? null;
+  const focus = chooseTrainingFocus(await areaStats(supabase, recent.data ?? []));
   const { tasks, notes } = buildTasks({
+    focus,
+    daysToExam: profile?.exam_day1 ? daysUntil(today, profile.exam_day1) : null,
     reviewMinutes: batch.reduce((a, r) => a + r.minutes_per_item, 0),
     reviewCount: batch.length,
     dailyGoal: daily === null ? null : Math.max(0, daily - keptMinutes),
@@ -123,7 +134,7 @@ export async function generateDayPlan(): Promise<PlanResult> {
         start_minute: b.start,
         planned_minutes: b.minutes,
         kind: b.kind,
-        area_code: b.taskId.startsWith("area-") ? b.taskId.slice(5) : null,
+        area_code: /^(area|foco)-/.test(b.taskId) ? b.taskId.slice(5) : null,
         title: b.title,
         reason: b.reason,
       })),
@@ -156,6 +167,28 @@ export async function generateDayPlan(): Promise<PlanResult> {
   revalidatePath("/rotina");
   revalidatePath("/hoje");
   return { ok: true };
+}
+
+/** Respostas recentes (primeira tentativa, sem ajuda) agrupadas por área das questões publicadas. */
+async function areaStats(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  rows: { item_version_id: string; is_correct: boolean | null; submitted_at: string }[],
+): Promise<AreaStat[]> {
+  const areas: AreaStat["area"][] = ["LC", "CH", "CN", "MT"];
+  const stats = new Map(areas.map((a) => [a, { area: a, answers: 0, wrong: 0, daysSinceLast: null as number | null }]));
+  if (!rows.length) return [...stats.values()];
+  const ids = [...new Set(rows.map((r) => r.item_version_id))];
+  const { data } = await supabase.from("study_items").select("item_version_id, area").in("item_version_id", ids);
+  const areaOf = new Map((data ?? []).map((r) => [r.item_version_id as string, r.area as AreaStat["area"]]));
+  for (const r of rows) {
+    const s = stats.get(areaOf.get(r.item_version_id) as AreaStat["area"]);
+    if (!s || r.is_correct === null) continue;
+    s.answers += 1;
+    if (!r.is_correct) s.wrong += 1;
+    const days = Math.floor((Date.now() - new Date(r.submitted_at).getTime()) / 86_400_000);
+    s.daysSinceLast = s.daysSinceLast === null ? days : Math.min(s.daysSinceLast, days);
+  }
+  return [...stats.values()];
 }
 
 /**
