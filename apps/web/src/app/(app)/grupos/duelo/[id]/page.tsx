@@ -31,6 +31,11 @@ export default async function DueloPage({ params }: { params: Promise<{ id: stri
             {d.revealed ? "Placar completo." : "Os acertos dos outros aparecem quando você terminar."}
           </p>
           {d.open && !me?.finished && <PlayDuel duelId={d.id} label={me ? "Continuar" : "Começar"} />}
+          {me?.finished && d.mySession && (
+            <Link href={`/estudar/sessao/${d.mySession}`} className="self-start t-ui underline">
+              Rever minhas respostas
+            </Link>
+          )}
         </div>
         <section aria-labelledby="placar" className="flex flex-col gap-5 rounded-panel border border-line-subtle bg-surface p-5 sm:p-7">
           <h2 id="placar" className="t-kicker">

@@ -188,7 +188,7 @@ export function SessionRunner({ session }: { session: SessionView }) {
           tabIndex={-1}
           className="t-section outline-none"
         >
-          Treino concluído
+          {session.duelId ? "Duelo concluído" : "Treino concluído"}
         </h2>
         <p className="t-reading">
           {correct} de {total} {total === 1 ? "acerto" : "acertos"}. Os erros
@@ -196,10 +196,10 @@ export function SessionRunner({ session }: { session: SessionView }) {
         </p>
         <div className="flex flex-wrap gap-3">
           <Link
-            href="/estudar"
+            href={session.duelId ? `/grupos/duelo/${session.duelId}` : "/estudar"}
             className="inline-flex min-h-11 items-center rounded-control bg-primary px-4 t-ui text-on-primary hover:bg-primary-hover"
           >
-            Novo treino
+            {session.duelId ? "Ver o placar" : "Novo treino"}
           </Link>
           {session.entries.some((e) => e.triage) && (
             <Link

@@ -103,7 +103,7 @@ export async function loadSkillSheet(area: string, code: string): Promise<SkillS
   const ids = (tags ?? []).map((t) => t.item_version_id);
   const { data: items } = ids.length
     ? await supabase.from("study_items").select("item_version_id, appearances").in("item_version_id", ids)
-    : { data: [] as { item_version_id: string; appearances: { day: number; booklet: number; color: string; position: number }[] | null }[] };
+    : { data: [] as { item_version_id: string; appearances: { year?: number; day: number; booklet: number; color: string; position: number }[] | null }[] };
   return {
     area: a.code,
     skill,
@@ -112,7 +112,7 @@ export async function loadSkillSheet(area: string, code: string): Promise<SkillS
     source: m.source,
     questions: (items ?? []).map((i) => {
       const f = i.appearances?.[0];
-      return { itemVersionId: i.item_version_id, origin: f ? `Dia ${f.day} · Caderno ${f.booklet} (${f.color}) · Questão ${f.position}` : "Enem" };
+      return { itemVersionId: i.item_version_id, origin: f ? `${f.year ? `Enem ${f.year} · ` : ""}Dia ${f.day} · Caderno ${f.booklet} (${f.color}) · Questão ${f.position}` : "Enem" };
     }),
     cards: (cards ?? []).map((c) => ({
       id: c.id,

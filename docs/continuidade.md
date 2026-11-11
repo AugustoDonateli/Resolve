@@ -6,7 +6,7 @@ Estado do banco em 11/11/2026: **366 questões publicadas**: Enem 2025, cadernos
 
 ## 1. Funciona (verificado com dados reais ou de ponta a ponta no projeto)
 
-- **Conta, perfis e papéis** (aluno, editor). Matriz de acesso contra o projeto: **259/259** (`pnpm test:access`), cobrindo também grupos, repertório, trilha, meta de curso, questão do dia e data da prova.
+- **Conta, perfis e papéis** (aluno, editor). Matriz de acesso contra o projeto: **256/256** (`pnpm test:access`), cobrindo também grupos, repertório, trilha, meta de curso, questão do dia e data da prova.
 - **Hoje** (`/hoje`): plano nos horários livres, foco com relógio do servidor, agenda com remarcação, feito hoje, ficou de fora, se-então, sequência. Agora também:
   - bloco com **"Abrir a atividade"** (revisão, redação ou treino já na área do bloco);
   - **contagem até a prova** e chip de **reta final**;
@@ -24,7 +24,13 @@ Estado do banco em 11/11/2026: **366 questões publicadas**: Enem 2025, cadernos
   - **redação por foto**: enviar a foto da folha (reduzida no aparelho, até 4), ver ao lado do editor e digitar olhando para ela. Conferido no navegador: envio, exibição e remoção.
 - **Revisar**: **feed finito de cartões por gestos** (vira, arrasta, teclado, botões, tela final). Conferido no celular com a demonstração `/revisar/demonstracao`.
 - **Progresso**: relatório de 7 dias e **meta de curso** (`/progresso/meta`): curso, instituição, corte e pesos informados com fonte obrigatória, média ponderada numa régua 0–1000 e quanto falta na quinta nota. Conferido no navegador; a conta bate com o cálculo à mão.
-- **Grupos e duelos** (`/grupos`): criar, entrar por código, apelido, sair, convite. Políticas testadas em transação e na matriz.
+- **Grupos e duelos** (`/grupos`): criar, entrar por código, apelido, sair, convite. Políticas testadas em transação e na matriz. **Duelo real em 11/11** entre as contas A e B (Matemática, 5 questões publicadas): B não vê o placar de A antes de terminar; depois, os dois veem o placar completo. Ao terminar, a tela final é "Duelo concluído" com "Ver o placar".
+- **Dia D, prova inteira em uso real (11/11)**, conta A:
+  - 2024 · dia 2 · azul, horário livre: abriu, marcou no caderno, transcreveu no cartão (a divergência apareceu), recarregou (cartão voltou do servidor), entregou, resultado 1/89 válidas (1 anulada), replay com 16 eventos e blocos de acertos, histórico;
+  - 2025 · dia 1 · azul · inglês, no celular: redação salva, igual depois de recarregar, entregue com a proposta oficial.
+  - A correção da redação do Dia D depende da chave de IA (seção 3, item 2).
+- **Comando primeiro, caça ao distrator, questão do dia e texto compartilhado com questões publicadas (11/11)**: trecho marcado e guardado; classificação dos distratores guardada; a comparação diz "indisponível" porque as etiquetas estão pendentes. Texto compartilhado das questões 6 a 10 de 2025 numa sessão real: texto inteiro na primeira, recolhido nas seguintes.
+- **Banco**: filtro por **edição** (Enem 2025, Enem 2024) além de área, habilidade, assunto e dia. A origem das questões mostra o ano e sempre o caderno azul (fonte do texto importado).
 - **Matriz e incidência** (`/estudar/matriz`): as 120 habilidades oficiais com página e fonte, por área e competência, e a ficha de cada habilidade.
 - **TRI**: motor EAP 3PL configurável, testado contra integração fina e com cenários não aditivos. O diagnóstico diz "indisponível" (sem parâmetros oficiais) e tem demonstração marcada.
 - **Área editorial**: propostas, dúvidas, etiquetas, cartões, temas, publicação de conteúdo conferido; a prévia do aluno desenha tabelas e linhas numeradas.
@@ -40,14 +46,10 @@ Estado do banco em 11/11/2026: **366 questões publicadas**: Enem 2025, cadernos
 
 | Recurso | Como foi verificado | O que falta para validar |
 | --- | --- | --- |
-| Estudo, Raio-X, caderno de erros, revisão espaçada, banco, triagem, ritmo | testes e transações | questões publicadas |
-| **Comando primeiro** e **caça ao distrator** (`/estudar/comando`, `/estudar/distrator`) | funções testadas em transação; demonstrações no navegador | questões publicadas; a comparação com o gabarito editorial só sai com etiquetas aprovadas |
-| **Questão do dia** (`daily_question`) | sem questões, devolve vazio sem erro | questões publicadas |
-| **Texto compartilhado** | testes de agrupamento e marcação; aparência conferida numa página temporária | questões publicadas que compartilham texto-base |
-| **Duelos** (lançar, jogar, placar revelado só depois de terminar) | políticas e placar testados em transação; faixa do placar conferida com dados de exemplo | ao menos 5 questões publicadas e duas contas jogando |
+| Raio-X, caderno de erros, revisão espaçada, triagem, ritmo | testes e transações; treino com questões publicadas conferido | uso ao longo de dias (a revisão espaçada depende de datas) |
+| Comparação de evidência (comando) e de distratores com a revisão editorial | regra testada em unidade | etiquetas editoriais aprovadas (hoje todas pendentes) |
 | **Treino por habilidade** e incidência | telas mostram "indisponível" | etiquetas de habilidade revisadas em questões publicadas |
 | **Feed de cartões reais** | demonstração no navegador | cartões de conceito publicados (hoje: 0) |
-| **Dia D** completo no projeto | fluxo validado em PostgreSQL local (Codex); catálogo e recusa conferidos no projeto | um caderno com as 90 posições publicadas e o tema oficial do dia 1 |
 | Correção de redação real | avaliador de teste, sem tokens | chave e política de IA |
 | TRI com números | motor testado com parâmetros fictícios marcados | parâmetros oficiais do Inep por item |
 
@@ -56,7 +58,7 @@ Estado do banco em 11/11/2026: **366 questões publicadas**: Enem 2025, cadernos
 1. ~~Publicar as 182 questões aptas~~: feito em 11/11.
    - Treino conferido de ponta a ponta com a conta A: sessão aberta, resposta gravada, gabarito oficial.
    - Dia D: 6 cadernos liberados (dia 1 azul e amarelo, em espanhol e inglês, com redação; dia 2 azul e amarelo).
-   - Falta fazer uma prova inteira em uso real.
+   - Prova inteira em uso real: feita em 11/11 (seção 1).
    - A correção da redação do dia 1 depende da chave de IA (item 2).
    - Destrava quase tudo da seção 2 e o **Dia D do dia 2** (caderno 7).
    - Para o Dia D do dia 1, falta também publicar o **tema oficial** em `/editor/temas`.
@@ -85,7 +87,12 @@ Estado do banco em 11/11/2026: **366 questões publicadas**: Enem 2025, cadernos
 
 ## Retomar por aqui
 
-Enquanto Guto não publica: novos cadernos (item 8) ou recursos independentes. Depois que as questões forem publicadas, percorrer a seção 2 com as contas de teste: estudo, comando, distrator, questão do dia, texto compartilhado, duelo entre A e B, treino por habilidade.
+As questões publicadas já foram percorridas com as contas de teste (Dia D, comando, distrator, questão do dia, texto compartilhado, duelo). Edições anteriores (2023, 2022…) ficaram para depois, a pedido de Guto. Próximos passos sem bloqueio externo:
+- revisão das etiquetas de habilidade e de distratores pela área editorial (destrava treino por habilidade, incidência e as comparações);
+- fichas de cinco minutos com fonte (item 9);
+- rodar de novo `audit:ui` com os dados reais.
+
+Publicação: por autorização permanente de Guto (11/11/2026), o trabalho verificado vai direto para `claude/new-session-vhzm54` (Vercel).
 
 Lembretes:
 - Migrações sem `delete`/`drop`; tabela nova revoga `anon` e entra na matriz.

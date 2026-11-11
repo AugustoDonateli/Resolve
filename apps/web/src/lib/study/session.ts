@@ -37,6 +37,8 @@ export interface SessionView {
   mode: string;
   status: string;
   deadlineAt: string | null;
+  /** Duelo de grupo que abriu esta sessão (a tela final leva ao placar). */
+  duelId: string | null;
   /** Questões marcadas para revisar (último evento de marcação de cada uma). */
   marked: string[];
   entries: SessionEntry[];
@@ -162,6 +164,11 @@ export async function loadSession(id: string): Promise<SessionView> {
     });
   }
   markSharedTexts(entries, byVersion);
+  const { data: duel } = await supabase
+    .from("duel_entries")
+    .select("duel_id")
+    .eq("session_id", id)
+    .maybeSingle();
   const { data: marks } = await supabase
     .from("attempt_events")
     .select("session_item_id, event_type, sequence")
@@ -176,6 +183,7 @@ export async function loadSession(id: string): Promise<SessionView> {
     mode: session.mode,
     status: session.status,
     deadlineAt: session.deadline_at,
+    duelId: duel?.duel_id ?? null,
     marked: [...last]
       .filter(([, t]) => t === "marcada_para_revisar")
       .map(([k]) => k),

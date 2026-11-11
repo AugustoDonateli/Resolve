@@ -53,7 +53,7 @@ export default async function BankPage({
           <form
             method="get"
             aria-label="Filtros"
-            className="grid gap-4 rounded-panel border border-line bg-surface p-4 sm:grid-cols-2 sm:p-6 lg:grid-cols-4"
+            className="grid gap-4 rounded-panel border border-line bg-surface p-4 sm:grid-cols-2 sm:p-6 lg:grid-cols-3"
           >
             <label className="flex min-w-0 flex-col gap-1.5 t-ui">
               Área
@@ -103,22 +103,37 @@ export default async function BankPage({
               </select>
             </label>
             <label className="flex min-w-0 flex-col gap-1.5 t-ui">
-              Origem
+              Edição
+              <select
+                name="edicao"
+                defaultValue={f.year ?? ""}
+                className={selectCls}
+              >
+                <option value="">Todas</option>
+                {opts.years.map(([year, n]) => (
+                  <option key={year} value={year}>
+                    Enem {year} ({n})
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="flex min-w-0 flex-col gap-1.5 t-ui">
+              Dia de prova
               <select
                 name="dia"
                 defaultValue={f.day ?? ""}
                 className={selectCls}
               >
-                <option value="">Enem, os dois dias</option>
+                <option value="">Os dois dias</option>
                 <option value="d1">
-                  Enem · 1º dia ({opts.days.get("d1") ?? 0})
+                  1º dia ({opts.days.get("d1") ?? 0})
                 </option>
                 <option value="d2">
-                  Enem · 2º dia ({opts.days.get("d2") ?? 0})
+                  2º dia ({opts.days.get("d2") ?? 0})
                 </option>
               </select>
             </label>
-            <div className="flex flex-wrap items-center gap-3 sm:col-span-2 lg:col-span-4">
+            <div className="flex flex-wrap items-center gap-3 sm:col-span-2 lg:col-span-3">
               <button
                 type="submit"
                 className="inline-flex min-h-11 items-center rounded-control bg-primary px-4 t-ui text-on-primary hover:bg-primary-hover"
@@ -179,7 +194,7 @@ export default async function BankPage({
                       <p className="t-meta text-ink-2">
                         {AREA_LABEL[i.area]}
                         {i.origins[0]
-                          ? ` · Enem, ${i.origins[0].day}º dia, caderno ${i.origins[0].booklet}, questão ${i.origins[0].position}`
+                          ? ` · Enem${i.origins[0].year ? ` ${i.origins[0].year}` : ""}, ${i.origins[0].day}º dia, caderno ${i.origins[0].booklet}, questão ${i.origins[0].position}`
                           : ""}
                         {i.skills.length ? ` · ${i.skills.join(", ")}` : ""}
                         {i.subjects.length

@@ -29,13 +29,13 @@ export default async function ReportsPage() {
     (places ?? []).map((p) => {
       const a = (
         p.appearances as
-          | { day: number; booklet: number; position: number }[]
+          | { year?: number; day: number; booklet: number; position: number }[]
           | null
       )?.[0];
       return [
         p.item_version_id,
         a
-          ? `${p.area} · Enem, ${a.day}º dia, caderno ${a.booklet}, questão ${a.position}`
+          ? `${p.area} · Enem${a.year ? ` ${a.year}` : ""}, ${a.day}º dia, caderno ${a.booklet}, questão ${a.position}`
           : p.area,
       ];
     }),

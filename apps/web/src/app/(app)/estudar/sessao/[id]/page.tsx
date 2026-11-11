@@ -15,17 +15,18 @@ export default async function SessionPage({
 }) {
   const { id } = await params;
   const session = await loadSession(id);
+  const duel = session.duelId ? `/grupos/duelo/${session.duelId}` : null;
   return (
     <>
       <Link
-        href="/estudar"
+        href={duel ?? "/estudar"}
         className="mb-3 inline-flex min-h-11 items-center gap-1 t-ui text-ink-2 hover:text-ink"
       >
-        <ChevronLeft aria-hidden="true" className="size-4" /> Estudar
+        <ChevronLeft aria-hidden="true" className="size-4" /> {duel ? "Duelo" : "Estudar"}
       </Link>
       <ScreenHeader
-        title={session.mode === "revisao" ? "Revisão" : "Treino livre"}
-        kicker={session.mode === "revisao" ? "Revisar" : "Estudar"}
+        title={duel ? "Duelo" : session.mode === "revisao" ? "Revisão" : "Treino livre"}
+        kicker={duel ? "Grupos" : session.mode === "revisao" ? "Revisar" : "Estudar"}
       />
       <SessionRunner session={session} />
     </>

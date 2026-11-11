@@ -118,7 +118,7 @@ export interface StudyItemRow {
   alternatives: { key: string; content_blocks: RawBlock[] }[];
   stimulus_version_id?: string | null;
   appearances:
-    | { booklet: number; day: number; color: string; position: number }[]
+    | { year?: number; booklet: number; day: number; color: string; position: number }[]
     | null;
 }
 
@@ -136,7 +136,7 @@ export function fromStudyItem(
   return {
     area: row.area,
     origin: first
-      ? `Enem · Dia ${first.day} · Caderno ${first.booklet} (${first.color}) · Questão ${first.position}`
+      ? `Enem${first.year ? ` ${first.year}` : ""} · Dia ${first.day} · Caderno ${first.booklet} (${first.color}) · Questão ${first.position}`
       : "Enem",
     stimulus: toBlocks(row.stimulus_blocks, figureFor),
     command: toBlocks(row.command_blocks, figureFor),

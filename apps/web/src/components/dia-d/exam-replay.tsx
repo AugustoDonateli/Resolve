@@ -61,7 +61,7 @@ export function ExamReplay({ run, open }: { run: ExamRun; open: (position: numbe
     <section className="max-w-3xl" aria-labelledby="dia-d-replay">
       <h2 id="dia-d-replay" className="t-section">Replay da prova</h2>
       <p className="my-3 t-meta text-ink-2">
-        A linha usa o horário registrado pelo servidor. Um segundo de replay equivale a {Math.round(scale)} segundos de prova.
+        A linha usa o horário registrado pelo servidor. {Math.round(scale) <= 1 ? "O replay corre no tempo real da prova." : `Um segundo de replay equivale a ${Math.round(scale)} segundos de prova.`}
       </p>
       <div className="mb-4 flex flex-wrap items-center gap-3">
         <Button variant="secondary" onClick={() => { if (last) setTime(0); setPlaying(last || !playing); }}>

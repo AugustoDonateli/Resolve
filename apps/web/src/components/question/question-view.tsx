@@ -259,9 +259,9 @@ export function QuestionView({
     >
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <span className="t-meta font-medium uppercase tracking-[0.08em] text-ink-2">
-          {AREA_LABEL[question.area]}
+          {AREA_LABEL[question.area]}<span aria-hidden="true" className="font-normal normal-case"> ·</span>
         </span>
-        <span className="t-meta text-ink-2">· {question.origin}</span>
+        <span className="t-meta text-ink-2">{question.origin}</span>
         {badge}
       </div>
       {question.stimulus.length > 0 &&
