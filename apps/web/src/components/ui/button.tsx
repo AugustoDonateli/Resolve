@@ -12,8 +12,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 /**
- * Botão (plano §6): normal, hover, foco 2/2 px, pressionado, carregando com
- * rótulo preservado e desabilitado. Pressão em 120 ms com deslocamento mínimo.
+ * Botão: normal, hover, foco 2/2 px, pressionado, carregando com rótulo preservado e desabilitado.
+ * Primário é a caneta azul; secundário é contorno de tinta que se preenche; pressão em 120 ms.
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   { variant = "primary", size = "md", loading = false, icon, className, children, disabled, ...rest },
@@ -33,7 +33,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         variant === "primary" &&
           "bg-primary text-on-primary hover:bg-primary-hover active:bg-primary-pressed disabled:bg-disabled disabled:text-ink-2",
         variant === "secondary" &&
-          "border border-line bg-surface text-ink hover:bg-surface-subtle disabled:bg-disabled disabled:text-ink-2",
+          "border-[1.5px] border-ink bg-transparent text-ink hover:bg-ink hover:text-background disabled:border-line-subtle disabled:bg-transparent disabled:text-ink-2",
         variant === "ghost" && "text-ink hover:bg-surface-subtle disabled:text-ink-2",
         className,
       )}

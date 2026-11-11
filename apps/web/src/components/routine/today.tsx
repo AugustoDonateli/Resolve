@@ -25,6 +25,7 @@ import {
 import { duration, ease } from "@resolve/ui/motion";
 import { useReduced } from "@/components/prefs/prefs";
 import { ScreenHeader } from "@/components/shell/app-shell";
+import { DeskObject } from "@/components/today/desk-objects";
 import { Button } from "@/components/ui/button";
 import {
   fmtClock,
@@ -91,12 +92,15 @@ export function Today({
   ifThen,
   streak,
   daily,
+  desk,
 }: {
   plan: DayPlan;
   ifThen: IfThenPlan | null;
   streak: StreakView | null;
   /** Questão do dia (já renderizada pela página). */
   daily?: ReactNode;
+  /** Atalhos-objeto da mesa (caderno, fichas, folha, régua), já renderizados pela página. */
+  desk?: ReactNode;
 }) {
   const router = useRouter();
   const reduced = useReduced();
@@ -308,15 +312,19 @@ export function Today({
         }}
         style={{ transformOrigin: "50% 0%" }}
       >
-        <ScreenHeader title="Hoje" kicker={longDate(plan.today)}>
-          <div className="flex flex-wrap items-center gap-2">
-            <ExamCountdown examDay={plan.examDay} days={plan.daysToExam} />
-            {streak && <StreakChip s={streak} />}
-          </div>
-        </ScreenHeader>
-
-        <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(300px,360px)] lg:gap-12">
-          <div className="flex min-w-0 flex-col gap-10">
+        {/* A mesa: a folha do dia à esquerda; questão do dia, agenda e os outros objetos ao lado. */}
+        <div className="grid items-start gap-7 lg:grid-cols-[minmax(0,1fr)_minmax(300px,372px)] lg:gap-10">
+          <div className="relative arrive arrive-inicio">
+            <div className="pile hidden md:block" aria-hidden="true" />
+            <div className="sheet sheet-punched flex min-h-[60dvh] min-w-0 flex-col gap-10 px-4 pb-10 pt-6 sm:px-6 md:min-h-[calc(100dvh-3rem)] md:pb-14 md:pl-14 md:pr-10 md:pt-11">
+            <div className="-mb-10">
+              <ScreenHeader title="Hoje" kicker={longDate(plan.today)}>
+                <div className="flex flex-wrap items-center gap-4">
+                  {streak && <StreakChip s={streak} />}
+                  <ExamCountdown examDay={plan.examDay} days={plan.daysToExam} />
+                </div>
+              </ScreenHeader>
+            </div>
             <section aria-labelledby="plano-hoje" className="flex flex-col gap-4">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h2 id="plano-hoje" className="t-kicker">
@@ -460,15 +468,23 @@ export function Today({
             )}
 
             <IfThenNote plan={ifThen} />
+            </div>
           </div>
 
-          <aside className="flex min-w-0 flex-col gap-6" aria-label="Questão do dia e agenda">
-            {daily}
-            {plan.blocks.length > 0 ? (
-              <DayAgenda plan={plan} openRequest={rescheduleReq} />
-            ) : (
-              <TodayWindows plan={plan} />
+          <aside className="flex min-w-0 flex-col gap-7 px-4 md:px-0 lg:pt-9" aria-label="Questão do dia, agenda e objetos da mesa">
+            {daily && (
+              <DeskObject i={0} r="1.1deg">
+                {daily}
+              </DeskObject>
             )}
+            <DeskObject i={1} r="-0.7deg">
+              {plan.blocks.length > 0 ? (
+                <DayAgenda plan={plan} openRequest={rescheduleReq} />
+              ) : (
+                <TodayWindows plan={plan} />
+              )}
+            </DeskObject>
+            {desk}
           </aside>
         </div>
       </motion.div>

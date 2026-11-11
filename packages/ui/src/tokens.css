@@ -1,29 +1,35 @@
 /*
- * Resolve — tokens da identidade Caderno de Prova (plano §6).
+ * Resolve — tokens da identidade Mesa (a prova sobre a mesa).
  * Fonte única: espelha src/tokens.ts (um teste confere que os valores coincidem).
  * Tema: <html data-theme="light|dark">; sem atributo, segue o sistema.
  */
 
 :root {
   color-scheme: light;
-  --rs-background: #F7F4ED;
-  --rs-surface: #FFFFFF;
-  --rs-surface-subtle: #EEEAE1;
-  --rs-text: #20242C;
-  --rs-text-secondary: #626772;
+  --rs-desk: #17191A;
+  --rs-on-desk: #E9E6DC;
+  --rs-on-desk-secondary: #A9A69C;
+  --rs-background: #EFEEE9;
+  --rs-surface: #FAF9F5;
+  --rs-surface-subtle: #E3E1DA;
+  --rs-text: #15171A;
+  --rs-text-secondary: #585C63;
   --rs-primary: #2452D1;
   --rs-on-primary: #FFFFFF;
   --rs-primary-hover: #1F49BE;
   --rs-primary-pressed: #1B42AE;
   --rs-link-focus: #2452D1;
-  --rs-border-control: #737984;
-  --rs-border-subtle: #DAD6CC;
+  --rs-correction: #C4281F;
+  --rs-border-control: #6E737C;
+  --rs-border-subtle: #D5D2C9;
   --rs-highlight-yellow: #F2CA52;
   --rs-highlight-pink: #E88CAE;
-  --rs-on-highlight: #20242C;
-  --rs-disabled-surface: #EEEAE1;
-  --rs-scrim: rgb(32 36 44 / 0.48);
-  --rs-shadow: 0 1px 2px rgb(32 36 44 / 0.08), 0 4px 16px rgb(32 36 44 / 0.08);
+  --rs-on-highlight: #15171A;
+  --rs-disabled-surface: #E3E1DA;
+  --rs-scrim: rgb(12 13 15 / 0.6);
+  --rs-shadow: 0 1px 0 rgb(21 23 26 / 0.05), 0 8px 22px rgb(21 23 26 / 0.08);
+  --rs-shadow-sheet: 0 1px 0 rgb(255 255 255 / 0.55) inset, 0 28px 70px rgb(0 0 0 / 0.5), 0 3px 8px rgb(0 0 0 / 0.35);
+  --rs-lamp: rgb(255 238 205 / 0.14);
   --rs-paper-grain: 0.05;
 
   /* Movimento (plano §8) */
@@ -42,33 +48,41 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
+    --rs-desk: #0C0D0F;
     --rs-background: #20242C;
     --rs-surface: #2B3039;
     --rs-surface-subtle: #343A45;
     --rs-text: #F7F4ED;
     --rs-text-secondary: #B7BDC8;
     --rs-link-focus: #9FB7FF;
+    --rs-correction: #FF8A7A;
     --rs-border-control: #8B929E;
     --rs-border-subtle: #4A515D;
     --rs-disabled-surface: #343A45;
-    --rs-scrim: rgb(32 36 44 / 0.72);
+    --rs-scrim: rgb(0 0 0 / 0.72);
     --rs-shadow: none;
+    --rs-shadow-sheet: 0 28px 70px rgb(0 0 0 / 0.6), 0 0 0 1px rgb(255 255 255 / 0.04);
+    --rs-lamp: rgb(255 238 205 / 0.05);
   }
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
+  --rs-desk: #0C0D0F;
   --rs-background: #20242C;
   --rs-surface: #2B3039;
   --rs-surface-subtle: #343A45;
   --rs-text: #F7F4ED;
   --rs-text-secondary: #B7BDC8;
   --rs-link-focus: #9FB7FF;
+  --rs-correction: #FF8A7A;
   --rs-border-control: #8B929E;
   --rs-border-subtle: #4A515D;
   --rs-disabled-surface: #343A45;
-  --rs-scrim: rgb(32 36 44 / 0.72);
+  --rs-scrim: rgb(0 0 0 / 0.72);
   --rs-shadow: none;
+  --rs-shadow-sheet: 0 28px 70px rgb(0 0 0 / 0.6), 0 0 0 1px rgb(255 255 255 / 0.04);
+  --rs-lamp: rgb(255 238 205 / 0.05);
 }
 
 /* Movimento reduzido: preferência do sistema OU opção interna (data-motion="reduced"). */

@@ -16,8 +16,8 @@ export const viewport: Viewport = {
   // iPhone: ocupa a tela inteira e respeita entalhe/barra via env(safe-area-inset-*).
   viewportFit: "cover",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F7F4ED" },
-    { media: "(prefers-color-scheme: dark)", color: "#20242C" },
+    { media: "(prefers-color-scheme: light)", color: "#17191A" },
+    { media: "(prefers-color-scheme: dark)", color: "#0C0D0F" },
   ],
 };
 
@@ -36,6 +36,18 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: prefsBootScript }} />
       </head>
       <body>
+        {/* Tinta de carimbo: borda irregular e falhas de impressão (usado por .stamp). */}
+        <svg width="0" height="0" className="absolute" aria-hidden="true">
+          <defs>
+            <filter id="rs-tinta" x="-10%" y="-10%" width="120%" height="120%">
+              <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" result="n" />
+              <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" result="d" />
+              <feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="1" result="g" />
+              <feColorMatrix in="g" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.72" result="m" />
+              <feComposite in="d" in2="m" operator="in" />
+            </filter>
+          </defs>
+        </svg>
         <PrefsProvider account={account} persist={account ? savePreferences : undefined}>
           {children}
         </PrefsProvider>

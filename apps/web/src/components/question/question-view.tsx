@@ -1,6 +1,7 @@
 "use client";
 
 import * as Dialog from "@radix-ui/react-dialog";
+import { clsx } from "clsx";
 import { Maximize2, X } from "lucide-react";
 import { useId, type ReactNode } from "react";
 import { Alternatives, type Reveal } from "@/components/ui/alternatives";
@@ -239,8 +240,9 @@ export interface AnswerState {
 }
 
 /**
- * Questão real (F1-T05, F3-T02): texto-base, comando e alternativas na ordem da fonte, em uma coluna
- * de leitura. Nada se move durante a leitura; figuras ampliam por ação.
+ * Questão real: página de caderno. Quando há espaço (PC) e texto-base, abre em página dupla — texto à
+ * esquerda, comando e alternativas à direita, sempre à vista enquanto se lê. Em telas estreitas, uma
+ * coluna na ordem da fonte. Nada se move durante a leitura; figuras ampliam por ação.
  */
 export function QuestionView({
   question,
@@ -252,61 +254,67 @@ export function QuestionView({
   badge?: ReactNode;
 }) {
   const id = useId();
+  const collapsed = Boolean(question.shared && !question.shared.first);
+  const spread = question.stimulus.length > 0 && !collapsed;
   return (
-    <article
-      aria-labelledby={`${id}-cmd`}
-      className="max-w-[72ch] rounded-panel border border-line-subtle bg-surface p-4 sm:p-7"
-    >
-      <div className="mb-4 flex flex-wrap items-center gap-2">
-        <span className="t-meta font-medium uppercase tracking-[0.08em] text-ink-2">
-          {AREA_LABEL[question.area]}<span aria-hidden="true" className="font-normal normal-case"> ·</span>
-        </span>
-        <span className="t-meta text-ink-2">{question.origin}</span>
-        {badge}
-      </div>
-      {question.stimulus.length > 0 &&
-        (question.shared && !question.shared.first ? (
-          <details className="group mb-5 rounded-card border border-line-subtle bg-surface-subtle">
-            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 py-2 t-ui text-ink">
-              <span>
-                Mesmo texto da questão {question.shared.positions[0]}{" "}
-                <span className="t-meta text-ink-2">(texto para as questões {sharedList(question.shared.positions)})</span>
-              </span>
-              <span className="t-meta text-link group-open:hidden">Mostrar</span>
-              <span className="hidden t-meta text-link group-open:inline">Recolher</span>
-            </summary>
-            <div className="flex flex-col gap-4 border-t border-line-subtle bg-surface px-4 py-4 t-reading text-ink">
+    <div className="@container">
+      <article
+        aria-labelledby={`${id}-cmd`}
+        className={clsx(
+          "relative max-w-[72ch] rounded-panel border border-line-subtle bg-surface p-4 shadow-paper sm:p-7",
+          spread && "@[62rem]:grid @[62rem]:max-w-none @[62rem]:grid-cols-2 @[62rem]:gap-x-0 @[62rem]:p-0",
+        )}
+      >
+        <div className={clsx("mb-4 flex flex-wrap items-center gap-x-2 gap-y-1", spread && "@[62rem]:col-span-2 @[62rem]:mb-0 @[62rem]:border-b @[62rem]:border-line-subtle @[62rem]:px-8 @[62rem]:py-3")}>
+          <span className="t-kicker">
+            {AREA_LABEL[question.area]}<span aria-hidden="true"> ·</span>
+          </span>
+          <span className="t-kicker font-normal">{question.origin}</span>
+          {badge}
+        </div>
+        {question.stimulus.length > 0 &&
+          (collapsed ? (
+            <details className="group mb-5 rounded-card border border-line-subtle bg-surface-subtle">
+              <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 py-2 t-ui text-ink">
+                <span>
+                  Mesmo texto da questão {question.shared!.positions[0]}{" "}
+                  <span className="t-meta text-ink-2">(texto para as questões {sharedList(question.shared!.positions)})</span>
+                </span>
+                <span className="t-meta text-link group-open:hidden">Mostrar</span>
+                <span className="hidden t-meta text-link group-open:inline">Recolher</span>
+              </summary>
+              <div className="flex flex-col gap-4 border-t border-line-subtle bg-surface px-4 py-4 t-reading text-ink">
+                <QuestionBlocks blocks={question.stimulus} />
+              </div>
+            </details>
+          ) : (
+            <div className="mb-5 flex flex-col gap-4 t-reading text-ink @[62rem]:mb-0 @[62rem]:border-r @[62rem]:border-line-subtle @[62rem]:px-8 @[62rem]:py-7">
+              {question.shared && (
+                <p className="t-meta font-medium text-ink-2">Texto para as questões {sharedList(question.shared.positions)}</p>
+              )}
               <QuestionBlocks blocks={question.stimulus} />
             </div>
-          </details>
-        ) : (
-          <div className="mb-5 flex flex-col gap-4 t-reading text-ink">
-            {question.shared && (
-              <p className="t-meta font-medium text-ink-2">Texto para as questões {sharedList(question.shared.positions)}</p>
-            )}
-            <QuestionBlocks blocks={question.stimulus} />
+          ))}
+        <div className={clsx(spread && "@[62rem]:sticky @[62rem]:top-6 @[62rem]:self-start @[62rem]:px-8 @[62rem]:py-7")}>
+          <div id={`${id}-cmd`} className="mb-3 flex flex-col gap-3 t-reading font-medium text-ink">
+            <QuestionBlocks blocks={question.command} />
           </div>
-        ))}
-      <div
-        id={`${id}-cmd`}
-        className="mb-4 flex flex-col gap-3 t-reading font-medium text-ink"
-      >
-        <QuestionBlocks blocks={question.command} />
-      </div>
-      <Alternatives
-        name={`${id}-alt`}
-        labelledBy={`${id}-cmd`}
-        items={question.alternatives.map((a) => ({
-          key: a.key,
-          letter: a.letter,
-          content: (
-            <span className="flex flex-col gap-2">
-              <QuestionBlocks blocks={a.blocks} zoom={false} />
-            </span>
-          ),
-        }))}
-        {...answer}
-      />
-    </article>
+          <Alternatives
+            name={`${id}-alt`}
+            labelledBy={`${id}-cmd`}
+            items={question.alternatives.map((a) => ({
+              key: a.key,
+              letter: a.letter,
+              content: (
+                <span className="inline-flex flex-col gap-2 align-top">
+                  <QuestionBlocks blocks={a.blocks} zoom={false} />
+                </span>
+              ),
+            }))}
+            {...answer}
+          />
+        </div>
+      </article>
+    </div>
   );
 }

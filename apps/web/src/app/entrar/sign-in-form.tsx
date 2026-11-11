@@ -32,7 +32,7 @@ export function SignInForm({ next }: { next: string }) {
 
       <fieldset>
         <legend className="sr-only">O que você quer fazer</legend>
-        <div className="grid grid-cols-2 gap-1 rounded-control border border-line bg-surface p-1">
+        <div className="grid grid-cols-2 gap-1 border-b border-line-subtle">
           {(
             [
               ["entrar", "Entrar"],
@@ -42,9 +42,9 @@ export function SignInForm({ next }: { next: string }) {
             <label
               key={v}
               className={clsx(
-                "flex min-h-10 cursor-pointer items-center justify-center rounded-[6px] t-ui transition-colors duration-[var(--rs-dur-state)]",
+                "-mb-px flex min-h-11 cursor-pointer items-center justify-center rounded-t-[6px] border border-b-0 t-ui transition-colors duration-[var(--rs-dur-state)]",
                 "has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-link",
-                current === v ? "bg-ink text-background" : "text-ink hover:bg-surface-subtle",
+                current === v ? "border-line-subtle bg-surface font-semibold text-ink" : "border-transparent text-ink-2 hover:text-ink",
               )}
             >
               <input type="radio" name="mode-choice" value={v} checked={current === v} onChange={() => setMode(v)} className="sr-only" />
@@ -59,7 +59,7 @@ export function SignInForm({ next }: { next: string }) {
       )}
 
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="email" className="t-ui">
+        <label htmlFor="email" className="t-kicker">
           E-mail
         </label>
         <input
@@ -73,11 +73,11 @@ export function SignInForm({ next }: { next: string }) {
           key={`e-${state.email}`}
           aria-invalid={state.error ? true : undefined}
           aria-describedby="auth-msg"
-          className="min-h-11 rounded-control border border-line bg-surface px-3 t-ui text-ink"
+          className="field-line"
         />
       </div>
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="password" className="t-ui">
+        <label htmlFor="password" className="t-kicker">
           Senha
         </label>
         <input
@@ -88,7 +88,7 @@ export function SignInForm({ next }: { next: string }) {
           required
           minLength={8}
           aria-describedby="auth-msg password-hint"
-          className="min-h-11 rounded-control border border-line bg-surface px-3 t-ui text-ink"
+          className="field-line"
         />
         <p id="password-hint" className="t-meta text-ink-2">
           Pelo menos 8 caracteres.

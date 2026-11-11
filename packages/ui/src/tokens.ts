@@ -1,37 +1,41 @@
 /**
- * Paleta da identidade Caderno de Prova (plano §6, "Paleta completa de interface").
- * Esta é a única fonte de cores do produto. Gráficos, régua, constelação e replay
- * herdam estes tokens; não existe paleta paralela de status.
+ * Paleta da identidade Mesa: a prova sobre a mesa. A mesa é escura; o conteúdo vive em papel claro,
+ * escrito em tinta preta; a caneta azul é a ação; a caneta vermelha é a do corretor (marcas e notas
+ * de correção); o marca-texto é preenchimento. Esta é a única fonte de cores do produto.
  *
- * O escuro deriva da tinta (#20242C). Amarelo e rosa são preenchimentos — nunca
- * cor de texto, número, contorno essencial, cursor ou linha de gráfico.
+ * No tema escuro a luminária está apagada: o papel escurece e a tinta clareia. Amarelo e rosa são
+ * preenchimentos — nunca cor de texto, número, contorno essencial, cursor ou linha de gráfico.
  */
 
 export type ThemeName = "light" | "dark";
 
 export const colorTokens = {
-  background: { light: "#F7F4ED", dark: "#20242C" },
-  surface: { light: "#FFFFFF", dark: "#2B3039" },
-  "surface-subtle": { light: "#EEEAE1", dark: "#343A45" },
-  text: { light: "#20242C", dark: "#F7F4ED" },
-  "text-secondary": { light: "#626772", dark: "#B7BDC8" },
+  desk: { light: "#17191A", dark: "#0C0D0F" },
+  "on-desk": { light: "#E9E6DC", dark: "#E9E6DC" },
+  "on-desk-secondary": { light: "#A9A69C", dark: "#A9A69C" },
+  background: { light: "#EFEEE9", dark: "#20242C" },
+  surface: { light: "#FAF9F5", dark: "#2B3039" },
+  "surface-subtle": { light: "#E3E1DA", dark: "#343A45" },
+  text: { light: "#15171A", dark: "#F7F4ED" },
+  "text-secondary": { light: "#585C63", dark: "#B7BDC8" },
   primary: { light: "#2452D1", dark: "#2452D1" },
   "on-primary": { light: "#FFFFFF", dark: "#FFFFFF" },
   "primary-hover": { light: "#1F49BE", dark: "#1F49BE" },
   "primary-pressed": { light: "#1B42AE", dark: "#1B42AE" },
   "link-focus": { light: "#2452D1", dark: "#9FB7FF" },
-  "border-control": { light: "#737984", dark: "#8B929E" },
-  "border-subtle": { light: "#DAD6CC", dark: "#4A515D" },
+  correction: { light: "#C4281F", dark: "#FF8A7A" },
+  "border-control": { light: "#6E737C", dark: "#8B929E" },
+  "border-subtle": { light: "#D5D2C9", dark: "#4A515D" },
   "highlight-yellow": { light: "#F2CA52", dark: "#F2CA52" },
   "highlight-pink": { light: "#E88CAE", dark: "#E88CAE" },
-  "on-highlight": { light: "#20242C", dark: "#20242C" },
-  "disabled-surface": { light: "#EEEAE1", dark: "#343A45" },
+  "on-highlight": { light: "#15171A", dark: "#15171A" },
+  "disabled-surface": { light: "#E3E1DA", dark: "#343A45" },
 } as const satisfies Record<string, Record<ThemeName, `#${string}`>>;
 
 export type ColorToken = keyof typeof colorTokens;
 
 /** Tinta usada para sombra (8% no claro) e scrim (48% claro / 72% escuro). */
-export const INK = "#20242C";
+export const INK = "#15171A";
 
 /** Tokens que só podem ser usados como preenchimento (nunca como texto/linha). */
 export const fillOnlyTokens: readonly ColorToken[] = ["highlight-yellow", "highlight-pink"];
@@ -64,20 +68,28 @@ export const usedPairs: ReadonlyArray<{
   { fg: "border-control", bg: "background", kind: "ui" },
   { fg: "link-focus", bg: "surface", kind: "ui" },
   { fg: "primary", bg: "surface", kind: "ui", themes: ["light"] },
+  { fg: "on-desk", bg: "desk", kind: "text" },
+  { fg: "on-desk-secondary", bg: "desk", kind: "text" },
+  { fg: "link-focus", bg: "surface-subtle", kind: "text" },
+  { fg: "correction", bg: "background", kind: "text" },
+  { fg: "correction", bg: "surface", kind: "text" },
+  { fg: "correction", bg: "surface-subtle", kind: "ui" },
 ];
 
 /** Tipografia (plano §6, "Tipografia, grade e materiais"). Tamanhos em px: [tamanho, altura de linha]. */
 export const typeScale = {
-  display: { family: "newsreader", weight: 500, desktop: [48, 52], mobile: [34, 39] },
-  "screen-title": { family: "dm-sans", weight: 600, desktop: [30, 36], mobile: [24, 30] },
-  "section-title": { family: "dm-sans", weight: 600, desktop: [22, 28], mobile: [20, 26] },
-  reading: { family: "dm-sans", weight: 400, desktop: [18, 29], mobile: [18, 29] },
+  display: { family: "instrument-serif", weight: 400, desktop: [72, 68], mobile: [46, 46] },
+  "screen-title": { family: "instrument-serif", weight: 400, desktop: [64, 60], mobile: [44, 44] },
+  "section-title": { family: "instrument-serif", weight: 400, desktop: [30, 34], mobile: [26, 30] },
+  reading: { family: "newsreader", weight: 400, desktop: [18, 29], mobile: [18, 29] },
   ui: { family: "dm-sans", weight: 500, desktop: [16, 24], mobile: [16, 24] },
   meta: { family: "dm-sans", weight: 400, desktop: [14, 20], mobile: [14, 20] },
   metric: { family: "dm-sans", weight: 500, desktop: [24, 30], mobile: [22, 28], tabular: true },
+  kicker: { family: "dm-mono", weight: 500, desktop: [11.5, 16], mobile: [11.5, 16] },
+  hand: { family: "caveat", weight: 600, desktop: [24, 26], mobile: [22, 24] },
 } as const;
 
 export const spacing = [4, 8, 12, 16, 24, 32, 48, 64] as const;
-export const radii = { control: 8, card: 12, panel: 16 } as const;
+export const radii = { control: 4, card: 4, panel: 6 } as const;
 export const breakpoints = { sm: 640, md: 960, lg: 1200 } as const;
-export const layout = { maxWidth: 1280, sidebar: 216, gutter: { desktop: 32, tablet: 24, mobile: 16 } } as const;
+export const layout = { maxWidth: 1240, sidebar: 196, gutter: { desktop: 32, tablet: 24, mobile: 16 } } as const;

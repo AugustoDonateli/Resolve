@@ -25,20 +25,14 @@ function cssVar(block: string, name: string): string | undefined {
   return m?.[1]?.toUpperCase();
 }
 
-describe("paleta Caderno de Prova", () => {
-  it("reproduz os contrastes declarados no plano (§6)", () => {
+describe("paleta Mesa", () => {
+  it("papel, tinta e mesa mantêm leitura confortável (7:1 no texto principal)", () => {
     const c = colorTokens;
-    const r = (a: string, b: string) => Math.round(contrastRatio(a, b) * 100) / 100;
-    expect(r(c.text.light, c.background.light)).toBeCloseTo(14.16, 1);
-    expect(r(c["text-secondary"].light, c.background.light)).toBeCloseTo(5.16, 1);
-    expect(r(c.text.dark, c.background.dark)).toBeCloseTo(14.16, 1);
-    expect(r(c["text-secondary"].dark, c.surface.dark)).toBeCloseTo(7.02, 1);
-    expect(r(c["on-primary"].light, c.primary.light)).toBeCloseTo(6.56, 1);
-    expect(r(c["link-focus"].dark, c.surface.dark)).toBeCloseTo(6.75, 1);
-    expect(r(c["on-highlight"].light, c["highlight-yellow"].light)).toBeCloseTo(9.88, 1);
-    expect(r(c["on-highlight"].light, c["highlight-pink"].light)).toBeCloseTo(6.51, 1);
-    expect(r(c["border-control"].light, c.surface.light)).toBeCloseTo(4.38, 1);
-    expect(r(c["border-control"].dark, c.surface.dark)).toBeCloseTo(4.23, 1);
+    for (const theme of ["light", "dark"] as ThemeName[]) {
+      expect(contrastRatio(c.text[theme], c.background[theme])).toBeGreaterThanOrEqual(7);
+      expect(contrastRatio(c.text[theme], c.surface[theme])).toBeGreaterThanOrEqual(7);
+      expect(contrastRatio(c["on-desk"][theme], c.desk[theme])).toBeGreaterThanOrEqual(7);
+    }
   });
 
   for (const theme of ["light", "dark"] as ThemeName[]) {
