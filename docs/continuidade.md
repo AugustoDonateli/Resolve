@@ -2,7 +2,7 @@
 
 Nota única: o que funciona, o que foi feito mas ainda não passou por uso real, o que falta e onde retomar. Objetivo em vigor: concluir a plataforma inteira (ver `CLAUDE.md`).
 
-Estado do banco em 11/11/2026: **182 questões publicadas** (cadernos 1 e 7 do Enem 2025: LC 50, CH 45, CN 43, MT 44), com conteúdo conferido e etiquetas pendentes. A publicação foi autorizada por Guto nesta conversa e feita com a conta de editor de teste; está registrada na nota do lote (`data/editorial/2026-11-11-publicacao.log`). As 3 questões anuladas do caderno 7 ficam fora do banco. 0 temas publicados, 0 parâmetros de TRI.
+Estado do banco em 11/11/2026: **182 questões publicadas** (cadernos 1 e 7 do Enem 2025: LC 50, CH 45, CN 43, MT 44), com conteúdo conferido e etiquetas pendentes. A publicação foi autorizada por Guto nesta conversa e feita com a conta de editor de teste; está registrada na nota do lote (`data/editorial/2026-11-11-publicacao.log`). As 3 questões anuladas do caderno 7 ficam fora do banco. Tema oficial de 2025 ("Perspectivas acerca do envelhecimento na sociedade brasileira") publicado em 11/11, também por autorização de Guto. Os 6 textos motivadores, os créditos e as 2 figuras foram conferidos contra a p. 20 do PDF oficial. 0 parâmetros de TRI.
 
 ## 1. Funciona (verificado com dados reais ou de ponta a ponta no projeto)
 
@@ -55,8 +55,9 @@ Estado do banco em 11/11/2026: **182 questões publicadas** (cadernos 1 e 7 do E
 
 1. ~~Publicar as 182 questões aptas~~: feito em 11/11.
    - Treino conferido de ponta a ponta com a conta A: sessão aberta, resposta gravada, gabarito oficial.
-   - O Dia D do dia 2 aparece pronto nas cores azul e amarela; falta fazer uma prova inteira nele.
-   - Falta só o **tema oficial** (Guto, `/editor/temas`) para o Dia D do dia 1, que já tem as 90 questões em azul e amarelo.
+   - Dia D: 6 cadernos liberados (dia 1 azul e amarelo, em espanhol e inglês, com redação; dia 2 azul e amarelo).
+   - Falta fazer uma prova inteira em uso real.
+   - A correção da redação do dia 1 depende da chave de IA (item 2).
    - Destrava quase tudo da seção 2 e o **Dia D do dia 2** (caderno 7).
    - Para o Dia D do dia 1, falta também publicar o **tema oficial** em `/editor/temas`.
    - A conferência foi feita por Claude, com a conta de editor de teste; cada revisão registra a autoria. Antes de publicar, vale dar uma olhada na prévia do aluno de algumas questões (por exemplo, 6, 165 e 138).
