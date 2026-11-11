@@ -427,3 +427,24 @@ export async function startDailyQuestion(input: unknown): Promise<Outcome<string
     p_selection_reason: "plano",
   });
 }
+
+/** Treino de uma habilidade: questões publicadas com a habilidade em etiqueta revisada (até 10). */
+export async function startSkillTraining(input: unknown): Promise<Outcome<string>> {
+  const p = z.object({ actionId: uuid, skillId: uuid }).safeParse(input);
+  if (!p.success) return { ok: false, error: "dados inválidos", final: true };
+  const supabase = await createClient();
+  const { data: tags } = await supabase.from("item_skill_tags").select("item_version_id").eq("skill_id", p.data.skillId).eq("review_status", "aprovada");
+  const ids = (tags ?? []).map((t) => t.item_version_id as string);
+  if (!ids.length) return { ok: false, error: "resolve_no_items", final: true };
+  const { data: pool } = await supabase.from("study_items").select("item_version_id").in("item_version_id", ids).eq("annulled", false);
+  const chosen = (pool ?? []).map((r) => r.item_version_id as string).sort(() => Math.random() - 0.5).slice(0, 10);
+  if (!chosen.length) return { ok: false, error: "resolve_no_items", final: true };
+  return rpc<string>("start_session", {
+    p_client_action_id: p.data.actionId,
+    p_mode: "treino",
+    p_item_version_ids: chosen,
+    p_planned_minutes: null,
+    p_time_limit_minutes: null,
+    p_selection_reason: "escolha",
+  });
+}
