@@ -1,0 +1,18 @@
+{
+ "booklet_note": "%D2_CD7%",
+ "pdf_sha": "39af0f0eaf3e30a3cd211bc19db9029204703965a2c76ff232fb3109181fa7c8",
+ "figures": {},
+ "alt_figures": {},
+ "alt_only": {
+  "105": "Esquema de uma usina nuclear. Dentro do \"Vaso de contenção\": o \"Reator\", com o \"Elemento combustível\", e o \"Pressurizador\", ligados pelo circuito primário (amarelo, com uma \"Bomba\"); o circuito primário passa por um gerador de \"Vapor\", onde aquece a água do circuito secundário (azul-escuro). O vapor segue para a \"Turbina\", ligada ao \"Gerador elétrico\" e à \"Torre de transmissão\". Depois da turbina, o \"Condensador\" é resfriado pelo sistema de água de refrigeração (verde), que leva \"Água fria\" de um \"Ecossistema aquático\" e passa por uma \"Torre de resfriamento\", com \"Bombas\". A \"Água\" condensada volta por uma \"Bomba\" desde o \"Tanque de água de alimentação\". Legenda: amarelo, circuito primário; azul-escuro, circuito secundário; verde, sistema de água de refrigeração.",
+  "106": "Fotografia antiga, em preto e branco, de uma aula de química: um professor de pé ao lado de uma lousa e alunos sentados de costas. Um destaque amplia o que está escrito na lousa: \"AzO + O = AzO²\"; \"SO² + H²O = H²SO³\"; \"2 H²SO³ + O² = 2 H²SO⁴\"; \"2 HCl + MgO²H² = MgCl² + 2 H²O\"."
+ },
+ "text_fixes": {},
+ "letters": [],
+ "false_positive_figures": {},
+ "formula_doubts": {},
+ "date": "11/11/2026",
+ "tables": {},
+ "block_fixes": {},
+ "replacements": {}
+}

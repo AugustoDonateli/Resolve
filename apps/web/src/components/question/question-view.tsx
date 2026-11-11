@@ -109,7 +109,41 @@ export function QuestionBlocks({
                 {b.text}
               </P>
             );
-          case "table":
+          case "table": {
+            const rows = tableRows(b.text);
+            if (rows)
+              return (
+                <span key={b.id} className="block overflow-x-auto">
+                  <table className="w-full border-collapse t-ui">
+                    <thead>
+                      <tr>
+                        {rows[0]!.map((c, i) => (
+                          <th key={i} scope="col" className="border border-line bg-surface-subtle px-3 py-2 text-left font-semibold">
+                            {c}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {rows.slice(1).map((r, i) => (
+                        <tr key={i}>
+                          {r.map((c, j) => (
+                            <td key={j} className="border border-line px-3 py-2 tabular">
+                              {c || <span className="sr-only">vazio</span>}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </span>
+              );
+            return (
+              <span key={b.id} className="block overflow-x-auto whitespace-pre-wrap rounded-control bg-surface-subtle p-3">
+                {b.text}
+              </span>
+            );
+          }
           case "formula":
             return (
               <span
@@ -149,6 +183,17 @@ export function QuestionBlocks({
       })}
     </>
   );
+}
+
+/**
+ * Tabela em texto: uma linha por quebra de linha e células separadas por " | " (a primeira linha é o
+ * cabeçalho). Devolve null quando o texto não tem esse formato, e o bloco aparece pré-formatado.
+ */
+export function tableRows(text: string | undefined): string[][] | null {
+  const lines = (text ?? "").split("\n").filter((l) => l.trim());
+  if (lines.length < 2 || !lines.every((l) => l.includes(" | "))) return null;
+  const rows = lines.map((l) => l.split(" | ").map((c) => c.trim()));
+  return rows.every((r) => r.length === rows[0]!.length) ? rows : null;
 }
 
 /** [3, 4, 5] → "3, 4 e 5". */

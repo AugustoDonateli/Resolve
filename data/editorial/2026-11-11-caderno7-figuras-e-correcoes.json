@@ -1,0 +1,926 @@
+{
+ "booklet_note": "%D2_CD7%",
+ "pdf_sha": "39af0f0eaf3e30a3cd211bc19db9029204703965a2c76ff232fb3109181fa7c8",
+ "figures": {
+  "91": {
+   "crop": "91_p2_1.png",
+   "alt": "Esquema com dois círculos cinza vistos em corte. À esquerda, \"Carvão comum\", com poucos poros redondos pequenos, um deles indicado como \"Mesoporo\". À direita, \"Carvão ativado\", com borda irregular e muitos poros de tamanhos variados: \"Macroporo\" (poro grande), \"Mesoporo\", \"Microporo\" (poro muito pequeno) e pontos pretos presos às paredes, indicados como \"Impureza adsorvida\"."
+  },
+  "94": {
+   "crop": "94_p2_adj.png",
+   "alt": "Foto de um filtro de linha branco com seis tomadas, um interruptor e o cabo enrolado com o plugue."
+  },
+  "97": {
+   "crop": "97_p3_1.png",
+   "alt": "Fluxograma ilustrado em quatro etapas numeradas. Parte de um microscópio com a legenda \"Cultura de células infectadas com vírus\"; seta 1 leva a \"Isolamento dos vírus\" (partículas virais coloridas); seta 2 leva a vírus escurecidos, com a legenda \"Inativação dos vírus pelo calor ou por ação química\"; seta 3 leva a \"Aplicação da vacina\" no braço de uma mulher de máscara; seta 4 aponta para partículas virais cercadas de anticorpos em forma de Y."
+  },
+  "109": {
+   "crop": "109_p7_1.png",
+   "alt": "Equação química com fórmulas estruturais. À esquerda, \"Ácido anacárdico\": anel benzênico com um grupo OH, um grupo carboxila (C com O duplo e OH) e uma cadeia C15H31. Uma seta com Δ e \"180 °C a 200 °C\" leva, à direita, ao \"Cardanol\": anel benzênico com um grupo OH e a cadeia C15H31, mais CO2."
+  },
+  "111": {
+   "crop": "111_p7_1.png",
+   "alt": "Ilustração de um biodigestor rural em quatro etapas numeradas. 1: \"Excrementos animais e restos de alimentos são misturados com água no alimentador do biodigestor\" (uma vaca e um porco no alto; um tanque de tijolos recebe água de um cano e o conteúdo de um balde). 2: \"Dentro do biodigestor, a ação das bactérias decompõe os resíduos, transformando-os em gás metano e adubo\" (um cano liga o tanque a uma câmara cilíndrica de tijolos). 3: \"O gás metano pode ser encanado para alimentar um gerador ou aquecedor\" (seta para cima saindo de um tubo no topo da câmara). 4: \"As sobras servem como fertilizante\" (monte de material ao lado da câmara)."
+  },
+  "113": [
+   {
+    "crop": "113_p8_1.png",
+    "alt": "Figura 1: esquema de um tubo de raios catódicos visto de lado. Na parte estreita, à esquerda, a letra A indica a fonte do feixe e há uma série de discos; mais à frente, a letra B indica um par de placas paralelas, uma acima e outra abaixo do feixe. O tubo se alarga até a \"Tela\", à direita, onde uma linha tracejada horizontal (a trajetória sem desvio) chega ao ponto 5, no centro. Ao redor do ponto 5 estão marcados o ponto 1 (acima), o 2 (abaixo), o 4 (à esquerda) e o 3 (à direita), ligados ao centro por linhas tracejadas."
+   },
+   {
+    "crop": "113_p8_2.png",
+    "alt": "Figura 2: duas placas horizontais paralelas, uma em cima e outra embaixo, com oito setas azuis verticais apontando para cima entre elas, indicadas como campo elétrico E. À esquerda, uma partícula amarela com sinal negativo entra entre as placas com velocidade v horizontal, para a direita (seta vermelha)."
+   }
+  ],
+  "114": {
+   "crop": "114_p8_1.png",
+   "alt": "Tirinha em preto e branco, em um só quadro. Um menino de óculos, sentado à mesa, parece assustado diante de um prato com um líquido que se espalha. Ao centro, uma menina de cabelo curto (Mônica) grita: \"E quem está gritando muito?\", ao lado de um menino de braços cruzados (Cebolinha). À direita, um garçom de chapéu segura uma bandeja com taças das quais o conteúdo transborda e escorre; há traços de vibração em volta das taças."
+  },
+  "115": {
+   "crop": "115_p8_1.png",
+   "alt": "Fórmula estrutural do \"Borneol\": esqueleto bicíclico (dois anéis que compartilham dois carbonos, unidos por uma ponte de um carbono). A ponte carrega dois grupos metila (H3C e CH3); um carbono da cabeça de ponte carrega outro grupo metila (H3C); o carbono vizinho a ele carrega um grupo OH."
+  },
+  "120": {
+   "crop": "120_p10_1.png",
+   "alt": "No alto, um \"Transmissor\" emite um feixe vermelho horizontal até um \"Receptor\"; no receptor, a altura do feixe é marcada como d entre duas linhas tracejadas. Embaixo, cinco figuras de uma pessoa: escalando um muro de tijolos para cima (seta para cima), 0,5 m/s; descendo o muro (seta para baixo), 0,7 m/s; caminhando, 1,0 m/s; andando mais rápido, 2,0 m/s; correndo, 5,0 m/s."
+  },
+  "122": {
+   "crop": "122_p10_1.png",
+   "alt": "Esquema em corte de um fogão de indução. Uma panela tampada com líquido e bolhas, indicada como \"Conteúdo aquecido\"; pequenos triângulos vermelhos no fundo e nas paredes indicam \"Transferência do calor gerado na panela\". Abaixo da panela, uma placa cinza: \"Vidro cerâmico\". Embaixo do vidro, uma bobina de fio enrolado em um cilindro, \"Bobina de indução\", com linhas vermelhas curvas saindo das extremidades: \"Campo magnético criado por bobina de indução\"."
+  },
+  "126": {
+   "crop": "126_p11_1.png",
+   "alt": "Esquema em perspectiva com três eixos que se cruzam onde está um avião verde: um eixo vertical; um eixo horizontal de \"Oeste\" (esquerda) a \"Leste\" (direita); e um eixo diagonal de \"Sul\" (embaixo, à esquerda) a \"Norte\" (em cima, à direita). O avião aponta para o Norte, com o vetor velocidade v ao longo desse eixo. No alto, à direita, um ponto indicado como \"Posição a ser atingida\"; linhas azuis tracejadas mostram sua projeção: de um ponto do eixo Leste, uma linha paralela ao eixo Norte e, dali, uma linha vertical subindo até o ponto."
+  },
+  "128": {
+   "crop": "128_p12_1.png",
+   "alt": "Gráfico de linhas: Resistência (ohm), de 50 a 250, em função da Temperatura (°C), de −100 a 350, com cinco retas que vão de −50 °C a cerca de 320 °C. Valores aproximados, lidos na grade: Sensor 1, de 225 a 229 ohm (quase horizontal); Sensor 2, de 76 a 224 ohm; Sensor 3, de 147 a 168 ohm; Sensor 4, de 91 a 149 ohm; Sensor 5, de 66 a 145 ohm."
+  },
+  "133": {
+   "crop": "133_p14_1.png",
+   "alt": "Esquema em camadas, de baixo para cima: \"Malha de aço\" (grade); \"Camada inferior de polímero\" (cadeia azul com anéis de cinco membros contendo N+, entre parênteses com índice n); \"Nanopartículas de sílica\" (círculos SiO2 com carga negativa); \"Camada superior de polímero\" (igual à inferior); e, no topo, \"Surfactante\" (cadeias de carbonos ligados a muitos átomos de flúor, cada uma terminando em um grupo com carga negativa voltado para baixo)."
+  },
+  "134": {
+   "crop": "134_p14_1.png",
+   "alt": "Fórmulas estruturais de cinco esteroides, todos com o mesmo esqueleto de quatro anéis fundidos (três de seis membros e um de cinco) e um CH3 na junção dos dois últimos anéis. Estradiol: primeiro anel aromático com HO; OH no anel de cinco membros. Estriol: primeiro anel aromático com HO; dois OH no anel de cinco membros. Estrona: primeiro anel aromático com HO; O ligado por ligação dupla no anel de cinco membros. Novestrol: primeiro anel aromático com HO; no anel de cinco membros, OH e C≡CH no mesmo carbono. Noretindrona: primeiro anel não aromático, com O ligado por ligação dupla e uma ligação dupla no anel; no anel de cinco membros, OH e C≡CH no mesmo carbono."
+  },
+  "137": {
+   "crop": "137_p16_1.png",
+   "alt": "Infográfico em tons de cinza. No alto, um balão: \"90% dos internautas brasileiros acessam redes sociais\", sobre uma fileira de dez pessoas, nove desenhadas em cinza-escuro e uma em branco. Embaixo, com o título \"MULHERES × HOMENS\": \"60% da quantidade de internautas brasileiros que acessam redes sociais são mulheres\", com uma seta para um quadro de vinte figuras em duas fileiras: na de cima, oito mulheres em cinza-escuro e dois homens em branco; na de baixo, quatro mulheres em cinza-escuro e seis homens em branco."
+  },
+  "143": {
+   "crop": "143_p19_1.png",
+   "alt": "Cinco quadros coloridos com informações de embalagens. Batata chips: pacote com 3 porções de 50 g; 170 mg de sódio por porção. Palitos salgados: pacote com 4 porções de 20 g; 501 mg de sódio por porção. Biscoito multigrãos: pacote com 8 porções de 25 g; 264 mg de sódio por porção. Biscoito de polvilho: pacote com 6 porções de 15 g; 175 mg de sódio por porção. Biscoito de água e sal: pacote com 5 porções de 40 g; 166 mg de sódio por porção."
+  },
+  "145": {
+   "crop": "145_p19_adj.png",
+   "alt": "Gráfico da Frequência respiratória (rpm) em função do Tempo (min), sem valores numéricos. A curva começa horizontal no nível f1; a partir do instante t1, indicado como \"Início da prática meditativa\", desce suavemente até o nível f2, mais baixo, que atinge no instante t2; depois de t2, continua horizontal em f2. Linhas tracejadas ligam t1 e t2 ao eixo do tempo e f2 ao eixo vertical."
+  },
+  "147": {
+   "crop": "147_p20_1.png",
+   "alt": "Dois gráficos lado a lado. À esquerda, gráfico de setores \"Porcentagem de matrículas por idioma – 2023\": Inglês, 60%; Espanhol, 25%; Francês, 10%; Alemão, 5%. À direita, gráfico de barras \"Quantidade de matrículas por idioma – 2024\": Inglês, 280; Espanhol, 80; Francês, 20; Alemão, 20."
+  },
+  "153": {
+   "crop": "153_p22_1.png",
+   "alt": "Plano cartesiano com eixos x e y e origem 0. Um quadrilátero azul de vértices T, S, V e U, com lados inclinados em relação aos eixos. São dadas as coordenadas de dois vértices consecutivos: S (6 ; 2), embaixo, e V (8 ; 6), à direita. O vértice U fica no alto e o vértice T à esquerda, sem coordenadas indicadas."
+  },
+  "154": {
+   "crop": "154_p22_1.png",
+   "alt": "Gráfico de barras com linha, escala vertical de 0 a 170. Para cada gênero, uma barra para Autor brasileiro, uma para Autor estrangeiro e um ponto de Demanda ligado por uma linha. Ficção: brasileiro 80, estrangeiro 120, demanda 160. Autoajuda: brasileiro 50, estrangeiro 80, demanda cerca de 135. Romance: brasileiro 40, estrangeiro cerca de 105, demanda 140. Biografia: brasileiro cerca de 45, estrangeiro 50, demanda 80."
+  },
+  "156": {
+   "crop": "156_p23_1.png",
+   "alt": "Desenho de um sol amarelo: um círculo central cercado por oito raios triangulares separados dele, apontando para fora (para cima, para baixo, para os lados e nas diagonais). Cotas indicam que, da ponta do raio da esquerda à ponta do raio da direita, a largura é 20 cm, e da ponta do raio de cima à ponta do raio de baixo, a altura é 20 cm."
+  },
+  "160": {
+   "crop": "160_p24_1.png",
+   "alt": "À esquerda, desenho de um vaso de perfil, mais largo em cima, apoiado no \"Tampo da mesa\". À direita, gráfico de D em função de T. Duas retas verticais pontilhadas verdes passam por T = (5 − 2π)/2, à esquerda do zero, e T = (5 + 2π)/2, à direita de 4. Entre elas, uma curva crescente: tracejada fora do trecho usado e contínua de T = 0 (círculo aberto, valor pequeno de D) até T = 4 (círculo aberto), passando pelo ponto (2,5 ; 30). Linhas azuis tracejadas ligam a base do vaso ao início do trecho contínuo e a boca do vaso ao seu final."
+  },
+  "161": {
+   "crop": "161_p24_1.png",
+   "alt": "Malha de quarteirões quadrados cinza, em 7 fileiras e 6 colunas, separados por ruas. Contando as fileiras de cima para baixo e as colunas da esquerda para a direita: Q fica na 1ª fileira, 5ª coluna; A (em destaque, fundo preto) na 4ª fileira, 3ª coluna; S na 4ª fileira, 5ª coluna; R na 7ª fileira, 1ª coluna; P na 7ª fileira, 5ª coluna; T na 7ª fileira, 6ª coluna. Ao lado, uma rosa dos ventos: N para cima, S para baixo, L para a direita, O para a esquerda."
+  },
+  "164": {
+   "crop": "164_p25_1.png",
+   "alt": "No alto, uma bússola: mostrador com graduação de 0 a 340, de 20 em 20 (com 90 e 270 também marcados), N no 0, L no 90, S no 180 e O no 270, e a agulha vermelha apontando para N. Embaixo, um trajeto em setas: de P, uma seta laranja vai para baixo e para a direita até Q, e outra seta laranja segue para a direita, na horizontal, até R. Também de P, uma seta verde sobe inclinada para a esquerda até S, e outra seta verde segue para a direita, na horizontal, até T. Uma linha azul tracejada liga T a R."
+  },
+  "166": {
+   "crop": "166_p26_1.png",
+   "alt": "Esquema de uma corrida em linha reta. \"Comprimento do percurso\": marcas em 0 km, 1 km, 2 km, 3 km, 4 km e 5 km, que delimitam do 1º ao 5º trecho. \"Tempo de corrida\" em cada marca: 0 s, 272 s, 556 s, 844 s e 1 132 s (um corredor está no 4 km). \"Tempo gasto em cada trecho de 1 km\": 272 s, 284 s, 288 s e 288 s nos quatro primeiros trechos; o 5º trecho ainda não tem tempo."
+  },
+  "167": {
+   "crop": "167_p27_1.png",
+   "alt": "Dois gráficos de rendimento em função da Velocidade (km/h), de 20 a 140, com grade de 20 em 20. À esquerda, GNV, Rendimento (km/m³): cerca de 8 a 20 km/h, sobe até o máximo de 12 a 100 km/h, cai para cerca de 11 a 120 km/h e chega a 10 a 140 km/h. À direita, Gasolina, Rendimento (km/L): 6 a 20 km/h, cerca de 8 a 60 km/h, máximo de 11 a 100 km/h e cerca de 9 a 140 km/h."
+  },
+  "170": [
+   {
+    "crop": "170_p29_1.png",
+    "alt": "Primeira figura: caixa-d'água em forma de bloco retangular, com base de 2,5 dm por 1,5 dm, com pouca água no fundo e um objeto oval no fundo. No alto, à direita, uma torneira com boia: uma haste ligada a uma bola preta pendurada, com a bola baixa; um fio de água azul cai da torneira na água."
+   },
+   {
+    "crop": "170_p29_2.png",
+    "alt": "Segunda figura: a mesma caixa-d'água, com base de 2,5 dm por 1,5 dm, agora cheia até a altura de 2 dm; a bola da boia flutua na superfície e a haste está na horizontal. O objeto oval continua no fundo."
+   }
+  ],
+  "173": {
+   "crop": "173_p30_1.png",
+   "alt": "Dois projetos de túneis em forma de semicírculo, escavados numa encosta marrom. Projeto 1: \"Túnel para automóveis\", com base de 12 m dividida ao meio em \"volta\" e \"ida\", e \"Túnel para bicicletas\", com base de 6 m dividida ao meio em \"volta\" e \"ida\". Projeto 2: um único \"Túnel de uso misto\", com base dividida em quatro faixas, da esquerda para a direita: volta 3 m, volta 6 m, ida 6 m e ida 3 m."
+  },
+  "177": {
+   "crop": "177_p31_1.png",
+   "alt": "À esquerda, vista de cima de um disco amarelo de 6 cm de diâmetro (medido na vertical, de A a C), com um quadrado cinza inscrito de vértices A (em cima), B (à direita), C (embaixo) e D (à esquerda), que tocam a borda do disco. À direita, o mesmo disco em perspectiva, com espessura de 3 mm e o quadrado na face de cima."
+  },
+  "180": {
+   "crop": "180_p31_1.png",
+   "alt": "Esquema circular com quatro círculos numerados ligados por setas no sentido horário: 1 (marrom, em cima) → 2 (azul, à direita) → 3 (laranja, embaixo) → 4 (verde, à esquerda) → de volta ao 1."
+  },
+  "107": [
+   {
+    "crop": "107_p6_adj.png",
+    "alt": "Esquema de herança em joaninhas. \"Parentais\": um macho com quatro pintas pretas e sem listra, cruzado (×) com uma fêmea com uma listra preta vertical no meio e sem pintas. \"Primeira geração\": um macho e uma fêmea, ambos com a listra vertical e as quatro pintas."
+   },
+   {
+    "crop": "107_p6_adjA.png",
+    "alternative": "A",
+    "alt": "Quatro joaninhas, todas com quatro pintas e sem listra. Legenda: Machos e Fêmeas."
+   },
+   {
+    "crop": "107_p6_adjB.png",
+    "alternative": "B",
+    "alt": "Quatro joaninhas, todas com a listra vertical e sem pintas. Legenda: Machos e Fêmeas."
+   },
+   {
+    "crop": "107_p6_adjC.png",
+    "alternative": "C",
+    "alt": "Quatro joaninhas, todas com a listra vertical e as quatro pintas. Legenda: Machos e Fêmeas."
+   },
+   {
+    "crop": "107_p6_adjD.png",
+    "alternative": "D",
+    "alt": "Quatro joaninhas: duas com quatro pintas e sem listra e duas com a listra vertical e sem pintas. Legenda: Machos e Fêmeas."
+   },
+   {
+    "crop": "107_p6_adjE.png",
+    "alternative": "E",
+    "alt": "Quatro joaninhas: uma com quatro pintas e sem listra, uma com a listra vertical e sem pintas e duas com a listra vertical e as quatro pintas. Legenda: Machos e Fêmeas."
+   }
+  ],
+  "108": [
+   {
+    "crop": "108_p6_adjA.png",
+    "alternative": "A",
+    "alt": "Gráfico da Força de atrito em função do Tempo, sem valores: começa num valor alto, desce em linha reta até um mínimo, sobe rapidamente até um valor um pouco maior que o inicial e depois fica constante."
+   },
+   {
+    "crop": "108_p6_adjB.png",
+    "alternative": "B",
+    "alt": "Gráfico da Força de atrito em função do Tempo, sem valores: começa num valor intermediário, sobe em linha reta até um máximo, desce até um valor mais baixo que o inicial e depois fica constante."
+   },
+   {
+    "crop": "108_p6_adjC.png",
+    "alternative": "C",
+    "alt": "Gráfico da Força de atrito em função do Tempo, sem valores: uma reta horizontal, a força constante o tempo todo."
+   },
+   {
+    "crop": "108_p6_adjD.png",
+    "alternative": "D",
+    "alt": "Gráfico da Força de atrito em função do Tempo, sem valores: começa constante num valor alto e, a partir de certo instante, decresce em linha reta até um valor baixo."
+   },
+   {
+    "crop": "108_p6_adjE.png",
+    "alternative": "E",
+    "alt": "Gráfico da Força de atrito em função do Tempo, sem valores: começa num valor baixo, sobe em linha reta até um máximo e depois decresce em linha reta, mais devagar, até um valor baixo."
+   }
+  ],
+  "127": [
+   {
+    "crop": "127_p12_1.png",
+    "alternative": "A",
+    "alt": "Diagrama de Energia em função do Progresso da reação, de A para B, com duas curvas que têm o mesmo pico. A linha contínua cinza começa em A num nível mais baixo; a linha pontilhada laranja começa em A num nível mais alto. As duas terminam juntas em B, num nível mais baixo que os dois de partida."
+   },
+   {
+    "crop": "127_p12_2.png",
+    "alternative": "B",
+    "alt": "Diagrama de Energia em função do Progresso da reação, de A para B. As duas curvas partem juntas do mesmo nível em A e têm o mesmo pico. A linha contínua cinza termina em B num nível bem mais baixo; a linha pontilhada laranja termina em B num nível mais alto, acima do de partida."
+   },
+   {
+    "crop": "127_p12_3.png",
+    "alternative": "C",
+    "alt": "Diagrama de Energia em função do Progresso da reação, de A para B. As duas curvas partem juntas do mesmo nível em A e terminam juntas no mesmo nível, mais baixo, em B. O pico da linha contínua cinza é mais alto que o pico da linha pontilhada laranja."
+   },
+   {
+    "crop": "127_p12_4.png",
+    "alternative": "D",
+    "alt": "Diagrama de Energia em função do Progresso da reação, de A para B. As duas curvas partem juntas do mesmo nível em A e terminam juntas no mesmo nível, mais baixo, em B. O pico da linha pontilhada laranja é mais alto que o pico da linha contínua cinza."
+   },
+   {
+    "crop": "127_p12_5.png",
+    "alternative": "E",
+    "alt": "Diagrama de Energia em função do Progresso da reação, de A para B, com duas curvas que têm o mesmo pico. A linha pontilhada laranja começa e termina em níveis mais altos que os da linha contínua cinza; nas duas, o nível final em B é mais baixo que o inicial em A."
+   }
+  ],
+  "130": [
+   {
+    "crop": "130_p13_1.png",
+    "alternative": "A",
+    "alt": "Circuito com uma bateria e dois resistores em paralelo: um resistor R_C e um resistor quadriculado R_P = 0,2 R_C."
+   },
+   {
+    "crop": "130_p13_2.png",
+    "alternative": "B",
+    "alt": "Circuito com uma bateria e dois resistores em paralelo: um resistor R_C e um resistor quadriculado R_P = 1,2 R_C."
+   },
+   {
+    "crop": "130_p13_3.png",
+    "alternative": "C",
+    "alt": "Circuito com uma bateria e dois resistores em série: um resistor quadriculado R_P = 1,2 R_C e um resistor R_C."
+   },
+   {
+    "crop": "130_p13_4.png",
+    "alternative": "D",
+    "alt": "Circuito com uma bateria e dois resistores em série: um resistor quadriculado R_P = 2,2 R_C e um resistor R_C."
+   },
+   {
+    "crop": "130_p13_5.png",
+    "alternative": "E",
+    "alt": "Circuito com uma bateria e dois resistores em série: um resistor quadriculado R_P = 0,2 R_C e um resistor R_C."
+   }
+  ],
+  "135": [
+   {
+    "crop": "135_p15_3.png",
+    "alt": "No alto, gráfico da Fotoluminescência (u.a.), de 0,0 a 1,2, em função do Comprimento de onda (nm), de cerca de 525 a 725: a curva começa perto de 0,3, sobe até o pico de 1,0 em 600 nm e desce até perto de 0,1 no fim. Figura 1: foto de um bebê deitado sob luz azul, com um adesivo vermelho em forma de coração no corpo. Figura 2: escala de cores do coração conforme o tempo de exposição: 0 h, vermelho; 3 h, laranja-avermelhado; 6 h, laranja; 9 h, bege; 12 h, verde; ao lado, setas para cima indicam que a frequência e o tempo de exposição aumentam nesse sentido."
+   },
+   {
+    "crop": "135_p15_adjA.png",
+    "alternative": "A",
+    "alt": "Gráfico da Fotoluminescência (u.a.) em função do Comprimento de onda (nm), com duas curvas. No início do tratamento (linha contínua): pico de 1,0 em 600 nm. No final do tratamento (linha tracejada): pico de 1,0 deslocado para cerca de 555 nm; depois as duas curvas se juntam em comprimentos de onda maiores."
+   },
+   {
+    "crop": "135_p15_adjB.png",
+    "alternative": "B",
+    "alt": "Gráfico da Fotoluminescência (u.a.) em função do Comprimento de onda (nm), com duas curvas. No início do tratamento (linha contínua): pico de 1,0 em 600 nm. No final do tratamento (linha tracejada): pico de 1,0 deslocado para cerca de 635 nm, com cerca de 0,75 em 600 nm."
+   },
+   {
+    "crop": "135_p15_adjC.png",
+    "alternative": "C",
+    "alt": "Gráfico da Fotoluminescência (u.a.) em função do Comprimento de onda (nm), com duas curvas de mesmo formato e pico em 600 nm: no início do tratamento (linha contínua), pico de 1,0; no final do tratamento (linha tracejada), pico mais baixo, de cerca de 0,85."
+   },
+   {
+    "crop": "135_p15_adjD.png",
+    "alternative": "D",
+    "alt": "Gráfico da Fotoluminescência (u.a.) em função do Comprimento de onda (nm), com duas curvas de mesmo formato e pico em 600 nm: no início do tratamento (linha contínua), pico de 1,0; no final do tratamento (linha tracejada), pico mais alto, de cerca de 1,1."
+   },
+   {
+    "crop": "135_p15_adjE.png",
+    "alternative": "E",
+    "alt": "Gráfico da Fotoluminescência (u.a.) em função do Comprimento de onda (nm): as curvas do início do tratamento (linha contínua) e do final do tratamento (linha tracejada) coincidem, com pico de 1,0 em 600 nm."
+   }
+  ],
+  "138": [
+   {
+    "crop": "138_p17_1.png",
+    "alt": "Sistema de eixos x, y e z em perspectiva, com grades quadriculadas de 8 por 8 unidades nos três planos: yz (fundo), xz (parede da esquerda) e xy (chão). Um cubo azul de aresta 1 flutua no espaço, e linhas pontilhadas levam às suas três projeções, que são quadrados azuis de uma unidade: no plano yz, y entre 1 e 2 e z entre 6 e 7; no plano xz, x entre 5 e 6 e z entre 6 e 7; no plano xy, x entre 5 e 6 e y entre 1 e 2."
+   },
+   {
+    "crop": "138_p17_2.png",
+    "alternative": "A",
+    "alt": "Os mesmos três planos quadriculados, com três quadrados vermelhos de uma unidade: no plano yz, y entre 6 e 7 e z entre 3 e 4; no plano xz, x entre 1 e 2 e z entre 2 e 3; no plano xy, x entre 1 e 2 e y entre 6 e 7."
+   },
+   {
+    "crop": "138_p17_5.png",
+    "alternative": "B",
+    "alt": "Os mesmos três planos quadriculados, com três quadrados vermelhos de uma unidade: no plano yz, y entre 4 e 5 e z entre 2 e 3; no plano xz, x entre 0 e 1 e z entre 2 e 3; no plano xy, x entre 0 e 1 e y entre 4 e 5."
+   },
+   {
+    "crop": "138_p17_6.png",
+    "alternative": "C",
+    "alt": "Os mesmos três planos quadriculados, com três quadrados vermelhos de uma unidade: no plano yz, y entre 5 e 6 e z entre 2 e 3; no plano xz, x entre 2 e 3 e z entre 2 e 3; no plano xy, x entre 2 e 3 e y entre 6 e 7."
+   },
+   {
+    "crop": "138_p17_3.png",
+    "alternative": "D",
+    "alt": "Os mesmos três planos quadriculados, com três quadrados vermelhos de uma unidade: no plano yz, y entre 5 e 6 e z entre 2 e 3; no plano xz, x entre 2 e 3 e z entre 2 e 3; no plano xy, x entre 2 e 3 e y entre 5 e 6."
+   },
+   {
+    "crop": "138_p17_4.png",
+    "alternative": "E",
+    "alt": "Os mesmos três planos quadriculados, com três quadrados vermelhos de uma unidade: no plano yz, y entre 6 e 7 e z entre 2 e 3; no plano xz, x entre 2 e 3 e z entre 2 e 3; no plano xy, x entre 2 e 3 e y entre 6 e 7."
+   }
+  ],
+  "139": {
+   "crop": "139_p18_1.png",
+   "alt": "Vista de cima de uma lagoa circular azul cercada por uma pista em forma de anel. No alto, à direita, um trecho da pista está pintado de cinza, com um ponto P no meio dele; cotas indicam 200 m de uma extremidade do trecho até P e 200 m de P até a outra extremidade."
+  },
+  "148": {
+   "crop": "148_p20_1.png",
+   "alt": "Cinco quadros numerados de I a V, cada um com um segmento desenhado, seu comprimento no desenho e a escala. I: segmento de A a B, 9 cm, escala 1 : 100. II: de B a C, 5 cm, escala 1 : 300. III: de D a C, 5 cm, escala 1 : 600. IV: de D a E, 3 cm, escala 1 : 700. V: de E a F, 2 cm, escala 1 : 1 000. Cada segmento tem uma pequena seta indicando o sentido do percurso."
+  },
+  "149": [
+   {
+    "crop": "149_p21_adj1.png",
+    "alt": "Duas vistas de um mesmo poliedro colorido. Suas faces são triângulos azuis, quadrados amarelos, um pentágono verde e uma grande face vermelha com dez lados."
+   },
+   {
+    "crop": "149_p21_adj2.png",
+    "alt": "Planificação do poliedro: um decágono vermelho no centro, com 25 triângulos azuis distribuídos ao redor, 5 quadrados amarelos presos às pontas e, à direita, um pentágono verde ligado a um dos quadrados amarelos."
+   }
+  ],
+  "163": {
+   "crop": "163_p25_1.png",
+   "alt": "Dois gráficos. No alto, gráfico de barras \"Modalidades esportivas no ensino médio, por série\", Quantidade de estudantes sem valores no eixo, com linhas de grade igualmente espaçadas. Em unidades da grade: 1ª série, Futebol 7, Vôlei 3, Basquete 1; 2ª série, Futebol 6, Vôlei 3, Basquete 3; 3ª série, Futebol 5, Vôlei 4, Basquete 4. Embaixo, gráfico de setores \"Quantidade de estudantes, por modalidade esportiva\": Futebol ocupa metade do círculo, Vôlei e Basquete dividem a outra metade, e o setor de Basquete traz o número 80."
+  },
+  "119": [
+   {
+    "crop": "119_p9_2.png",
+    "alternative": "A",
+    "alt": "Circuito em que um gerador de 136 V, em série com uma resistência interna de 3,2 Ω, alimenta a bomba."
+   },
+   {
+    "crop": "119_p9_3.png",
+    "alternative": "B",
+    "alt": "Circuito em que um gerador de 120 V, em série com uma resistência interna de 2,4 Ω, alimenta a bomba."
+   },
+   {
+    "crop": "119_p9_4.png",
+    "alternative": "C",
+    "alt": "Circuito em que um gerador de 120 V, em série com uma resistência interna de 5,3 Ω, alimenta a bomba."
+   },
+   {
+    "crop": "119_p9_5.png",
+    "alternative": "D",
+    "alt": "Circuito em que um gerador de 102 V, em série com uma resistência interna de 2,4 Ω, alimenta a bomba."
+   },
+   {
+    "crop": "119_p9_6.png",
+    "alternative": "E",
+    "alt": "Circuito em que um gerador de 102 V, em série com uma resistência interna de 5,3 Ω, alimenta a bomba."
+   }
+  ],
+  "169": [
+   {
+    "crop": "169_p28_2.png",
+    "alternative": "A",
+    "alt": "Gráfico de linha da Produção (tonelada) por Safra: 11-12, 400; 12-13, 330; 13-14, 562,5; 14-15, 562,5; 15-16, 500."
+   },
+   {
+    "crop": "169_p28_4.png",
+    "alternative": "B",
+    "alt": "Gráfico de linha da Produção (tonelada) por Safra: 11-12, 40; 12-13, 30; 13-14, 45; 14-15, 45; 15-16, 50."
+   },
+   {
+    "crop": "169_p28_6.png",
+    "alternative": "C",
+    "alt": "Gráfico de linha da Produção (tonelada) por Safra: 11-12, 200; 12-13, 220; 13-14, 250; 14-15, 250; 15-16, 200."
+   },
+   {
+    "crop": "169_p28_3.png",
+    "alternative": "D",
+    "alt": "Gráfico de linha da Produção (tonelada) por Safra: 11-12, 240; 12-13, 250; 13-14, 295; 14-15, 295; 15-16, 250."
+   },
+   {
+    "crop": "169_p28_5.png",
+    "alternative": "E",
+    "alt": "Gráfico de linha da Produção (tonelada) por Safra: 11-12, 8; 12-13, 6,6; 13-14, 11,25; 14-15, 11,25; 15-16, 10."
+   }
+  ]
+ },
+ "alt_figures": {},
+ "alt_only": {
+  "119": "Símbolo de um gerador não ideal: uma fonte com polos − e +, indicada como ε = 40 V, em série com um resistor r (a resistência interna).",
+  "169": "Quadro com cinco safras (11-12, 12-13, 13-14, 14-15 e 15-16). Área cultivada (hectare): 200, 220, 250, 250 e 200. Produtividade (sacas de 50 kg por hectare): 40, 30, 45, 45 e 50."
+ },
+ "text_fixes": {
+  "172": {
+   "alternatives": {
+    "A": "10^(0,5)",
+    "C": "10^(2,5) / 84",
+    "D": "10^(2,5) / 99"
+   }
+  },
+  "160": {
+   "alternatives": {
+    "A": "D = 2,5 + tg[30(T − (5 − 2π)/2)]",
+    "B": "D = 4 + tg[30(T + 5/2)]",
+    "C": "D = 4 + tg[2,5(T + (5 + 2π)/2)]",
+    "D": "D = 30 + tg[(1/2)(T − 5)]",
+    "E": "D = 30 + tg[(1/2)(T − 5/2)]"
+   }
+  }
+ },
+ "letters": [],
+ "false_positive_figures": {
+  "141": "p. 18: só texto e alternativas numéricas; não há imagem nem desenho na região da questão.",
+  "152": "p. 21: só texto; os traços detectados são as barras de fração das alternativas.",
+  "179": "p. 31: só texto; os traços detectados são as barras de fração das alternativas."
+ },
+ "formula_doubts": {
+  "106": "Conferido no PDF oficial (p. 5): na notação antiga da questão os números aparecem sobrescritos (AzO², NaAzO³, HAzO³, CaCl² etc.), exatamente como no texto da proposta.",
+  "117": "Conferido no PDF oficial (p. 9): índices corretos (TiO₂, Cl₂, TiCl₄, O₂); a seta de equilíbrio da equação foi restaurada.",
+  "124": "Conferido no PDF oficial (p. 11): índices e cargas corretos (Ag₂S, S²⁻, H⁺, H₂O, Al³⁺, e⁻); as semirreações foram separadas em linhas.",
+  "125": "Conferido no PDF oficial (p. 11): NH₄HCO₃, NH₃, CO₂, H₂O, mol⁻¹ e K⁻¹ iguais ao texto da proposta.",
+  "131": "Conferido no PDF oficial (p. 13): Nb₂O₅, Al₂O₃ e mol⁻¹ iguais ao texto da proposta.",
+  "132": "Conferido no PDF oficial (p. 13): a expressão é n = 10 log₁₀ (I / I₀); o bloco com glifos não mapeados foi substituído por ela.",
+  "172": "Conferido no PDF oficial (p. 29): P = 4 ⋅ log[−K ⋅ (t + 1) ⋅ (t − 19)], 10⁸ e 25 × 10⁻² corretos; as potências de expoente decimal ficaram escritas como 10^(0,5) e 10^(2,5) / 84 e 10^(2,5) / 99, porque não há vírgula sobrescrita e a forma anterior era ambígua.",
+  "137": "Conferido no PDF oficial (p. 16): as frações das alternativas são 30/90, 36/100, 40/100, 40/90 e 46/90, iguais ao texto da proposta.",
+  "152": "Conferido no PDF oficial (p. 21): as frações das alternativas são 1/2, 1/10, 1/16, 1/24 e 1/256, iguais ao texto da proposta.",
+  "179": "Conferido no PDF oficial (p. 31): as alternativas são cd/m², m²/cd, cd/m, m/cd e m/cd², iguais ao texto da proposta.",
+  "104": "Conferido no PDF oficial (p. 4): CO₂ nas duas ocorrências, igual ao texto da proposta; o grau duplicado (°°) foi corrigido.",
+  "115": "Conferido no PDF oficial (p. 8): C₉H₁₆O, C₉H₁₇O, C₁₀H₁₆O, C₁₀H₁₆O₂ e C₁₀H₁₈O₂, iguais ao texto da proposta.",
+  "118": "Conferido no PDF oficial (p. 9): 50 m², 10⁴ Pa, 1 250 kg/m³ e 10 m/s², iguais ao texto da proposta.",
+  "123": "Conferido no PDF oficial (p. 10): CO₂ e H₂S, iguais ao texto da proposta.",
+  "133": "Conferido no PDF oficial (p. 14): SiO₂, igual ao texto da proposta.",
+  "136": "Conferido no PDF oficial (p. 16): 1 m³, igual ao texto da proposta.",
+  "140": "Conferido no PDF oficial (p. 18): S₁ e S₂ em todas as ocorrências, iguais ao texto da proposta.",
+  "145": "Conferido no PDF oficial (p. 19): t₁, t₂, f₁ e f₂ iguais ao texto da proposta.",
+  "159": "Conferido no PDF oficial (p. 23): 20 000 cm³, igual ao texto da proposta.",
+  "173": "Conferido no PDF oficial (p. 30): m² nas alternativas, igual ao texto da proposta; π restaurado."
+ },
+ "date": "11/11/2026",
+ "tables": {
+  "129": {
+   "replace": [
+    "s2",
+    "s3",
+    "s4",
+    "s5",
+    "s6",
+    "s7"
+   ],
+   "rows": [
+    [
+     "Teste",
+     "Resultado"
+    ],
+    [
+     "Aedes aegypti (larvas)",
+     "Baixa eficiência"
+    ],
+    [
+     "Bacilo de Koch",
+     "Média eficiência"
+    ],
+    [
+     "Moluscos aquáticos (adultos)",
+     "Alta eficiência"
+    ],
+    [
+     "Pernilongo (larvas)",
+     "Média eficiência"
+    ],
+    [
+     "Vermes platelmintos",
+     "Ineficiente"
+    ]
+   ]
+  },
+  "142": {
+   "replace": [
+    "s2",
+    "s3",
+    "s4",
+    "s5",
+    "s6",
+    "s7",
+    "s8",
+    "s9",
+    "s10",
+    "s11",
+    "s12"
+   ],
+   "rows": [
+    [
+     "Cidades",
+     "Velocidade de referência (MB/s)"
+    ],
+    [
+     "C1",
+     "390"
+    ],
+    [
+     "C2",
+     "380"
+    ],
+    [
+     "C3",
+     "320"
+    ],
+    [
+     "C4",
+     "390"
+    ],
+    [
+     "C5",
+     "340"
+    ],
+    [
+     "C6",
+     "380"
+    ],
+    [
+     "C7",
+     "390"
+    ],
+    [
+     "C8",
+     "400"
+    ],
+    [
+     "C9",
+     "350"
+    ],
+    [
+     "C10",
+     "360"
+    ]
+   ]
+  },
+  "165": {
+   "replace": [
+    "s2",
+    "s3",
+    "s4",
+    "s5",
+    "s6",
+    "s7"
+   ],
+   "rows": [
+    [
+     "Grupos",
+     "Menor idade",
+     "Maior idade",
+     "Média",
+     "Mediana",
+     "Moda",
+     "Desvio padrão"
+    ],
+    [
+     "1",
+     "",
+     "",
+     "25",
+     "",
+     "",
+     "10"
+    ],
+    [
+     "2",
+     "",
+     "",
+     "",
+     "25",
+     "",
+     "9"
+    ],
+    [
+     "3",
+     "",
+     "",
+     "",
+     "",
+     "25",
+     ""
+    ],
+    [
+     "4",
+     "",
+     "",
+     "25",
+     "",
+     "",
+     "1"
+    ],
+    [
+     "5",
+     "20",
+     "35",
+     "",
+     "",
+     "",
+     ""
+    ]
+   ]
+  },
+  "168": {
+   "replace": [
+    "s4",
+    "s5",
+    "s6",
+    "s7"
+   ],
+   "rows": [
+    [
+     "Autoescola",
+     "Valor de cada aula teórica (R$)",
+     "Valor de cada aula prática (R$)",
+     "Aluguel do veículo (R$)"
+    ],
+    [
+     "I",
+     "10",
+     "80",
+     "400"
+    ],
+    [
+     "II",
+     "30",
+     "50",
+     "200"
+    ],
+    [
+     "III",
+     "20",
+     "40",
+     "400"
+    ]
+   ]
+  },
+  "94": {
+   "replace": [
+    "s2",
+    "s3",
+    "s4",
+    "s5",
+    "s6",
+    "s7",
+    "s8",
+    "s9"
+   ],
+   "rows": [
+    [
+     "Aparelho",
+     "Potência (watt)"
+    ],
+    [
+     "Luminária de LED",
+     "5"
+    ],
+    [
+     "Computador",
+     "250"
+    ],
+    [
+     "Impressora a laser",
+     "660"
+    ],
+    [
+     "Secador de cabelos",
+     "750"
+    ],
+    [
+     "Cafeteira",
+     "900"
+    ],
+    [
+     "Condicionador de ar portátil",
+     "1 100"
+    ]
+   ]
+  }
+ },
+ "block_fixes": {
+  "117": [
+   {
+    "replace": [
+     "s2"
+    ],
+    "with": [
+     {
+      "id": "s2",
+      "type": "formula",
+      "text": "TiO₂ (s) + 2 Cl₂ (g) ⇌ TiCl₄ (g) + O₂ (g)    ΔH = +175 kJ/mol"
+     }
+    ],
+    "note": "equação com a seta de equilíbrio (⇌) que a extração tinha perdido"
+   }
+  ],
+  "124": [
+   {
+    "replace": [
+     "s2",
+     "s3"
+    ],
+    "with": [
+     {
+      "id": "s2",
+      "type": "formula",
+      "text": "Ag₂S (s) + 2 e⁻ → 2 Ag (s) + S²⁻ (aq)    −0,69 V"
+     },
+     {
+      "id": "s2b",
+      "type": "formula",
+      "text": "O₂ (g) + 4 H⁺ (aq) + 4 e⁻ → 2 H₂O (l)    +1,23 V"
+     },
+     {
+      "id": "s3",
+      "type": "formula",
+      "text": "Al³⁺ (aq) + 3 e⁻ → Al (s)    −1,68 V"
+     }
+    ],
+    "note": "três semirreações separadas, uma por linha, como no PDF (a extração tinha juntado as duas primeiras)"
+   }
+  ],
+  "132": [
+   {
+    "replace": [
+     "s2",
+     "s3"
+    ],
+    "with": [
+     {
+      "id": "s2",
+      "type": "formula",
+      "text": "n = 10 log₁₀ (I / I₀)"
+     }
+    ],
+    "note": "expressão do nível sonoro reescrita a partir do PDF (a extração tinha produzido glifos não mapeados)"
+   }
+  ],
+  "101": [
+   {
+    "replace": [
+     "s1",
+     "s2"
+    ],
+    "with": [
+     {
+      "id": "s1",
+      "type": "heading",
+      "text": "Por que os olhos ficam vermelhos em algumas fotografias?"
+     }
+    ],
+    "note": "título reunido numa linha (a extração o tinha partido em dois parágrafos)"
+   }
+  ],
+  "113": [
+   {
+    "replace": [
+     "s2",
+     "s3",
+     "fig1b",
+     "fig2b"
+    ],
+    "with": [
+     {
+      "id": "fig1b",
+      "type": "image",
+      "asset_ref": "fig1"
+     },
+     {
+      "id": "s2",
+      "type": "paragraph",
+      "text": "Na Figura 2, a carga negativa representa o feixe de elétrons que é acelerado e, posteriormente, atinge um ponto da tela. O campo elétrico na região B apresenta a seguinte configuração:"
+     },
+     {
+      "id": "fig2b",
+      "type": "image",
+      "asset_ref": "fig2"
+     }
+    ],
+    "note": "Figura 1 depois do primeiro parágrafo e Figura 2 depois do segundo, como no PDF; a legenda solta \"Figura 2\" saiu (está no texto alternativo)"
+   }
+  ],
+  "130": [
+   {
+    "replace": [
+     "s2",
+     "s3",
+     "src"
+    ],
+    "with": [
+     {
+      "id": "s2",
+      "type": "paragraph",
+      "text": "Considere um equipamento de resistência elétrica R_C que funciona corretamente apenas em um dado valor de tensão. Porém, a única fonte de alimentação disponível fornece uma tensão 20% superior à tensão recomendada. Para adaptar essa fonte ao aparelho, a associação de um resistor de proteção R_P, de potência adequada, se faz necessária."
+     }
+    ],
+    "note": "parágrafo refeito a partir do PDF: os índices de R_C e R_P tinham partido o texto e um \"P\" solto virou fonte"
+   },
+   {
+    "field": "command_blocks",
+    "replace": [
+     "c1"
+    ],
+    "with": [
+     {
+      "id": "c1",
+      "type": "paragraph",
+      "text": "A configuração adequada do circuito e o valor do resistor de proteção, em relação ao valor da resistência do equipamento, são:"
+     }
+    ],
+    "note": "comando sem o final do parágrafo anterior"
+   }
+  ],
+  "151": [
+   {
+    "replace": [
+     "s2",
+     "s3",
+     "s4",
+     "s5",
+     "s6"
+    ],
+    "with": [
+     {
+      "id": "s2",
+      "type": "paragraph",
+      "text": "• o primeiro dígito indica o andar ao qual o visitante se dirige, que é um número de 1 a 4;\n• os dois próximos dígitos correspondem ao número do setor da empresa ao qual o visitante se destina. Esse número varia de 01 a 20;\n• os três dígitos seguintes correspondem ao número do funcionário da empresa com quem o visitante irá se reunir. Esse número varia de 001 a 135;\n• o último dígito indica se o visitante chegou à empresa pela manhã, dígito 0, ou à tarde, dígito 1."
+     }
+    ],
+    "note": "lista reunida, um item por linha (a extração a tinha partido no meio dos itens)"
+   }
+  ]
+ },
+ "replacements": {
+  "104": {
+   "pairs": [
+    [
+     "°°",
+     "°"
+    ]
+   ],
+   "note": "símbolo de grau duplicado (°°) corrigido para °, conforme o PDF"
+  },
+  "116": {
+   "pairs": [
+    [
+     "°°",
+     "°"
+    ]
+   ],
+   "note": "símbolo de grau duplicado (°°) corrigido para °, conforme o PDF"
+  },
+  "121": {
+   "pairs": [
+    [
+     "°°",
+     "°"
+    ]
+   ],
+   "note": "símbolo de grau duplicado (°°) corrigido para °, conforme o PDF"
+  },
+  "125": {
+   "pairs": [
+    [
+     "°°",
+     "°"
+    ]
+   ],
+   "note": "símbolo de grau duplicado (°°) corrigido para °, conforme o PDF"
+  },
+  "128": {
+   "pairs": [
+    [
+     "°°",
+     "°"
+    ]
+   ],
+   "note": "símbolo de grau duplicado (°°) corrigido para °, conforme o PDF"
+  },
+  "164": {
+   "pairs": [
+    [
+     "°°",
+     "°"
+    ]
+   ],
+   "note": "símbolo de grau duplicado (°°) corrigido para °, conforme o PDF"
+  },
+  "139": {
+   "pairs": [
+    [
+     "aproximação para p",
+     "aproximação para π"
+    ]
+   ],
+   "note": "π restaurado (a extração tinha trocado o símbolo pela letra p)"
+  },
+  "173": {
+   "pairs": [
+    [
+     "aproximação para p",
+     "aproximação para π"
+    ]
+   ],
+   "note": "π restaurado (a extração tinha trocado o símbolo pela letra p)"
+  },
+  "177": {
+   "pairs": [
+    [
+     "aproximado para p.",
+     "aproximado para π."
+    ]
+   ],
+   "note": "π restaurado (a extração tinha trocado o símbolo pela letra p), conferido na p. 31"
+  },
+  "145": {
+   "pairs": [
+    [
+     "apartir",
+     "a partir"
+    ]
+   ],
+   "note": "espaço restaurado em \"a partir\" (o PDF tem o caractere de espaço)"
+  }
+ }
+}

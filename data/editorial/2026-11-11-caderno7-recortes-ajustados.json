@@ -1,0 +1,262 @@
+[
+ {
+  "key": "145",
+  "page": 19,
+  "bbox_pt": [
+   326.01,
+   265.0,
+   563.03,
+   433.63
+  ],
+  "png": "145_p19_adj.png",
+  "sha256": "eb9d99eb1488460817a455aa3371c695bfc0a2d2f7cccaf4c2ba30dacc568fa5",
+  "kind": "imagem"
+ },
+ {
+  "key": "107",
+  "page": 6,
+  "bbox_pt": [
+   74.0,
+   376.34,
+   262.0,
+   448.22
+  ],
+  "png": "107_p6_adjA.png",
+  "sha256": "72c1d79b1509d1934ea8c4d11bd9ae48ce2f26728a09cfd6c02268a99da426c6",
+  "kind": "imagem"
+ },
+ {
+  "key": "107",
+  "page": 6,
+  "bbox_pt": [
+   74.0,
+   457.99,
+   262.0,
+   529.75
+  ],
+  "png": "107_p6_adjB.png",
+  "sha256": "c962dfd1bff2888b0452fef83a8614a9ef511bc0a7f04736740f57cb04e181e7",
+  "kind": "imagem"
+ },
+ {
+  "key": "107",
+  "page": 6,
+  "bbox_pt": [
+   74.0,
+   539.52,
+   262.0,
+   611.4
+  ],
+  "png": "107_p6_adjC.png",
+  "sha256": "de9b29dffe6999651b1fce0ec597928bad526cc07afc6f7d75a7626056713470",
+  "kind": "imagem"
+ },
+ {
+  "key": "107",
+  "page": 6,
+  "bbox_pt": [
+   74.0,
+   622.17,
+   262.0,
+   693.93
+  ],
+  "png": "107_p6_adjD.png",
+  "sha256": "2af12be6d012dc59c6d332936154c1c8d269c6787df8f753d373d0cac94b453a",
+  "kind": "imagem"
+ },
+ {
+  "key": "107",
+  "page": 6,
+  "bbox_pt": [
+   74.0,
+   704.7,
+   262.0,
+   776.58
+  ],
+  "png": "107_p6_adjE.png",
+  "sha256": "0653b244971a40f2d8ab3df186288918c86b8097722d4f2a9fef64e5ca95db81",
+  "kind": "imagem"
+ },
+ {
+  "key": "107",
+  "page": 6,
+  "bbox_pt": [
+   100.0,
+   157.0,
+   280.0,
+   350.0
+  ],
+  "png": "107_p6_adj.png",
+  "sha256": "63699c9c240beef6552ab331448e96b648c7395a629940a4f266f7bb2cf72e07",
+  "kind": "imagem"
+ },
+ {
+  "key": "108",
+  "page": 6,
+  "bbox_pt": [
+   338.0,
+   268.0,
+   584.0,
+   370.0
+  ],
+  "png": "108_p6_adjA.png",
+  "sha256": "4c84e5b4b8f433f49eb9939c2b394359c0e35885a6afc40ca65f285d22c24a62",
+  "kind": "imagem"
+ },
+ {
+  "key": "108",
+  "page": 6,
+  "bbox_pt": [
+   338.0,
+   371.0,
+   584.0,
+   471.0
+  ],
+  "png": "108_p6_adjB.png",
+  "sha256": "a4d54aaca010f20229d04c25168b40274dc6552e77c3c42cb0e7ab903e49ddb2",
+  "kind": "imagem"
+ },
+ {
+  "key": "108",
+  "page": 6,
+  "bbox_pt": [
+   338.0,
+   472.0,
+   584.0,
+   571.0
+  ],
+  "png": "108_p6_adjC.png",
+  "sha256": "35ae486669f07942debbe7c28c37152c225bdb993ac1b065a27c8762ee4f1bfc",
+  "kind": "imagem"
+ },
+ {
+  "key": "108",
+  "page": 6,
+  "bbox_pt": [
+   338.0,
+   572.0,
+   584.0,
+   672.0
+  ],
+  "png": "108_p6_adjD.png",
+  "sha256": "20fbd643cf79b9a26c0dd4bf5f6c83f7d4023a9943e1e223ae6624b5d72a1593",
+  "kind": "imagem"
+ },
+ {
+  "key": "108",
+  "page": 6,
+  "bbox_pt": [
+   338.0,
+   673.0,
+   584.0,
+   775.0
+  ],
+  "png": "108_p6_adjE.png",
+  "sha256": "85a1e4c2b0b4af55147a03f336fdb43d8cdb1174729dc6322b468c041e2e006b",
+  "kind": "imagem"
+ },
+ {
+  "key": "135",
+  "page": 15,
+  "bbox_pt": [
+   331.0,
+   139.0,
+   568.0,
+   267.5
+  ],
+  "png": "135_p15_adjA.png",
+  "sha256": "f3ca40bbb24cd773bba5d7dff45721799884b5b7da24b0757156bae18996b9ea",
+  "kind": "imagem"
+ },
+ {
+  "key": "135",
+  "page": 15,
+  "bbox_pt": [
+   331.0,
+   268.5,
+   568.0,
+   394.5
+  ],
+  "png": "135_p15_adjB.png",
+  "sha256": "e94445be55c70ce5f6890a40f5b57c261510b17691b7079fa158c9fa90fd2392",
+  "kind": "imagem"
+ },
+ {
+  "key": "135",
+  "page": 15,
+  "bbox_pt": [
+   331.0,
+   395.5,
+   568.0,
+   520.5
+  ],
+  "png": "135_p15_adjC.png",
+  "sha256": "ef100bd9af40d689ee4df6cc4f6573e5256ce0c7b06b907a7dc94e8decfee16b",
+  "kind": "imagem"
+ },
+ {
+  "key": "135",
+  "page": 15,
+  "bbox_pt": [
+   331.0,
+   521.5,
+   568.0,
+   647.5
+  ],
+  "png": "135_p15_adjD.png",
+  "sha256": "5a53cf3e6df947b43ee7a87abea933cba1b8545b87056d49f93a32b9f8e3dcc3",
+  "kind": "imagem"
+ },
+ {
+  "key": "135",
+  "page": 15,
+  "bbox_pt": [
+   331.0,
+   648.5,
+   568.0,
+   774.5
+  ],
+  "png": "135_p15_adjE.png",
+  "sha256": "d8ed7991b28064478c41c249fda9f263dbbf257ea95a6a517415a377508ad1ed",
+  "kind": "imagem"
+ },
+ {
+  "key": "149",
+  "page": 21,
+  "bbox_pt": [
+   88.0,
+   316.0,
+   278.0,
+   464.0
+  ],
+  "png": "149_p21_adj2.png",
+  "sha256": "370256ea68bd76cbd941436bb442af165483bd651497cc2d7b8757fcf3009d71",
+  "kind": "imagem"
+ },
+ {
+  "key": "149",
+  "page": 21,
+  "bbox_pt": [
+   92.0,
+   194.0,
+   276.0,
+   310.0
+  ],
+  "png": "149_p21_adj1.png",
+  "sha256": "f56f4c6f10add26882926a710058821a472964a258b9d317aa59591899dcdcc4",
+  "kind": "imagem"
+ },
+ {
+  "key": "94",
+  "page": 2,
+  "bbox_pt": [
+   501.0,
+   410.0,
+   581.0,
+   520.0
+  ],
+  "png": "94_p2_adj.png",
+  "sha256": "40ae5334d8aed939563dbad567d752cc46bb73e1841103033c8bec9251a3bf0d",
+  "kind": "imagem"
+ }
+]

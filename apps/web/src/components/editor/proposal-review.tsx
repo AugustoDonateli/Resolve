@@ -101,7 +101,7 @@ export function ProposalReview({ detail, viewing, saved }: { detail: ProposalDet
             <legend className="px-1 t-ui">Texto-base</legend>
             {draft.stimulus_blocks.length === 0 && <p className="t-meta text-ink-2">Sem texto-base.</p>}
             {draft.stimulus_blocks.map((b, i) =>
-              TEXT_TYPES.has(b.type) ? (
+              TEXT_TYPES.has(b.type) || (b.type === "table" && !b.asset_ref) ? (
                 <div key={b.id} className="flex flex-col gap-2">
                   <TextArea
                     label={`Bloco ${b.id} (${TYPE_LABEL[b.type]})`}
