@@ -22,6 +22,12 @@ Segunda leva (12/11), também publicada:
 - **Sumário** (`components/ui/sumario.tsx`) como forma padrão de listar tudo o que uma seção tem; página 404 na mesa.
 - No celular a barra de baixo é uma tira de papel (uma barra escura fazia o verificador de contraste ler como ilegível o texto que passava por baixo dela).
 
+Velocidade e cliques (12/11, publicado):
+- A área da folha cobria as divisórias e engolia o clique: corrigido, com teste de clique real em cada aba na auditoria.
+- Troca de aba lenta: as funções passam a rodar em São Paulo (`vercel.json` e `preferredRegion = "gru1"`), junto do banco; cada seção tem folha de espera (`loading.tsx`) que aparece no clique; a conferência de login é feita uma vez por requisição (`lib/supabase/server.ts`). Medido aqui: a aba responde em cerca de 50 ms. O ganho da região só vale em produção; se continuar lento, conferir no painel da Vercel se a região das funções ficou `gru1`.
+- Com a folha de espera, endereço inexistente dentro das seções responde 200 com a página "Esta folha não está no caderno" (a área editorial continua respondendo 404).
+- A folha de escrever só destrava quando o salvamento local está ligado (o que fosse digitado antes disso se perdia ao recarregar).
+
 Falta aprofundar (hoje usam só a base, já coerente): Rotina (agenda com marca-texto), Progresso (régua como protagonista), Mais, Grupos e duelo, área editorial, abertura do envelope do Dia D revista na nova paleta. Também: busca "Ir para…" com todos os destinos. Nenhuma imagem externa é necessária; texturas e traços são gerados em código.
 
 Defeito corrigido no caminho: com uma única revisão vencida (3 min), o plano do dia criava um bloco de 3 min, que o banco recusa (mínimo de 5), e nada era gravado. Agora a revisão ocupa no mínimo 5 min (teste em `planner.test.ts`).

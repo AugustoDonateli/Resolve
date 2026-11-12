@@ -91,6 +91,11 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Celular: o que recebe foco (ou é alvo de âncora) nunca fica sob a marca de cima nem sob as abas de baixo. */
+@media (max-width: 959px) {
+  html { scroll-padding-top: calc(3.25rem + env(safe-area-inset-top) + 12px); scroll-padding-bottom: calc(4rem + env(safe-area-inset-bottom) + 12px); }
+}
+
 /* Foco visível de 2 px com afastamento de 2 px. */
 :focus-visible {
   outline: 2px solid var(--rs-link-focus);
@@ -212,14 +217,14 @@ body {
   }
 
   /* ── Chegadas: cada seção põe a sua folha na mesa de um jeito ── */
-  .arrive { animation-duration: var(--arrive-ms, 560ms); animation-timing-function: var(--rs-ease-layout); animation-fill-mode: both; }
-  .arrive-inicio { animation-name: arrive-inicio; --arrive-ms: 420ms; }
-  .arrive-pagina { animation-name: arrive-pagina; --arrive-ms: 300ms; }
-  .arrive-caderno { animation-name: arrive-caderno; --arrive-ms: 640ms; transform-origin: left center; }
-  .arrive-ficha { animation-name: arrive-ficha; --arrive-ms: 560ms; }
-  .arrive-folha { animation-name: arrive-folha; --arrive-ms: 560ms; }
-  .arrive-agenda { animation-name: arrive-agenda; --arrive-ms: 600ms; transform-origin: top center; }
-  .arrive-regua { animation-name: arrive-regua; --arrive-ms: 620ms; }
+  .arrive { animation-duration: var(--arrive-ms, 420ms); animation-timing-function: var(--rs-ease-layout); animation-fill-mode: both; }
+  .arrive-inicio { animation-name: arrive-inicio; --arrive-ms: 320ms; }
+  .arrive-pagina { animation-name: arrive-pagina; --arrive-ms: 240ms; }
+  .arrive-caderno { animation-name: arrive-caderno; --arrive-ms: 460ms; transform-origin: left center; }
+  .arrive-ficha { animation-name: arrive-ficha; --arrive-ms: 420ms; }
+  .arrive-folha { animation-name: arrive-folha; --arrive-ms: 400ms; }
+  .arrive-agenda { animation-name: arrive-agenda; --arrive-ms: 440ms; transform-origin: top center; }
+  .arrive-regua { animation-name: arrive-regua; --arrive-ms: 440ms; }
   :root[data-motion="reduced"] .arrive { animation-name: fade-in; --arrive-ms: 100ms; }
   @media (prefers-reduced-motion: reduce) { .arrive { animation-name: fade-in; --arrive-ms: 100ms; } }
 
@@ -232,8 +237,8 @@ body {
     box-shadow: var(--rs-shadow-sheet);
     transform: rotate(var(--r, 0deg));
     transition: transform var(--rs-dur-layout) var(--rs-ease-layout), box-shadow var(--rs-dur-layout);
-    animation: desk-land 640ms var(--rs-ease-layout) backwards;
-    animation-delay: calc(var(--i, 0) * 110ms + 160ms);
+    animation: desk-land 460ms var(--rs-ease-layout) backwards;
+    animation-delay: calc(var(--i, 0) * 60ms);
   }
   .desk-object:hover, .desk-object:focus-within, .desk-object:focus-visible { transform: rotate(0deg) translateY(-2px); }
   :root[data-motion="reduced"] .desk-object { animation: fade-in 100ms backwards; }
@@ -333,7 +338,7 @@ body {
     background-attachment: local, local;
     background-position: 0 0, 0 -4px;
   }
-  .folha-escrita:read-only { background-color: var(--rs-surface-subtle); }
+  .folha-escrita[data-locked="true"] { background-color: var(--rs-surface-subtle); }
   @media (max-width: 639px) { .folha-escrita { padding-left: 40px; background-image:
       linear-gradient(90deg, transparent 28px, color-mix(in srgb, var(--rs-correction) 55%, transparent) 28px, color-mix(in srgb, var(--rs-correction) 55%, transparent) 29px, transparent 29px),
       repeating-linear-gradient(180deg, transparent 0, transparent calc(var(--pauta) - 1px), color-mix(in srgb, var(--rs-primary) 24%, transparent) calc(var(--pauta) - 1px), color-mix(in srgb, var(--rs-primary) 24%, transparent) var(--pauta)); } }
@@ -516,8 +521,9 @@ body {
 }
 /* Objetos da mesa pousam um a um. */
 @keyframes desk-land {
-  0% { opacity: 0; transform: translateY(-26px) rotate(calc(var(--r, 0deg) + 4deg)) scale(1.04); }
-  100% { opacity: 1; transform: rotate(var(--r, 0deg)); }
+  /* Só movimento: o papel nunca fica translúcido (o texto continua legível durante a chegada). */
+  0% { transform: translateY(-22px) rotate(calc(var(--r, 0deg) + 3.5deg)) scale(1.035); }
+  100% { transform: rotate(var(--r, 0deg)); }
 }
 
 /* Campo de ficha: o foco é a própria linha engrossando, sem o anel padrão. */

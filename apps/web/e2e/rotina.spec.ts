@@ -369,13 +369,13 @@ test("plano de hoje: blocos nos horários livres, sem encostar no compromisso, e
       timeout: 15_000,
     });
     const plan = page.getByRole("region", { name: "Plano de hoje" });
-    await expect(plan.getByText(/Treino livre/).first()).toBeVisible();
-    await expect(
-      plan.getByText(/Completa a meta de 60 min por dia/).first(),
-    ).toBeVisible();
+    // com respostas na conta, o plano adaptativo escolhe uma área ("Treino de …"); sem elas, "Treino livre"
+    await expect(plan.getByText(/Treino (livre|de )/).first()).toBeVisible();
     const { data: blocks } = await db
       .from("study_blocks")
-      .select("start_minute, planned_minutes");
+      .select("start_minute, planned_minutes, reason");
+    // o motivo fica gravado no bloco (na tela aparece só no bloco em destaque, que pode ser a revisão)
+    expect((blocks ?? []).some((b) => /Completa a meta de 60 min por dia/.test(b.reason ?? ""))).toBe(true);
     expect((blocks ?? []).reduce((a, b) => a + b.planned_minutes, 0)).toBe(60);
     for (const b of blocks ?? []) {
       expect(b.start_minute).toBeGreaterThanOrEqual(now);
@@ -389,12 +389,13 @@ test("plano de hoje: blocos nos horários livres, sem encostar no compromisso, e
     // Remarcação (F4-T16) por formulário: o horário do compromisso não é oferecido; outro horário grava.
     const { data: before } = await db
       .from("study_blocks")
-      .select("id, start_minute, planned_minutes")
+      .select("id, title, start_minute, planned_minutes")
       .order("start_minute");
-    const first = before![0]!;
+    // o bloco aberto abaixo é o primeiro de treino (com revisão vencida, o primeiro do dia é a revisão)
+    const first = before!.find((b) => /^Treino/.test(b.title))!;
     await page
       .locator("[data-block]")
-      .filter({ hasText: "Treino livre" })
+      .filter({ hasText: /Treino (livre|de )/ })
       .first()
       .click();
     const dialog = page.getByRole("dialog", { name: /Remarcar/ });

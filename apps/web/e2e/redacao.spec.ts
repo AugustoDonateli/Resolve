@@ -85,6 +85,7 @@ test("redação: salva sozinho, recupera ao recarregar e ao voltar a conexão; c
     );
 
     // recarregar antes do salvamento automático: a cópia do aparelho volta e é salva
+    await expect(a.page.getByLabel("Texto da redação")).toBeEditable(); // a folha destrava quando o salvamento local está ligado
     await a.page.getByLabel("Texto da redação").press("Control+End");
     await a.page
       .getByLabel("Texto da redação")

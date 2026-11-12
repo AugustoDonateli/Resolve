@@ -1,7 +1,7 @@
 "use client";
 
 import { clsx } from "clsx";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Button } from "@/components/ui/button";
 import {
   recover,
@@ -58,6 +58,8 @@ function writeLocal(versionId: string, copy: LocalCopy | null) {
  * a cada mudança e recupera ao recarregar. Se outra aba/aparelho salvou antes, mostra as duas versões e
  * o aluno escolhe — nada é sobrescrito em silêncio. Nada se move durante a escrita.
  */
+const subscribeNever = () => () => {};
+
 /**
  * As 30 linhas da folha, uma marca por linha: as usadas ficam em tinta; o que passa do limite fica
  * em caneta vermelha. É a mesma contagem da "folha simulada" (perfil fixo), vista de relance.
@@ -206,6 +208,7 @@ export function EssayEditor({ draft }: { draft: DraftView }) {
     setStatus("salvo");
   };
 
+  const hydrated = useSyncExternalStore(subscribeNever, () => true, () => false);
   const paragraphs = toParagraphs(text).length;
   const piece = pieceOf(draft.trainingPiece);
   return (
@@ -232,7 +235,10 @@ export function EssayEditor({ draft }: { draft: DraftView }) {
           <textarea
             value={text}
             onChange={(e) => onChange(e.target.value)}
-            readOnly={readOnly}
+            // Antes de a página "acordar" no navegador, o que fosse digitado se perderia: a folha só
+            // aceita texto quando o salvamento local já está ligado.
+            readOnly={readOnly || !hydrated}
+            data-locked={readOnly || undefined}
             rows={18}
             spellCheck
             lang="pt-BR"

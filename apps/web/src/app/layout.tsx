@@ -4,6 +4,9 @@ import { PrefsProvider, prefsBootScript } from "@/components/prefs/prefs";
 import { loadPreferences, savePreferences } from "@/lib/prefs/actions";
 import "./globals.css";
 
+/** O banco fica em São Paulo: as funções rodam lá também, para cada consulta não cruzar o continente. */
+export const preferredRegion = "gru1";
+
 export const metadata: Metadata = {
   title: { default: "Resolve", template: "%s · Resolve" },
   description: "Preparação para o ENEM",

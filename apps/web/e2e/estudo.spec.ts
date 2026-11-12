@@ -121,7 +121,10 @@ test("estudar: sessão de outra conta ou inexistente não abre", async ({
   const res = await page.goto(
     "/estudar/sessao/00000000-0000-4000-8000-000000000000",
   );
-  expect(res?.status()).toBe(404);
+  // Com a folha de espera, a resposta começa antes de se saber que a página não existe: o código
+  // pode ser 200; o que vale é a página de "não encontrada" no lugar do conteúdo.
+  expect([200, 404]).toContain(res?.status());
+  await expect(page.getByRole("heading", { name: "Esta folha não está no caderno" })).toBeVisible();
 });
 
 test("revisar: fila do dia sem seleção manual e escolha de tempo", async ({
@@ -230,7 +233,10 @@ test("triagem: três decisões, página oculta não conta tempo, janela encerra 
 test("conferência da triagem: sessão alheia ou inexistente não abre", async ({ page }) => {
   await signIn(page);
   const res = await page.goto("/estudar/triagem/00000000-0000-4000-8000-000000000000/conferencia");
-  expect(res?.status()).toBe(404);
+  // Com a folha de espera, a resposta começa antes de se saber que a página não existe: o código
+  // pode ser 200; o que vale é a página de "não encontrada" no lugar do conteúdo.
+  expect([200, 404]).toContain(res?.status());
+  await expect(page.getByRole("heading", { name: "Esta folha não está no caderno" })).toBeVisible();
 });
 
 test("ritmo: marcar, navegar e voltar preserva resposta; gabarito só no fim", async ({ page }) => {
