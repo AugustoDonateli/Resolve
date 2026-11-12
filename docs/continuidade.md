@@ -15,7 +15,14 @@ Feito e publicado (auditoria `audit:ui` 81 aprovados, 2 pulados por horário):
 - **Estudar**: abertura do caderno, com treino livre e sumário de todos os modos.
 - **Entrada**: caderno fechado com as "instruções" e ficha de identificação.
 
-Falta aprofundar (hoje usam só a base): Revisar (maço de fichas), Redação (folha de 30 linhas como protagonista), Rotina (agenda com marca-texto), Progresso (régua), Dia D (cartão-resposta e envelope), Mais, Grupos, área editorial. Também: busca "Ir para…" com todos os destinos.
+Segunda leva (12/11), também publicada:
+- **Revisar**: maço de fichas que engrossa com a fila e é dado ficha a ficha; linha do tempo dos intervalos (1, 3, 7, 14, 30 dias).
+- **Redação**: abertura com a folha de 30 linhas e sumário; a tela de escrita é a folha pautada, com as 30 linhas enchendo ao lado (mesma contagem da folha simulada).
+- **Dia D**: cartão-resposta de verdade (três colunas, cinco bolinhas por questão, setas ← → na linha); depois da entrega, gabarito circulado em vermelho e xis no erro. Conferido com uma prova real da conta de teste (marcar, recarregar, entregar).
+- **Sumário** (`components/ui/sumario.tsx`) como forma padrão de listar tudo o que uma seção tem; página 404 na mesa.
+- No celular a barra de baixo é uma tira de papel (uma barra escura fazia o verificador de contraste ler como ilegível o texto que passava por baixo dela).
+
+Falta aprofundar (hoje usam só a base, já coerente): Rotina (agenda com marca-texto), Progresso (régua como protagonista), Mais, Grupos e duelo, área editorial, abertura do envelope do Dia D revista na nova paleta. Também: busca "Ir para…" com todos os destinos. Nenhuma imagem externa é necessária; texturas e traços são gerados em código.
 
 Defeito corrigido no caminho: com uma única revisão vencida (3 min), o plano do dia criava um bloco de 3 min, que o banco recusa (mínimo de 5), e nada era gravado. Agora a revisão ocupa no mínimo 5 min (teste em `planner.test.ts`).
 

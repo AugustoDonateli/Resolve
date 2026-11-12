@@ -136,9 +136,12 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
       </div>
 
-      {/* Celular: cinco divisórias na borda de baixo */}
-      <nav aria-label="Principal" className="fixed inset-x-0 bottom-0 z-30 bg-desk pb-[env(safe-area-inset-bottom)] md:hidden">
-        <ul className="mx-auto grid max-w-md grid-cols-5 gap-1 px-1.5 pt-1.5">
+      {/* Celular: cinco abas numa tira de papel na borda de baixo */}
+      <nav
+        aria-label="Principal"
+        className="fixed inset-x-0 bottom-0 z-30 border-t border-line-subtle bg-background pb-[env(safe-area-inset-bottom)] shadow-[0_-10px_26px_rgb(0_0_0/0.28)] md:hidden"
+      >
+        <ul className="mx-auto grid max-w-md grid-cols-5">
           {NAV.filter((n) => n.mobile).map((item) => {
             const active = isActive(pathname, item.href);
             const Icon = item.icon;
@@ -148,10 +151,11 @@ export function AppShell({ children }: { children: ReactNode }) {
                   href={item.href}
                   aria-current={active ? "page" : undefined}
                   className={clsx(
-                    "flex h-[3.4rem] flex-col items-center justify-center gap-0.5 rounded-t-[7px] text-[12px] font-medium leading-4 transition-[background-color,color,transform] duration-[var(--rs-dur-state)]",
-                    active ? "bg-background text-ink" : "translate-y-1 text-on-desk-2",
+                    "relative flex h-16 flex-col items-center justify-center gap-1 text-[12px] font-medium leading-4 transition-colors duration-[var(--rs-dur-state)]",
+                    active ? "text-ink" : "text-ink-2",
                   )}
                 >
+                  {active && <span aria-hidden="true" className="absolute top-0 h-[3px] w-10 rounded-b-full bg-primary" />}
                   <Icon aria-hidden="true" className="size-5" strokeWidth={active ? 2.25 : 2} />
                   {item.label}
                 </Link>

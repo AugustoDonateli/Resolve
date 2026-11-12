@@ -5,6 +5,7 @@ import { StartRhythm } from "@/components/question/start-rhythm";
 import { StartTraining } from "@/components/question/start-training";
 import { ScreenHeader } from "@/components/shell/app-shell";
 import { EmptyState } from "@/components/ui/empty-state";
+import { Sumario } from "@/components/ui/sumario";
 import { publishedByArea } from "@/lib/study/session";
 
 export const metadata: Metadata = { title: "Estudar" };
@@ -42,30 +43,7 @@ export default async function EstudarPage({ searchParams }: { searchParams: Prom
               <p className="max-w-[46ch] t-reading text-ink-2">Abra o caderno numa área e resolva. Cada resposta é corrigida na hora, à caneta.</p>
               <StartTraining counts={counts!} initialArea={initialArea} />
             </section>
-            <nav aria-labelledby="sumario-t">
-              <h2 id="sumario-t" className="mb-2 t-kicker">
-                Sumário
-              </h2>
-              <ol className="flex flex-col border-t-[1.5px] border-ink">
-                {SUMARIO.map((m, i) => (
-                  <li key={m.href}>
-                    <Link href={m.href} className="group grid grid-cols-[2rem_minmax(0,1fr)] gap-x-2 border-b border-line-subtle py-3">
-                      <span aria-hidden className="pt-0.5 font-mono text-[12px] tabular text-ink-2">{String(i + 1).padStart(2, "0")}</span>
-                      <span className="min-w-0">
-                        <span className="flex items-baseline gap-2">
-                          <span className="t-ui text-ink [background:linear-gradient(currentColor,currentColor)_no-repeat_left_100%/0%_1.5px] transition-[background-size] duration-[var(--rs-dur-layout)] ease-layout group-hover:[background-size:100%_1.5px] group-focus-visible:[background-size:100%_1.5px]">
-                            {m.title}
-                          </span>
-                          <span aria-hidden className="mb-1 min-w-6 flex-1 border-b border-dotted border-line" />
-                          <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-ink-2">{m.tag}</span>
-                        </span>
-                        <span className="mt-0.5 block t-meta text-ink-2">{m.body}</span>
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ol>
-            </nav>
+            <Sumario id="sumario-t" items={SUMARIO} />
           </div>
 
           <div className="grid gap-x-12 gap-y-10 border-t-[1.5px] border-ink pt-8 lg:grid-cols-2">

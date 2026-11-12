@@ -1,5 +1,6 @@
 "use client";
 
+import { clsx } from "clsx";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,6 +14,7 @@ import type { DraftView } from "@/lib/essay/drafts";
 import { pieceOf } from "@/lib/essay/pieces";
 import { SubmitForCorrection } from "./submit-for-correction";
 import { PieceTimer } from "./piece-timer";
+import { SHEET_PROFILE, wrapLines } from "@/lib/essay/sheet";
 import { SheetPreview } from "./sheet-preview";
 
 type Status =
@@ -56,6 +58,38 @@ function writeLocal(versionId: string, copy: LocalCopy | null) {
  * a cada mudança e recupera ao recarregar. Se outra aba/aparelho salvou antes, mostra as duas versões e
  * o aluno escolhe — nada é sobrescrito em silêncio. Nada se move durante a escrita.
  */
+/**
+ * As 30 linhas da folha, uma marca por linha: as usadas ficam em tinta; o que passa do limite fica
+ * em caneta vermelha. É a mesma contagem da "folha simulada" (perfil fixo), vista de relance.
+ */
+function LineMeter({ lines }: { lines: number }) {
+  const limit = SHEET_PROFILE.lineLimit;
+  const over = Math.max(0, lines - limit);
+  return (
+    <div className="flex flex-col gap-2" aria-hidden="true">
+      <p className="t-kicker">Linhas da folha</p>
+      <ol className="flex flex-col gap-[3px]">
+        {Array.from({ length: limit }, (_, i) => (
+          <li key={i} className="flex items-center gap-2">
+            <span className="w-5 text-right font-mono text-[9px] leading-none text-ink-2">{(i + 1) % 5 === 0 || i === 0 ? i + 1 : ""}</span>
+            <span className={clsx("h-[3px] flex-1 rounded-full transition-colors duration-[var(--rs-dur-state)]", i < lines ? "bg-ink" : "bg-line-subtle")} />
+          </li>
+        ))}
+        {over > 0 && (
+          <li className="flex items-center gap-2">
+            <span className="w-5 text-right font-mono text-[9px] leading-none text-pen">+{over}</span>
+            <span className="h-[3px] flex-1 rounded-full bg-pen" />
+          </li>
+        )}
+      </ol>
+      <p className="font-display text-[28px] leading-none tabular">
+        {Math.min(lines, 99)}
+        <span className="text-ink-2">/{limit}</span>
+      </p>
+    </div>
+  );
+}
+
 export function EssayEditor({ draft }: { draft: DraftView }) {
   const readOnly = draft.status !== "rascunho";
   const [text, setText] = useState(draft.text);
@@ -192,30 +226,33 @@ export function EssayEditor({ draft }: { draft: DraftView }) {
           )}
         </section>
       )}
-      <label className="flex flex-col gap-1.5 t-ui">
-        Texto da redação
-        <textarea
-          value={text}
-          onChange={(e) => onChange(e.target.value)}
-          readOnly={readOnly}
-          rows={18}
-          spellCheck
-          lang="pt-BR"
-          aria-describedby="estado-rascunho contagem"
-          className="min-h-[50dvh] w-full rounded-control border border-line bg-surface px-4 py-3 t-reading text-ink read-only:bg-surface-subtle"
-        />
-      </label>
-      <p id="contagem" className="t-meta text-ink-2">
-        {wordCount(text)} palavras · {paragraphs}{" "}
-        {paragraphs === 1 ? "parágrafo" : "parágrafos"} · deixe uma linha em
-        branco entre parágrafos
-      </p>
+      <div className="grid gap-x-10 gap-y-4 lg:grid-cols-[minmax(0,1fr)_210px] lg:items-start">
+        <label className="flex min-w-0 flex-col gap-1.5 t-ui">
+          Texto da redação
+          <textarea
+            value={text}
+            onChange={(e) => onChange(e.target.value)}
+            readOnly={readOnly}
+            rows={18}
+            spellCheck
+            lang="pt-BR"
+            aria-describedby="estado-rascunho contagem"
+            className="folha-escrita min-h-[58dvh] w-full text-ink"
+          />
+        </label>
+        {/* Ao lado da folha: as 30 linhas enchendo, a contagem e o estado do rascunho */}
+        <aside className="flex flex-col gap-4 lg:sticky lg:top-6 lg:pt-8" aria-label="Folha e rascunho">
+          {!piece && <LineMeter lines={wrapLines(text).length} />}
+          <p id="contagem" className="t-meta text-ink-2">
+            {wordCount(text)} palavras · {paragraphs} {paragraphs === 1 ? "parágrafo" : "parágrafos"}
+            <span className="block">Deixe uma linha em branco entre parágrafos.</span>
+          </p>
+          <p id="estado-rascunho" role="status" className="t-meta">
+            {readOnly ? "Versão enviada: não muda mais. A reescrita cria uma nova versão." : STATUS_TEXT[status]}
+          </p>
+        </aside>
+      </div>
       {!piece && <SheetPreview text={text} />}
-      <p id="estado-rascunho" role="status" className="t-meta">
-        {readOnly
-          ? "Versão enviada: não muda mais. A reescrita cria uma nova versão."
-          : STATUS_TEXT[status]}
-      </p>
       {!piece && (
         <SubmitForCorrection
           essayId={draft.essayId}

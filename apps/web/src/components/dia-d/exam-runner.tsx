@@ -5,8 +5,9 @@ import { useEffect, useEffectEvent, useRef, useState } from "react";
 import { PromptReader } from "@/components/essay/prompt-reader";
 import { QuestionView } from "@/components/question/question-view";
 import { Button } from "@/components/ui/button";
+import { AnswerCard } from "./answer-card";
 import { saveDiaD } from "@/lib/dia-d/actions";
-import { LETTERS, clockLabel, type ExamAction, type ExamRun, type Letter } from "@/lib/dia-d/types";
+import { clockLabel, type ExamAction, type ExamRun, type Letter } from "@/lib/dia-d/types";
 import { ExamReplay } from "./exam-replay";
 
 type View = "questao" | "cartao" | "redacao" | "replay";
@@ -181,7 +182,7 @@ export function ExamRunner({ run }: { run: ExamRun }) {
         </section>
       )}
       {view === "cartao" && (
-        <section className="max-w-3xl">
+        <section>
           <h2 ref={heading} tabIndex={-1} className="t-section">Cartão-resposta</h2>
           <p className="my-3 t-meta text-ink-2">
             {ended ? `${blank} questões válidas em branco. A nota TRI está indisponível.` : `${differences} marcações do caderno ainda divergem do cartão.`}
@@ -200,32 +201,13 @@ export function ExamRunner({ run }: { run: ExamRun }) {
               ) : <Button disabled={locked} onClick={() => setConfirm(true)}>Entregar simulado</Button>}
             </div>
           )}
-          <table className="w-full text-left t-meta">
-            <thead className="border-b border-line">
-              <tr><th scope="col">Questão</th><th scope="col">Caderno</th><th scope="col">Cartão</th><th scope="col">{ended ? "Gabarito" : "Conferência"}</th></tr>
-            </thead>
-            <tbody className="divide-y divide-line-subtle">
-              {items.map((entry) => (
-                <tr key={entry.position}>
-                  <td><button className="min-h-11 underline" disabled={!ended && locked} onClick={() => open(entry.position)} aria-label={`Abrir questão ${entry.position}`}>{entry.position}</button></td>
-                  <td>{entry.work ?? "—"}</td>
-                  <td>
-                    {ended ? entry.card ?? "—" : (
-                      <select
-                        className="min-h-11 rounded-control border border-line bg-surface px-2"
-                        aria-label={`Cartão, questão ${entry.position}`} disabled={locked} value={entry.card ?? ""}
-                        onChange={(e) => record({ kind: "transcreveu", position: entry.position, letter: (e.target.value || null) as Letter | null })}
-                      >
-                        <option value="">—</option>
-                        {LETTERS.map((letter) => <option key={letter}>{letter}</option>)}
-                      </select>
-                    )}
-                  </td>
-                  <td>{entry.annulled ? "Anulada" : ended ? entry.correct : entry.work && entry.work !== entry.card ? "Diverge" : "—"}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <AnswerCard
+            items={items.map((e) => ({ position: e.position, work: (e.work ?? null) as Letter | null, card: (e.card ?? null) as Letter | null, annulled: Boolean(e.annulled), correct: (e.correct ?? null) as Letter | null }))}
+            ended={ended}
+            locked={locked}
+            onMark={(position, letter) => record({ kind: "transcreveu", position, letter })}
+            onOpen={open}
+          />
         </section>
       )}
       {view === "redacao" && (

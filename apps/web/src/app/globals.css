@@ -281,6 +281,77 @@ body {
   .desk-regua-marca { position: absolute; top: -5px; bottom: -5px; left: 58%; width: 2px; background: var(--rs-correction); transition: left var(--rs-dur-stage) var(--rs-ease-stage); }
   .desk-regua:hover .desk-regua-marca, .desk-regua:focus-visible .desk-regua-marca { left: 76%; }
 
+  /* ── Maço de fichas (Revisar): as fichas são dadas uma a uma e abrem em leque ao encostar ── */
+  .deck { position: relative; width: min(100%, 440px); aspect-ratio: 5 / 3.15; margin: calc(var(--n, 0) * 3px + 6px) calc(var(--n, 0) * 3px + 6px) 0 0; }
+  .deck > i, .deck-top {
+    position: absolute; inset: 0; background: var(--rs-surface); border: 1px solid var(--rs-border-subtle);
+    box-shadow: 0 1px 2px rgb(21 23 26 / 0.1), 0 6px 14px rgb(21 23 26 / 0.08);
+  }
+  .deck > i {
+    transform: translate(calc(var(--k) * 3px), calc(var(--k) * -3px)) rotate(calc(var(--k) * 0.45deg));
+    transition: transform var(--rs-dur-evidence) var(--rs-ease-evidence);
+    animation: deck-deal 420ms var(--rs-ease-layout) backwards;
+    animation-delay: calc((var(--n) - var(--k)) * 70ms + 120ms);
+  }
+  .deck:hover > i { transform: translate(calc(var(--k) * 10px), calc(var(--k) * -5px)) rotate(calc(var(--k) * 1.9deg)); }
+  .deck-top {
+    display: flex; flex-direction: column; gap: 6px; padding: 18px 22px 20px;
+    animation: deck-deal 420ms var(--rs-ease-layout) backwards; animation-delay: calc(var(--n, 0) * 70ms + 190ms);
+    background-image: linear-gradient(transparent 0, transparent 52px, color-mix(in srgb, var(--rs-correction) 55%, transparent) 52px, color-mix(in srgb, var(--rs-correction) 55%, transparent) 53px, transparent 53px);
+  }
+  :root[data-motion="reduced"] .deck > i, :root[data-motion="reduced"] .deck-top { animation: fade-in 100ms backwards; }
+  @media (prefers-reduced-motion: reduce) { .deck > i, .deck-top { animation: fade-in 100ms backwards; } }
+
+  /* ── Folha de redação (abertura da seção): pauta numerada, margem vermelha, ação escrita nela ── */
+  .folha-redacao {
+    position: relative; background: var(--rs-surface); border: 1px solid var(--rs-border-subtle);
+    box-shadow: var(--rs-shadow); padding: 18px 22px 0 22px; overflow: hidden; max-width: 520px;
+  }
+  .folha-linhas { --pauta: 34px; list-style: none; margin: 0; padding: 0; }
+  .folha-linhas li {
+    height: var(--pauta); padding-left: 2px; font-family: var(--font-mono); font-size: 11px; line-height: calc(var(--pauta) + 8px);
+    color: var(--rs-text-secondary); border-bottom: 1px solid color-mix(in srgb, var(--rs-primary) 26%, transparent);
+    background: linear-gradient(90deg, transparent 30px, color-mix(in srgb, var(--rs-correction) 55%, transparent) 30px, color-mix(in srgb, var(--rs-correction) 55%, transparent) 31px, transparent 31px);
+  }
+  .folha-linhas li:nth-child(n+7) { opacity: 0.55; }
+  .folha-linhas li:nth-child(n+8) { opacity: 0.3; }
+  .folha-linhas li:nth-child(n+9) { opacity: 0.12; border-bottom-color: transparent; }
+  .folha-acao {
+    position: absolute; left: 62px; right: 22px; top: 86px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px;
+  }
+
+  /* Folha em que se escreve: pauta que rola com o texto, margem vermelha à esquerda. */
+  .folha-escrita {
+    --pauta: var(--rs-reading-line);
+    font-family: var(--font-reading); font-size: var(--rs-reading-size); line-height: var(--pauta);
+    border: 1px solid var(--rs-border-subtle); border-radius: 2px; box-shadow: var(--rs-shadow);
+    padding: calc(var(--pauta) - 1px) 22px var(--pauta) 58px; resize: vertical;
+    background-color: var(--rs-surface);
+    background-image:
+      linear-gradient(90deg, transparent 42px, color-mix(in srgb, var(--rs-correction) 55%, transparent) 42px, color-mix(in srgb, var(--rs-correction) 55%, transparent) 43px, transparent 43px),
+      repeating-linear-gradient(180deg, transparent 0, transparent calc(var(--pauta) - 1px), color-mix(in srgb, var(--rs-primary) 24%, transparent) calc(var(--pauta) - 1px), color-mix(in srgb, var(--rs-primary) 24%, transparent) var(--pauta));
+    background-attachment: local, local;
+    background-position: 0 0, 0 -4px;
+  }
+  .folha-escrita:read-only { background-color: var(--rs-surface-subtle); }
+  @media (max-width: 639px) { .folha-escrita { padding-left: 40px; background-image:
+      linear-gradient(90deg, transparent 28px, color-mix(in srgb, var(--rs-correction) 55%, transparent) 28px, color-mix(in srgb, var(--rs-correction) 55%, transparent) 29px, transparent 29px),
+      repeating-linear-gradient(180deg, transparent 0, transparent calc(var(--pauta) - 1px), color-mix(in srgb, var(--rs-primary) 24%, transparent) calc(var(--pauta) - 1px), color-mix(in srgb, var(--rs-primary) 24%, transparent) var(--pauta)); } }
+
+  /* ── Cartão-resposta (Dia D): colunas de questões, cinco bolinhas por linha ── */
+  .cartao-resposta { list-style: none; margin: 0; padding: 0; columns: 300px 3; column-gap: 40px; column-rule: 1px solid var(--rs-border-subtle); }
+  .cartao-linha { display: flex; align-items: center; gap: 8px; min-height: 46px; break-inside: avoid; border-bottom: 1px solid var(--rs-border-subtle); }
+  .cartao-bolha {
+    position: relative; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
+    font-size: 13px; font-weight: 600; color: var(--rs-text);
+  }
+  .cartao-bolha:disabled { cursor: default; }
+  .cartao-bolha:not(:disabled):hover { background: var(--rs-surface-subtle); }
+  .cartao-rabisco { stroke-dasharray: 1; animation: pen-draw 420ms var(--rs-ease-evidence) both; }
+  .cartao-traco { stroke-dasharray: 1; animation: pen-draw 520ms var(--rs-ease-evidence) both; }
+  :root[data-motion="reduced"] .cartao-rabisco, :root[data-motion="reduced"] .cartao-traco { animation: none; }
+  @media (prefers-reduced-motion: reduce) { .cartao-rabisco, .cartao-traco { animation: none; } }
+
   /* ── Tinta ── */
   /* Carimbo: borda dupla, tinta irregular; bate uma vez. */
   .stamp {
@@ -427,6 +498,13 @@ body {
   0% { opacity: 0; transform: rotate(-19deg) scale(2.3); }
   60% { opacity: 1; transform: rotate(-6deg) scale(0.94); }
   100% { opacity: 0.92; transform: rotate(-7deg) scale(1); }
+}
+@keyframes pen-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes deck-deal {
+  from { opacity: 0; transform: translate(70px, -46px) rotate(9deg); }
 }
 @keyframes hand-write {
   from { clip-path: inset(-20% 100% -20% 0); }
