@@ -145,3 +145,21 @@ for (const view of VIEWS) {
     expect(navs.every(Boolean)).toBe(true);
   });
 }
+
+/** Navegação: clique real em cada divisória (falha se a folha ou outro elemento ficar por cima). */
+for (const width of [1440, 1100, 390]) {
+  test(`navegação por clique · ${width}px`, async ({ browser }) => {
+    const ctx = await browser.newContext({ storageState: AUTH_FILE, viewport: { width, height: 844 } });
+    const page = await ctx.newPage();
+    await page.goto("/hoje");
+    const nav = page.getByRole("navigation", { name: "Principal" });
+    const dest: [string, string][] = [["Estudar", "/estudar"], ["Revisar", "/revisar"], ["Redação", "/redacao"], ["Rotina", "/rotina"], ["Progresso", "/progresso"], ["Mais", "/mais"], ["Hoje", "/hoje"]];
+    for (const [label, path] of dest) {
+      const link = nav.getByRole("link", { name: label, exact: true }).locator("visible=true");
+      if (!(await link.count())) continue; // no celular, Rotina e Progresso ficam em Mais
+      await link.first().click({ timeout: 8_000 });
+      await page.waitForURL(`**${path}`, { timeout: 20_000 });
+    }
+    await ctx.close();
+  });
+}

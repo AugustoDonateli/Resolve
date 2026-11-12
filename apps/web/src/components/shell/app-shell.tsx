@@ -128,7 +128,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </Link>
       </header>
 
-      <div className="relative z-20 md:py-6 md:pl-[196px] md:pr-6">
+      <div className="relative z-20 md:ml-[196px] md:py-6 md:pr-6">
         <div className="relative mx-auto w-full max-w-[1240px] [perspective:2200px]">
           <Sheet key={pathname} pathname={pathname}>
             {children}
