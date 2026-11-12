@@ -125,6 +125,13 @@ describe("tarefas do dia", () => {
     ]);
     expect(notes).toEqual([]);
   });
+  it("uma revisão curta ocupa o bloco mínimo de 5 min (o banco recusa blocos menores)", () => {
+    const { tasks } = buildTasks({ reviewMinutes: 3, reviewCount: 1, dailyGoal: null, weeklyGoal: null, areaGoals: [] });
+    expect(tasks[0]).toMatchObject({ id: "revisao", minutes: 5, minBlock: 5 });
+    const { blocks } = planDay([{ start: 600, end: 700 }], tasks, { gap: 5, notBefore: 600, step: 5 });
+    expect(blocks.map((b) => b.minutes)).toEqual([5]);
+  });
+
   it("sem meta: só revisão, com nota", () => {
     const { tasks, notes } = buildTasks({
       reviewMinutes: 6,

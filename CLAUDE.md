@@ -2,7 +2,7 @@
 
 Plataforma de preparação para o ENEM. Dono e primeiro usuário: Guto (prova em 2027).
 
-**Pedido em vigor:** concluir a plataforma (pedido de Guto de 10/11/2026): os seis núcleos (questões/estudo/revisão, diagnóstico e TRI, habilidades de prova, redação completa, rotina e foco, simulado e estratégia) e as expansões (plano adaptativo, previsão, feed finito, dados brasileiros, incidência e fichas, tutor, texto compartilhado, meta de curso, reta final, questão do dia, redação por foto, grupos e duelos), com acabamento verificado. Não há backlog por ID nem ritual por tarefa; `docs/plan/Resolve-pacote.md` é só referência funcional pontual. Uma tela reformulada ou uma lista de próximos passos não encerra o pedido.
+**Pedido em vigor:** concluir a plataforma (pedido de Guto de 10/11/2026) e reconstruir a experiência na identidade Mesa (pedido de 11/11/2026, ver "Regras do produto"): os seis núcleos (questões/estudo/revisão, diagnóstico e TRI, habilidades de prova, redação completa, rotina e foco, simulado e estratégia) e as expansões (plano adaptativo, previsão, feed finito, dados brasileiros, incidência e fichas, tutor, texto compartilhado, meta de curso, reta final, questão do dia, redação por foto, grupos e duelos), com acabamento verificado. Não há backlog por ID nem ritual por tarefa; `docs/plan/Resolve-pacote.md` é só referência funcional pontual. Uma tela reformulada ou uma lista de próximos passos não encerra o pedido.
 
 ## Ao começar
 1. Leia `docs/continuidade.md` (nota única: o que funciona, o que falta, ponto de retomada) e confira código e banco.
@@ -20,9 +20,10 @@ Plataforma de preparação para o ENEM. Dono e primeiro usuário: Guto (prova em
 - Nunca invente parâmetros, notas, fontes ou estatísticas. Dado ausente aparece como indisponível. Interfaces sem dados dizem isso.
 - Preserve rascunhos, respostas e dados existentes.
 - Regras de prova e matriz mudam por versão; a proposta de 2028 não é regra adotada.
-- Identidade Caderno de Prova: tokens de `packages/ui` (papel `#F7F4ED`, tinta `#20242C`, azul `#2452D1`; DM Sans e Newsreader). Amarelo/rosa são preenchimento com texto em tinta, nunca texto, linha ou contorno essencial. O escuro deriva da tinta. Ao criar um par texto/fundo novo, acrescente-o a `usedPairs` em `packages/ui/src/tokens.ts`.
+- Identidade **Mesa** (escolhida por Guto em 11/11/2026; substitui "Caderno de Prova"): a prova sobre a mesa. Mesa escura com luminária; o conteúdo vive em folhas de papel; tinta preta; caneta azul `#2452D1` é a ação; caneta vermelha (`correction`) é só do corretor (marcas e notas de correção); marca-texto amarelo/rosa é preenchimento com texto em tinta, nunca texto, linha ou contorno essencial. Tokens em `packages/ui`; tipos: Instrument Serif (títulos), Newsreader (leitura), DM Sans (interface), DM Mono (rótulos), Caveat (anotação curta à mão, nunca texto de leitura). Ao criar um par texto/fundo novo, acrescente-o a `usedPairs` em `packages/ui/src/tokens.ts`.
+- A metáfora não pode esconder função: a navegação (divisórias de fichário no PC, abas embaixo no celular) fica sempre visível e com rótulo; todo objeto da mesa tem texto; nenhum recurso existe só atrás de animação. Traços de caneta ficam em `apps/web/src/lib/ink` e nas classes de `globals.css` (`.stamp`, `.pen-strike`, `.desk-object`, `.arrive-*`).
 - Composição: cada tela tem um objetivo e uma ação principal claros. Evite grades repetidas de cartões e números.
-- Movimento: tokens de `@resolve/ui/motion` e `useReduced()`. A ação é registrada antes da animação; interromper termina em estado válido; nada se move durante leitura e escrita; cenas longas podem ser puladas.
+- Movimento: tokens de `@resolve/ui/motion` e `useReduced()`. A ação é registrada antes da animação; interromper termina em estado válido; nada se move durante leitura e escrita; cenas longas podem ser puladas. Cada seção tem a sua chegada (folha que abre, ficha dada, página de agenda), sempre abaixo de 700 ms e sem bloquear cliques.
 
 ## Comandos
 `pnpm dev` · `pnpm check` (lint + tipos + testes) · `pnpm build` · `pnpm --filter @resolve/web audit:ui` (auditoria visual, acessibilidade, conta, iPhone e área editorial; exige build) · `pnpm test:access` (matriz de acesso contra o projeto real) · importação: `cd tools/ingest && .venv/bin/python -m unittest test_contract test_crossmatch test_tagging`

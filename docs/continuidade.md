@@ -4,6 +4,21 @@ Nota única: o que funciona, o que foi feito mas ainda não passou por uso real,
 
 Estado do banco em 11/11/2026: **366 questões publicadas**: Enem 2025, cadernos 1 e 7 (182), e Enem 2024, cadernos 1 e 7 (184). Todas com conteúdo conferido contra os PDFs oficiais e etiquetas pendentes, publicadas com a conta de editor de teste por autorização de Guto (registro em `data/editorial/2026-11-11-*publicacao.log`). As anuladas ficam fora do banco. Temas oficiais de 2025 e 2024 publicados; o Dia D tem 12 cadernos completos (2024 e 2025, dias 1 e 2). 0 parâmetros de TRI.
 
+## 0. Reconstrução visual: identidade Mesa (em andamento)
+
+Direção escolhida por Guto em 11/11/2026 entre três protótipos (artefato "Direções do Resolve"). Regras em `CLAUDE.md`.
+
+Feito e publicado (auditoria `audit:ui` 81 aprovados, 2 pulados por horário):
+- **Base**: tokens (mesa, papel, caneta do corretor), tipografia, luminária que segue o cursor, folha com furos de fichário sobre pilha, divisórias de fichário como navegação (abas embaixo no celular), chegada animada por seção.
+- **Questão**: página dupla no PC (texto à esquerda; comando e alternativas à direita, sempre à vista); bolinha preenchida com rabisco, alternativa riscada, círculo e visto do corretor; carimbo "Certa" ou nota "gabarito: X"; tela final com placar e tira de bolinhas.
+- **Hoje**: é a mesa. Folha do dia com todo o plano; ao lado, questão do dia, agenda e os objetos caderno, fichas (com revisões vencidas), folha e régua, que são atalhos com rótulo.
+- **Estudar**: abertura do caderno, com treino livre e sumário de todos os modos.
+- **Entrada**: caderno fechado com as "instruções" e ficha de identificação.
+
+Falta aprofundar (hoje usam só a base): Revisar (maço de fichas), Redação (folha de 30 linhas como protagonista), Rotina (agenda com marca-texto), Progresso (régua), Dia D (cartão-resposta e envelope), Mais, Grupos, área editorial. Também: busca "Ir para…" com todos os destinos.
+
+Defeito corrigido no caminho: com uma única revisão vencida (3 min), o plano do dia criava um bloco de 3 min, que o banco recusa (mínimo de 5), e nada era gravado. Agora a revisão ocupa no mínimo 5 min (teste em `planner.test.ts`).
+
 ## 1. Funciona (verificado com dados reais ou de ponta a ponta no projeto)
 
 - **Conta, perfis e papéis** (aluno, editor). Matriz de acesso contra o projeto: **256/256** (`pnpm test:access`), cobrindo também grupos, repertório, trilha, meta de curso, questão do dia e data da prova.
@@ -40,7 +55,7 @@ Estado do banco em 11/11/2026: **366 questões publicadas**: Enem 2025, cadernos
   - caderno 7: figuras, alternativas em imagem, tabelas, fórmulas, símbolos (°, π), comandos e listas;
   - letras do cruzamento com o caderno 5 conferidas no PDF oficial.
   - O Dia D do dia 2 (caderno 7) fica completo assim que as 87 forem publicadas: o dia 2 não tem redação, e as anuladas entram como anuladas.
-- **Auditoria visual e de acessibilidade**: `pnpm --filter @resolve/web audit:ui` com 81 aprovados e 2 pulados (fluxos que dependem de plano do dia na conta de teste). `pnpm check`: 120 testes do app + 7 do pacote de UI.
+- **Auditoria visual e de acessibilidade**: `pnpm --filter @resolve/web audit:ui` com 81 aprovados e 2 pulados (o fluxo do plano do dia é pulado depois das 21h de Brasília). `pnpm check`: 120 testes do app + 7 do pacote de UI.
 
 ## 2. Implementado, mas não validado em uso real (falta conteúdo publicado ou chave)
 

@@ -59,7 +59,7 @@ function Sheet({ pathname, children }: { pathname: string; children: ReactNode }
   // Hoje é a própria mesa: a página põe a folha do dia e os objetos; aqui não há folha única.
   if (pathname === "/hoje")
     return (
-      <main id="conteudo" ref={ref} tabIndex={-1} className="w-full pb-24 outline-none md:pb-4">
+      <main id="conteudo" ref={ref} tabIndex={-1} className="w-full pb-24 outline-none max-lg:overflow-x-clip md:pb-4">
         {children}
       </main>
     );

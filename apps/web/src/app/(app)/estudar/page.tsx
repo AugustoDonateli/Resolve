@@ -10,12 +10,17 @@ import { publishedByArea } from "@/lib/study/session";
 export const metadata: Metadata = { title: "Estudar" };
 export const dynamic = "force-dynamic";
 
-const MODES = [
-  { href: "/estudar/dia-d", title: "Dia D", body: "Simulado com caderno oficial, relógio do servidor e cartão-resposta." },
-  { href: "/estudar/comando", title: "Comando primeiro", body: "Leia o comando antes do texto, marque a evidência e só então responda." },
-  { href: "/estudar/distrator", title: "Caça ao distrator", body: "Depois de responder, classifique por que cada alternativa errada atrai." },
-  { href: "/estudar/matriz", title: "Matriz e incidência", body: "As 120 habilidades oficiais, quantas vezes aparecem no banco e a ficha de cada uma." },
-  { href: "/diagnostico", title: "Diagnóstico", body: "Até 20 questões por área e a estimativa por TRI quando houver parâmetros oficiais." },
+/** Sumário do caderno: todos os modos de estudo, na ordem em que costumam ser usados. */
+const SUMARIO = [
+  { href: "#treino", title: "Treino livre", tag: "nesta página", body: "Questões sorteadas, primeiro as que você ainda não respondeu." },
+  { href: "/estudar/banco", title: "Banco de questões", tag: "filtros", body: "Escolha por área, edição, dia de prova, habilidade ou assunto." },
+  { href: "/estudar/dia-d", title: "Dia D", tag: "simulado", body: "Caderno oficial inteiro, relógio do servidor e cartão-resposta." },
+  { href: "/estudar/comando", title: "Comando primeiro", tag: "leitura", body: "Leia o comando antes do texto, marque a evidência e só então responda." },
+  { href: "/estudar/distrator", title: "Caça ao distrator", tag: "eliminação", body: "Depois de responder, classifique por que cada alternativa errada atrai." },
+  { href: "#triagem", title: "Triagem de 20 segundos", tag: "nesta página", body: "Decida rápido: resolver agora, deixar para depois ou chutar." },
+  { href: "#ritmo", title: "Blocos de ritmo", tag: "nesta página", body: "Contra o relógio, com alvo por questão e gabarito só no fim." },
+  { href: "/estudar/matriz", title: "Matriz e incidência", tag: "mapa", body: "As 120 habilidades oficiais e a ficha de cada uma." },
+  { href: "/diagnostico", title: "Diagnóstico", tag: "medida", body: "Até 20 questões por área; estimativa por TRI quando houver parâmetros oficiais." },
 ];
 
 export default async function EstudarPage({ searchParams }: { searchParams: Promise<{ area?: string }> }) {
@@ -25,62 +30,64 @@ export default async function EstudarPage({ searchParams }: { searchParams: Prom
   const total = counts ? Object.values(counts).reduce((a, b) => a + b, 0) : 0;
   return (
     <>
-      <ScreenHeader title="Estudar" kicker="Treino livre" />
-      <nav aria-label="Modos de estudo" className="mb-10">
-        <ul className="flex flex-col border-t border-line-subtle">
-          {MODES.map((m) => (
-            <li key={m.href}>
-              <Link
-                href={m.href}
-                className="group flex min-h-16 items-center justify-between gap-4 border-b border-line-subtle py-3 hover:bg-surface-subtle/60"
-              >
-                <span>
-                  <span className="block t-ui text-ink">{m.title}</span>
-                  <span className="block t-meta text-ink-2">{m.body}</span>
-                </span>
-                <span aria-hidden className="t-ui text-ink-2 transition-transform duration-[var(--rs-dur-state)] group-hover:translate-x-1">
-                  →
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <ScreenHeader title="Estudar" kicker={total > 0 ? `Caderno de questões · ${total} questões oficiais` : "Caderno de questões"} />
       {total > 0 ? (
-        <div id="treino" className="flex scroll-mt-20 flex-col gap-6">
-          <StartTraining counts={counts!} initialArea={initialArea} />
-          <section
-            aria-labelledby="treinos-habilidade"
-            className="flex max-w-xl flex-col gap-3"
-          >
-            <h2 id="treinos-habilidade" className="t-section">
-              Triagem de 20 segundos
-            </h2>
-            <p className="t-meta text-ink-2">
-              Para cada questão, decida em até 20 segundos: resolver agora,
-              deixar para depois ou chutar. Depois você resolve todas e compara.
-            </p>
-            <StartTraining counts={counts!} mode="triagem" />
-          </section>
-          <section
-            aria-labelledby="ritmo"
-            className="flex max-w-xl flex-col gap-3"
-          >
-            <h2 id="ritmo" className="scroll-mt-24 t-section">
-              Blocos de ritmo
-            </h2>
-            <p className="t-meta text-ink-2">
-              Resolva contra o relógio, com alvo por questão, marcação para
-              revisar e gabarito só no fim.
-            </p>
-            <StartRhythm available={total} />
-          </section>
+        <div className="flex flex-col gap-12">
+          {/* Página dupla de abertura: o treino à esquerda, o sumário à direita */}
+          <div className="grid gap-x-12 gap-y-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
+            <section id="treino" aria-labelledby="treino-t" className="flex scroll-mt-20 flex-col gap-4">
+              <h2 id="treino-t" className="t-section">
+                Treino livre
+              </h2>
+              <p className="max-w-[46ch] t-reading text-ink-2">Abra o caderno numa área e resolva. Cada resposta é corrigida na hora, à caneta.</p>
+              <StartTraining counts={counts!} initialArea={initialArea} />
+            </section>
+            <nav aria-labelledby="sumario-t">
+              <h2 id="sumario-t" className="mb-2 t-kicker">
+                Sumário
+              </h2>
+              <ol className="flex flex-col border-t-[1.5px] border-ink">
+                {SUMARIO.map((m, i) => (
+                  <li key={m.href}>
+                    <Link href={m.href} className="group grid grid-cols-[2rem_minmax(0,1fr)] gap-x-2 border-b border-line-subtle py-3">
+                      <span aria-hidden className="pt-0.5 font-mono text-[12px] tabular text-ink-2">{String(i + 1).padStart(2, "0")}</span>
+                      <span className="min-w-0">
+                        <span className="flex items-baseline gap-2">
+                          <span className="t-ui text-ink [background:linear-gradient(currentColor,currentColor)_no-repeat_left_100%/0%_1.5px] transition-[background-size] duration-[var(--rs-dur-layout)] ease-layout group-hover:[background-size:100%_1.5px] group-focus-visible:[background-size:100%_1.5px]">
+                            {m.title}
+                          </span>
+                          <span aria-hidden className="mb-1 min-w-6 flex-1 border-b border-dotted border-line" />
+                          <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-ink-2">{m.tag}</span>
+                        </span>
+                        <span className="mt-0.5 block t-meta text-ink-2">{m.body}</span>
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </div>
+
+          <div className="grid gap-x-12 gap-y-10 border-t-[1.5px] border-ink pt-8 lg:grid-cols-2">
+            <section id="triagem" aria-labelledby="triagem-t" className="flex scroll-mt-20 flex-col gap-3">
+              <h2 id="triagem-t" className="t-section">
+                Triagem de 20 segundos
+              </h2>
+              <p className="t-meta text-ink-2">
+                Para cada questão, decida em até 20 segundos: resolver agora, deixar para depois ou chutar. Depois você resolve todas e compara.
+              </p>
+              <StartTraining counts={counts!} mode="triagem" />
+            </section>
+            <section aria-labelledby="ritmo" className="flex flex-col gap-3">
+              <h2 id="ritmo" className="scroll-mt-24 t-section">
+                Blocos de ritmo
+              </h2>
+              <p className="t-meta text-ink-2">Resolva contra o relógio, com alvo por questão, marcação para revisar e gabarito só no fim.</p>
+              <StartRhythm available={total} />
+            </section>
+          </div>
           <p className="t-meta text-ink-2">
             Só questões reais do Enem, conferidas e publicadas.{" "}
-            <Link href="/estudar/banco" className="underline">
-              Escolher no banco, com filtros
-            </Link>{" "}
-            ·{" "}
             <Link href="/estudar/demonstracao" className="underline">
               Ver a questão demonstrativa
             </Link>

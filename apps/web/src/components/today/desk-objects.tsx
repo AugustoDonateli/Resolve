@@ -35,11 +35,11 @@ export function DeskObjects({ counts }: { counts: DeskCounts }) {
           <span aria-hidden="true" />
           <span aria-hidden="true" />
           <span className="desk-cards-top">
-            <span className="t-kicker">Revisar</span>
+            <span className="t-kicker !text-ink">Revisar</span>
             <span className="font-display text-[26px] leading-none text-ink">
               {due === null ? "Fichas" : due === 0 ? "Em dia" : `${due} ${due === 1 ? "ficha" : "fichas"}`}
             </span>
-            {due !== null && due > 0 && <span className="t-meta text-ink-2">para hoje</span>}
+            {due !== null && due > 0 && <span className="t-meta text-ink">para hoje</span>}
           </span>
         </Link>
         <Link href="/redacao" className="desk-object desk-folha ruled" style={{ "--i": 4, "--r": "-1.6deg", "--pauta": "18px" } as CSSProperties}>

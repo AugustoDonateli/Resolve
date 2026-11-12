@@ -511,10 +511,10 @@ test("temas: aluno não chega à revisão e vê só temas publicados", async ({
   await expect(
     page.getByRole("heading", { level: 1, name: "Temas de redação" }),
   ).toBeVisible();
-  // o tema oficial carregado ainda é rascunho: o aluno não o vê
+  // os temas oficiais de 2025 e 2024 foram publicados (11/11/2026): o aluno vê o publicado
   await expect(
-    page.getByText("Perspectivas acerca do envelhecimento"),
-  ).toHaveCount(0);
+    page.getByText("Perspectivas acerca do envelhecimento").first(),
+  ).toBeVisible();
   const r = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
     .analyze();

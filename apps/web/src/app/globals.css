@@ -302,6 +302,13 @@ body {
   :root[data-motion="reduced"] .stamp-hit { animation: fade-in 100ms both; }
   @media (prefers-reduced-motion: reduce) { .stamp-hit { animation: fade-in 100ms both; } }
 
+  /* Nota de corretor: a escrita aparece da esquerda para a direita. */
+  .hand-write { animation: hand-write 700ms linear both; }
+  /* Bolinhas do resultado: surgem uma a uma. */
+  .result-dot { animation: dot-in 260ms var(--rs-ease-layout) backwards; }
+  :root[data-motion="reduced"] .hand-write, :root[data-motion="reduced"] .result-dot { animation: fade-in 100ms backwards; }
+  @media (prefers-reduced-motion: reduce) { .hand-write, .result-dot { animation: fade-in 100ms backwards; } }
+
   /* Papel pautado (folha de redação, fichas): --pauta é a altura da linha. */
   .ruled {
     --pauta: 32px;
@@ -420,6 +427,14 @@ body {
   0% { opacity: 0; transform: rotate(-19deg) scale(2.3); }
   60% { opacity: 1; transform: rotate(-6deg) scale(0.94); }
   100% { opacity: 0.92; transform: rotate(-7deg) scale(1); }
+}
+@keyframes hand-write {
+  from { clip-path: inset(-20% 100% -20% 0); }
+  to { clip-path: inset(-20% 0 -20% 0); }
+}
+@keyframes dot-in {
+  from { opacity: 0; transform: scale(0.3); }
+  to { opacity: 1; transform: none; }
 }
 /* Objetos da mesa pousam um a um. */
 @keyframes desk-land {

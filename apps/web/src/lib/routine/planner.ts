@@ -180,12 +180,14 @@ export function buildTasks(i: PlanInputs): {
   const tasks: PlanTask[] = [];
   const notes: string[] = [];
   if (i.reviewMinutes > 0) {
+    // Um bloco de estudo tem no mínimo 5 min (regra do banco): uma revisão curta ocupa esse mínimo.
+    const reviewMinutes = Math.max(5, i.reviewMinutes);
     tasks.push({
       id: "revisao",
       kind: "revisao",
       title: "Revisão do dia",
-      minutes: i.reviewMinutes,
-      minBlock: Math.min(10, i.reviewMinutes),
+      minutes: reviewMinutes,
+      minBlock: Math.min(10, reviewMinutes),
       maxBlock: 50,
       priority: 1,
       reason: `${i.reviewCount} ${i.reviewCount === 1 ? "revisão venceu" : "revisões venceram"} e ${i.reviewCount === 1 ? "cabe" : "cabem"} no tempo escolhido.`,

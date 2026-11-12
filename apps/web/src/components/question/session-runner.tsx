@@ -1,6 +1,5 @@
 "use client";
 
-import { Check, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Button } from "@/components/ui/button";
@@ -16,6 +15,7 @@ import { ERROR_REASONS } from "@/lib/study/reasons";
 import { withSameAction, type Outcome } from "@/lib/study/retry";
 import type { SubmitResult } from "@/lib/study/actions";
 import type { SessionEntry, SessionView } from "@/lib/study/session";
+import { ResultStrip, Verdict } from "@/components/ui/verdict";
 import { QuestionView } from "./question-view";
 import { RaioXPanel } from "./raiox-panel";
 import { ReportProblem } from "./report-problem";
@@ -89,6 +89,8 @@ export function SessionRunner({ session }: { session: SessionView }) {
   const [eliminated, setEliminated] = useState<Set<string>>(new Set());
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Questão corrigida agora há pouco: só ela mostra o gesto do carimbo ou da nota do corretor.
+  const [fresh, setFresh] = useState<string | null>(null);
   const [raiox, setRaiox] = useState<Record<string, RaioXView>>({});
   const [loadingX, setLoadingX] = useState(false);
   const [confirmHelp, setConfirmHelp] = useState(false);
@@ -96,6 +98,7 @@ export function SessionRunner({ session }: { session: SessionView }) {
   const [pending, setPending] = useState<Record<string, string>>({});
 
   const applyResult = (e: SessionEntry, key: string, v: SubmitResult) => {
+    setFresh(e.sessionItemId);
     const keyById = Object.fromEntries(
       Object.entries(e.alternativeIds).map(([k, id]) => [id, k]),
     );
@@ -178,22 +181,26 @@ export function SessionRunner({ session }: { session: SessionView }) {
 
   if (!entry) {
     return (
-      <section
-        aria-labelledby="fim"
-        className="flex max-w-xl flex-col gap-4 rounded-panel border border-line bg-surface p-5"
-      >
-        <h2
-          id="fim"
-          ref={headingRef}
-          tabIndex={-1}
-          className="t-section outline-none"
-        >
+      <section aria-labelledby="fim" className="flex max-w-2xl flex-col gap-5">
+        <p className="t-kicker">Resultado</p>
+        <h2 id="fim" ref={headingRef} tabIndex={-1} className="-mt-3 t-screen outline-none">
           {session.duelId ? "Duelo concluído" : "Treino concluído"}
         </h2>
-        <p className="t-reading">
-          {correct} de {total} {total === 1 ? "acerto" : "acertos"}. Os erros
-          entraram no caderno e na revisão.
+        <p className="flex items-baseline gap-3">
+          <span className="t-display tabular">
+            {correct}
+            <span className="text-ink-2">/{total}</span>
+          </span>
+          <span className="t-reading text-ink-2">{correct === 1 ? "acerto" : "acertos"}</span>
         </p>
+        <ResultStrip
+          label="Respostas, na ordem"
+          marks={session.entries.map((e) => {
+            const r = results[e.sessionItemId];
+            return r ? (r.isCorrect ? "certa" : "errada") : "vazia";
+          })}
+        />
+        <p className="t-reading">Os erros entraram no caderno e na revisão.</p>
         <div className="flex flex-wrap gap-3">
           <Link
             href={session.duelId ? `/grupos/duelo/${session.duelId}` : "/estudar"}
@@ -226,6 +233,7 @@ export function SessionRunner({ session }: { session: SessionView }) {
   const result = results[entry.sessionItemId];
   const pendingKey = result ? undefined : pending[entry.sessionItemId];
   const go = (i: number) => {
+    setFresh(null);
     setIndex(i);
     setValue(null);
     setEliminated(new Set());
@@ -400,23 +408,7 @@ export function SessionRunner({ session }: { session: SessionView }) {
               ))}
           </div>
         ) : (
-          <div role="status" className="flex items-center gap-2 t-ui">
-            {result.isCorrect ? (
-              <>
-                <Check
-                  aria-hidden="true"
-                  className="size-5"
-                  strokeWidth={2.5}
-                />{" "}
-                Você acertou.
-              </>
-            ) : (
-              <>
-                <X aria-hidden="true" className="size-5" strokeWidth={2.5} />{" "}
-                Resposta correta: {correctLetter ?? "indisponível"}.
-              </>
-            )}
-          </div>
+          <Verdict correct={result.isCorrect === true} letter={correctLetter ?? null} fresh={fresh === entry.sessionItemId} />
         )}
         {result && !view && (
           <Button
