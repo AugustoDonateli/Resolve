@@ -1,6 +1,6 @@
 # Resolve — Plano v2 (15 de novembro de 2026)
 
-Pedido de Guto: um plano amplo, que vá além do que ele citou, procure o que está faltando ou passou batido, e proponha coisas ambiciosas. Parte do estado real em `docs/continuidade.md` (11 e 12/11). As regras do `CLAUDE.md` continuam: questões oficiais conferidas, nada inventado, identidade Mesa, segurança dos dados.
+Pedido de Guto: um plano amplo, que vá além do que ele citou e procure o que está faltando ou passou batido. Parte do estado real em `docs/continuidade.md` (11 e 12/11). As regras do `CLAUDE.md` continuam: questões oficiais conferidas, nada inventado, identidade Mesa, segurança dos dados.
 
 **Decisões de Guto (15/11)**
 - Público: ele e uns 5 amigos convidados.
@@ -67,7 +67,7 @@ Olhando o Resolve como um aluno que chega pela primeira vez, e não como lista d
 
 ## 2. Frente 1 — Ensinar: currículo completo do Enem (Opus 5.5 para o conteúdo; Fable 5.2 para a forma)
 
-O coração do plano. Transformar o Resolve de ferramenta de treino em **curso completo, ligado às questões reais**.
+A frente mais importante: transformar o Resolve de ferramenta de treino em **curso completo, ligado às questões reais**.
 
 ### 2.1 Mapa de conteúdos (Opus 5.5)
 - **Fonte oficial:** a matriz do Enem lista os objetos de conhecimento de cada área. Eles viram a árvore do curso: área, depois disciplina, depois tema, depois assunto (cerca de 300 a 400 assuntos).
@@ -75,6 +75,8 @@ O coração do plano. Transformar o Resolve de ferramenta de treino em **curso c
 - **Incidência real:** quantas vezes cada assunto caiu de 2015 a 2025, contado pelas questões etiquetadas, não estimado. Mostra "cai muito", "cai às vezes" e "raro", com o número e os anos.
 
 ### 2.2 Cada assunto vira uma lição (Opus 5.5 escreve, Guto revisa)
+O formato detalhado, o estilo de escrita e as regras de interação estão em 2A. O resumo abaixo é a versão curta.
+
 Formato fixo, pensado para o Enem:
 1. **Em uma frase:** o que é e por que cai.
 2. **O essencial:** explicação curta, com exemplo do cotidiano. O Enem cobra contexto.
@@ -105,6 +107,126 @@ Escritas por Opus nas sessões, sem gastar a API. Cada lição cita fontes e pas
   - Matemática: unidades, gráficos e conta de cabeça versus no papel.
   - Natureza: contexto antes da fórmula.
   - Humanas: data, contexto e o "porquê".
+
+---
+
+## 2A. Como ensinar: o padrão das lições e do tutorial
+
+Pedido de Guto (15/11): ensino de verdade, que não pareça feito por IA, sem palavras de efeito. Interação, imagem e animação só quando ajudam a entender. Esta seção vale para tudo que o aluno lê no Resolve: lições, fichas, dicas, tutorial, explicações de mecânica e mensagens da interface.
+
+### 2A.1 Como escrever
+
+O modelo é um bom professor de cursinho explicando na lousa para um aluno só: direto, concreto, com exemplo antes da regra.
+
+- **Frases curtas.** Uma ideia por frase. Parágrafo de até 3 ou 4 linhas no celular.
+- **Exemplo antes da regra.** Primeiro um caso concreto ("uma blusa de R$ 80 com 25% de desconto"); depois o nome e a fórmula.
+- **Palavras do aluno.** Termo técnico só quando o Enem usa, e explicado na primeira vez em que aparece.
+- **Dizer o que importa para a prova.** "No Enem, isso aparece quase sempre em gráfico de conta de luz" vale mais que um parágrafo de teoria.
+- **Mostrar o erro comum** e por que ele parece certo.
+- **Sem enfeite.** Ficam fora palavras e frases de efeito como "mergulhe", "jornada", "desvende", "domine de vez", "poderoso", "incrível", "segredo", "o guia definitivo", "vamos juntos", "prepare-se para", e também perguntas retóricas de abertura, exclamações e emojis.
+- **Sem promessa.** Nada de "garante pontos" ou "nunca mais erre". Quando uma dica é opinião de professor, ela diz isso (selos da seção 2.5).
+- **Sem encher.** Se uma frase pode sair sem perder informação, ela sai.
+- **Teste final de cada texto:** ler em voz alta. Se soa como propaganda ou como resposta de chatbot, reescreve.
+
+Exemplo do tom esperado (lição de porcentagem):
+
+> Porcentagem é uma fração com denominador 100. 25% é 25 de cada 100, ou seja, um quarto.
+>
+> Para achar 25% de R$ 80, divida por 4: R$ 20. A blusa sai por R$ 60.
+>
+> O Enem gosta de aumentos e descontos seguidos. Um aumento de 10% seguido de um desconto de 10% não volta ao preço inicial: R$ 100 vira R$ 110 e depois R$ 99. Quem soma e subtrai as porcentagens marca R$ 100, que é justamente uma das alternativas.
+
+### 2A.2 Estrutura de uma lição
+
+Baseada em prática de lembrar, exemplo resolvido e retirada gradual da ajuda, que é o que mais funciona para aprender. Cada lição cabe em 10 a 15 minutos.
+
+1. **Pergunta de entrada (1 min):** uma questão curta, antes de qualquer explicação. Não vale nota; serve para o aluno ver o que já sabe. Quem acerta com folga pode pular para o treino.
+2. **Explicação curta (3 a 5 min):** o essencial, no estilo de 2A.1, com no máximo um recurso visual (2A.3).
+3. **Exemplo resolvido:** uma questão real do Enem resolvida passo a passo, com o raciocínio escrito ("o comando pede X; no gráfico, isso é Y").
+4. **Exemplo com lacunas:** outra questão real em que o aluno completa um ou dois passos. A ajuda diminui.
+5. **Questão sozinho:** uma questão real sem ajuda, com o Raio-X depois.
+6. **Pegadinhas:** os distratores mais comuns daquele assunto, com a alternativa real que pegou mais gente (quando houver dado do Inep).
+7. **Resumo em cartões:** fórmulas e ideias-chave entram na revisão espaçada automaticamente.
+8. **Para ir além:** uma ou duas aulas gratuitas, com link verificado.
+
+A lição se adapta: errou a pergunta de entrada, ganha mais um exemplo; acertou o exemplo com lacunas de primeira, pula para a questão sozinho.
+
+### 2A.3 Interação, imagem e animação: quando usar
+
+**Regra:** um recurso só entra se resolver uma dificuldade específica daquele assunto que o texto sozinho não resolve. Antes de cada recurso, a sessão escreve em uma linha qual dificuldade ele resolve. Se não conseguir escrever essa linha, o recurso não entra. Lição sem nenhum recurso é normal.
+
+Bons motivos, com exemplos:
+- **Ver uma relação mudar** (o que acontece com Y quando X muda): mexer num controle e ver o efeito.
+  - Física: lançamento oblíquo, mudando ângulo e velocidade.
+  - Matemática: gráfico de função afim, mudando a e b.
+  - Química: deslocamento de equilíbrio.
+- **Ver passo a passo algo que a lousa faria em etapas:** etapas que avançam por toque, nunca sozinhas.
+  - Balanceamento de equação.
+  - Divisão celular.
+  - Ciclo da água.
+  - Montagem de um circuito.
+- **Ler um gráfico, mapa ou tabela:** a figura real da questão do Enem, com marca-texto no ponto que importa.
+- **Ordenar ou situar:**
+  - linha do tempo em História;
+  - mapa em Geografia, com a região destacada.
+- **Treinar uma leitura:** o aluno grifa no texto o trecho que responde o comando e compara com o grifo revisado (já existe no "comando primeiro").
+
+Fora:
+- ilustração decorativa, foto de banco de imagens, mascote, animação de entrada em cada parágrafo;
+- vídeo gerado;
+- animação que roda sozinha durante a leitura (regra de movimento do `CLAUDE.md`);
+- interação que é só clicar para revelar texto que podia estar ali.
+
+Como são feitos:
+- **Componentes de lição reutilizáveis**, desenhados na identidade Mesa (Fable 5.2):
+  - controle deslizante com gráfico;
+  - etapas por toque;
+  - figura com marca-texto;
+  - linha do tempo;
+  - mapa com destaque;
+  - grifo no texto;
+  - exemplo com lacunas.
+
+  Cada lição monta o que precisa a partir deles. Todos funcionam por teclado e toque e têm versão sem movimento.
+- **Imagens:** figuras das questões oficiais ou desenhos em código (SVG). Nada de imagem externa sem fonte e licença.
+- **Acessibilidade:** todo recurso tem texto equivalente. Quem não interage não perde conteúdo.
+
+### 2A.4 Como uma lição é produzida e aprovada
+
+1. **Opus 5.5** escreve a lição seguindo 2A.1 e 2A.2, com as questões reais etiquetadas daquele assunto e as fontes.
+2. A lição passa por uma **checagem automática de estilo:** lista de palavras proibidas, tamanho de frase e de parágrafo, presença das partes obrigatórias.
+3. **Fable 5.2** escolhe e ajusta os recursos visuais, só onde 2A.3 justifica.
+4. **Guto lê e marca:** "entendi", "confuso aqui" (com um toque no trecho) ou "chato". O que for marcado volta para reescrita.
+5. **Medida de que funcionou:** o acerto nas questões daquele assunto antes e depois da lição, mostrado a Guto. Lição que não melhora nada é revista.
+
+**Piloto antes de escalar:** as três primeiras lições servem de molde. Proposta:
+- porcentagem (Matemática, muito cobrada);
+- leitura de gráficos (aparece em todas as áreas);
+- interpretação do comando em Linguagens.
+
+Só depois de Guto aprovar o jeito, as outras são produzidas em lote, na ordem de incidência.
+
+### 2A.5 O tutorial do site
+
+Aprender fazendo, na própria mesa, em vez de uma sequência de telas explicando tudo de uma vez.
+
+1. **Primeira entrada (cerca de 3 minutos):** três perguntas na ficha de identificação: curso e instituição, horas por semana, inglês ou espanhol. A data da prova já vem preenchida com o ENEM 2027, provisória até o edital.
+2. **Primeira questão de verdade:** a mesa abre com uma questão real fácil. O aluno responde e o Raio-X aparece pela primeira vez, com uma frase explicando o que é. É o primeiro contato com a mecânica principal.
+3. **Tour curto da mesa:** cada objeto (caderno, fichas, folha, régua, agenda) é destacado um por vez, com uma frase:
+   - "Aqui ficam as suas revisões. Uma questão errada volta amanhã, depois em 3 dias...";
+   - avança por toque, pula a qualquer momento, nunca roda sozinho;
+   - sem movimento para quem prefere reduzido.
+4. **Dicas na primeira vez de cada recurso:** ao abrir triagem, ritmo, Dia D ou duelo pela primeira vez, uma ficha curta diz o que é, quando usar e quanto tempo leva. Aparece uma vez e fica guardada em "Como funciona".
+5. **"Por quê?" sempre disponível** nas decisões automáticas (seção 5.2).
+6. **Rever o tutorial** a qualquer momento, em Mais.
+
+O que o tutorial não faz:
+- vídeo de abertura;
+- texto longo de boas-vindas;
+- várias telas antes de chegar na mesa;
+- tooltips em cascata.
+
+Meta: em 5 minutos, o aluno respondeu uma questão real, sabe onde ficam as revisões e sabe o que fazer amanhã.
 
 ---
 
@@ -164,6 +286,8 @@ Escritas por Opus nas sessões, sem gastar a API. Cada lição cita fontes e pas
 ## 5. Frente 4 — Entender o site (Fable 5.2 na forma; Opus 5.5 no texto e na lógica)
 
 ### 5.1 Boas-vindas que montam o plano
+O desenho detalhado do tutorial está em 2A.5.
+
 - **Primeira entrada, cerca de 5 minutos:**
   - prova-alvo e data;
   - curso e instituição;
@@ -262,20 +386,22 @@ Sessões curtas, uma frente (ou metade) por sessão. Cada uma termina com um tou
 |---|---|---|
 | 1 | Opus 5.5 | Certificado ICP-Brasil no ambiente; parâmetros e taxas do Inep; validação da TRI (4.1, 4.2) |
 | 2 | Opus 5.5 | Árvore de conteúdos e etiquetagem das 366 (2.1, 3.1) |
-| 3 | Fable 5.2 | Conferência relâmpago para Guto; boas-vindas e tour da mesa (3.1, 5.1) |
+| 3 | Fable 5.2 | Conferência relâmpago para Guto; tutorial: primeira entrada, primeira questão, tour da mesa, dicas da primeira vez (3.1, 2A.5) |
 | 4 | Opus 5.5 | Convites, membros, cota de IA, termos, exportar e excluir (7, 9) |
 | 5 | Opus 5.5 | Cursos e cortes do Sisu, pesos, CC UFES e UFV, explicador do Sisu (4.3) |
 | 6 | Fable 5.2 | Régua da nota e do curso; progresso como história; reorganização do Estudar (4.3, 5.3) |
-| 7–9 | Opus 5.5 | Lições das matérias, por incidência: Matemática e Natureza, depois Humanas e Linguagens (2.2, 2.5) |
-| 10 | Fable 5.2 | Página de lição, trilhas e mapa de domínio; central "Como funciona" e glossário com ilustrações (2.3, 5.2) |
-| 11 | Opus 5.5 | Trilhas, diagnóstico de entrada, domínio, calibração de confiança (2.3, 2.4) |
-| 12 | Opus 5.5 | Estratégia pessoal, protocolo de crise, calendário do candidato, manual do Dia D (6) |
-| 13 | Fable 5.2 | Cenas do Dia D (abertura, sob pressão, replay); terminar a Mesa nas telas restantes (6, 10) |
-| 14 | Opus 5.5 | Redação: trilha por competência, repertório, checklist (6); ligar a chave e a correção na cota |
-| 15 | Fable 5.2 | Folha de redação, foto da folha, sala de estudo e Dia D fantasma (6, 7) |
-| 16–19 | Opus 5.5 | Edições de 2023 a 2015, uma por sessão, com etiquetas (3.2) |
-| 20 | Opus 5.5 | Papel: PDF, leitura do cartão pela câmera (8) |
-| 21 | Fable 5.2 | PWA, avisos, acessibilidade e desempenho no celular (10) |
+| 7 | Opus 5.5 | Piloto: lições de porcentagem, leitura de gráficos e comando em Linguagens; checagem automática de estilo (2A.1, 2A.2, 2A.4) |
+| 8 | Fable 5.2 | Componentes de lição (controle com gráfico, etapas por toque, figura com marca-texto, linha do tempo, mapa, grifo, lacunas) aplicados ao piloto; Guto aprova o molde (2A.3) |
+| 9–11 | Opus 5.5 | Lições em lote, por incidência, no molde aprovado: Matemática e Natureza, depois Humanas e Linguagens (2.2, 2.5) |
+| 12 | Fable 5.2 | Trilhas e mapa de domínio; central "Como funciona" e glossário (2.3, 5.2) |
+| 13 | Opus 5.5 | Trilhas, diagnóstico de entrada, domínio, calibração de confiança (2.3, 2.4) |
+| 14 | Opus 5.5 | Estratégia pessoal, protocolo de crise, calendário do candidato, manual do Dia D (6) |
+| 15 | Fable 5.2 | Cenas do Dia D (abertura, sob pressão, replay); terminar a Mesa nas telas restantes (6, 10) |
+| 16 | Opus 5.5 | Redação: trilha por competência, repertório, checklist (6); ligar a chave e a correção na cota |
+| 17 | Fable 5.2 | Folha de redação, foto da folha, sala de estudo e Dia D fantasma (6, 7) |
+| 18–21 | Opus 5.5 | Edições de 2023 a 2015, uma por sessão, com etiquetas (3.2) |
+| 22 | Opus 5.5 | Papel: PDF, leitura do cartão pela câmera (8) |
+| 23 | Fable 5.2 | PWA, avisos, acessibilidade e desempenho no celular (10) |
 
 **Regra para os dois modelos não se atropelarem:** uma sessão por vez na branch `claude/new-session-vhzm54`. Fable mexe em `components/`, `globals.css`, `lib/ink` e `packages/ui`; Opus mexe em `lib/`, `supabase/`, `tools/` e no conteúdo. Cada sessão começa lendo `docs/continuidade.md`.
 
@@ -283,7 +409,7 @@ Sessões curtas, uma frente (ou metade) por sessão. Cada uma termina com um tou
 
 ---
 
-## 9. Ideias mais radicais (para escolher depois)
+## 9. Outras ideias (para escolher depois)
 - **Professor de bolso por voz:** explicar a resolução em voz alta e o app transcrever no aparelho e comparar com a resolução revisada. Sem custo de IA na transcrição, se o aparelho fizer.
 - **"Modo Enem real" de fim de semana:** o app trava as outras funções, o relógio segue o horário oficial de Brasília (portão, início, fim), e a pessoa faz a prova no papel em casa.
 - **Gêmeo de desempenho:** com a TRI validada, simular como seria a nota com mais N horas em cada assunto, usando o histórico real do aluno, com a incerteza explícita.
