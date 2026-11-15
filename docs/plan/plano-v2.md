@@ -3,6 +3,7 @@
 Pedido de Guto: um plano amplo, que vá além do que ele citou e procure o que está faltando ou passou batido. Parte do estado real em `docs/continuidade.md` (11 e 12/11). As regras do `CLAUDE.md` continuam: questões oficiais conferidas, nada inventado, identidade Mesa, segurança dos dados.
 
 **Decisões de Guto (15/11)**
+- Um ano até o ENEM 2027; o plano de estudo se ajusta às horas que a pessoa tem (seção 2B).
 - Público: ele e uns 5 amigos convidados.
 - Prova: ENEM 2027.
 - Alvo: Ciência da Computação na UFES ou na UFV (Viçosa). O app deve permitir escolher outros cursos populares (Medicina, Direito etc.).
@@ -230,6 +231,82 @@ Meta: em 5 minutos, o aluno respondeu uma questão real, sabe onde ficam as revi
 
 ---
 
+## 2B. Um ano de estudo: horas, volume de conteúdo e foco
+
+Guto tem cerca de um ano até o ENEM 2027. O app precisa saber quanto tempo a pessoa tem, mostrar onde ela está e gastar cada hora no que mais sobe a nota **para o curso que ela quer**.
+
+### 2B.1 Quanto conteúdo cabe em um ano
+
+Conta com 50 semanas de estudo:
+
+| Ritmo | Horas no ano |
+|---|---|
+| 1 h por semana | 50 h |
+| 2 h por semana | 100 h |
+| 1 h por dia | 350 h |
+| 2 h por dia | 700 h |
+
+Quanto custa cada bloco de conteúdo (estimativa de tempo de uso):
+
+| Bloco | Volume | Tempo |
+|---|---|---|
+| Lições do currículo | cerca de 350 lições × 13 min | cerca de 75 h |
+| Banco 2015–2025 resolvido uma vez | cerca de 2.000 questões × 3 min | cerca de 100 h |
+| Dias D completos (dois dias de prova cada) | 10 provas × 10,5 h | cerca de 105 h |
+| Redações com reescrita | 40 × 1,5 h | cerca de 60 h |
+| Revisão espaçada | cerca de 20% do tempo total | variável |
+
+O que isso quer dizer:
+- **Com 1 a 2 h por dia (350 a 700 h):** cabe tudo — currículo completo, o banco inteiro, uns 10 Dias D, uma redação por semana e a revisão. Com 2 h por dia, as 2.000 questões terminam antes do fim do ano. Por isso as provas PPL e as reaplicações de 2015 a 2025 ficam como reserva, a serem importadas quando o banco estiver perto de acabar.
+- **Com 1 a 2 h por semana (50 a 100 h):** não cabe o currículo inteiro. Mal cabem as lições. O app precisa escolher por você o que dá mais nota por hora, deixar claro o que ficou de fora e reservar algumas horas para pelo menos 2 Dias D e algumas redações.
+
+O plano anual (2B.3) usa as horas que a pessoa informa e mostra o que cabe e o que não cabe. Nada de prometer o currículo inteiro para quem tem 1 hora por semana.
+
+### 2B.2 Onde você está
+
+Já existem peças (Dia D, nota por área quando houver TRI, relatório de 7 dias). O que falta é juntar numa medida clara e atualizada.
+
+1. **Diagnóstico de entrada (cerca de 1 h, dividido em partes):**
+   - 15 a 20 questões reais por área, escolhidas pela TRI para posicionar rápido (questões de dificuldade variada; quando a TRI estiver validada, escolha adaptativa);
+   - uma redação curta, opcional;
+   - resultado: nota estimada por área com faixa (ou "indisponível" sem parâmetros) e um primeiro mapa de assuntos.
+2. **Mapa de domínio por assunto:** cada assunto em quatro estados com regra explícita:
+   - não visto;
+   - em construção;
+   - dominando (acertos sem ajuda em questões diferentes);
+   - dominado (o mesmo, em dias diferentes, incluindo revisão).
+
+   O aluno toca num assunto e vê por que ele está naquele estado.
+3. **Reavaliação mensal:** um mini Dia D de cerca de 1 h por mês, misturando áreas. A nota estimada por área vira uma linha no tempo, com a faixa de incerteza.
+4. **Nota contra a meta:** a régua do curso (UFES ou UFV, Ciência da Computação, e outros cursos populares) mostra a média ponderada estimada contra o corte de referência, e quanto falta em cada área, já com os pesos do curso.
+
+### 2B.3 Onde focar: o plano anual
+
+O plano do dia já existe e já escolhe a área com mais erro. Ele passa a seguir um plano anual com uma regra de prioridade explicada ao aluno.
+
+**Prioridade de um assunto:** pontos que ele pode render × peso da área no curso × quanto ainda falta dominar ÷ horas necessárias.
+- **Pontos que pode render:** pela TRI, quando houver; até lá, pela incidência real do assunto nas provas.
+- **Peso da área:** pelos pesos do Sisu do curso escolhido. Para Ciência da Computação, Matemática costuma pesar mais. O peso exato vem do dado oficial de cada instituição, na sessão de cursos.
+- **Quanto falta:** pelo mapa de domínio.
+- **Horas necessárias:** pelo tamanho da lição e do treino daquele assunto.
+
+**Como o ano é dividido** (proporções iniciais, ajustadas pelo desempenho e mostradas ao aluno):
+- **Meses 1 a 8:** base e conteúdo novo, com treino e revisão; um Dia D a cada 6 a 8 semanas; uma redação a cada 1 a 2 semanas.
+- **Meses 9 a 11:** menos conteúdo novo, mais treino misturado, Dias D a cada 2 a 3 semanas, estratégia pessoal (seção 6).
+- **Último mês:** reta final, que já existe: revisão, Dias D, protocolo de crise e semana da prova.
+
+**O que o aluno vê:**
+- "Esta semana: 3 lições de Matemática (função afim, porcentagem, estatística básica), 1 de Natureza, 40 questões, 1 redação." Cada item com o porquê ("Matemática pesa mais para Ciência da Computação e você está em construção em função afim").
+- "Fica de fora este mês": o que não coube nas horas informadas, para a pessoa decidir se quer mais tempo.
+- **Replanejamento automático** quando a pessoa estuda menos ou mais do que o previsto, sem apagar o que já foi feito.
+
+### 2B.4 Questões que você não sabe
+- **Treino de lacuna:** questões reais dos assuntos "em construção", da dificuldade logo acima do nível atual, nem fáceis demais nem impossíveis.
+- **Caderno de erros por assunto:** os erros agrupados por assunto e por tipo de pegadinha, com a lição correspondente a um toque.
+- **Questões que valem mais para você:** com a TRI, as questões cuja resposta certa mais sobe a nota estimada, ligadas ao "pontos baratos" da seção 4.2.
+
+---
+
 ## 3. Frente 2 — Etiquetas e o banco completo (Opus 5.5)
 
 ### 3.1 Etiquetas das 366 publicadas (primeira sessão)
@@ -394,7 +471,7 @@ Sessões curtas, uma frente (ou metade) por sessão. Cada uma termina com um tou
 | 8 | Fable 5.2 | Componentes de lição (controle com gráfico, etapas por toque, figura com marca-texto, linha do tempo, mapa, grifo, lacunas) aplicados ao piloto; Guto aprova o molde (2A.3) |
 | 9–11 | Opus 5.5 | Lições em lote, por incidência, no molde aprovado: Matemática e Natureza, depois Humanas e Linguagens (2.2, 2.5) |
 | 12 | Fable 5.2 | Trilhas e mapa de domínio; central "Como funciona" e glossário (2.3, 5.2) |
-| 13 | Opus 5.5 | Trilhas, diagnóstico de entrada, domínio, calibração de confiança (2.3, 2.4) |
+| 13 | Opus 5.5 | Plano anual pelas horas informadas, prioridade por curso, diagnóstico de entrada, mapa de domínio, reavaliação mensal, treino de lacuna (2B, 2.3, 2.4) |
 | 14 | Opus 5.5 | Estratégia pessoal, protocolo de crise, calendário do candidato, manual do Dia D (6) |
 | 15 | Fable 5.2 | Cenas do Dia D (abertura, sob pressão, replay); terminar a Mesa nas telas restantes (6, 10) |
 | 16 | Opus 5.5 | Redação: trilha por competência, repertório, checklist (6); ligar a chave e a correção na cota |
