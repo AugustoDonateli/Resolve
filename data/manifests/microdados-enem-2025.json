@@ -1,0 +1,97 @@
+{
+ "edition": "microdados-enem-2025",
+ "url": "https://download.inep.gov.br/microdados/microdados_enem_2025.zip",
+ "source_page": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/enem",
+ "sha256": "b8d3e72cbf387ee08f18d552367005429017d43eea1f6d4b9bafe1d83a116071",
+ "bytes": 1035674693,
+ "retrieved_at": "2026-11-15T23:43:00+00:00",
+ "files": [
+  {
+   "name": "microdados_enem_2025/DADOS/ITENS_PROVA_2025.csv",
+   "bytes": 365768
+  },
+  {
+   "name": "microdados_enem_2025/DADOS/PARTICIPANTES_2025.csv",
+   "bytes": 513113794
+  },
+  {
+   "name": "microdados_enem_2025/DICIONÁRIO/Dicionário_Microdados_Enem_2025.ods",
+   "bytes": 26828
+  },
+  {
+   "name": "microdados_enem_2025/DICIONÁRIO/Dicionário_Microdados_Enem_2025.xlsx",
+   "bytes": 45516
+  },
+  {
+   "name": "microdados_enem_2025/INPUTS/INPUT_R_ITENS_PROVA_2025.R",
+   "bytes": 2526
+  },
+  {
+   "name": "microdados_enem_2025/INPUTS/INPUT_R_PARTICIPANTES_2025.R",
+   "bytes": 17193
+  },
+  {
+   "name": "microdados_enem_2025/INPUTS/INPUT_R_RESULTADOS_2025.R",
+   "bytes": 7747
+  },
+  {
+   "name": "microdados_enem_2025/INPUTS/INPUT_SAS_ITENS_PROVA_2025.sas",
+   "bytes": 3835
+  },
+  {
+   "name": "microdados_enem_2025/INPUTS/INPUT_SAS_PARTICIPANTES_2025.sas",
+   "bytes": 17111
+  },
+  {
+   "name": "microdados_enem_2025/INPUTS/INPUT_SAS_RESULTADOS_2025.sas",
+   "bytes": 15129
+  },
+  {
+   "name": "microdados_enem_2025/INPUTS/INPUT_SPSS_ITENS_PROVA_2025.sps",
+   "bytes": 3621
+  },
+  {
+   "name": "microdados_enem_2025/INPUTS/INPUT_SPSS_PARTICIPANTES_2025.sps",
+   "bytes": 12474
+  },
+  {
+   "name": "microdados_enem_2025/INPUTS/INPUT_SPSS_RESULTADOS_2025.sps",
+   "bytes": 12443
+  },
+  {
+   "name": "microdados_enem_2025/LEIA-ME E DOCUMENTOS TÉCNICOS/A_Redacao_no_ENEM_2025_Cartilha_do_Participante.pdf",
+   "bytes": 1665360
+  },
+  {
+   "name": "microdados_enem_2025/LEIA-ME E DOCUMENTOS TÉCNICOS/Edital_ENEM_2025.pdf",
+   "bytes": 9569945
+  },
+  {
+   "name": "microdados_enem_2025/LEIA-ME E DOCUMENTOS TÉCNICOS/ENEM_Procedimentos_de_Analise.pdf",
+   "bytes": 1267475
+  },
+  {
+   "name": "microdados_enem_2025/LEIA-ME E DOCUMENTOS TÉCNICOS/Entenda_a_Sua_Nota_no_Enem_Guia_do_Participante.pdf",
+   "bytes": 16814488
+  },
+  {
+   "name": "microdados_enem_2025/LEIA-ME E DOCUMENTOS TÉCNICOS/Leia_Me_Enem_2025.docx",
+   "bytes": 62377
+  },
+  {
+   "name": "microdados_enem_2025/LEIA-ME E DOCUMENTOS TÉCNICOS/Leia_Me_Enem_2025.pdf",
+   "bytes": 381054
+  },
+  {
+   "name": "microdados_enem_2025/LEIA-ME E DOCUMENTOS TÉCNICOS/Matriz_Referencia_ENEM.pdf",
+   "bytes": 177800
+  },
+  {
+   "name": "microdados_enem_2025/DADOS/RESULTADOS_2025.csv",
+   "bytes": 2115499721
+  }
+ ],
+ "notes": [
+  "Baixado com a verificação TLS ligada (intermediário em tools/ingest/certs). O zip fica fora do repositório."
+ ]
+}

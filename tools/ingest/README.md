@@ -58,3 +58,36 @@ Depois, as figuras: recortar todas as questões com `recorte_por_cabecalho.py` (
 Defeitos corrigidos no extrator em 11/11: rodapé com "•" (2024) além de "|", contracapa colada na última alternativa, grau duplicado (°°) e ligadura "fi"/"fl" duplicada (`corrigir_ligaduras.mjs` corrige propostas antigas). Frações empilhadas em alternativas ainda saem embaralhadas: `checar_extracao.py` aponta ("fração embaralhada") e a transcrição é manual, olhando o PDF.
 
 Questão já publicada com erro: `correct_published_item` (função de editor) cria a versão seguinte com o texto corrigido, leva junto posição e letras impressas e aposenta a anterior; o motivo fica em `item_corrections`. Usada em 11/11 nas questões 157 e 178 do caderno 7 de 2025.
+
+## TRI e microdados (sessão 1 do plano v2, 15/11/2026)
+
+Os microdados do Inep trazem, por edição, `ITENS_PROVA_<ano>.csv` (código, gabarito e parâmetros a, b, c de cada
+item em cada prova) e `RESULTADOS_<ano>.csv` (respostas, gabarito e nota oficial de cada participante, sem
+identificação). Com eles o Resolve carrega os parâmetros oficiais, confere o cálculo contra as notas oficiais e
+calcula a taxa de acerto real de cada questão. O zip (500 MB a 1 GB) fica fora do repositório, em `/home/user/inep`.
+
+```bash
+# baixar com a verificação TLS ligada (mesmo intermediário de fetch.py)
+python3 - <<'PY'
+import ssl, urllib.request, shutil
+ctx = ssl.create_default_context(); ctx.load_verify_locations(cafile="certs/rnp-icpedu-gr46-ov-tls-ca-2025.pem")
+url = "https://download.inep.gov.br/microdados/microdados_enem_2025.zip"
+with urllib.request.urlopen(url, context=ctx, timeout=120) as r, open("/home/user/inep/microdados_enem_2025.zip", "wb") as f:
+    shutil.copyfileobj(r, f, length=1 << 20)
+PY
+python3 tri_inep.py manifesto /home/user/inep/microdados_enem_2025.zip 2025 <baixado-em>   # data/manifests/microdados-enem-2025.json
+python3 tri_inep.py provas /home/user/inep/microdados_enem_2025.zip 2025 chaves-2025.json  # gabarito do banco (CHAVES_SQL) × provas do Inep
+python3 tri_inep.py ler /home/user/inep/microdados_enem_2025.zip 2025 --amostra 8000       # ~40 s por edição
+python3 tri_inep.py validar 2025 && python3 tri_inep.py cruzar 2024 2025                    # data/tri/validacao-2025.json
+python3 tri_inep.py sql ../../supabase/migrations/<data>_carga_tri.sql modelo.json 2024 2025
+python3 -m unittest test_tri_engine                                                          # motor em Python = engine.ts
+```
+
+- **Identificação das provas:** cada caderno do banco é ligado à prova do Inep cujo gabarito bate em 100% das
+  posições publicadas; qualquer divergência interrompe. As provas "da mesma aplicação" são as que têm exatamente os
+  mesmos itens, sem versão adaptada.
+- **Validação:** `tri_engine.py` repete `apps/web/src/lib/tri/engine.ts` (o teste confere os dois contra a mesma
+  integração fina). A escala nota = intercepto + inclinação·θ de cada área é ajustada em metade da amostra e
+  conferida na outra metade; quem deixou a área inteira em branco fica fora (o Inep dá nota 0, regra da prova).
+- **Gabarito protegido:** a contagem por alternativa denuncia a resposta, por isso `item_response_stats` só é
+  lida pelo editor e pelo Raio-X (`item_explanation`), depois de a pessoa responder.

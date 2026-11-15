@@ -1,9 +1,15 @@
 import type { RaioXView } from "@/lib/study/raiox";
 
-/**
- * Raio-X textual (F3-T04): comando e habilidade, evidência, distratores e resolução comentada revisados.
- * Sem movimento (o scanner M01 é a F3-T05). Dado ausente aparece como indisponível.
- */
+/** "3,2 milhões de participantes" / "45 mil participantes" / "820 participantes": arredondado, sem fingir precisão. */
+function participants(n: number) {
+  if (n >= 1_000_000) {
+    const m = Math.round(n / 100_000) / 10;
+    return `${m.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} ${m < 2 ? "milhão" : "milhões"} de participantes`;
+  }
+  if (n >= 10_000) return `${Math.round(n / 1000).toLocaleString("pt-BR")} mil participantes`;
+  return `${n.toLocaleString("pt-BR")} participantes`;
+}
+
 export function RaioXPanel({
   view,
   headingId,
@@ -25,6 +31,20 @@ export function RaioXPanel({
           registrada como feita com ajuda.
         </p>
       )}
+      <div>
+        <h4 className="mb-1 t-ui font-semibold">Na prova</h4>
+        {view.stats ? (
+          <p className="t-reading">
+            {`No Enem${view.stats.edition ? ` ${view.stats.edition}` : ""}, ${view.stats.correctPct}% dos participantes acertaram esta questão.`}
+            {view.stats.topWrong && ` A errada mais marcada foi a ${view.stats.topWrong.letter}, escolhida por ${view.stats.topWrong.pct}%.`}
+            <span className="mt-1 block t-meta text-ink-2">
+              Microdados do Inep: {participants(view.stats.respondents)} presentes receberam esta questão.
+            </span>
+          </p>
+        ) : (
+          <p className="t-reading text-ink-2">Taxa de acerto na prova indisponível para esta questão.</p>
+        )}
+      </div>
       <div>
         <h4 className="mb-1 t-ui font-semibold">Comando</h4>
         <p className="t-reading">

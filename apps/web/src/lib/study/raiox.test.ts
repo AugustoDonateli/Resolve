@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { StudyQuestion } from "./question-types";
-import { buildRaioX } from "./raiox";
+import { buildRaioX, examStats } from "./raiox";
 
 const q: StudyQuestion = {
   area: "LC",
@@ -118,3 +118,27 @@ describe("Raio-X textual", () => {
     expect(v.correctLetter).toBe("E");
   });
 });
+
+describe("taxa real na prova", () => {
+  const letterOf = (k: string) => ({ A: "C", B: "A", C: "B", D: "D", E: "E" })[k] ?? k;
+  it("porcentagem de acerto e a errada mais marcada, na letra que a pessoa vê", () => {
+    const s = examStats(
+      {
+        released: true,
+        correct_key: "A",
+        stats: { edition: "2024", respondents: 2000, correct: 900, blank: 20,
+          alternatives: { A: 450, B: 300, C: 150, D: 80, E: 20 }, alternatives_respondents: 1000 },
+      },
+      letterOf,
+    );
+    expect(s).toEqual({ edition: "2024", respondents: 2000, correctPct: 45, blankPct: 1, topWrong: { letter: "A", pct: 30 } });
+  });
+  it("sem dado da prova, nada é mostrado; sem contagem por alternativa, só a taxa", () => {
+    expect(examStats({ released: true, stats: null }, letterOf)).toBeNull();
+    const s = examStats({ released: true, correct_key: "A",
+      stats: { edition: "2025", respondents: 10, correct: 3, blank: 0, alternatives: null, alternatives_respondents: null } }, letterOf);
+    expect(s?.topWrong).toBeNull();
+    expect(s?.correctPct).toBe(30);
+  });
+});
+

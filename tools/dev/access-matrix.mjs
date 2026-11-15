@@ -352,9 +352,14 @@ let batchId, proposalId;
   check("A", "lê a própria sequência (regra sequencia-v1)", st.data?.[0]?.rule_version === "sequencia-v1", st.error?.message ?? "");
   if (today) {
     // Folga de hoje fica no histórico: a conta de teste A acumula essa linha de propósito.
+    // (a regra de folgas pode recusar a de hoje; aí o teste usa a folga mais recente que já está no histórico)
     await A.c.from("rest_days").insert({ rest_date: today });
-    const del = await A.c.from("rest_days").delete().eq("rest_date", today).select();
-    check("A", "não apaga folga de hoje (histórico)", Boolean(del.error), del.error?.message ?? `${rows(del)} linha(s) apagada(s)!`);
+    const last = (await A.c.from("rest_days").select("rest_date").lte("rest_date", today).order("rest_date", { ascending: false }).limit(1)).data?.[0]?.rest_date;
+    if (last) {
+      const del = await A.c.from("rest_days").delete().eq("rest_date", last).select();
+      const kept = (await A.c.from("rest_days").select("rest_date").eq("rest_date", last)).data?.length === 1;
+      check("A", "não apaga folga de hoje ou passada (histórico)", (Boolean(del.error) || rows(del) === 0) && kept, del.error?.message ?? `${rows(del)} linha(s) apagada(s)`);
+    } else check("A", "não apaga folga de hoje ou passada (histórico)", false, "nenhuma folga no histórico da conta A para testar");
     const past = await A.c.from("rest_days").insert({ rest_date: "2020-01-06" }).select();
     check("A", "não marca folga no passado", Boolean(past.error), past.error?.message ?? "marcou!");
     const b = await B.c.from("rest_days").insert({ user_id: A.id, rest_date: today }).select();
@@ -540,6 +545,33 @@ let batchId, proposalId;
   check("A", "não corrige questão publicada", /resolve_not_editor/.test(ar.error?.message ?? ""), ar.error?.message ?? "corrigiu!");
   const ex = await B.c.from("profiles").update({ exam_day1: "2027-11-07" }).eq("user_id", A.id).select();
   check("B", "não muda a data da prova de A", denied(ex), ex.error?.message ?? `${rows(ex)} linha(s)`);
+}
+
+// ── TRI e taxas de acerto (microdados) ──
+{
+  for (const t of ["parameter_sets", "item_parameters", "tri_model_versions", "tri_model_parameter_sets", "item_response_stats"]) {
+    const v = await V.c.from(t).select("*").limit(1);
+    check("visitante", `não lê ${t}`, denied(v), v.error?.message ?? `${rows(v)} linha(s)`);
+  }
+  for (const t of ["parameter_sets", "item_parameters", "tri_model_versions"]) {
+    const r = await A.c.from(t).select("*").limit(1);
+    check("A", `lê ${t}`, !r.error && rows(r) >= 0, r.error?.message ?? "");
+  }
+  // a distribuição por alternativa denuncia o gabarito: conta comum só vê pelo Raio-X, depois de responder
+  const st = await A.c.from("item_response_stats").select("item_id, alternatives").limit(3);
+  check("A", "não lê as taxas de acerto direto", denied(st), st.error?.message ?? `${rows(st)} linha(s)`);
+  const es = await E.c.from("item_response_stats").select("item_id").limit(1);
+  check("E", "lê as taxas de acerto", !es.error, es.error?.message ?? "");
+  const src = (await E.c.from("sources").select("id").limit(1).single()).data?.id;
+  const fake = "00000000-0000-4000-8000-000000000000";
+  const ins = await A.c.from("item_response_stats").insert({ item_id: fake, source_id: src, population: "teste", respondents: 1, correct: 1, blank: 0 }).select();
+  check("A", "não grava taxa de acerto", permError(ins) || denied(ins), ins.error?.message ?? "gravou!");
+  const ps = await A.c.from("parameter_sets").insert({ label: "teste da matriz", source_id: src, area_id: fake, model_family: "3pl", scale_constant: 1 }).select();
+  check("A", "não cria conjunto de parâmetros", permError(ps) || denied(ps), ps.error?.message ?? "criou!");
+  const up = await A.c.from("item_parameters").update({ a: 9 }).neq("item_id", fake).select();
+  check("A", "não altera parâmetro de item", denied(up), up.error?.message ?? `${rows(up)} linha(s)`);
+  const mv = await A.c.from("tri_model_versions").update({ validation_status: "validado" }).neq("id", "x").select();
+  check("A", "não altera versão do modelo", denied(mv), mv.error?.message ?? `${rows(mv)} linha(s)`);
 }
 
 // ── Arquivos ──

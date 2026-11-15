@@ -2,7 +2,9 @@
 
 Nota única: o que funciona, o que foi feito mas ainda não passou por uso real, o que falta e onde retomar. Objetivo em vigor: concluir a plataforma inteira (ver `CLAUDE.md`).
 
-Estado do banco em 11/11/2026: **366 questões publicadas**: Enem 2025, cadernos 1 e 7 (182), e Enem 2024, cadernos 1 e 7 (184). Todas com conteúdo conferido contra os PDFs oficiais e etiquetas pendentes, publicadas com a conta de editor de teste por autorização de Guto (registro em `data/editorial/2026-11-11-*publicacao.log`). As anuladas ficam fora do banco. Temas oficiais de 2025 e 2024 publicados; o Dia D tem 12 cadernos completos (2024 e 2025, dias 1 e 2). 0 parâmetros de TRI.
+Estado do banco em 11/11/2026: **366 questões publicadas**: Enem 2025, cadernos 1 e 7 (182), e Enem 2024, cadernos 1 e 7 (184). Todas com conteúdo conferido contra os PDFs oficiais e etiquetas pendentes, publicadas com a conta de editor de teste por autorização de Guto (registro em `data/editorial/2026-11-11-*publicacao.log`). As anuladas ficam fora do banco. Temas oficiais de 2025 e 2024 publicados; o Dia D tem 12 cadernos completos (2024 e 2025, dias 1 e 2).
+
+Em 15/11/2026 (sessão 1 do plano v2): **TRI com os parâmetros oficiais do Inep** em 364 das 366 questões (as outras 2 foram retiradas pelo Inep na calibração), cálculo conferido contra as notas oficiais dos microdados de 2024 e 2025 (erro médio de 0,03 ponto, o arredondamento da própria nota), e **taxa de acerto real** das 366 no Raio-X.
 
 ## 0. Reconstrução visual: identidade Mesa (em andamento)
 
@@ -60,7 +62,16 @@ Defeito corrigido no caminho: com uma única revisão vencida (3 min), o plano d
 - **Comando primeiro, caça ao distrator, questão do dia e texto compartilhado com questões publicadas (11/11)**: trecho marcado e guardado; classificação dos distratores guardada; a comparação diz "indisponível" porque as etiquetas estão pendentes. Texto compartilhado das questões 6 a 10 de 2025 numa sessão real: texto inteiro na primeira, recolhido nas seguintes.
 - **Banco**: filtro por **edição** (Enem 2025, Enem 2024) além de área, habilidade, assunto e dia. A origem das questões mostra o ano e sempre o caderno azul (fonte do texto importado).
 - **Matriz e incidência** (`/estudar/matriz`): as 120 habilidades oficiais com página e fonte, por área e competência, e a ficha de cada habilidade.
-- **TRI**: motor EAP 3PL configurável, testado contra integração fina e com cenários não aditivos. O diagnóstico diz "indisponível" (sem parâmetros oficiais) e tem demonstração marcada.
+- **TRI com dados oficiais (15/11)**: microdados do Inep de 2024 e 2025 baixados (o intermediário do certificado já estava em `tools/ingest/certs`; não era ICP-Brasil). Fluxo em `tools/ingest/tri_inep.py` e no README da importação.
+  - Cada caderno do banco foi ligado à prova do Inep cujo gabarito bate em 100% das posições; 366 itens com o código oficial (`items.official_item_code`).
+  - Parâmetros a, b, c de 364 itens; 2 ficam inválidos com o motivo do Inep ("problema de convergência").
+  - Validação: o motor em Python (`tri_engine.py`, idêntico ao `engine.ts`, com teste) reproduz a nota oficial de 8 mil participantes por área e ano: erro médio de 0,025 a 0,032 ponto, D = 1, priori normal padrão, 40 pontos entre −4 e 4 (o que o documento "procedimentos de análise" do Inep descreve). A escala de cada área (Linguagens 108,09·θ + 499,98; Humanas 112,32·θ + 501,49; Natureza 113,11·θ + 501,14; Matemática 129,67·θ + 500,02) é a mesma nos dois anos. Relatórios em `data/tri/`.
+  - Regra do Inep reproduzida: quem deixa a área inteira em branco recebe 0.
+  - Modelos `enem-inep-{lc,ch,cn,mt}-v1` registrados como validados; cada um reúne os conjuntos de 2024 e 2025 (`tri_model_parameter_sets`).
+  - **Diagnóstico** mostra a estimativa por área com faixa e as 6 questões erradas que mais subiriam a nota ("Enem 2024 · questão 42 · +35"). Conferido com a conta A: Linguagens 362 com 47 respostas.
+  - **Dia D**: o resultado mostra a nota de cada área pelo mesmo cálculo do Inep (uma casa decimal, como no boletim). Conferido nos três Dias D da conta A.
+  - **Raio-X**: "No Enem 2024, 70% dos participantes acertaram esta questão. A errada mais marcada foi a B, escolhida por 14%." A contagem por alternativa denuncia o gabarito, por isso `item_response_stats` só é lida pelo editor e pelo Raio-X depois da resposta (matriz de acesso).
+  - Conferências: a taxa pela tabela de letras de cada caderno bate até a 5ª casa com a taxa pelo gabarito do Inep nos mesmos cadernos; matriz de acesso 270/270; axe sem violações no Diagnóstico e no Dia D (claro e escuro).
 - **Área editorial**: propostas, dúvidas, etiquetas, cartões, temas, publicação de conteúdo conferido; a prévia do aluno desenha tabelas e linhas numeradas.
 - **Cadernos 1 e 7 conferidos contra os PDFs oficiais** (registros em `data/editorial/2026-11-1*`):
   - palavras grudadas: corrigidas em 80 propostas; a causa foi corrigida em `extract.py`;
@@ -79,7 +90,7 @@ Defeito corrigido no caminho: com uma única revisão vencida (3 min), o plano d
 | **Treino por habilidade** e incidência | telas mostram "indisponível" | etiquetas de habilidade revisadas em questões publicadas |
 | **Feed de cartões reais** | demonstração no navegador | cartões de conceito publicados (hoje: 0) |
 | Correção de redação real | avaliador de teste, sem tokens | chave e política de IA |
-| TRI com números | motor testado com parâmetros fictícios marcados | parâmetros oficiais do Inep por item |
+| Estimativa TRI no uso de Guto | conferida contra notas oficiais e com a conta de teste | uso real: estimativa com poucas respostas fica perto do meio e com faixa larga, como deve ser; vale olhar depois de umas 20 respostas por área |
 
 ## 3. Falta, com o bloqueio específico
 
@@ -97,8 +108,8 @@ Defeito corrigido no caminho: com uma única revisão vencida (3 min), o plano d
    - retorno do treino por peças;
    - leitura automática da foto da redação;
    - **tutor** (F7-T32–34). O tutor não foi construído: não há como implementar nem avaliar o contrato sem chamadas reais.
-3. **Parâmetros oficiais de TRI** (microdados do Inep, inacessíveis daqui). Destrava a estimativa por área e a **previsão** (F7-T23–25). A previsão exige ainda histórico mínimo de estimativas comparáveis.
-4. **Dados brasileiros agregados** (F7-T28): precisam dos microdados (mesmo bloqueio do item 3). Nada foi construído para não sugerir dado ausente.
+3. ~~Parâmetros oficiais de TRI~~: feito em 15/11. Falta a **previsão** (F7-T23–25), que exige histórico mínimo de estimativas comparáveis da própria conta.
+4. **Dados brasileiros agregados** (F7-T28): a taxa por questão está no Raio-X. Falta a agregação por habilidade e assunto ("o Brasil erra mais em…"), que depende das etiquetas revisadas (sessão 2). As contagens por prova e posição podem ser refeitas com `tri_inep.py ler` (cerca de 40 s por edição).
 5. **Notas de corte verificáveis** (EXT-CURSO, F7-T37): sem fonte importada. A meta de curso funciona com dados informados pela conta e com fonte.
 6. **Redações nota 1000 e corpus de calibração**: Guto traz. Biblioteca nota 1000 e calibração aguardam.
 7. **Notificação / WhatsApp da questão do dia** (EXT-CANAL): a questão do dia existe só dentro do app.
@@ -115,12 +126,15 @@ Defeito corrigido no caminho: com uma única revisão vencida (3 min), o plano d
 
 ## Retomar por aqui
 
-As questões publicadas já foram percorridas com as contas de teste (Dia D, comando, distrator, questão do dia, texto compartilhado, duelo). Edições anteriores (2023, 2022…) ficaram para depois, a pedido de Guto. Próximos passos sem bloqueio externo:
-- revisão das etiquetas de habilidade e de distratores pela área editorial (destrava treino por habilidade, incidência e as comparações);
-- fichas de cinco minutos com fonte (item 9);
-- rodar de novo `audit:ui` com os dados reais.
+Roteiro em `docs/plan/plano-v2.md`, seção 8. **Sessão 1 (Opus 5.5) feita em 15/11**: microdados, parâmetros, validação da TRI, nota do Dia D, taxa de acerto no Raio-X. **Próxima: sessão 2 (Opus 5.5)**, árvore de conteúdos e etiquetagem das 366 (destrava treino por habilidade, incidência, comparações de distrator e os agregados "o Brasil erra mais em…").
 
-Publicação: por autorização permanente de Guto (11/11/2026), o trabalho verificado vai direto para `claude/new-session-vhzm54` (Vercel).
+Para outras edições (2023, 2022… e o banco 2015–2025 do plano), os microdados seguem o mesmo endereço; `tri_inep.py` já faz provas, leitura, validação e carga assim que os cadernos da edição estiverem no banco. Os zips não ficam no repositório; baixar de novo leva uns 10 minutos por edição.
+
+Outros passos sem bloqueio externo:
+- fichas de cinco minutos com fonte (item 9);
+- rodar de novo `audit:ui` com os dados reais (as telas de Diagnóstico e Dia D não estão na suíte; conferidas à parte com axe em 15/11).
+
+Publicação: por autorização permanente de Guto (11/11/2026), o trabalho verificado vai direto para `claude/new-session-vhzm54` (Vercel). A sessão 1 (15/11) foi publicada assim, e os dados de TRI e taxas foram carregados com a conta de editor de teste.
 
 Lembretes:
 - Migrações sem `delete`/`drop`; tabela nova revoga `anon` e entra na matriz.

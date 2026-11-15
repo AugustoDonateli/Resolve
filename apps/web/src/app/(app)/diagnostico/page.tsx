@@ -14,7 +14,7 @@ export const dynamic = "force-dynamic";
 const STATUS: Record<string, string> = {
   nao_validado: "cálculo ainda não validado contra notas de referência",
   em_validacao: "cálculo em validação",
-  validado: "cálculo validado contra notas de referência",
+  validado: "cálculo conferido contra notas oficiais",
 };
 
 export default async function DiagnosticoPage() {
@@ -67,9 +67,16 @@ export default async function DiagnosticoPage() {
                     }}
                   />
                   <p className="t-meta text-ink-2">
-                    Modelo {a.model.id} · {a.model.parameterSet} · {STATUS[a.model.status] ?? a.model.status}
-                    {a.model.transformSource ? ` · escala: ${a.model.transformSource}` : " · escala do modelo (θ), sem conversão para nota"}. Não é a nota oficial.
+                    Parâmetros oficiais do Inep · {STATUS[a.model.status] ?? a.model.status} · modelo {a.model.id}. É uma estimativa com as questões
+                    que você respondeu, não a nota oficial.
                   </p>
+                  {(a.model.validationNote || a.model.transformSource) && (
+                    <details className="t-meta text-ink-2">
+                      <summary className="min-h-11 cursor-pointer py-2 underline">Como o cálculo foi conferido</summary>
+                      {a.model.validationNote && <p className="mt-1 max-w-3xl">{a.model.validationNote}</p>}
+                      {a.model.transformSource && <p className="mt-2 max-w-3xl">Escala: {a.model.transformSource}</p>}
+                    </details>
+                  )}
                 </>
               ) : (
                 <p className="max-w-2xl t-ui text-ink">

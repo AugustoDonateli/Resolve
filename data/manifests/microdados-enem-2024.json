@@ -1,0 +1,93 @@
+{
+ "edition": "microdados-enem-2024",
+ "url": "https://download.inep.gov.br/microdados/microdados_enem_2024.zip",
+ "source_page": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/enem",
+ "sha256": "69ee52dbcdae61410a7b2c31b776f396f2da30febfc1d2856e9e0ad064c76fb1",
+ "bytes": 526073856,
+ "retrieved_at": "2026-11-15T23:28:00+00:00",
+ "files": [
+  {
+   "name": "microdados_enem_2024/DADOS/ITENS_PROVA_2024.csv",
+   "bytes": 330676
+  },
+  {
+   "name": "microdados_enem_2024/DADOS/PARTICIPANTES_2024.csv",
+   "bytes": 462022669
+  },
+  {
+   "name": "microdados_enem_2024/DADOS/RESULTADOS_2024.csv",
+   "bytes": 1683449589
+  },
+  {
+   "name": "microdados_enem_2024/DICIONÁRIO/Dicionário_Microdados_Enem_2024.ods",
+   "bytes": 22458
+  },
+  {
+   "name": "microdados_enem_2024/DICIONÁRIO/Dicionário_Microdados_Enem_2024.xlsx",
+   "bytes": 35781
+  },
+  {
+   "name": "microdados_enem_2024/INPUTS/INPUT_R_ITENS_PROVA_2024.R",
+   "bytes": 2785
+  },
+  {
+   "name": "microdados_enem_2024/INPUTS/INPUT_R_PARTICIPANTES_2024.R",
+   "bytes": 17319
+  },
+  {
+   "name": "microdados_enem_2024/INPUTS/INPUT_R_RESULTADOS_2024.R",
+   "bytes": 7859
+  },
+  {
+   "name": "microdados_enem_2024/INPUTS/INPUT_SAS_ITENS_PROVA_2024.sas",
+   "bytes": 3793
+  },
+  {
+   "name": "microdados_enem_2024/INPUTS/INPUT_SAS_PARTICIPANTES_2024.sas",
+   "bytes": 16902
+  },
+  {
+   "name": "microdados_enem_2024/INPUTS/INPUT_SAS_RESULTADOS_2024.sas",
+   "bytes": 10817
+  },
+  {
+   "name": "microdados_enem_2024/INPUTS/INPUT_SPSS_ITENS_PROVA_2024.sps",
+   "bytes": 3621
+  },
+  {
+   "name": "microdados_enem_2024/INPUTS/INPUT_SPSS_PARTICIPANTES_2024.sps",
+   "bytes": 12462
+  },
+  {
+   "name": "microdados_enem_2024/INPUTS/INPUT_SPSS_RESULTADOS_2024.sps",
+   "bytes": 8985
+  },
+  {
+   "name": "microdados_enem_2024/LEIA-ME E DOCUMENTOS TÉCNICOS/Edital_ENEM_2024.pdf",
+   "bytes": 304039
+  },
+  {
+   "name": "microdados_enem_2024/LEIA-ME E DOCUMENTOS TÉCNICOS/enem_procedimentos_de_analise.pdf",
+   "bytes": 1267467
+  },
+  {
+   "name": "microdados_enem_2024/LEIA-ME E DOCUMENTOS TÉCNICOS/entenda_a_sua_nota_no_enem_guia_do_participante (2).pdf",
+   "bytes": 16814632
+  },
+  {
+   "name": "microdados_enem_2024/LEIA-ME E DOCUMENTOS TÉCNICOS/Leia_Me_Enem_2024.pdf",
+   "bytes": 349159
+  },
+  {
+   "name": "microdados_enem_2024/LEIA-ME E DOCUMENTOS TÉCNICOS/manual_de_redacao_do_enem_2024.pdf",
+   "bytes": 4638851
+  },
+  {
+   "name": "microdados_enem_2024/LEIA-ME E DOCUMENTOS TÉCNICOS/matriz_referencia_enem.pdf",
+   "bytes": 177800
+  }
+ ],
+ "notes": [
+  "Baixado com a verificação TLS ligada (intermediário em tools/ingest/certs). O zip fica fora do repositório."
+ ]
+}

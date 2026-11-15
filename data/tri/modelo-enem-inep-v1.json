@@ -1,0 +1,51 @@
+{
+ "D": 1,
+ "prior": {
+  "kind": "normal",
+  "mean": 0,
+  "sd": 1
+ },
+ "integration": {
+  "from": -4,
+  "to": 4,
+  "points": 40
+ },
+ "interval_z": 1.645,
+ "code_version": "apps/web/src/lib/tri/engine.ts @ 0553f27",
+ "transform": {
+  "LC": {
+   "slope": 108.09,
+   "intercept": 499.976
+  },
+  "CH": {
+   "slope": 112.3151,
+   "intercept": 501.4864
+  },
+  "CN": {
+   "slope": 113.1122,
+   "intercept": 501.1417
+  },
+  "MT": {
+   "slope": 129.6679,
+   "intercept": 500.0157
+  }
+ },
+ "transform_source": {
+  "LC": "Inep, Enem: procedimentos de análise (documento dos microdados): EAP com 40 pontos de quadratura, priori normal e transformação linear para a escala do Enem. Inclinação e intercepto desta área ajustados nas notas oficiais (NU_NOTA) dos microdados de 2025 e conferidos nos de 2024 (tools/ingest/tri_inep.py; data/tri/validacao-*.json).",
+  "CH": "Inep, Enem: procedimentos de análise (documento dos microdados): EAP com 40 pontos de quadratura, priori normal e transformação linear para a escala do Enem. Inclinação e intercepto desta área ajustados nas notas oficiais (NU_NOTA) dos microdados de 2025 e conferidos nos de 2024 (tools/ingest/tri_inep.py; data/tri/validacao-*.json).",
+  "CN": "Inep, Enem: procedimentos de análise (documento dos microdados): EAP com 40 pontos de quadratura, priori normal e transformação linear para a escala do Enem. Inclinação e intercepto desta área ajustados nas notas oficiais (NU_NOTA) dos microdados de 2025 e conferidos nos de 2024 (tools/ingest/tri_inep.py; data/tri/validacao-*.json).",
+  "MT": "Inep, Enem: procedimentos de análise (documento dos microdados): EAP com 40 pontos de quadratura, priori normal e transformação linear para a escala do Enem. Inclinação e intercepto desta área ajustados nas notas oficiais (NU_NOTA) dos microdados de 2025 e conferidos nos de 2024 (tools/ingest/tri_inep.py; data/tri/validacao-*.json)."
+ },
+ "status": {
+  "LC": "validado",
+  "CH": "validado",
+  "CN": "validado",
+  "MT": "validado"
+ },
+ "notes": {
+  "LC": "Conferido contra notas oficiais de participantes anônimos dos microdados do Inep. Enem 2025, metade da amostra fora do ajuste (n = 4000): erro médio 0,025 ponto, 95% abaixo de 0,048, máximo 0,083. Mesma escala nas notas do Enem 2024 (n = 7993): erro médio 0,025, 95% abaixo de 0,048. A nota oficial tem uma casa decimal, então o erro esperado só do arredondamento é 0,025. Com D = 1,7 o erro médio seria 6,583. Fora da conta: quem deixou a área inteira em branco (o Inep dá nota 0).",
+  "CH": "Conferido contra notas oficiais de participantes anônimos dos microdados do Inep. Enem 2025, metade da amostra fora do ajuste (n = 3989): erro médio 0,025 ponto, 95% abaixo de 0,049, máximo 0,079. Mesma escala nas notas do Enem 2024 (n = 7983): erro médio 0,026, 95% abaixo de 0,050. A nota oficial tem uma casa decimal, então o erro esperado só do arredondamento é 0,025. Com D = 1,7 o erro médio seria 9,208. Fora da conta: quem deixou a área inteira em branco (o Inep dá nota 0).",
+  "CN": "Conferido contra notas oficiais de participantes anônimos dos microdados do Inep. Enem 2025, metade da amostra fora do ajuste (n = 3999): erro médio 0,025 ponto, 95% abaixo de 0,050, máximo 0,091. Mesma escala nas notas do Enem 2024 (n = 7998): erro médio 0,025, 95% abaixo de 0,050. A nota oficial tem uma casa decimal, então o erro esperado só do arredondamento é 0,025. Com D = 1,7 o erro médio seria 9,740. Fora da conta: quem deixou a área inteira em branco (o Inep dá nota 0).",
+  "MT": "Conferido contra notas oficiais de participantes anônimos dos microdados do Inep. Enem 2025, metade da amostra fora do ajuste (n = 4000): erro médio 0,032 ponto, 95% abaixo de 0,061, máximo 5,093. Mesma escala nas notas do Enem 2024 (n = 8000): erro médio 0,030, 95% abaixo de 0,059. A nota oficial tem uma casa decimal, então o erro esperado só do arredondamento é 0,025. Com D = 1,7 o erro médio seria 12,502. Fora da conta: quem deixou a área inteira em branco (o Inep dá nota 0)."
+ }
+}

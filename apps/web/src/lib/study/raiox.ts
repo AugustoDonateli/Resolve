@@ -25,6 +25,25 @@ export interface Explanation {
   }[];
   steps?: { id: string; text: string }[];
   correct_key?: string | null;
+  /** Taxa real na prova (microdados do Inep); ausente quando a questão não tem esse dado. */
+  stats?: {
+    edition: string | null;
+    respondents: number;
+    correct: number;
+    blank: number;
+    alternatives: Record<string, number> | null;
+    alternatives_respondents: number | null;
+  } | null;
+}
+
+export interface ExamStats {
+  edition: string | null;
+  respondents: number;
+  /** Porcentagens inteiras (arredondadas) sobre os presentes que receberam a questão. */
+  correctPct: number;
+  blankPct: number;
+  /** A alternativa errada mais marcada, na letra que a pessoa vê; null se não há contagem por alternativa. */
+  topWrong: { letter: string; pct: number } | null;
 }
 
 export interface RaioXView {
@@ -34,6 +53,7 @@ export interface RaioXView {
   distractors: { letter: string; labels: string[]; rationale: string }[];
   steps: string[];
   correctLetter: string | null;
+  stats: ExamStats | null;
 }
 
 function blockText(
@@ -94,5 +114,27 @@ export function buildRaioX(q: StudyQuestion, x: Explanation): RaioXView | null {
     distractors,
     steps: (x.steps ?? []).map((s) => s.text).filter(Boolean),
     correctLetter: x.correct_key ? letterOf(x.correct_key) : null,
+    stats: examStats(x, letterOf),
+  };
+}
+
+/** Quantos acertaram a questão na prova e qual errada foi mais marcada (sem dado, null). */
+export function examStats(x: Explanation, letterOf: (key: string) => string): ExamStats | null {
+  const s = x.stats;
+  if (!s || !(s.respondents > 0)) return null;
+  const pct = (n: number, d: number) => Math.round((100 * n) / d);
+  let topWrong: ExamStats["topWrong"] = null;
+  if (s.alternatives && s.alternatives_respondents && x.correct_key) {
+    const wrong = Object.entries(s.alternatives)
+      .filter(([key]) => key !== x.correct_key)
+      .sort((a, b) => b[1] - a[1])[0];
+    if (wrong && wrong[1] > 0) topWrong = { letter: letterOf(wrong[0]), pct: pct(wrong[1], s.alternatives_respondents) };
+  }
+  return {
+    edition: s.edition,
+    respondents: s.respondents,
+    correctPct: pct(s.correct, s.respondents),
+    blankPct: pct(s.blank, s.respondents),
+    topWrong,
   };
 }

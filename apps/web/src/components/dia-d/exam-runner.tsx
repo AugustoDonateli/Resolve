@@ -9,6 +9,7 @@ import { AnswerCard } from "./answer-card";
 import { saveDiaD } from "@/lib/dia-d/actions";
 import { clockLabel, type ExamAction, type ExamRun, type Letter } from "@/lib/dia-d/types";
 import { ExamReplay } from "./exam-replay";
+import { ExamScore } from "./exam-score";
 
 type View = "questao" | "cartao" | "redacao" | "replay";
 type Command = { id: string; action: ExamAction };
@@ -185,8 +186,9 @@ export function ExamRunner({ run }: { run: ExamRun }) {
         <section>
           <h2 ref={heading} tabIndex={-1} className="t-section">Cartão-resposta</h2>
           <p className="my-3 t-meta text-ink-2">
-            {ended ? `${blank} questões válidas em branco. A nota TRI está indisponível.` : `${differences} marcações do caderno ainda divergem do cartão.`}
+            {ended ? `${blank} questões válidas em branco.` : `${differences} marcações do caderno ainda divergem do cartão.`}
           </p>
+          {ended && run.tri && <ExamScore scores={run.tri} />}
           {!ended && (
             <div className="mb-4">
               {confirm ? (

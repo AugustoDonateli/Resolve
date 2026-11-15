@@ -1,5 +1,6 @@
 import type { PromptDetail } from "@/lib/essay/prompt-types";
 import type { StudyQuestion } from "@/lib/study/question-types";
+import type { ExamAreaScore } from "@/lib/tri/exam";
 
 export const LETTERS = ["A", "B", "C", "D", "E"] as const;
 export type Letter = (typeof LETTERS)[number];
@@ -79,6 +80,8 @@ export interface ExamRun {
   items: ExamItem[];
   events: ExamEvent[];
   prompt?: PromptDetail | null;
+  /** Nota TRI por área, só depois da entrega. */
+  tri?: ExamAreaScore[];
 }
 
 export function bookletLabel(book: Booklet) {

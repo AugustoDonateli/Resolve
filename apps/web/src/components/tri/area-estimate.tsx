@@ -17,11 +17,23 @@ export interface EstimateInput {
  * Estimativa e cenários com o mesmo motor: escolher um erro e ver o conjunto inteiro recalculado como se
  * ele fosse acerto. Um cenário por vez; a diferença não é uma parcela somável a outros cenários.
  */
+const TOP = 6;
+
 export function AreaEstimate({ input }: { input: EstimateInput }) {
   const params = useMemo(() => new Map<string, ItemParameters>(input.data.map((d) => [d.itemId, { a: d.a, b: d.b, c: d.c }])), [input.data]);
   const responses: Response[] = useMemo(() => input.data.map((d) => ({ itemId: d.itemId, correct: d.correct })), [input.data]);
   const base = useMemo(() => eap(responses, params, input.config), [responses, params, input.config]);
-  const wrong = input.data.filter((d) => !d.correct);
+  // As erradas que mais subiriam a nota se fossem acerto (cada uma recalculada sozinha), das maiores para as menores.
+  const wrong = useMemo(
+    () =>
+      input.data
+        .filter((d) => !d.correct)
+        .map((d) => ({ ...d, gain: scenario(responses, params, input.config, { label: d.itemId, changes: [{ itemId: d.itemId, correct: true }] }).delta }))
+        .sort((x, y) => y.gain - x.gain)
+        .slice(0, TOP),
+    [input.data, responses, params, input.config],
+  );
+  const totalWrong = input.data.filter((d) => !d.correct).length;
   const [pick, setPick] = useState<string | null>(null);
   const sc = useMemo(
     () => (pick ? scenario(responses, params, input.config, { label: pick, changes: [{ itemId: pick, correct: true }] }) : null),
@@ -49,6 +61,9 @@ export function AreaEstimate({ input }: { input: EstimateInput }) {
       {wrong.length > 0 && (
         <fieldset className="flex flex-col gap-2">
           <legend className="mb-1 t-ui">E se você tivesse acertado…</legend>
+          {totalWrong > TOP && (
+            <p className="t-meta text-ink-2">As {TOP} questões erradas que mais subiriam a sua estimativa, de {totalWrong} erradas.</p>
+          )}
           <div className="flex flex-wrap gap-2">
             {wrong.map((w) => (
               <label
@@ -66,6 +81,7 @@ export function AreaEstimate({ input }: { input: EstimateInput }) {
                   onChange={() => setPick(w.itemId)}
                 />
                 {w.label ?? `questão ${w.itemId.slice(0, 4)}`}
+                <span className="tabular text-ink-2">+{fmt(w.gain)}</span>
               </label>
             ))}
             {pick && (

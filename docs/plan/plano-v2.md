@@ -260,6 +260,8 @@ O que isso quer dizer:
 - **Com 1 a 2 h por dia (350 a 700 h):** cabe tudo — currículo completo, o banco inteiro, uns 10 Dias D, uma redação por semana e a revisão. Com 2 h por dia, as 2.000 questões terminam antes do fim do ano. Por isso as provas PPL e as reaplicações de 2015 a 2025 ficam como reserva, a serem importadas quando o banco estiver perto de acabar.
 - **Com 1 a 2 h por semana (50 a 100 h):** não cabe o currículo inteiro. Mal cabem as lições. O app precisa escolher por você o que dá mais nota por hora, deixar claro o que ficou de fora e reservar algumas horas para pelo menos 2 Dias D e algumas redações.
 
+**Ritmo de Guto (15/11/2026): 2 a 3 h por semana, cerca de 100 a 150 h até a prova.** É o caso apertado: cabem as lições prioritárias, parte do banco, 2 ou 3 Dias D e umas 15 redações. O plano de Guto é feito para esse caso, e o app tem de funcionar bem nele antes de pensar em quem estuda 2 h por dia.
+
 O plano anual (2B.3) usa as horas que a pessoa informa e mostra o que cabe e o que não cabe. Nada de prometer o currículo inteiro para quem tem 1 hora por semana.
 
 ### 2B.2 Onde você está
@@ -335,13 +337,13 @@ O plano do dia já existe e já escolhe a área com mais erro. Ele passa a segui
 ## 4. Frente 3 — TRI, nota e futuro (Opus 5.5)
 
 ### 4.1 Destravar os dados do Inep
-- **Causa achada em 15/11:** os servidores do Inep usam certificado da cadeia ICP-Brasil, ausente do ambiente. Não é bloqueio de rede.
-- **Correção:** acrescentar a raiz oficial da ICP-Brasil (ITI), conferida pela impressão digital publicada, à confiança do ambiente, por meio do script de configuração do ambiente, para valer em toda sessão. Sem desligar a verificação.
+- **Causa (15/11):** `download.inep.gov.br` envia o certificado sem o intermediário da cadeia (RNP ICPEdu GR46, assinado pela GlobalSign Root R46). Não é ICP-Brasil nem bloqueio de rede.
+- **Correção (feita na sessão 1):** o intermediário já estava no repositório (`tools/ingest/certs/`) e completa a cadeia com a verificação ligada. Microdados de 2024 e 2025 baixados assim.
 - **Importar dos microdados:** os parâmetros a, b e c de cada item e a taxa de acerto real por questão.
 
 ### 4.2 Nota validada
 - **Anos sem parâmetro público:** estimar das respostas dos participantes, com o erro declarado.
-- **Validação contra notas oficiais:** recalcular a nota de participantes reais (anônimos) dos microdados e publicar o erro médio por área e ano. Até lá, o rótulo é "cálculo experimental".
+- **Validação contra notas oficiais (feita em 15/11):** a nota de 8 mil participantes por área e ano, recalculada, bate com a oficial com erro médio de 0,03 ponto (2024 e 2025). Relatórios em `data/tri/`.
 - **O que aparece:**
   - nota do Dia D com a calibração da edição;
   - nota por área com faixa;
@@ -461,7 +463,7 @@ Sessões curtas, uma frente (ou metade) por sessão. Cada uma termina com um tou
 
 | # | Modelo | Sessão |
 |---|---|---|
-| 1 | Opus 5.5 | Certificado ICP-Brasil no ambiente; parâmetros e taxas do Inep; validação da TRI (4.1, 4.2) |
+| 1 | Opus 5.5 | **Feita (15/11).** Microdados do Inep; parâmetros e taxas de acerto; validação da TRI contra notas oficiais (4.1, 4.2) |
 | 2 | Opus 5.5 | Árvore de conteúdos e etiquetagem das 366 (2.1, 3.1) |
 | 3 | Fable 5.2 | Conferência relâmpago para Guto; tutorial: primeira entrada, primeira questão, tour da mesa, dicas da primeira vez (3.1, 2A.5) |
 | 4 | Opus 5.5 | Convites, membros, cota de IA, termos, exportar e excluir (7, 9) |
