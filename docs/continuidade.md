@@ -130,6 +130,8 @@ Roteiro em `docs/plan/plano-v2.md`, seção 8. **Sessão 1 (Opus 5.5) feita em 1
 
 Para outras edições (2023, 2022… e o banco 2015–2025 do plano), os microdados seguem o mesmo endereço; `tri_inep.py` já faz provas, leitura, validação e carga assim que os cadernos da edição estiverem no banco. Os zips não ficam no repositório; baixar de novo leva uns 10 minutos por edição.
 
+Pedido de Guto (16/11/2026), a fazer depois da etiquetagem: **perfil por área e assunto**. A partir dos acertos e erros (e da nota TRI de cada área), mostrar onde a pessoa vai bem e onde vai mal ("Humanas: vai bem; Exatas: precisa de reforço"), em linguagem simples, para ela se enxergar e até para ajudar a pensar em curso e profissão. O mapa de habilidades atual não ficou claro para ele: explicar ou substituir por essa visão.
+
 Outros passos sem bloqueio externo:
 - fichas de cinco minutos com fonte (item 9);
 - rodar de novo `audit:ui` com os dados reais (as telas de Diagnóstico e Dia D não estão na suíte; conferidas à parte com axe em 15/11).
