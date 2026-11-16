@@ -1,0 +1,14 @@
+{
+ "nota": "Subdivisões do Resolve dentro de objetos de conhecimento oficiais que juntam vários conteúdos num item só. Não são texto da matriz: servem para estudar e contar incidência com mais detalhe. Cada lista fica sob o objeto oficial cujo texto começa como a chave.",
+ "MT": {
+  "Operações em conjuntos numéricos": ["Operações com inteiros e expressões numéricas", "Frações e números decimais", "Potências, raízes e notação científica"],
+  "Desigualdades, divisibilidade, fatoração": ["Divisibilidade, múltiplos e divisores (MMC e MDC)", "Razão e proporção", "Regra de três simples e composta", "Porcentagem", "Juros simples e compostos", "Desigualdades e fatoração"],
+  "Relações de dependência entre grandezas": ["Grandezas diretamente e inversamente proporcionais", "Sequências, progressão aritmética e geométrica", "Princípio fundamental da contagem e combinatória"],
+  "Grandezas, unidades de medida e escalas": ["Unidades de medida e conversões", "Escalas em mapas, plantas e maquetes"],
+  "Comprimentos, áreas e volumes": ["Perímetro e área de figuras planas", "Área de superfície e volume de sólidos"],
+  "Características das figuras geométricas planas e espaciais": ["Figuras planas e suas propriedades", "Sólidos geométricos, planificações e vistas"],
+  "Representação e análise de dados": ["Leitura e interpretação de gráficos e tabelas", "Escolha e construção de gráficos"],
+  "Funções algébricas do 1º e do 2º graus": ["Função do 1º grau", "Função do 2º grau", "Funções exponencial e logarítmica", "Funções polinomiais e racionais"],
+  "Paralelismo e perpendicularidade, sistemas de equações": ["Sistemas de equações", "Paralelismo e perpendicularidade de retas"]
+ }
+}

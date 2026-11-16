@@ -1,0 +1,2370 @@
+{
+ "source": {
+  "title": "Matrizes de referência do Enem, v1 (abril de 2026), anexo: objetos de conhecimento",
+  "url": "https://download.inep.gov.br/enem/outros_documentos/enem_matriz_de_referencia_v1.pdf",
+  "sha256": "4f540d5439df00f88e13363ecaff3d884b83d16c1ae6cedbe5c2c3aabbf288b6"
+ },
+ "areas": [
+  {
+   "code": "LC",
+   "disciplinas": [
+    {
+     "label": null,
+     "temas": [
+      {
+       "label": "Estudo do texto: as sequências discursivas e os gêneros textuais no sistema de comunicação e informação",
+       "objetos": [
+        {
+         "label": "Modos de organização da composição textual",
+         "page": 33,
+         "code": "LC.1.1"
+        },
+        {
+         "label": "Atividades de produção escrita e de leitura de textos gerados nas diferentes esferas sociais — públicas e privadas",
+         "page": 33,
+         "code": "LC.1.2"
+        }
+       ],
+       "page": 33,
+       "code": "LC.1"
+      },
+      {
+       "label": "Estudo das práticas corporais: a linguagem corporal como integradora social e formadora de identidade",
+       "objetos": [
+        {
+         "label": "Performance corporal e identidades juvenis",
+         "page": 33,
+         "code": "LC.2.1"
+        },
+        {
+         "label": "Possibilidades de vivência crítica e emancipada do lazer",
+         "page": 33,
+         "code": "LC.2.2"
+        },
+        {
+         "label": "Mitos e verdades sobre os corpos masculino e feminino na sociedade atual",
+         "page": 33,
+         "code": "LC.2.3"
+        },
+        {
+         "label": "Exercício físico e saúde",
+         "page": 33,
+         "code": "LC.2.4"
+        },
+        {
+         "label": "Corpo e expressão artística e cultural",
+         "page": 33,
+         "code": "LC.2.5"
+        },
+        {
+         "label": "O corpo no mundo dos símbolos e como produção da cultura",
+         "page": 33,
+         "code": "LC.2.6"
+        },
+        {
+         "label": "Práticas corporais e autonomia",
+         "page": 33,
+         "code": "LC.2.7"
+        },
+        {
+         "label": "Condicionamentos e esforços físicos",
+         "page": 33,
+         "code": "LC.2.8"
+        },
+        {
+         "label": "O esporte",
+         "page": 34,
+         "code": "LC.2.9"
+        },
+        {
+         "label": "A dança",
+         "page": 34,
+         "code": "LC.2.10"
+        },
+        {
+         "label": "As lutas",
+         "page": 34,
+         "code": "LC.2.11"
+        },
+        {
+         "label": "Os jogos",
+         "page": 34,
+         "code": "LC.2.12"
+        },
+        {
+         "label": "As brincadeiras",
+         "page": 34,
+         "code": "LC.2.13"
+        }
+       ],
+       "page": 33,
+       "code": "LC.2"
+      },
+      {
+       "label": "Produção e recepção de textos artísticos: interpretação e representação do mundo para o fortalecimento dos processos de identidade e cidadania",
+       "objetos": [
+        {
+         "label": "Artes Visuais: estrutura morfológica, sintática, o contexto da obra artística, o contexto da comunidade",
+         "page": 34,
+         "code": "LC.3.1"
+        },
+        {
+         "label": "Teatro: estrutura morfológica, sintática, o contexto da obra artística, o contexto da comunidade, as fontes de criação",
+         "page": 34,
+         "code": "LC.3.2"
+        },
+        {
+         "label": "Música: estrutura morfológica, sintática, o contexto da obra artística, o contexto da comunidade, as fontes de criação",
+         "page": 34,
+         "code": "LC.3.3"
+        },
+        {
+         "label": "Dança: estrutura morfológica, sintática, o contexto da obra artística, o contexto da comunidade, as fontes de criação",
+         "page": 34,
+         "code": "LC.3.4"
+        },
+        {
+         "label": "Conteúdos estruturantes das linguagens artísticas (Artes Visuais, Dança, Música, Teatro), elaborados a partir de suas estruturas morfológicas e sintáticas",
+         "page": 34,
+         "code": "LC.3.5"
+        },
+        {
+         "label": "Inclusão, diversidade e multiculturalidade: a valorização da pluralidade expressada nas produções estéticas e artísticas das minorias sociais e das pessoas com deficiência",
+         "page": 34,
+         "code": "LC.3.6"
+        }
+       ],
+       "page": 34,
+       "code": "LC.3"
+      },
+      {
+       "label": "Estudo do texto literário: relações entre produção literária e processo social, concepções artísticas, procedimentos de construção e recepção de textos",
+       "objetos": [
+        {
+         "label": "Produção literária e processo social",
+         "page": 34,
+         "code": "LC.4.1"
+        },
+        {
+         "label": "Processos de formação literária e de formação nacional",
+         "page": 34,
+         "code": "LC.4.2"
+        },
+        {
+         "label": "Produção de textos literários, sua recepção e a constituição do patrimônio literário nacional",
+         "page": 35,
+         "code": "LC.4.3"
+        },
+        {
+         "label": "Relações entre a dialética cosmopolitismo/localismo e a produção literária nacional",
+         "page": 35,
+         "code": "LC.4.4"
+        },
+        {
+         "label": "Elementos de continuidade e ruptura entre os diversos momentos da literatura brasileira",
+         "page": 35,
+         "code": "LC.4.5"
+        },
+        {
+         "label": "Associações entre concepções artísticas e procedimentos de construção do texto literário em seus gêneros (épico/narrativo, lírico e dramático) e formas diversas",
+         "page": 35,
+         "code": "LC.4.6"
+        },
+        {
+         "label": "Articulações entre os recursos expressivos e estruturais do texto literário e o processo social relacionado ao momento de sua produção",
+         "page": 35,
+         "code": "LC.4.7"
+        },
+        {
+         "label": "Representação literária: natureza, função, organização e estrutura do texto literário",
+         "page": 35,
+         "code": "LC.4.8"
+        },
+        {
+         "label": "Relações entre literatura, outras artes e outros saberes",
+         "page": 35,
+         "code": "LC.4.9"
+        }
+       ],
+       "page": 34,
+       "code": "LC.4"
+      },
+      {
+       "label": "Estudo dos aspectos linguísticos em diferentes textos: recursos expressivos da língua, procedimentos de construção e recepção de textos",
+       "objetos": [
+        {
+         "label": "Organização da macroestrutura semântica e a articulação entre ideias e proposições (relações lógico-semânticas)",
+         "page": 35,
+         "code": "LC.5.1"
+        }
+       ],
+       "page": 35,
+       "code": "LC.5"
+      },
+      {
+       "label": "Estudo do texto argumentativo, seus gêneros e recursos linguísticos: argumentação — tipo, gêneros e usos em Língua Portuguesa",
+       "objetos": [
+        {
+         "label": "Formas de apresentação de diferentes pontos de vista",
+         "page": 35,
+         "code": "LC.6.1"
+        },
+        {
+         "label": "Organização e progressão textual",
+         "page": 35,
+         "code": "LC.6.2"
+        },
+        {
+         "label": "Papéis sociais e comunicativos dos interlocutores, relação entre usos e propósitos comunicativos, função sociocomunicativa do gênero, aspectos da dimensão espaçotemporal em que se produz o texto",
+         "page": 35,
+         "code": "LC.6.3"
+        }
+       ],
+       "page": 35,
+       "code": "LC.6"
+      },
+      {
+       "label": "Estudo dos aspectos linguísticos da Língua Portuguesa: usos da língua — norma culta e variação linguística",
+       "objetos": [
+        {
+         "label": "Uso dos recursos linguísticos em relação ao contexto em que o texto é constituído: elementos de referência pessoal, temporal, espacial, registro linguístico, grau de formalidade, seleção lexical, tempos e modos verbais",
+         "page": 36,
+         "code": "LC.7.1"
+        },
+        {
+         "label": "Uso dos recursos linguísticos em processo de coesão textual: elementos de articulação das sequências dos textos ou à construção da microestrutura do texto",
+         "page": 36,
+         "code": "LC.7.2"
+        }
+       ],
+       "page": 36,
+       "code": "LC.7"
+      },
+      {
+       "label": "Estudo dos gêneros digitais: tecnologia da comunicação e informação — impacto e função social",
+       "objetos": [
+        {
+         "label": "Texto literário típico da cultura de massa: o suporte textual em gêneros digitais",
+         "page": 36,
+         "code": "LC.8.1"
+        },
+        {
+         "label": "Caracterização dos interlocutores na comunicação tecnológica",
+         "page": 36,
+         "code": "LC.8.2"
+        },
+        {
+         "label": "Recursos linguísticos e os gêneros digitais",
+         "page": 36,
+         "code": "LC.8.3"
+        },
+        {
+         "label": "Função social das novas tecnologias",
+         "page": 36,
+         "code": "LC.8.4"
+        }
+       ],
+       "page": 36,
+       "code": "LC.8"
+      }
+     ],
+     "page": 33
+    }
+   ]
+  },
+  {
+   "code": "MT",
+   "disciplinas": [
+    {
+     "label": null,
+     "temas": [
+      {
+       "label": "Conhecimentos numéricos",
+       "objetos": [
+        {
+         "label": "Operações em conjuntos numéricos (naturais, inteiros, racionais e reais)",
+         "page": 37,
+         "code": "MT.1.1",
+         "assuntos": [
+          {
+           "code": "MT.1.1.1",
+           "label": "Operações com inteiros e expressões numéricas"
+          },
+          {
+           "code": "MT.1.1.2",
+           "label": "Frações e números decimais"
+          },
+          {
+           "code": "MT.1.1.3",
+           "label": "Potências, raízes e notação científica"
+          }
+         ]
+        },
+        {
+         "label": "Desigualdades, divisibilidade, fatoração, razões e proporções, porcentagem e juros",
+         "page": 37,
+         "code": "MT.1.2",
+         "assuntos": [
+          {
+           "code": "MT.1.2.1",
+           "label": "Divisibilidade, múltiplos e divisores (MMC e MDC)"
+          },
+          {
+           "code": "MT.1.2.2",
+           "label": "Razão e proporção"
+          },
+          {
+           "code": "MT.1.2.3",
+           "label": "Regra de três simples e composta"
+          },
+          {
+           "code": "MT.1.2.4",
+           "label": "Porcentagem"
+          },
+          {
+           "code": "MT.1.2.5",
+           "label": "Juros simples e compostos"
+          },
+          {
+           "code": "MT.1.2.6",
+           "label": "Desigualdades e fatoração"
+          }
+         ]
+        },
+        {
+         "label": "Relações de dependência entre grandezas, sequências e progressões, princípios de contagem",
+         "page": 37,
+         "code": "MT.1.3",
+         "assuntos": [
+          {
+           "code": "MT.1.3.1",
+           "label": "Grandezas diretamente e inversamente proporcionais"
+          },
+          {
+           "code": "MT.1.3.2",
+           "label": "Sequências, progressão aritmética e geométrica"
+          },
+          {
+           "code": "MT.1.3.3",
+           "label": "Princípio fundamental da contagem e combinatória"
+          }
+         ]
+        }
+       ],
+       "page": 37,
+       "code": "MT.1"
+      },
+      {
+       "label": "Conhecimentos geométricos",
+       "objetos": [
+        {
+         "label": "Características das figuras geométricas planas e espaciais",
+         "page": 37,
+         "code": "MT.2.1",
+         "assuntos": [
+          {
+           "code": "MT.2.1.1",
+           "label": "Figuras planas e suas propriedades"
+          },
+          {
+           "code": "MT.2.1.2",
+           "label": "Sólidos geométricos, planificações e vistas"
+          }
+         ]
+        },
+        {
+         "label": "Grandezas, unidades de medida e escalas",
+         "page": 37,
+         "code": "MT.2.2",
+         "assuntos": [
+          {
+           "code": "MT.2.2.1",
+           "label": "Unidades de medida e conversões"
+          },
+          {
+           "code": "MT.2.2.2",
+           "label": "Escalas em mapas, plantas e maquetes"
+          }
+         ]
+        },
+        {
+         "label": "Comprimentos, áreas e volumes",
+         "page": 37,
+         "code": "MT.2.3",
+         "assuntos": [
+          {
+           "code": "MT.2.3.1",
+           "label": "Perímetro e área de figuras planas"
+          },
+          {
+           "code": "MT.2.3.2",
+           "label": "Área de superfície e volume de sólidos"
+          }
+         ]
+        },
+        {
+         "label": "Ângulos",
+         "page": 37,
+         "code": "MT.2.4"
+        },
+        {
+         "label": "Posições de retas",
+         "page": 37,
+         "code": "MT.2.5"
+        },
+        {
+         "label": "Simetrias de figuras planas ou espaciais",
+         "page": 37,
+         "code": "MT.2.6"
+        },
+        {
+         "label": "Congruência e semelhança de triângulos",
+         "page": 37,
+         "code": "MT.2.7"
+        },
+        {
+         "label": "Teorema de Tales",
+         "page": 37,
+         "code": "MT.2.8"
+        },
+        {
+         "label": "Relações métricas nos triângulos",
+         "page": 38,
+         "code": "MT.2.9"
+        },
+        {
+         "label": "Circunferências",
+         "page": 38,
+         "code": "MT.2.10"
+        },
+        {
+         "label": "Trigonometria do ângulo agudo",
+         "page": 38,
+         "code": "MT.2.11"
+        }
+       ],
+       "page": 37,
+       "code": "MT.2"
+      },
+      {
+       "label": "Conhecimentos de estatística e probabilidade",
+       "objetos": [
+        {
+         "label": "Representação e análise de dados",
+         "page": 38,
+         "code": "MT.3.1",
+         "assuntos": [
+          {
+           "code": "MT.3.1.1",
+           "label": "Leitura e interpretação de gráficos e tabelas"
+          },
+          {
+           "code": "MT.3.1.2",
+           "label": "Escolha e construção de gráficos"
+          }
+         ]
+        },
+        {
+         "label": "Medidas de tendência central (médias, moda e mediana)",
+         "page": 38,
+         "code": "MT.3.2"
+        },
+        {
+         "label": "Desvios e variância",
+         "page": 38,
+         "code": "MT.3.3"
+        },
+        {
+         "label": "Noções de probabilidade",
+         "page": 38,
+         "code": "MT.3.4"
+        }
+       ],
+       "page": 38,
+       "code": "MT.3"
+      },
+      {
+       "label": "Conhecimentos algébricos",
+       "objetos": [
+        {
+         "label": "Gráficos e funções",
+         "page": 38,
+         "code": "MT.4.1"
+        },
+        {
+         "label": "Funções algébricas do 1º e do 2º graus, polinomiais, racionais, exponenciais e logarítmicas",
+         "page": 38,
+         "code": "MT.4.2",
+         "assuntos": [
+          {
+           "code": "MT.4.2.1",
+           "label": "Função do 1º grau"
+          },
+          {
+           "code": "MT.4.2.2",
+           "label": "Função do 2º grau"
+          },
+          {
+           "code": "MT.4.2.3",
+           "label": "Funções exponencial e logarítmica"
+          },
+          {
+           "code": "MT.4.2.4",
+           "label": "Funções polinomiais e racionais"
+          }
+         ]
+        },
+        {
+         "label": "Equações e inequações",
+         "page": 38,
+         "code": "MT.4.3"
+        },
+        {
+         "label": "Relações no ciclo trigonométrico e funções trigonométricas",
+         "page": 38,
+         "code": "MT.4.4"
+        }
+       ],
+       "page": 38,
+       "code": "MT.4"
+      },
+      {
+       "label": "Conhecimentos algébricos/geométricos",
+       "objetos": [
+        {
+         "label": "Plano cartesiano",
+         "page": 38,
+         "code": "MT.5.1"
+        },
+        {
+         "label": "Retas",
+         "page": 38,
+         "code": "MT.5.2"
+        },
+        {
+         "label": "Circunferências",
+         "page": 38,
+         "code": "MT.5.3"
+        },
+        {
+         "label": "Paralelismo e perpendicularidade, sistemas de equações",
+         "page": 38,
+         "code": "MT.5.4",
+         "assuntos": [
+          {
+           "code": "MT.5.4.1",
+           "label": "Sistemas de equações"
+          },
+          {
+           "code": "MT.5.4.2",
+           "label": "Paralelismo e perpendicularidade de retas"
+          }
+         ]
+        }
+       ],
+       "page": 38,
+       "code": "MT.5"
+      }
+     ],
+     "page": 37
+    }
+   ]
+  },
+  {
+   "code": "CN",
+   "disciplinas": [
+    {
+     "label": "Física",
+     "temas": [
+      {
+       "label": "Conhecimentos básicos e fundamentais",
+       "objetos": [
+        {
+         "label": "Noções de ordem de grandeza",
+         "page": 39,
+         "code": "CN.1.1"
+        },
+        {
+         "label": "Notação Científica",
+         "page": 39,
+         "code": "CN.1.2"
+        },
+        {
+         "label": "Sistema Internacional de Unidades",
+         "page": 39,
+         "code": "CN.1.3"
+        },
+        {
+         "label": "Metodologia de investigação: a procura de regularidades e de sinais na interpretação física do mundo",
+         "page": 39,
+         "code": "CN.1.4"
+        },
+        {
+         "label": "Observações e mensurações: representação de grandezas físicas como grandezas mensuráveis",
+         "page": 39,
+         "code": "CN.1.5"
+        },
+        {
+         "label": "Ferramentas básicas: gráficos e vetores",
+         "page": 39,
+         "code": "CN.1.6"
+        },
+        {
+         "label": "Conceituação de grandezas vetoriais e escalares",
+         "page": 39,
+         "code": "CN.1.7"
+        },
+        {
+         "label": "Operações básicas com vetores",
+         "page": 39,
+         "code": "CN.1.8"
+        }
+       ],
+       "page": 39,
+       "code": "CN.1"
+      },
+      {
+       "label": "O movimento, o equilíbrio e a descoberta de leis físicas",
+       "objetos": [
+        {
+         "label": "Grandezas fundamentais da mecânica: tempo, espaço, velocidade e aceleração",
+         "page": 40,
+         "code": "CN.2.1"
+        },
+        {
+         "label": "Relação histórica entre força e movimento",
+         "page": 40,
+         "code": "CN.2.2"
+        },
+        {
+         "label": "Descrições do movimento e sua interpretação: quantificação do movimento e sua descrição matemática e gráfica",
+         "page": 40,
+         "code": "CN.2.3"
+        },
+        {
+         "label": "Casos especiais de movimentos e suas regularidades observáveis",
+         "page": 40,
+         "code": "CN.2.4"
+        },
+        {
+         "label": "Conceito de inércia",
+         "page": 40,
+         "code": "CN.2.5"
+        },
+        {
+         "label": "Noção de sistemas de referência inerciais e não inerciais",
+         "page": 40,
+         "code": "CN.2.6"
+        },
+        {
+         "label": "Noção dinâmica de massa e quantidade de movimento (momento linear)",
+         "page": 40,
+         "code": "CN.2.7"
+        },
+        {
+         "label": "Força e variação da quantidade de movimento",
+         "page": 40,
+         "code": "CN.2.8"
+        },
+        {
+         "label": "Leis de Newton",
+         "page": 40,
+         "code": "CN.2.9"
+        },
+        {
+         "label": "Centro de massa e a ideia de ponto material",
+         "page": 40,
+         "code": "CN.2.10"
+        },
+        {
+         "label": "Conceito de forças externas e internas",
+         "page": 40,
+         "code": "CN.2.11"
+        },
+        {
+         "label": "Lei da conservação da quantidade de movimento (momento linear) e teorema do impulso",
+         "page": 40,
+         "code": "CN.2.12"
+        },
+        {
+         "label": "Momento de uma força (torque)",
+         "page": 40,
+         "code": "CN.2.13"
+        },
+        {
+         "label": "Condições de equilíbrio estático de ponto material e de corpos rígidos",
+         "page": 40,
+         "code": "CN.2.14"
+        },
+        {
+         "label": "Força de atrito, força peso, força normal de contato e tração",
+         "page": 40,
+         "code": "CN.2.15"
+        },
+        {
+         "label": "Diagramas de forças",
+         "page": 40,
+         "code": "CN.2.16"
+        },
+        {
+         "label": "Identificação das forças que atuam nos movimentos circulares",
+         "page": 40,
+         "code": "CN.2.17"
+        },
+        {
+         "label": "Noção de força centrípeta e sua quantificação",
+         "page": 40,
+         "code": "CN.2.18"
+        },
+        {
+         "label": "A hidrostática: aspectos históricos e variáveis relevantes",
+         "page": 40,
+         "code": "CN.2.19"
+        },
+        {
+         "label": "Empuxo",
+         "page": 40,
+         "code": "CN.2.20"
+        },
+        {
+         "label": "Princípios de Pascal, Arquimedes e Stevin: condições de flutuação, relação entre diferença de nível e pressão hidrostática",
+         "page": 40,
+         "code": "CN.2.21"
+        }
+       ],
+       "page": 40,
+       "code": "CN.2"
+      },
+      {
+       "label": "Energia, trabalho e potência",
+       "objetos": [
+        {
+         "label": "Conceituação de trabalho, energia e potência",
+         "page": 41,
+         "code": "CN.3.1"
+        },
+        {
+         "label": "Conceito de energia potencial e de energia cinética",
+         "page": 41,
+         "code": "CN.3.2"
+        },
+        {
+         "label": "Conservação de energia mecânica e dissipação de energia",
+         "page": 41,
+         "code": "CN.3.3"
+        },
+        {
+         "label": "Trabalho da força gravitacional e energia potencial gravitacional",
+         "page": 41,
+         "code": "CN.3.4"
+        },
+        {
+         "label": "Forças conservativas e dissipativas",
+         "page": 41,
+         "code": "CN.3.5"
+        }
+       ],
+       "page": 41,
+       "code": "CN.3"
+      },
+      {
+       "label": "A Mecânica e o funcionamento do Universo",
+       "objetos": [
+        {
+         "label": "Força peso",
+         "page": 41,
+         "code": "CN.4.1"
+        },
+        {
+         "label": "Aceleração gravitacional",
+         "page": 41,
+         "code": "CN.4.2"
+        },
+        {
+         "label": "Lei da Gravitação Universal",
+         "page": 41,
+         "code": "CN.4.3"
+        },
+        {
+         "label": "Leis de Kepler",
+         "page": 41,
+         "code": "CN.4.4"
+        },
+        {
+         "label": "Movimentos de corpos celestes",
+         "page": 41,
+         "code": "CN.4.5"
+        },
+        {
+         "label": "Influência na Terra: marés e variações climáticas",
+         "page": 41,
+         "code": "CN.4.6"
+        },
+        {
+         "label": "Concepções históricas sobre a origem do universo e sua evolução",
+         "page": 41,
+         "code": "CN.4.7"
+        }
+       ],
+       "page": 41,
+       "code": "CN.4"
+      },
+      {
+       "label": "Fenômenos Elétricos e Magnéticos",
+       "objetos": [
+        {
+         "label": "Carga elétrica e corrente elétrica",
+         "page": 41,
+         "code": "CN.5.1"
+        },
+        {
+         "label": "Lei de Coulomb",
+         "page": 41,
+         "code": "CN.5.2"
+        },
+        {
+         "label": "Campo elétrico e potencial elétrico",
+         "page": 41,
+         "code": "CN.5.3"
+        },
+        {
+         "label": "Linhas de campo",
+         "page": 41,
+         "code": "CN.5.4"
+        },
+        {
+         "label": "Superfícies equipotenciais",
+         "page": 41,
+         "code": "CN.5.5"
+        },
+        {
+         "label": "Poder das pontas",
+         "page": 41,
+         "code": "CN.5.6"
+        },
+        {
+         "label": "Blindagem",
+         "page": 41,
+         "code": "CN.5.7"
+        },
+        {
+         "label": "Capacitores",
+         "page": 42,
+         "code": "CN.5.8"
+        },
+        {
+         "label": "Efeito Joule",
+         "page": 42,
+         "code": "CN.5.9"
+        },
+        {
+         "label": "Lei de Ohm",
+         "page": 42,
+         "code": "CN.5.10"
+        },
+        {
+         "label": "Resistência elétrica e resistividade",
+         "page": 42,
+         "code": "CN.5.11"
+        },
+        {
+         "label": "Relações entre grandezas elétricas: tensão, corrente, potência e energia",
+         "page": 42,
+         "code": "CN.5.12"
+        },
+        {
+         "label": "Circuitos elétricos simples",
+         "page": 42,
+         "code": "CN.5.13"
+        },
+        {
+         "label": "Correntes contínua e alternada",
+         "page": 42,
+         "code": "CN.5.14"
+        },
+        {
+         "label": "Medidores elétricos",
+         "page": 42,
+         "code": "CN.5.15"
+        },
+        {
+         "label": "Representação gráfica de circuitos",
+         "page": 42,
+         "code": "CN.5.16"
+        },
+        {
+         "label": "Símbolos convencionais",
+         "page": 42,
+         "code": "CN.5.17"
+        },
+        {
+         "label": "Potência e consumo de energia em dispositivos elétricos",
+         "page": 42,
+         "code": "CN.5.18"
+        },
+        {
+         "label": "Campo magnético",
+         "page": 42,
+         "code": "CN.5.19"
+        },
+        {
+         "label": "Imãs permanentes",
+         "page": 42,
+         "code": "CN.5.20"
+        },
+        {
+         "label": "Linhas de campo magnético",
+         "page": 42,
+         "code": "CN.5.21"
+        },
+        {
+         "label": "Campo magnético terrestre",
+         "page": 42,
+         "code": "CN.5.22"
+        }
+       ],
+       "page": 41,
+       "code": "CN.5"
+      },
+      {
+       "label": "Oscilações, ondas, óptica e radiação",
+       "objetos": [
+        {
+         "label": "Feixes e frentes de ondas",
+         "page": 42,
+         "code": "CN.6.1"
+        },
+        {
+         "label": "Reflexão e refração",
+         "page": 42,
+         "code": "CN.6.2"
+        },
+        {
+         "label": "Óptica geométrica: lentes e espelhos",
+         "page": 42,
+         "code": "CN.6.3"
+        },
+        {
+         "label": "Formação de imagens",
+         "page": 42,
+         "code": "CN.6.4"
+        },
+        {
+         "label": "Instrumentos ópticos simples",
+         "page": 42,
+         "code": "CN.6.5"
+        },
+        {
+         "label": "Fenômenos ondulatórios",
+         "page": 42,
+         "code": "CN.6.6"
+        },
+        {
+         "label": "Pulsos e ondas",
+         "page": 42,
+         "code": "CN.6.7"
+        },
+        {
+         "label": "Período, frequência, ciclo",
+         "page": 42,
+         "code": "CN.6.8"
+        },
+        {
+         "label": "Propagação: relação entre velocidade, frequência e comprimento de onda",
+         "page": 43,
+         "code": "CN.6.9"
+        },
+        {
+         "label": "Ondas em diferentes meios de propagação",
+         "page": 43,
+         "code": "CN.6.10"
+        }
+       ],
+       "page": 42,
+       "code": "CN.6"
+      },
+      {
+       "label": "O calor e os fenômenos térmicos",
+       "objetos": [
+        {
+         "label": "Conceitos de calor e de temperatura",
+         "page": 43,
+         "code": "CN.7.1"
+        },
+        {
+         "label": "Escalas termométricas",
+         "page": 43,
+         "code": "CN.7.2"
+        },
+        {
+         "label": "Transferência de calor e equilíbrio térmico",
+         "page": 43,
+         "code": "CN.7.3"
+        },
+        {
+         "label": "Capacidade calorífica e calor específico",
+         "page": 43,
+         "code": "CN.7.4"
+        },
+        {
+         "label": "Condução do calor",
+         "page": 43,
+         "code": "CN.7.5"
+        },
+        {
+         "label": "Dilatação térmica",
+         "page": 43,
+         "code": "CN.7.6"
+        },
+        {
+         "label": "Mudanças de estado físico e calor latente de transformação",
+         "page": 43,
+         "code": "CN.7.7"
+        },
+        {
+         "label": "Comportamento de gases ideais",
+         "page": 43,
+         "code": "CN.7.8"
+        },
+        {
+         "label": "Máquinas térmicas",
+         "page": 43,
+         "code": "CN.7.9"
+        },
+        {
+         "label": "Ciclo de Carnot",
+         "page": 43,
+         "code": "CN.7.10"
+        },
+        {
+         "label": "Leis da Termodinâmica",
+         "page": 43,
+         "code": "CN.7.11"
+        },
+        {
+         "label": "Aplicações e fenômenos térmicos de uso cotidiano",
+         "page": 43,
+         "code": "CN.7.12"
+        },
+        {
+         "label": "Compreensão de fenômenos climáticos relacionados ao ciclo da água",
+         "page": 43,
+         "code": "CN.7.13"
+        }
+       ],
+       "page": 43,
+       "code": "CN.7"
+      }
+     ],
+     "page": 39
+    },
+    {
+     "label": "Química",
+     "temas": [
+      {
+       "label": "Transformações químicas",
+       "objetos": [
+        {
+         "label": "Evidências de transformações químicas",
+         "page": 43,
+         "code": "CN.8.1"
+        },
+        {
+         "label": "Interpretando transformações químicas",
+         "page": 43,
+         "code": "CN.8.2"
+        },
+        {
+         "label": "Sistemas Gasosos: Lei dos gases",
+         "page": 43,
+         "code": "CN.8.3"
+        },
+        {
+         "label": "Equação geral dos gases ideais, Princípio de Avogadro, conceito de molécula",
+         "page": 43,
+         "code": "CN.8.4"
+        },
+        {
+         "label": "Massa molar, volume molar dos gases",
+         "page": 44,
+         "code": "CN.8.5"
+        },
+        {
+         "label": "Teoria cinética dos gases",
+         "page": 44,
+         "code": "CN.8.6"
+        },
+        {
+         "label": "Misturas gasosas",
+         "page": 44,
+         "code": "CN.8.7"
+        },
+        {
+         "label": "Modelo corpuscular da matéria",
+         "page": 44,
+         "code": "CN.8.8"
+        },
+        {
+         "label": "Modelo atômico de Dalton",
+         "page": 44,
+         "code": "CN.8.9"
+        },
+        {
+         "label": "Natureza elétrica da matéria: Modelo Atômico de Thomson, Rutherford, Rutherford-Bohr",
+         "page": 44,
+         "code": "CN.8.10"
+        },
+        {
+         "label": "Átomos e sua estrutura",
+         "page": 44,
+         "code": "CN.8.11"
+        },
+        {
+         "label": "Número atômico, número de massa, isótopos, massa atômica",
+         "page": 44,
+         "code": "CN.8.12"
+        },
+        {
+         "label": "Elementos químicos e Tabela Periódica",
+         "page": 44,
+         "code": "CN.8.13"
+        },
+        {
+         "label": "Reações químicas",
+         "page": 44,
+         "code": "CN.8.14"
+        }
+       ],
+       "page": 43,
+       "code": "CN.8"
+      },
+      {
+       "label": "Representação das transformações químicas",
+       "objetos": [
+        {
+         "label": "Fórmulas químicas",
+         "page": 44,
+         "code": "CN.9.1"
+        },
+        {
+         "label": "Balanceamento de equações químicas",
+         "page": 44,
+         "code": "CN.9.2"
+        },
+        {
+         "label": "Aspectos quantitativos das transformações químicas",
+         "page": 44,
+         "code": "CN.9.3"
+        },
+        {
+         "label": "Leis ponderais das reações químicas",
+         "page": 44,
+         "code": "CN.9.4"
+        },
+        {
+         "label": "Determinação de fórmulas químicas",
+         "page": 44,
+         "code": "CN.9.5"
+        },
+        {
+         "label": "Grandezas Químicas: massa, volume, mol, massa molar, constante de Avogadro",
+         "page": 44,
+         "code": "CN.9.6"
+        },
+        {
+         "label": "Cálculos estequiométricos",
+         "page": 44,
+         "code": "CN.9.7"
+        }
+       ],
+       "page": 44,
+       "code": "CN.9"
+      },
+      {
+       "label": "Materiais, suas propriedades e usos",
+       "objetos": [
+        {
+         "label": "Propriedades de materiais",
+         "page": 44,
+         "code": "CN.10.1"
+        },
+        {
+         "label": "Estados físicos de materiais",
+         "page": 44,
+         "code": "CN.10.2"
+        },
+        {
+         "label": "Mudanças de estado",
+         "page": 44,
+         "code": "CN.10.3"
+        },
+        {
+         "label": "Misturas: tipos e métodos de separação",
+         "page": 45,
+         "code": "CN.10.4"
+        },
+        {
+         "label": "Substâncias químicas: classificação e características gerais",
+         "page": 45,
+         "code": "CN.10.5"
+        },
+        {
+         "label": "Metais e Ligas metálicas",
+         "page": 45,
+         "code": "CN.10.6"
+        },
+        {
+         "label": "Ferro, cobre e alumínio",
+         "page": 45,
+         "code": "CN.10.7"
+        },
+        {
+         "label": "Ligações metálicas",
+         "page": 45,
+         "code": "CN.10.8"
+        },
+        {
+         "label": "Substâncias iônicas: características e propriedades",
+         "page": 45,
+         "code": "CN.10.9"
+        },
+        {
+         "label": "Substâncias iônicas do grupo: cloreto, carbonato, nitrato e sulfato",
+         "page": 45,
+         "code": "CN.10.10"
+        },
+        {
+         "label": "Ligação iônica",
+         "page": 45,
+         "code": "CN.10.11"
+        },
+        {
+         "label": "Substâncias moleculares: características e propriedades",
+         "page": 45,
+         "code": "CN.10.12"
+        },
+        {
+         "label": "Substâncias moleculares: H , O , N , Cl , NH , H O, HCl, CH 2 2 2 2 3 2 4",
+         "page": 45,
+         "code": "CN.10.13"
+        },
+        {
+         "label": "Ligação Covalente",
+         "page": 45,
+         "code": "CN.10.14"
+        },
+        {
+         "label": "Polaridade de moléculas",
+         "page": 45,
+         "code": "CN.10.15"
+        },
+        {
+         "label": "Forças intermoleculares",
+         "page": 45,
+         "code": "CN.10.16"
+        },
+        {
+         "label": "Relação entre estruturas, propriedade e aplicação das substâncias",
+         "page": 45,
+         "code": "CN.10.17"
+        }
+       ],
+       "page": 44,
+       "code": "CN.10"
+      },
+      {
+       "label": "Água",
+       "objetos": [
+        {
+         "label": "Ocorrência e importância na vida animal e vegetal",
+         "page": 45,
+         "code": "CN.11.1"
+        },
+        {
+         "label": "Ligação, estrutura e propriedades",
+         "page": 45,
+         "code": "CN.11.2"
+        },
+        {
+         "label": "Sistemas em Solução Aquosa: soluções verdadeiras, soluções coloidais e suspensões",
+         "page": 45,
+         "code": "CN.11.3"
+        },
+        {
+         "label": "Solubilidade",
+         "page": 45,
+         "code": "CN.11.4"
+        },
+        {
+         "label": "Concentração das soluções",
+         "page": 45,
+         "code": "CN.11.5"
+        },
+        {
+         "label": "Aspectos qualitativos das propriedades coligativas das soluções",
+         "page": 45,
+         "code": "CN.11.6"
+        },
+        {
+         "label": "Ácidos, bases, sais e óxidos: definição, classificação, propriedades, formulação e nomenclatura",
+         "page": 45,
+         "code": "CN.11.7"
+        },
+        {
+         "label": "Conceitos de ácidos e base",
+         "page": 45,
+         "code": "CN.11.8"
+        },
+        {
+         "label": "Principais propriedades dos ácidos e bases: indicadores, condutibilidade elétrica, reação com metais, reação de neutralização",
+         "page": 46,
+         "code": "CN.11.9"
+        }
+       ],
+       "page": 45,
+       "code": "CN.11"
+      },
+      {
+       "label": "Transformações químicas e energia",
+       "objetos": [
+        {
+         "label": "Transformações químicas e energia calorífica",
+         "page": 46,
+         "code": "CN.12.1"
+        },
+        {
+         "label": "Calor de reação",
+         "page": 46,
+         "code": "CN.12.2"
+        },
+        {
+         "label": "Entalpia",
+         "page": 46,
+         "code": "CN.12.3"
+        },
+        {
+         "label": "Equações termoquímicas",
+         "page": 46,
+         "code": "CN.12.4"
+        },
+        {
+         "label": "Lei de Hess",
+         "page": 46,
+         "code": "CN.12.5"
+        },
+        {
+         "label": "Transformações químicas e energia elétrica",
+         "page": 46,
+         "code": "CN.12.6"
+        },
+        {
+         "label": "Reação de oxirredução",
+         "page": 46,
+         "code": "CN.12.7"
+        },
+        {
+         "label": "Potenciais padrão de redução",
+         "page": 46,
+         "code": "CN.12.8"
+        },
+        {
+         "label": "Pilha",
+         "page": 46,
+         "code": "CN.12.9"
+        },
+        {
+         "label": "Eletrólise",
+         "page": 46,
+         "code": "CN.12.10"
+        },
+        {
+         "label": "Leis de Faraday",
+         "page": 46,
+         "code": "CN.12.11"
+        },
+        {
+         "label": "Transformações nucleares",
+         "page": 46,
+         "code": "CN.12.12"
+        },
+        {
+         "label": "Conceitos fundamentais da radioatividade",
+         "page": 46,
+         "code": "CN.12.13"
+        },
+        {
+         "label": "Reações de fissão e fusão nuclear",
+         "page": 46,
+         "code": "CN.12.14"
+        },
+        {
+         "label": "Desintegração radioativa e radioisótopos",
+         "page": 46,
+         "code": "CN.12.15"
+        }
+       ],
+       "page": 46,
+       "code": "CN.12"
+      },
+      {
+       "label": "Dinâmica das transformações químicas",
+       "objetos": [
+        {
+         "label": "Transformações químicas e velocidade",
+         "page": 46,
+         "code": "CN.13.1"
+        },
+        {
+         "label": "Velocidade de reação",
+         "page": 46,
+         "code": "CN.13.2"
+        },
+        {
+         "label": "Energia de ativação",
+         "page": 46,
+         "code": "CN.13.3"
+        },
+        {
+         "label": "Fatores que alteram a velocidade de reação: concentração, pressão, temperatura e catalisador",
+         "page": 47,
+         "code": "CN.13.4"
+        }
+       ],
+       "page": 46,
+       "code": "CN.13"
+      },
+      {
+       "label": "Transformação Química e Equilíbrio",
+       "objetos": [
+        {
+         "label": "Caracterização do sistema em equilíbrio",
+         "page": 47,
+         "code": "CN.14.1"
+        },
+        {
+         "label": "Constante de equilíbrio",
+         "page": 47,
+         "code": "CN.14.2"
+        },
+        {
+         "label": "Produto iônico da água, equilíbrio ácido-base e pH",
+         "page": 47,
+         "code": "CN.14.3"
+        },
+        {
+         "label": "Solubilidade dos sais e hidrólise",
+         "page": 47,
+         "code": "CN.14.4"
+        },
+        {
+         "label": "Fatores que alteram o sistema em equilíbrio",
+         "page": 47,
+         "code": "CN.14.5"
+        },
+        {
+         "label": "Aplicação da velocidade e do equilíbrio químico no cotidiano",
+         "page": 47,
+         "code": "CN.14.6"
+        }
+       ],
+       "page": 47,
+       "code": "CN.14"
+      },
+      {
+       "label": "Compostos de Carbono",
+       "objetos": [
+        {
+         "label": "Características gerais dos compostos orgânicos",
+         "page": 47,
+         "code": "CN.15.1"
+        },
+        {
+         "label": "Principais funções orgânicas",
+         "page": 47,
+         "code": "CN.15.2"
+        },
+        {
+         "label": "Estrutura e propriedades de Hidrocarbonetos",
+         "page": 47,
+         "code": "CN.15.3"
+        },
+        {
+         "label": "Estrutura e propriedades de compostos orgânicos oxigenados",
+         "page": 47,
+         "code": "CN.15.4"
+        },
+        {
+         "label": "Fermentação",
+         "page": 47,
+         "code": "CN.15.5"
+        },
+        {
+         "label": "Estrutura e propriedades de compostos orgânicos nitrogenados",
+         "page": 47,
+         "code": "CN.15.6"
+        },
+        {
+         "label": "Macromoléculas naturais e sintéticas",
+         "page": 47,
+         "code": "CN.15.7"
+        },
+        {
+         "label": "Noções básicas sobre polímeros",
+         "page": 47,
+         "code": "CN.15.8"
+        },
+        {
+         "label": "Amido, glicogênio e celulose",
+         "page": 47,
+         "code": "CN.15.9"
+        },
+        {
+         "label": "Borracha natural e sintética",
+         "page": 47,
+         "code": "CN.15.10"
+        },
+        {
+         "label": "Polietileno, poliestireno, PVC, Teflon, náilon",
+         "page": 47,
+         "code": "CN.15.11"
+        },
+        {
+         "label": "Óleos e gorduras, sabões e detergentes sintéticos",
+         "page": 47,
+         "code": "CN.15.12"
+        },
+        {
+         "label": "Proteínas e enzimas",
+         "page": 47,
+         "code": "CN.15.13"
+        }
+       ],
+       "page": 47,
+       "code": "CN.15"
+      },
+      {
+       "label": "Relações da Química com as tecnologias, a sociedade e o meio ambiente",
+       "objetos": [
+        {
+         "label": "Química no cotidiano",
+         "page": 48,
+         "code": "CN.16.1"
+        },
+        {
+         "label": "Química na agricultura e na saúde",
+         "page": 48,
+         "code": "CN.16.2"
+        },
+        {
+         "label": "Química nos alimentos",
+         "page": 48,
+         "code": "CN.16.3"
+        },
+        {
+         "label": "Química e ambiente",
+         "page": 48,
+         "code": "CN.16.4"
+        },
+        {
+         "label": "Aspectos científico-tecnológicos, socioeconômicos e ambientais associados à obtenção ou produção de substâncias químicas",
+         "page": 48,
+         "code": "CN.16.5"
+        },
+        {
+         "label": "Indústria química: obtenção e utilização do cloro, hidróxido de sódio, ácido sulfúrico, amônia e ácido nítrico",
+         "page": 48,
+         "code": "CN.16.6"
+        },
+        {
+         "label": "Mineração e metalurgia",
+         "page": 48,
+         "code": "CN.16.7"
+        },
+        {
+         "label": "Poluição e tratamento de água",
+         "page": 48,
+         "code": "CN.16.8"
+        },
+        {
+         "label": "Poluição atmosférica",
+         "page": 48,
+         "code": "CN.16.9"
+        },
+        {
+         "label": "Contaminação e proteção do ambiente",
+         "page": 48,
+         "code": "CN.16.10"
+        }
+       ],
+       "page": 48,
+       "code": "CN.16"
+      },
+      {
+       "label": "Energias químicas no cotidiano",
+       "objetos": [
+        {
+         "label": "Petróleo, gás natural e carvão",
+         "page": 48,
+         "code": "CN.17.1"
+        },
+        {
+         "label": "Madeira e hulha",
+         "page": 48,
+         "code": "CN.17.2"
+        },
+        {
+         "label": "Biomassa",
+         "page": 48,
+         "code": "CN.17.3"
+        },
+        {
+         "label": "Biocombustíveis",
+         "page": 48,
+         "code": "CN.17.4"
+        },
+        {
+         "label": "Impactos ambientais de combustíveis fósseis",
+         "page": 48,
+         "code": "CN.17.5"
+        },
+        {
+         "label": "Energia nuclear",
+         "page": 48,
+         "code": "CN.17.6"
+        },
+        {
+         "label": "Lixo atômico",
+         "page": 48,
+         "code": "CN.17.7"
+        },
+        {
+         "label": "Vantagens e desvantagens do uso de energia nuclear",
+         "page": 48,
+         "code": "CN.17.8"
+        }
+       ],
+       "page": 48,
+       "code": "CN.17"
+      }
+     ],
+     "page": 43
+    },
+    {
+     "label": "Biologia",
+     "temas": [
+      {
+       "label": "Moléculas, células e tecidos",
+       "objetos": [
+        {
+         "label": "Estrutura e fisiologia celular: membrana, citoplasma e núcleo",
+         "page": 49,
+         "code": "CN.18.1"
+        },
+        {
+         "label": "Divisão celular",
+         "page": 49,
+         "code": "CN.18.2"
+        },
+        {
+         "label": "Aspectos bioquímicos das estruturas celulares",
+         "page": 49,
+         "code": "CN.18.3"
+        },
+        {
+         "label": "Aspectos gerais do metabolismo celular",
+         "page": 49,
+         "code": "CN.18.4"
+        },
+        {
+         "label": "Metabolismo energético: fotossíntese e respiração",
+         "page": 49,
+         "code": "CN.18.5"
+        },
+        {
+         "label": "Codificação da informação genética",
+         "page": 49,
+         "code": "CN.18.6"
+        },
+        {
+         "label": "Síntese proteica",
+         "page": 49,
+         "code": "CN.18.7"
+        },
+        {
+         "label": "Diferenciação celular",
+         "page": 49,
+         "code": "CN.18.8"
+        },
+        {
+         "label": "Principais tecidos animais e vegetais",
+         "page": 49,
+         "code": "CN.18.9"
+        },
+        {
+         "label": "Origem e evolução das células",
+         "page": 49,
+         "code": "CN.18.10"
+        },
+        {
+         "label": "Noções sobre células-tronco, clonagem e tecnologia do DNA recombinante",
+         "page": 49,
+         "code": "CN.18.11"
+        },
+        {
+         "label": "Aplicações de biotecnologia na produção de alimentos, fármacos e componentes biológicos",
+         "page": 49,
+         "code": "CN.18.12"
+        },
+        {
+         "label": "Aplicações de tecnologias relacionadas ao DNA a investigações científicas, determinação da paternidade, investigação criminal e identificação de indivíduos",
+         "page": 49,
+         "code": "CN.18.13"
+        },
+        {
+         "label": "Aspectos éticos relacionados ao desenvolvimento biotecnológico",
+         "page": 49,
+         "code": "CN.18.14"
+        },
+        {
+         "label": "Biotecnologia e sustentabilidade",
+         "page": 49,
+         "code": "CN.18.15"
+        }
+       ],
+       "page": 49,
+       "code": "CN.18"
+      },
+      {
+       "label": "Hereditariedade e diversidade da vida",
+       "objetos": [
+        {
+         "label": "Princípios básicos que regem a transmissão de características hereditárias",
+         "page": 49,
+         "code": "CN.19.1"
+        },
+        {
+         "label": "Concepções pré-mendelianas sobre a hereditariedade",
+         "page": 49,
+         "code": "CN.19.2"
+        },
+        {
+         "label": "Aspectos genéticos do funcionamento do corpo humano",
+         "page": 49,
+         "code": "CN.19.3"
+        },
+        {
+         "label": "Antígenos e anticorpos",
+         "page": 49,
+         "code": "CN.19.4"
+        },
+        {
+         "label": "Grupos sanguíneos, transplantes e doenças autoimunes",
+         "page": 50,
+         "code": "CN.19.5"
+        },
+        {
+         "label": "Neoplasias e a influência de fatores ambientais",
+         "page": 50,
+         "code": "CN.19.6"
+        },
+        {
+         "label": "Mutações gênicas e cromossômicas",
+         "page": 50,
+         "code": "CN.19.7"
+        },
+        {
+         "label": "Aconselhamento genético",
+         "page": 50,
+         "code": "CN.19.8"
+        },
+        {
+         "label": "Fundamentos genéticos da evolução",
+         "page": 50,
+         "code": "CN.19.9"
+        },
+        {
+         "label": "Aspectos genéticos da formação e manutenção da diversidade biológica",
+         "page": 50,
+         "code": "CN.19.10"
+        }
+       ],
+       "page": 49,
+       "code": "CN.19"
+      },
+      {
+       "label": "Identidade dos seres vivos",
+       "objetos": [
+        {
+         "label": "Níveis de organização dos seres vivos",
+         "page": 50,
+         "code": "CN.20.1"
+        },
+        {
+         "label": "Vírus, procariontes e eucariontes",
+         "page": 50,
+         "code": "CN.20.2"
+        },
+        {
+         "label": "Autótrofos e heterótrofos",
+         "page": 50,
+         "code": "CN.20.3"
+        },
+        {
+         "label": "Seres unicelulares e pluricelulares",
+         "page": 50,
+         "code": "CN.20.4"
+        },
+        {
+         "label": "Sistemática e as grandes linhas da evolução dos seres vivos",
+         "page": 50,
+         "code": "CN.20.5"
+        },
+        {
+         "label": "Tipos de ciclo de vida",
+         "page": 50,
+         "code": "CN.20.6"
+        },
+        {
+         "label": "Evolução e padrões anatômicos e fisiológicos observados nos seres vivos",
+         "page": 50,
+         "code": "CN.20.7"
+        },
+        {
+         "label": "Funções vitais dos seres vivos e sua relação com a adaptação desses organismos a diferentes ambientes",
+         "page": 50,
+         "code": "CN.20.8"
+        },
+        {
+         "label": "Embriologia, anatomia e fisiologia humana",
+         "page": 50,
+         "code": "CN.20.9"
+        },
+        {
+         "label": "Evolução humana",
+         "page": 50,
+         "code": "CN.20.10"
+        },
+        {
+         "label": "Biotecnologia e sistemática",
+         "page": 50,
+         "code": "CN.20.11"
+        }
+       ],
+       "page": 50,
+       "code": "CN.20"
+      },
+      {
+       "label": "Ecologia e ciências ambientais",
+       "objetos": [
+        {
+         "label": "Ecossistemas",
+         "page": 50,
+         "code": "CN.21.1"
+        },
+        {
+         "label": "Fatores bióticos e abióticos",
+         "page": 50,
+         "code": "CN.21.2"
+        },
+        {
+         "label": "Habitat e nicho ecológico",
+         "page": 50,
+         "code": "CN.21.3"
+        },
+        {
+         "label": "Comunidade biológica: teia alimentar, sucessão e comunidade clímax",
+         "page": 51,
+         "code": "CN.21.4"
+        },
+        {
+         "label": "Dinâmica de populações",
+         "page": 51,
+         "code": "CN.21.5"
+        },
+        {
+         "label": "Interações entre os seres vivos",
+         "page": 51,
+         "code": "CN.21.6"
+        },
+        {
+         "label": "Ciclos biogeoquímicos",
+         "page": 51,
+         "code": "CN.21.7"
+        },
+        {
+         "label": "Fluxo de energia no ecossistema",
+         "page": 51,
+         "code": "CN.21.8"
+        },
+        {
+         "label": "Biogeografia",
+         "page": 51,
+         "code": "CN.21.9"
+        },
+        {
+         "label": "Biomas brasileiros",
+         "page": 51,
+         "code": "CN.21.10"
+        },
+        {
+         "label": "Exploração e uso de recursos naturais",
+         "page": 51,
+         "code": "CN.21.11"
+        },
+        {
+         "label": "Problemas ambientais: mudanças climáticas, efeito estufa, desmatamento, erosão, poluição da água, do solo e do ar",
+         "page": 51,
+         "code": "CN.21.12"
+        },
+        {
+         "label": "Conservação e recuperação de ecossistemas",
+         "page": 51,
+         "code": "CN.21.13"
+        },
+        {
+         "label": "Conservação da biodiversidade",
+         "page": 51,
+         "code": "CN.21.14"
+        },
+        {
+         "label": "Tecnologias ambientais",
+         "page": 51,
+         "code": "CN.21.15"
+        },
+        {
+         "label": "Noções de saneamento básico",
+         "page": 51,
+         "code": "CN.21.16"
+        },
+        {
+         "label": "Noções de legislação ambiental: água, florestas, unidades de conservação, biodiversidade",
+         "page": 51,
+         "code": "CN.21.17"
+        }
+       ],
+       "page": 50,
+       "code": "CN.21"
+      },
+      {
+       "label": "Origem e evolução da vida",
+       "objetos": [
+        {
+         "label": "Biologia como ciência: história, métodos, técnicas e experimentação",
+         "page": 51,
+         "code": "CN.22.1"
+        },
+        {
+         "label": "Hipóteses sobre a origem do Universo, da Terra e dos seres vivos",
+         "page": 51,
+         "code": "CN.22.2"
+        },
+        {
+         "label": "Teorias de evolução",
+         "page": 51,
+         "code": "CN.22.3"
+        },
+        {
+         "label": "Explicações pré-darwinistas para a modificação das espécies",
+         "page": 51,
+         "code": "CN.22.4"
+        },
+        {
+         "label": "Teoria evolutiva de Charles Darwin",
+         "page": 51,
+         "code": "CN.22.5"
+        },
+        {
+         "label": "Teoria sintética da evolução",
+         "page": 51,
+         "code": "CN.22.6"
+        },
+        {
+         "label": "Seleção artificial e seu impacto sobre ambientes naturais e sobre populações humanas",
+         "page": 51,
+         "code": "CN.22.7"
+        }
+       ],
+       "page": 51,
+       "code": "CN.22"
+      },
+      {
+       "label": "Qualidade de vida das populações humanas",
+       "objetos": [
+        {
+         "label": "Aspectos biológicos da pobreza e do desenvolvimento humano",
+         "page": 52,
+         "code": "CN.23.1"
+        },
+        {
+         "label": "Indicadores sociais, ambientais e econômicos. Índice de desenvolvimento humano",
+         "page": 52,
+         "code": "CN.23.2"
+        },
+        {
+         "label": "Principais doenças que afetam a população brasileira: caracterização, prevenção e profilaxia",
+         "page": 52,
+         "code": "CN.23.3"
+        },
+        {
+         "label": "Noções de primeiros socorros",
+         "page": 52,
+         "code": "CN.23.4"
+        },
+        {
+         "label": "Infecções Sexualmente Transmissíveis",
+         "page": 52,
+         "code": "CN.23.5"
+        },
+        {
+         "label": "Aspectos sociais da biologia: uso indevido de drogas, gravidez na adolescência, obesidade",
+         "page": 52,
+         "code": "CN.23.6"
+        },
+        {
+         "label": "Violência e segurança pública",
+         "page": 52,
+         "code": "CN.23.7"
+        },
+        {
+         "label": "Exercícios físicos e vida saudável",
+         "page": 52,
+         "code": "CN.23.8"
+        },
+        {
+         "label": "Aspectos biológicos do desenvolvimento sustentável",
+         "page": 52,
+         "code": "CN.23.9"
+        },
+        {
+         "label": "Legislação e cidadania",
+         "page": 52,
+         "code": "CN.23.10"
+        }
+       ],
+       "page": 52,
+       "code": "CN.23"
+      }
+     ],
+     "page": 49
+    }
+   ]
+  },
+  {
+   "code": "CH",
+   "disciplinas": [
+    {
+     "label": null,
+     "temas": [
+      {
+       "label": "Diversidade cultural, conflitos e vida em sociedade",
+       "objetos": [
+        {
+         "label": "Cultura material e imaterial: patrimônio e diversidade cultural no Brasil",
+         "page": 53,
+         "code": "CH.1.1"
+        },
+        {
+         "label": "A Conquista da América: conflitos entre europeus e indígenas na América colonial",
+         "page": 53,
+         "code": "CH.1.2"
+        },
+        {
+         "label": "A escravidão e as formas de resistência indígena e africana na América",
+         "page": 53,
+         "code": "CH.1.3"
+        },
+        {
+         "label": "História cultural dos povos africanos: a luta dos negros no Brasil e o negro na formação da sociedade brasileira",
+         "page": 53,
+         "code": "CH.1.4"
+        },
+        {
+         "label": "História dos povos indígenas e a formação sócio-cultural brasileira",
+         "page": 53,
+         "code": "CH.1.5"
+        },
+        {
+         "label": "Movimentos culturais no mundo ocidental e seus impactos na vida política e social",
+         "page": 53,
+         "code": "CH.1.6"
+        }
+       ],
+       "page": 53,
+       "code": "CH.1"
+      },
+      {
+       "label": "Formas de organização social, movimentos sociais, pensamento político e ação do Estado",
+       "objetos": [
+        {
+         "label": "Cidadania e democracia na Antiguidade",
+         "page": 53,
+         "code": "CH.2.1"
+        },
+        {
+         "label": "Estado e direitos do cidadão a partir da Idade Moderna",
+         "page": 53,
+         "code": "CH.2.2"
+        },
+        {
+         "label": "Democracia direta, indireta e representativa",
+         "page": 53,
+         "code": "CH.2.3"
+        },
+        {
+         "label": "Revoluções sociais e políticas na Europa Moderna",
+         "page": 53,
+         "code": "CH.2.4"
+        },
+        {
+         "label": "Formação territorial brasileira",
+         "page": 54,
+         "code": "CH.2.5"
+        },
+        {
+         "label": "Regiões brasileiras",
+         "page": 54,
+         "code": "CH.2.6"
+        },
+        {
+         "label": "Políticas de reordenamento territorial",
+         "page": 54,
+         "code": "CH.2.7"
+        },
+        {
+         "label": "Lutas pela conquista da independência política das colônias da América",
+         "page": 54,
+         "code": "CH.2.8"
+        },
+        {
+         "label": "Grupos sociais em conflito no Brasil imperial e a construção da nação",
+         "page": 54,
+         "code": "CH.2.9"
+        },
+        {
+         "label": "Desenvolvimento do pensamento liberal na sociedade capitalista e seus críticos nos séculos XIX e XX",
+         "page": 54,
+         "code": "CH.2.10"
+        },
+        {
+         "label": "Políticas de colonização, migração, imigração e emigração no Brasil nos séculos XIX e XX",
+         "page": 54,
+         "code": "CH.2.11"
+        },
+        {
+         "label": "Atuação dos grupos sociais e os grandes processos revolucionários do século XX: Revolução Bolchevique, Revolução Chinesa, Revolução Cubana",
+         "page": 54,
+         "code": "CH.2.12"
+        },
+        {
+         "label": "Geopolítica e conflitos entre os séculos XIX e XX: Imperialismo, a ocupação da Ásia e da África, as Guerras Mundiais e a Guerra Fria",
+         "page": 54,
+         "code": "CH.2.13"
+        },
+        {
+         "label": "Sistemas totalitários na Europa do século XX: nazifascista, franquismo, salazarismo e stalinismo",
+         "page": 54,
+         "code": "CH.2.14"
+        },
+        {
+         "label": "Ditaduras políticas na América Latina: Estado Novo no Brasil e ditaduras na América",
+         "page": 54,
+         "code": "CH.2.15"
+        },
+        {
+         "label": "Conflitos político-culturais pós-Guerra Fria, reorganização política internacional e os organismos multilaterais nos séculos XX e XXI",
+         "page": 54,
+         "code": "CH.2.16"
+        },
+        {
+         "label": "Luta pela conquista de direitos pelos cidadãos: direitos civis, humanos, políticos e sociais",
+         "page": 54,
+         "code": "CH.2.17"
+        },
+        {
+         "label": "Direitos sociais nas constituições brasileiras",
+         "page": 54,
+         "code": "CH.2.18"
+        },
+        {
+         "label": "Políticas afirmativas.",
+         "page": 54,
+         "code": "CH.2.19"
+        },
+        {
+         "label": "Vida urbana: redes e hierarquia nas cidades, pobreza e segregação espacial",
+         "page": 54,
+         "code": "CH.2.20"
+        }
+       ],
+       "page": 53,
+       "code": "CH.2"
+      },
+      {
+       "label": "Características e transformações das estruturas produtivas",
+       "objetos": [
+        {
+         "label": "Diferentes formas de organização da produção: escravismo antigo, feudalismo, capitalismo, socialismo e suas diferentes experiências",
+         "page": 54,
+         "code": "CH.3.1"
+        },
+        {
+         "label": "Economia agroexportadora brasileira: complexo açucareiro, mineração no período colonial, economia cafeeira e borracha na Amazônia",
+         "page": 55,
+         "code": "CH.3.2"
+        },
+        {
+         "label": "Revolução Industrial: criação do sistema de fábrica na Europa e transformações no processo de produção",
+         "page": 55,
+         "code": "CH.3.3"
+        },
+        {
+         "label": "Formação do espaço urbano-industrial",
+         "page": 55,
+         "code": "CH.3.4"
+        },
+        {
+         "label": "Transformações na estrutura produtiva no século XX: fordismo, toyotismo, novas técnicas de produção e seus impactos",
+         "page": 55,
+         "code": "CH.3.5"
+        },
+        {
+         "label": "Industrialização brasileira, urbanização e transformações sociais e trabalhistas",
+         "page": 55,
+         "code": "CH.3.6"
+        },
+        {
+         "label": "Globalização e novas tecnologias de telecomunicação e suas consequências econômicas, políticas e sociais",
+         "page": 55,
+         "code": "CH.3.7"
+        },
+        {
+         "label": "Produção e transformação dos espaços agrários",
+         "page": 55,
+         "code": "CH.3.8"
+        },
+        {
+         "label": "Modernização da agricultura e estruturas agrárias tradicionais",
+         "page": 55,
+         "code": "CH.3.9"
+        },
+        {
+         "label": "Agronegócio, agricultura familiar, assalariados do campo e lutas sociais no campo",
+         "page": 55,
+         "code": "CH.3.10"
+        },
+        {
+         "label": "Relação campo-cidade",
+         "page": 55,
+         "code": "CH.3.11"
+        }
+       ],
+       "page": 54,
+       "code": "CH.3"
+      },
+      {
+       "label": "Os domínios naturais e a relação do ser humano com o ambiente",
+       "objetos": [
+        {
+         "label": "Relação homem-natureza e a apropriação dos recursos naturais pelas sociedades ao longo do tempo",
+         "page": 55,
+         "code": "CH.4.1"
+        },
+        {
+         "label": "Impacto ambiental das atividades econômicas no Brasil",
+         "page": 55,
+         "code": "CH.4.2"
+        },
+        {
+         "label": "Recursos minerais e energéticos: exploração e impactos",
+         "page": 55,
+         "code": "CH.4.3"
+        },
+        {
+         "label": "Recursos hídricos",
+         "page": 55,
+         "code": "CH.4.4"
+        },
+        {
+         "label": "Bacias hidrográficas e seus aproveitamentos",
+         "page": 55,
+         "code": "CH.4.5"
+        },
+        {
+         "label": "Questões ambientais contemporâneas: mudança climática, ilhas de calor, efeito estufa, chuva ácida, destruição da camada de ozônio",
+         "page": 55,
+         "code": "CH.4.6"
+        },
+        {
+         "label": "Nova ordem ambiental internacional",
+         "page": 55,
+         "code": "CH.4.7"
+        },
+        {
+         "label": "Políticas territoriais ambientais",
+         "page": 55,
+         "code": "CH.4.8"
+        },
+        {
+         "label": "Uso e conservação dos recursos naturais, unidades de conservação, corredores ecológicos, zoneamento ecológico e econômico",
+         "page": 56,
+         "code": "CH.4.9"
+        },
+        {
+         "label": "Origem e evolução do conceito de sustentabilidade",
+         "page": 56,
+         "code": "CH.4.10"
+        },
+        {
+         "label": "Estrutura interna da terra",
+         "page": 56,
+         "code": "CH.4.11"
+        },
+        {
+         "label": "Estruturas do solo e do relevo",
+         "page": 56,
+         "code": "CH.4.12"
+        },
+        {
+         "label": "Agentes internos e externos modeladores do relevo",
+         "page": 56,
+         "code": "CH.4.13"
+        },
+        {
+         "label": "Situação geral da atmosfera e classificação climática",
+         "page": 56,
+         "code": "CH.4.14"
+        },
+        {
+         "label": "Características climáticas do território brasileiro",
+         "page": 56,
+         "code": "CH.4.15"
+        },
+        {
+         "label": "Grandes domínios da vegetação no Brasil e no mundo",
+         "page": 56,
+         "code": "CH.4.16"
+        }
+       ],
+       "page": 55,
+       "code": "CH.4"
+      },
+      {
+       "label": "Representação espacial",
+       "objetos": [
+        {
+         "label": "Projeções cartográficas; leitura de mapas temáticos, físicos e políticos; tecnologias modernas aplicadas à cartografia",
+         "page": 56,
+         "code": "CH.5.1"
+        }
+       ],
+       "page": 56,
+       "code": "CH.5"
+      }
+     ],
+     "page": 53
+    }
+   ]
+  }
+ ],
+ "total_objetos": 379
+}

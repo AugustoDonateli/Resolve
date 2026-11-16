@@ -72,6 +72,11 @@ class Api:
         except urllib.error.HTTPError as err:
             raise RuntimeError(f"{method} {path}: {err.code} {err.read().decode()[:400]}") from None
 
+    def _req_raw(self, path: str) -> bytes:
+        req = urllib.request.Request(self.url + path, headers={"apikey": self.key, "Authorization": f"Bearer {self.token}"})
+        with urllib.request.urlopen(req, timeout=120) as r:
+            return r.read()
+
     def rest(self, method, table, body=None, query=""):
         return self._req(method, f"/rest/v1/{table}{query}", body, headers={"Prefer": "return=representation"})
 
