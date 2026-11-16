@@ -65,7 +65,7 @@ function GoalCard({ goal }: { goal: CourseGoal }) {
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="t-kicker">{goal.institution}</p>
-          <h2 className="mt-1 font-display text-[30px] leading-tight text-ink">{goal.course}</h2>
+          <h2 className="mt-1 font-reading font-medium text-[28px] leading-tight text-ink">{goal.course}</h2>
           {goal.modality && <p className="t-meta text-ink-2">{goal.modality}</p>}
         </div>
         <div className="text-right">

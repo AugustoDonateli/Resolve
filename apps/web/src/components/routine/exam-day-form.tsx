@@ -59,7 +59,7 @@ export function ExamDayForm({ examDay, today }: { examDay: string | null; today:
             className="min-h-11 rounded-control border border-line bg-surface px-3 t-ui text-ink"
           />
         </label>
-        <Button type="submit" loading={pending}>
+        <Button type="submit" variant="secondary" loading={pending}>
           Salvar data
         </Button>
         {examDay && (

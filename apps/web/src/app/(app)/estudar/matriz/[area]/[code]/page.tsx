@@ -21,7 +21,7 @@ export default async function FichaPage({ params }: { params: Promise<{ area: st
       <div className="grid max-w-5xl gap-10 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
         <div className="flex flex-col gap-8">
           <figure className="border-l-4 border-ink pl-5">
-            <blockquote className="font-display text-[26px] leading-snug text-ink">{f.skill.description}</blockquote>
+            <blockquote className="font-reading font-medium text-[24px] leading-snug text-ink">{f.skill.description}</blockquote>
             <figcaption className="mt-3 t-meta text-ink-2">
               {f.matrixLabel}
               {f.skill.page ? `, p. ${f.skill.page}` : ""} ·{" "}

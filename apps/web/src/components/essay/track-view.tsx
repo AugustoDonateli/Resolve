@@ -103,7 +103,7 @@ export function TrackView({ data }: { data: TrackData }) {
                       <p className="t-meta text-ink-2">
                         Nível 200 da competência {s.competency!.slice(1)} na matriz do Inep{r.page ? ` (p. ${r.page})` : ""}:
                       </p>
-                      <p className="mt-1 font-display text-[19px] leading-snug text-ink">“{r.top}”</p>
+                      <p className="mt-1 font-reading font-medium text-[17px] leading-snug text-ink">“{r.top}”</p>
                     </blockquote>
                   )}
                   <div className="flex flex-wrap items-center gap-3">

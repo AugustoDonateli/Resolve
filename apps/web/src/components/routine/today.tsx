@@ -319,7 +319,7 @@ export function Today({
         <div className="grid items-start gap-7 lg:grid-cols-[minmax(0,1fr)_minmax(300px,372px)] lg:gap-10">
           <div className="relative arrive arrive-inicio">
             <div className="pile hidden md:block" aria-hidden="true" />
-            <div className="sheet sheet-punched flex min-h-[60dvh] min-w-0 flex-col gap-10 px-4 pb-10 pt-6 sm:px-6 md:min-h-[calc(100dvh-3rem)] md:pb-14 md:pl-14 md:pr-10 md:pt-11">
+            <div className="sheet sheet-punched flex min-h-[60dvh] min-w-0 flex-col gap-10 px-4 pb-10 pt-6 sm:px-6 md:min-h-[min(calc(100dvh-3rem),44rem)] md:pb-14 md:pl-14 md:pr-10 md:pt-11">
             <div className="-mb-10">
               <ScreenHeader title="Hoje" kicker={longDate(plan.today)}>
                 <div className="flex flex-wrap items-center gap-4">
@@ -369,6 +369,7 @@ export function Today({
                 )
               ) : (
                 <EmptyDay
+                  quiet={Boolean(guide)}
                   made={made}
                   hasAvailability={plan.available.length > 0}
                   allDone={done.length > 0}
@@ -762,7 +763,10 @@ function EmptyDay({
   made,
   hasAvailability,
   allDone,
+  quiet = false,
 }: {
+  /** Os primeiros passos estão abertos na folha: a ação azul é a deles; esta fica em contorno. */
+  quiet?: boolean;
   made: boolean;
   hasAvailability: boolean;
   allDone: boolean;
@@ -797,7 +801,10 @@ function EmptyDay({
         </p>
         <Link
           href="/rotina#semana"
-          className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-control bg-primary px-4 t-ui text-on-primary hover:bg-primary-hover"
+          className={clsx(
+            "mt-5 inline-flex min-h-11 items-center gap-2 rounded-control px-4 t-ui",
+            quiet ? "border-[1.5px] border-ink text-ink hover:bg-ink hover:text-background" : "bg-primary text-on-primary hover:bg-primary-hover",
+          )}
         >
           <CalendarRange aria-hidden className="size-4" /> Definir horários
         </Link>
@@ -864,7 +871,7 @@ function IfThenNote({ plan }: { plan: IfThenPlan | null }) {
         Se o dia apertar
       </h2>
       {plan ? (
-        <p className="mt-1 font-display text-[20px] leading-snug text-ink">
+        <p className="mt-1 font-reading font-medium text-[18px] leading-snug text-ink">
           {plan.trigger_text}, então {plan.alternative_activity}{" "}
           <span className="font-sans t-meta tabular text-ink-2">
             ({fmtDuration(plan.duration_minutes)})

@@ -29,7 +29,7 @@ export default async function GruposPage() {
                 <li key={g.id}>
                   <Link href={`/grupos/${g.id}`} className="group flex min-h-16 items-center justify-between gap-4 border-b border-line-subtle py-3 hover:bg-surface-subtle/60">
                     <span>
-                      <span className="block font-display text-[24px] leading-tight text-ink">{g.name}</span>
+                      <span className="block font-reading font-medium text-[22px] leading-tight text-ink">{g.name}</span>
                       <span className="block t-meta text-ink-2">
                         {g.members} {g.members === 1 ? "pessoa" : "pessoas"}
                       </span>

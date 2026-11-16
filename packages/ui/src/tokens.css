@@ -49,19 +49,19 @@
   :root:not([data-theme="light"]) {
     color-scheme: dark;
     --rs-desk: #0C0D0F;
-    --rs-background: #20242C;
-    --rs-surface: #2B3039;
-    --rs-surface-subtle: #343A45;
-    --rs-text: #F7F4ED;
-    --rs-text-secondary: #B7BDC8;
+    --rs-background: #2A2927;
+    --rs-surface: #353330;
+    --rs-surface-subtle: #42403B;
+    --rs-text: #F5F1E7;
+    --rs-text-secondary: #C4BFB3;
     --rs-link-focus: #9FB7FF;
     --rs-correction: #FF8A7A;
-    --rs-border-control: #8B929E;
-    --rs-border-subtle: #4A515D;
-    --rs-disabled-surface: #343A45;
+    --rs-border-control: #9C978B;
+    --rs-border-subtle: #57534B;
+    --rs-disabled-surface: #42403B;
     --rs-scrim: rgb(0 0 0 / 0.72);
-    --rs-shadow: none;
-    --rs-shadow-sheet: 0 28px 70px rgb(0 0 0 / 0.6), 0 0 0 1px rgb(255 255 255 / 0.04);
+    --rs-shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 8px 20px rgb(0 0 0 / 0.32);
+    --rs-shadow-sheet: 0 1px 0 rgb(255 255 255 / 0.09) inset, 0 28px 70px rgb(0 0 0 / 0.65), 0 0 0 1px rgb(255 255 255 / 0.05);
     --rs-lamp: rgb(255 238 205 / 0.05);
   }
 }
@@ -69,19 +69,19 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
   --rs-desk: #0C0D0F;
-  --rs-background: #20242C;
-  --rs-surface: #2B3039;
-  --rs-surface-subtle: #343A45;
-  --rs-text: #F7F4ED;
-  --rs-text-secondary: #B7BDC8;
+  --rs-background: #2A2927;
+  --rs-surface: #353330;
+  --rs-surface-subtle: #42403B;
+  --rs-text: #F5F1E7;
+  --rs-text-secondary: #C4BFB3;
   --rs-link-focus: #9FB7FF;
   --rs-correction: #FF8A7A;
-  --rs-border-control: #8B929E;
-  --rs-border-subtle: #4A515D;
-  --rs-disabled-surface: #343A45;
+  --rs-border-control: #9C978B;
+  --rs-border-subtle: #57534B;
+  --rs-disabled-surface: #42403B;
   --rs-scrim: rgb(0 0 0 / 0.72);
-  --rs-shadow: none;
-  --rs-shadow-sheet: 0 28px 70px rgb(0 0 0 / 0.6), 0 0 0 1px rgb(255 255 255 / 0.04);
+  --rs-shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 8px 20px rgb(0 0 0 / 0.32);
+  --rs-shadow-sheet: 0 1px 0 rgb(255 255 255 / 0.09) inset, 0 28px 70px rgb(0 0 0 / 0.65), 0 0 0 1px rgb(255 255 255 / 0.05);
   --rs-lamp: rgb(255 238 205 / 0.05);
 }
 

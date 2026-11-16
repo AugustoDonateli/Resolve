@@ -51,7 +51,7 @@ export function FirstTimeTip({ tip, seen, className }: { tip: TipKey; seen: bool
   return (
     <aside ref={ref} aria-labelledby={id} className={`rounded-card border border-line-subtle bg-surface p-4 shadow-paper sm:p-5 ${className ?? ""}`}>
       <p className="t-kicker">Primeira vez aqui</p>
-      <h3 id={id} className="mb-3 mt-0.5 font-display text-[24px] leading-tight text-ink">
+      <h3 id={id} className="mb-3 mt-0.5 font-reading font-medium text-[22px] leading-tight text-ink">
         {TIPS[tip].title}
       </h3>
       <TipBody tip={tip} />

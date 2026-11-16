@@ -155,7 +155,7 @@ export function RepertoireView({ items, axes }: { items: RepertoireItem[]; axes:
               <li key={i.id} className="grid gap-2 border-b border-line-subtle py-4 sm:grid-cols-[8rem_minmax(0,1fr)_auto] sm:gap-6">
                 <span className="t-kicker pt-1">{KINDS[i.kind]}</span>
                 <div className="flex flex-col gap-1">
-                  <p className={clsx("text-ink", i.kind === "citacao" ? "font-display text-[20px] leading-snug" : "t-reading")}>
+                  <p className={clsx("text-ink", i.kind === "citacao" ? "font-reading font-medium text-[18px] leading-snug" : "t-reading")}>
                     {i.kind === "citacao" ? `“${i.content}”` : i.content}
                   </p>
                   {i.origin && <p className="t-ui text-ink-2">{i.origin}</p>}

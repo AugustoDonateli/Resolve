@@ -403,6 +403,7 @@ function GoalForm({
       <div className="flex flex-wrap gap-3">
         <Button
           type="submit"
+          variant="secondary"
           size={goal ? "sm" : "md"}
           loading={pending}
           disabled={!hydrated}
@@ -493,6 +494,7 @@ function PlanForm({
       <div className="flex flex-wrap gap-3">
         <Button
           type="submit"
+          variant="secondary"
           size={plan ? "sm" : "md"}
           loading={pending}
           disabled={!hydrated}

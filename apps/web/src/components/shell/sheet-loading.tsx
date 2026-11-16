@@ -23,5 +23,5 @@ export function SheetLoading() {
       </div>
     </div>
   );
-  return bare ? <div className="sheet min-h-[60dvh] px-4 pb-16 pt-6 sm:px-6 md:min-h-[calc(100dvh-3rem)] md:max-w-[820px] md:pl-14 md:pr-12 md:pt-11">{lines}</div> : lines;
+  return bare ? <div className="sheet min-h-[60dvh] px-4 pb-16 pt-6 sm:px-6 md:min-h-[min(calc(100dvh-3rem),44rem)] md:max-w-[820px] md:pl-14 md:pr-12 md:pt-11">{lines}</div> : lines;
 }

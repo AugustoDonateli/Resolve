@@ -42,7 +42,7 @@ export function DailyQuestion({ q, today }: { q: Daily | null; today: string }) 
         </div>
       ) : (
         <>
-          <p className="mt-2 font-display text-[26px] leading-tight text-ink">{AREA_LABEL[q.area]}</p>
+          <p className="mt-2 font-reading font-medium text-[24px] leading-tight text-ink">{AREA_LABEL[q.area]}</p>
           <p className="mt-1 t-meta text-ink-2">Uma questão oficial que você ainda não respondeu. A mesma até o fim do dia.</p>
           <Button
             className="mt-4"

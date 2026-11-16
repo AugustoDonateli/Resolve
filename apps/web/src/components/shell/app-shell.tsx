@@ -71,7 +71,7 @@ function Sheet({ pathname, children }: { pathname: string; children: ReactNode }
         ref={ref}
         tabIndex={-1}
         className={clsx(
-          "sheet sheet-punched arrive min-h-[calc(100dvh-7.5rem)] w-full px-4 pb-28 pt-6 outline-none sm:px-6 md:min-h-[calc(100dvh-3rem)] md:pb-16 md:pl-14 md:pr-12 md:pt-11",
+          "sheet sheet-punched arrive min-h-[calc(100dvh-7.5rem)] w-full px-4 pb-28 pt-6 outline-none sm:px-6 md:min-h-[min(calc(100dvh-3rem),44rem)] md:pb-16 md:pl-14 md:pr-12 md:pt-11",
           `arrive-${kind}`,
         )}
       >
@@ -129,7 +129,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </header>
 
       <div className="relative z-20 md:ml-[196px] md:py-6 md:pr-6">
-        <div className="relative mx-auto w-full max-w-[1240px] [perspective:2200px]">
+        <div className="relative w-full max-w-[1280px] [perspective:2200px]">
           <Sheet key={pathname} pathname={pathname}>
             {children}
           </Sheet>

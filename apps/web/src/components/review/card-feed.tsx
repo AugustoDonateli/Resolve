@@ -90,7 +90,7 @@ export function CardFeed({
         <span aria-hidden className="mx-auto grid size-12 place-items-center rounded-full bg-ink text-background">
           <Check className="size-6" strokeWidth={2.5} />
         </span>
-        <h3 id="fim-cartoes" className="font-display text-[28px] leading-tight">
+        <h3 id="fim-cartoes" className="font-reading font-medium text-[26px] leading-tight">
           Terminou por hoje
         </h3>
         <p className="t-reading text-ink-2">
@@ -148,7 +148,7 @@ export function CardFeed({
             Não lembrei
           </motion.span>
           <p className="t-kicker">{card.kind === "formula" ? "Fórmula" : "Conceito"}</p>
-          <p className="mt-4 font-display text-[24px] leading-snug text-ink">{card.front}</p>
+          <p className="mt-4 font-reading font-medium text-[22px] leading-snug text-ink">{card.front}</p>
           {flipped ? (
             <motion.div
               initial={{ opacity: 0 }}

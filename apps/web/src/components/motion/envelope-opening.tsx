@@ -9,13 +9,16 @@ import { useReduced } from "@/components/prefs/prefs";
 import { Button } from "@/components/ui/button";
 import { DemoBadge } from "@/components/ui/demo-badge";
 
-/** Cadernos "carregados e mapeados" — aqui, dois cadernos DEMONSTRATIVOS. */
-const BOOKLETS = [
-  { id: "azul", label: "Azul", cover: "bg-primary text-on-primary", sub: "text-on-primary/80" },
-  { id: "amarelo", label: "Amarelo", cover: "bg-mark-yellow text-on-mark", sub: "text-on-mark/75" },
-] as const;
+/** Capa por cor de caderno. Cor sem par de tinta conferido usa papel e tinta. */
+const COVERS: Record<string, { cover: string; sub: string }> = {
+  Azul: { cover: "bg-primary text-on-primary", sub: "text-on-primary/80" },
+  Amarelo: { cover: "bg-mark-yellow text-on-mark", sub: "text-on-mark/75" },
+  Rosa: { cover: "bg-mark-pink text-on-mark", sub: "text-on-mark/75" },
+};
+const PAPER = { cover: "bg-surface text-ink", sub: "text-ink-2" };
+const DEMO = ["Azul", "Amarelo"] as const;
 
-const PROVA_MS = 5.5 * 3600_000; // Dia 1, premissa do documento: 13h30–19h
+const PROVA_MS = 5.5 * 3600_000;
 const stageEase = bezierFn(ease.stage);
 const softEase = bezierFn(ease.layout);
 
@@ -27,75 +30,68 @@ function hms(ms: number) {
 }
 
 /**
- * Protótipo do envelope e caderno (M03; F1-T10). Formas 3D simples em CSS +
- * GSAP para testar enquadramento e ritmo (storyboard Q0–Q5, 5 s).
- * Pular está disponível desde o primeiro quadro. O cronômetro da prova fica
- * parado durante toda a cena e só inicia em “Começar prova”.
+ * Abertura do caderno no Dia D: o envelope lacrado sobre a mesa. O lacre rompe, a aba levanta, o caderno
+ * sai e o envelope é puxado para fora; fica a capa, pronta para começar.
+ *
+ * A cena é plana, vista de cima, com as peças em camadas fixas (fundo do envelope com a aba aberta, caderno,
+ * bolso da frente, aba fechada, lacre). Nenhuma peça gira em profundidade: a aba "dobra" encolhendo até a
+ * borda e reabrindo para cima já na camada de trás. Assim nada atravessa nada, em qualquer tamanho de tela.
+ * Dura cerca de 3 s, pode ser pulada desde o primeiro quadro (botão ou Esc) e, com movimento reduzido,
+ * mostra a capa direto. O relógio da prova só começa em "Começar prova".
  */
-export function EnvelopeOpening({ exam }: {
+export function EnvelopeOpening({
+  exam,
+}: {
   exam?: { color: string; day: number; minutes: number; starting: boolean; onStart: () => void };
 } = {}) {
   const reduced = useReduced();
-  const [demoBooklet, setBooklet] = useState<(typeof BOOKLETS)[number]>(BOOKLETS[0]);
-  const booklet = exam
-    ? {
-        ...(BOOKLETS.find((b) => b.label === exam.color) ?? { cover: "bg-surface text-ink", sub: "text-ink-2" }),
-        label: exam.color,
-      }
-    : demoBooklet;
+  const [demoColor, setDemoColor] = useState<string>(DEMO[0]);
+  const color = exam?.color ?? demoColor;
+  const look = COVERS[color] ?? PAPER;
   const day = exam?.day ?? 1;
   const [phase, setPhase] = useState<"scene" | "ready" | "running">("scene");
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [now, setNow] = useState(0);
-  const [log, setLog] = useState("");
   const tl = useRef<gsap.core.Timeline | null>(null);
   const skipRef = useRef<HTMLButtonElement>(null);
   const startRef = useRef<HTMLButtonElement>(null);
-  const cameraRef = useRef<HTMLDivElement>(null);
-  const tiltRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const envelopeRef = useRef<HTMLDivElement>(null);
+  const pocketRef = useRef<HTMLDivElement>(null);
   const flapRef = useRef<HTMLDivElement>(null);
+  const flapOpenRef = useRef<HTMLDivElement>(null);
   const sealLRef = useRef<HTMLDivElement>(null);
   const sealRRef = useRef<HTMLDivElement>(null);
   const bookletRef = useRef<HTMLDivElement>(null);
-  const shadowRef = useRef<HTMLDivElement>(null);
 
   const build = useCallback(() => {
     tl.current?.kill();
-    const t0 = performance.now();
-    const t = gsap.timeline({
-      paused: true,
-      onComplete: () => {
-        setPhase((p) => (p === "scene" ? "ready" : p));
-        const elapsed = performance.now() - t0;
-        // Conclusão instantânea (movimento reduzido ou pular) não é medição da cena.
-        if (elapsed > 200) setLog((l) => l || `cena ${(elapsed / 1000).toFixed(2)} s`);
-      },
-    });
-    // Q0 — estado inicial
-    t.set(cameraRef.current, { scale: 1, y: 0 })
-      .set(tiltRef.current, { rotationX: 22, rotationZ: -4, y: 0 })
-      .set(envelopeRef.current, { y: 0, opacity: 1 })
-      .set(flapRef.current, { rotationX: 0, z: 3 })
+    const t = gsap.timeline({ paused: true, onComplete: () => setPhase((p) => (p === "scene" ? "ready" : p)) });
+    const envelope = [envelopeRef.current, pocketRef.current];
+    // Quadro inicial: envelope fechado e lacrado, levemente girado sobre a mesa.
+    t.set(stageRef.current, { rotation: -3, y: 44 })
+      .set(envelope, { yPercent: 0, opacity: 1 })
+      .set(flapRef.current, { scaleY: 1, opacity: 1 })
+      .set(flapOpenRef.current, { scaleY: 0 })
       .set([sealLRef.current, sealRRef.current], { x: 0, rotation: 0, opacity: 1 })
-      .set(bookletRef.current, { y: 0, z: 1, scale: 1 })
-      .set(shadowRef.current, { opacity: 0.18, scale: 1 });
-    // Q1 0–1,2 s — aproximação lenta
-    t.to(cameraRef.current, { scale: 1.08, duration: 1.2, ease: "none" }, 0);
-    // Q2 1,2–2,2 s — lacre rompe e aba abre
-    t.to(sealLRef.current, { x: -10, rotation: -14, opacity: 0, duration: 0.45, ease: softEase }, 1.2)
-      .to(sealRRef.current, { x: 10, rotation: 14, opacity: 0, duration: 0.45, ease: softEase }, 1.2)
-      .to(flapRef.current, { rotationX: 178, duration: 0.8, ease: stageEase }, 1.4)
-      .set(flapRef.current, { z: -2 }, 1.8); // após 90°, a aba passa para trás do caderno
-    // Q3 2,2–3,6 s — caderno sobe do envelope
-    t.to(bookletRef.current, { y: "-44%", z: 6, duration: 1.4, ease: stageEase }, 2.2);
-    // Q4 3,6–5,0 s — envelope sai, câmera alinha a capa
-    t.to(envelopeRef.current, { y: "190%", duration: 1.0, ease: stageEase }, 3.6)
-      .to(envelopeRef.current, { opacity: 0, duration: 0.3 }, 4.3)
-      .to(shadowRef.current, { opacity: 0, duration: 0.6 }, 3.6)
-      .to(tiltRef.current, { rotationX: 0, rotationZ: 0, duration: 1.4, ease: stageEase }, 3.6)
-      .to(bookletRef.current, { y: "-6%", scale: 1.08, duration: 1.4, ease: stageEase }, 3.6)
-      .to(cameraRef.current, { scale: 1, duration: 1.4, ease: stageEase }, 3.6);
+      .set(bookletRef.current, { yPercent: 0, scale: 1 });
+    // 1. O lacre rompe ao meio.
+    t.to(sealLRef.current, { x: -16, rotation: -9, opacity: 0, duration: 0.4, ease: softEase }, 0.25)
+      .to(sealRRef.current, { x: 16, rotation: 9, opacity: 0, duration: 0.4, ease: softEase }, 0.25);
+    // 2. A aba dobra: a de cima encolhe até a borda; a de trás abre para cima, atrás do caderno.
+    t.to(flapRef.current, { scaleY: 0, duration: 0.24, ease: "power2.in" }, 0.62)
+      .set(flapRef.current, { opacity: 0 }, 0.86)
+      .to(flapOpenRef.current, { scaleY: 1, duration: 0.32, ease: softEase }, 0.86);
+    // 3. O caderno sai pelo alto, entre o fundo e o bolso do envelope.
+    t.to(bookletRef.current, { yPercent: -42, duration: 0.85, ease: stageEase }, 1.15);
+    // 4. O envelope é puxado para baixo, para fora da mesa.
+    t.to(envelope, { yPercent: 135, duration: 0.6, ease: stageEase }, 2.0).to(envelope, { opacity: 0, duration: 0.2 }, 2.4);
+    // 5. A capa assenta no centro, alinhada.
+    t.to(bookletRef.current, { yPercent: 0, scale: 1.1, duration: 0.6, ease: stageEase }, 2.55).to(
+      stageRef.current,
+      { rotation: 0, y: 0, duration: 0.6, ease: stageEase },
+      2.55,
+    );
     tl.current = t;
     return t;
   }, []);
@@ -110,16 +106,13 @@ export function EnvelopeOpening({ exam }: {
     requestAnimationFrame(() => skipRef.current?.focus({ preventScroll: true }));
   }, [build, reduced]);
 
-  /** Rever cena: sorteia a variante somente entre cadernos carregados e mapeados. */
-  const play = useCallback(() => {
-    setBooklet(BOOKLETS[Math.floor(Math.random() * BOOKLETS.length)]!);
+  const replay = useCallback(() => {
+    if (!exam) setDemoColor((c) => DEMO[(DEMO.indexOf(c as (typeof DEMO)[number]) + 1) % DEMO.length]!);
     setPhase("scene");
     setStartedAt(null);
-    setLog("");
     run();
-  }, [run]);
+  }, [exam, run]);
 
-  // Primeira exibição: a variante inicial é fixa para não divergir da renderização do servidor.
   useLayoutEffect(() => {
     run();
     return () => {
@@ -128,10 +121,7 @@ export function EnvelopeOpening({ exam }: {
   }, [run]);
 
   const skip = useCallback(() => {
-    if (!tl.current) return;
-    const p = tl.current.progress();
-    tl.current.progress(1);
-    if (p < 1) setLog(`pulada em ${(p * 5).toFixed(1)} s → capa final`);
+    tl.current?.progress(1);
   }, []);
 
   const start = () => {
@@ -169,39 +159,57 @@ export function EnvelopeOpening({ exam }: {
       <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
         <div role="timer" aria-live="off" className="flex items-baseline gap-3">
           <span className="t-meta text-ink-2">Tempo de prova</span>
-          <span data-testid="prova-timer" className="t-metric">{hms(remaining)}</span>
+          <span data-testid="prova-timer" className="t-metric">
+            {hms(remaining)}
+          </span>
           <span className="t-meta text-ink-2" aria-live="polite">
             {phase === "running" ? "em curso" : "não iniciado"}
           </span>
         </div>
-        {!exam && <DemoBadge>Caderno demonstrativo</DemoBadge>}
+        <div className="flex items-center gap-2">
+          {!exam && <DemoBadge>Caderno demonstrativo</DemoBadge>}
+          {phase === "scene" ? (
+            <Button ref={skipRef} size="sm" variant="secondary" onClick={skip} icon={<SkipForward aria-hidden className="size-4" />}>
+              Pular
+            </Button>
+          ) : (
+            <Button size="sm" variant="ghost" onClick={replay} icon={<RotateCcw aria-hidden className="size-4" />}>
+              Rever cena
+            </Button>
+          )}
+        </div>
       </div>
 
+      {/* A mesa: tudo aqui é desenho; o texto para leitor de tela vem na frase abaixo. */}
       <div
-        className="paper-grain relative h-[460px] overflow-hidden rounded-panel border border-line-subtle bg-surface-subtle sm:h-[540px]"
-        style={{ perspective: 1100 }}
-        aria-label="Cena de abertura do caderno"
         role="group"
+        aria-label="Cena de abertura do caderno"
+        className="relative h-[430px] overflow-hidden rounded-panel bg-desk sm:h-[520px]"
+        style={{ backgroundImage: "radial-gradient(ellipse 70% 60% at 50% 28%, var(--rs-lamp), transparent 70%)" }}
       >
         <p className="sr-only" aria-live="polite">
-          {phase === "scene" ? "Abrindo o envelope do caderno." : `Caderno ${booklet.label}, ${day}º dia. Pronto para começar.`}
+          {phase === "scene" ? "Abrindo o envelope do caderno." : `Caderno ${color}, ${day}º dia. Pronto para começar.`}
         </p>
-        <div ref={cameraRef} aria-hidden="true" className="absolute inset-0 grid place-items-center" style={{ transformStyle: "preserve-3d" }}>
-          <div ref={tiltRef} className="relative w-[min(52%,260px)] aspect-[0.76]" style={{ transformStyle: "preserve-3d" }}>
-            <div ref={shadowRef} aria-hidden="true" className="absolute -inset-x-4 -bottom-6 h-10 rounded-[50%] bg-ink blur-xl" />
-            {/* Caderno: entre o fundo e o bolso do envelope */}
-            <div
-              ref={bookletRef}
-              className={clsx("absolute inset-x-[6%] top-[4%] bottom-[3%] rounded-[6px] p-[8%] shadow-paper", booklet.cover)}
-              style={{ transformStyle: "preserve-3d" }}
-            >
+        <div aria-hidden="true" className="absolute inset-0 grid place-items-center">
+          <div ref={stageRef} className="relative aspect-[0.74] w-[min(54%,250px)]">
+            {/* 1 · fundo do envelope e, presa a ele, a aba aberta: nasce na borda de cima e cresce para fora, atrás do caderno */}
+            <div ref={envelopeRef} className="absolute inset-0 z-[1]">
+              <div className="absolute inset-0 rounded-[5px] bg-surface-subtle shadow-sheet" />
+              <div
+                ref={flapOpenRef}
+                className="absolute inset-x-0 bottom-full h-[36%] origin-bottom bg-surface-subtle"
+                style={{ clipPath: "polygon(0 100%, 100% 100%, 50% 0)", filter: "brightness(0.93)" }}
+              />
+            </div>
+            {/* 3 · caderno */}
+            <div ref={bookletRef} className={clsx("absolute inset-x-[7%] bottom-[4%] top-[5%] z-[3] rounded-[5px] p-[9%] shadow-paper", look.cover)}>
               <div className="flex h-full flex-col">
-                <p className={clsx("text-[10px] font-medium uppercase leading-tight tracking-[0.1em] sm:text-[11px]", booklet.sub)}>Caderno de questões</p>
-                <p className="mt-2 font-display text-[clamp(26px,6vw,40px)] leading-none">{day}º dia</p>
-                <p className="mt-1 text-[13px] font-medium">Caderno {booklet.label}</p>
+                <p className={clsx("font-mono text-[9.5px] font-medium uppercase leading-tight tracking-[0.1em] sm:text-[10.5px]", look.sub)}>Caderno de questões</p>
+                <p className="mt-2 font-display text-[clamp(28px,7vw,44px)] leading-none">{day}º dia</p>
+                <p className="mt-1.5 text-[13px] font-medium">Caderno {color}</p>
                 <div className="mt-auto flex items-end justify-between gap-2">
-                  <span className={clsx("text-[11px] leading-tight", booklet.sub)}>{exam ? "Dia D" : "Demonstração"}</span>
-                  <span aria-hidden="true" className="flex gap-1">
+                  <span className={clsx("font-mono text-[9.5px] uppercase tracking-[0.1em]", look.sub)}>{exam ? "Enem · Dia D" : "Demonstração"}</span>
+                  <span className="flex gap-1">
                     {[0, 1, 2, 3, 4].map((i) => (
                       <span key={i} className={clsx("size-2.5 rounded-full border border-current", i === 1 && "bg-current")} />
                     ))}
@@ -209,56 +217,49 @@ export function EnvelopeOpening({ exam }: {
                 </div>
               </div>
             </div>
-            {/* Envelope */}
-            <div ref={envelopeRef} className="absolute inset-0" style={{ transformStyle: "preserve-3d" }}>
-              <div className="absolute inset-0 rounded-[6px] border border-line-subtle bg-surface-subtle" style={{ transform: "translateZ(0px)" }} />
-              <div
-                className="absolute inset-0 rounded-[6px] bg-surface"
-                style={{ transform: "translateZ(2px)", clipPath: "polygon(0 0.5%, 50% 40%, 100% 0.5%, 100% 100%, 0 100%)", boxShadow: "inset 0 0 0 1px var(--rs-border-subtle)" }}
-              />
-              <svg aria-hidden="true" className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" style={{ transform: "translateZ(2.5px)" }}>
-                <path d="M0 0.5 L50 40 L100 0.5" fill="none" stroke="var(--rs-border-subtle)" strokeWidth="0.6" vectorEffect="non-scaling-stroke" />
-              </svg>
-              <div
-                ref={flapRef}
-                className="absolute inset-x-0 top-0 h-[42%] origin-top bg-surface-subtle"
-                style={{ clipPath: "polygon(0 0, 100% 0, 50% 100%)", boxShadow: "inset 0 0 0 1px var(--rs-border-subtle)" }}
-              />
-              {/* Lacre azul em duas metades */}
-              <div className="absolute left-1/2 top-[38%] size-11" style={{ transform: "translate(-50%,-50%) translateZ(5px)" }}>
-                <div ref={sealLRef} className="absolute inset-0 rounded-full bg-primary" style={{ clipPath: "inset(0 50% 0 0)" }} />
-                <div ref={sealRRef} className="absolute inset-0 rounded-full bg-primary" style={{ clipPath: "inset(0 0 0 50%)" }} />
+            {/* 4 · bolso da frente, com o recorte em V por onde o caderno aparece */}
+            <div
+              ref={pocketRef}
+              className="absolute inset-0 z-[4] rounded-[5px] bg-surface"
+              style={{ clipPath: "polygon(0 0, 50% 34%, 100% 0, 100% 100%, 0 100%)" }}
+            >
+              <span className="absolute inset-x-[12%] bottom-[10%] flex flex-col gap-1.5">
+                <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-ink-2">Abrir somente com autorização</span>
+                <span className="h-px bg-line-subtle" />
+                <span className="h-px w-2/3 bg-line-subtle" />
+              </span>
+            </div>
+            {/* 5 · aba fechada */}
+            <div
+              ref={flapRef}
+              className="absolute inset-x-0 top-0 z-[5] h-[36%] origin-top bg-surface-subtle"
+              style={{ clipPath: "polygon(0 0, 100% 0, 50% 100%)" }}
+            />
+            {/* 6 · lacre: fita em duas metades sobre a ponta da aba */}
+            <div className="absolute left-1/2 top-[33%] z-[6] h-[7.5%] w-[52%] -translate-x-1/2 -translate-y-1/2">
+              <div ref={sealLRef} className="absolute inset-y-0 left-0 grid w-1/2 place-items-center rounded-l-[2px] bg-ink">
+                <span className="font-mono text-[9px] font-medium uppercase tracking-[0.2em] text-background">Lac</span>
+              </div>
+              <div ref={sealRRef} className="absolute inset-y-0 right-0 grid w-1/2 place-items-center rounded-r-[2px] bg-ink">
+                <span className="font-mono text-[9px] font-medium uppercase tracking-[0.2em] text-background">re</span>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Controles sobre a cena — visíveis desde o primeiro quadro */}
-        <div className="absolute right-3 top-3 flex gap-2">
-          {phase === "scene" && (
-            <Button ref={skipRef} size="sm" variant="secondary" onClick={skip} icon={<SkipForward aria-hidden className="size-4" />}>
-              Pular
-            </Button>
-          )}
-          {phase !== "scene" && (
-            <Button size="sm" variant="ghost" onClick={play} icon={<RotateCcw aria-hidden className="size-4" />}>
-              Rever cena
-            </Button>
-          )}
-        </div>
-        <div className="absolute inset-x-0 bottom-0 flex justify-center p-4">
-          {phase !== "running" ? (
-            <Button ref={startRef} onClick={start} loading={exam?.starting} icon={<Play aria-hidden className="size-4" />}>
-              Começar prova
-            </Button>
-          ) : (
-            <p className="rounded-control bg-surface px-3 py-2 t-meta text-ink">Prova em curso. A primeira questão abriria aqui.</p>
-          )}
-        </div>
       </div>
-      <p className="mt-3 t-meta tabular text-ink-2" aria-live="polite">
-        {log || (reduced ? "Movimento reduzido: capa final exibida direto, sem a cena." : "Esc ou Pular levam à capa final. O cronômetro só inicia em Começar prova.")}
-      </p>
+
+      <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+        {phase !== "running" ? (
+          <Button ref={startRef} onClick={start} loading={exam?.starting} icon={<Play aria-hidden className="size-4" />}>
+            Começar prova
+          </Button>
+        ) : (
+          <p className="t-ui text-ink">Prova em curso. A primeira questão abriria aqui.</p>
+        )}
+        <p className="t-meta text-ink-2">
+          {reduced ? "Movimento reduzido: a capa aparece direto. " : "Esc ou Pular levam direto à capa. "}O relógio só começa em Começar prova.
+        </p>
+      </div>
     </div>
   );
 }
