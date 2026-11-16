@@ -709,3 +709,87 @@ test("ocorrências: editor vê a fila; aluno não chega", async ({ browser }) =>
   expect((await sp.goto("/editor/ocorrencias"))?.status()).toBe(404);
   await sctx.close();
 });
+
+// ── Conferência das anotações (sessão 3 do plano v2) ──
+// Aprovar e devolver são definitivos e a fila é a real. Por isso a ação vai ao servidor com uma proposta
+// inexistente (o banco recusa) e a resposta volta trocada por sucesso: a tela é exercitada inteira e
+// nenhuma anotação real muda. A decisão de verdade é de Guto.
+test("conferência das anotações: aluno não chega; editor navega, ajusta e aprova (resposta simulada)", async ({ browser, page }) => {
+  test.setTimeout(120_000);
+  await signIn(page, student);
+  const blocked = await page.goto("/editor/anotacoes");
+  expect(blocked?.status()).toBe(404);
+  expect((await page.request.get("/editor/anotacoes/ficha?id=00000000-0000-4000-8000-000000000000")).status()).toBe(404);
+
+  const { ctx, page: ed } = await editorPage(browser);
+  let calls = 0;
+  await ed.route(
+    () => true,
+    async (route) => {
+      const req = route.request();
+      if (req.method() !== "POST" || !req.headers()["next-action"]) return route.fallback();
+      calls++;
+      const body = (req.postData() ?? "").replace(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/g, "00000000-0000-4000-8000-000000000000");
+      const real = await route.fetch({ postData: body });
+      const text = await real.text();
+      expect(text).toContain('"ok":false');
+      await route.fulfill({ response: real, body: text.replace(/\{"ok":false,"problem":"[^"]*"\}/, '{"ok":true}') });
+    },
+  );
+  await ed.goto("/editor/anotacoes");
+  const title = ed.getByRole("heading", { level: 2 });
+  const ficha = ed.getByRole("region", { name: "Anotação proposta" });
+  await expect(ficha).toContainText("Gabarito e alternativas");
+  await expect(ficha).toContainText("Resolução proposta");
+  await expect(ficha.getByText("gabarito oficial", { exact: true })).toBeVisible();
+  const axe = await new AxeBuilder({ page: ed }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]).analyze();
+  expect(axe.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);
+
+  const approve = ed.getByRole("button", { name: /^Aprovar/ });
+  if (!(await approve.isVisible())) {
+    // Fila toda conferida: só há leitura.
+    await ctx.close();
+    return;
+  }
+  const first = await title.innerText();
+  // J e K trocam de questão; a ficha vizinha chega pela rota, sem recarregar a página.
+  await ed.keyboard.press("j");
+  await expect(title).not.toHaveText(first);
+  await expect(ed).toHaveURL(/q=[0-9a-f-]{36}/);
+  await ed.keyboard.press("k");
+  await expect(title).toHaveText(first);
+
+  // Devolver pede motivo.
+  await ed.keyboard.press("d");
+  await ed.getByRole("button", { name: "Devolver com este motivo" }).click();
+  await expect(ed.locator("main").getByRole("alert")).toContainText("10 caracteres");
+  await ed.keyboard.press("Escape");
+
+  // Ajustar: o que impede aprovar aparece antes de ir ao banco.
+  await ed.keyboard.press("e");
+  await ed.getByLabel("Resolução (um passo por linha)").fill("");
+  await ed.getByRole("button", { name: "Aprovar com ajustes" }).click();
+  await expect(ed.locator("main").getByRole("alert")).toContainText("pelo menos um passo");
+  expect(calls).toBe(0);
+  await ed.keyboard.press("Escape");
+  await expect(approve).toBeVisible();
+
+  // Aprovar pelo teclado: registra, carimba e passa para a próxima por conferir.
+  await ed.waitForTimeout(700);
+  await title.focus();
+  await ed.keyboard.press("a");
+  await expect(title).not.toHaveText(first, { timeout: 15_000 });
+  expect(calls).toBe(1);
+  await expect(ed.getByText(/Última: .* aprovada\./)).toBeVisible();
+  // Tecla repetida logo em seguida não aprova a próxima sem leitura.
+  await ed.keyboard.press("a");
+  await ed.keyboard.press("a");
+  await ed.waitForTimeout(400);
+  expect(calls).toBe(1);
+
+  // Celular: a barra de decisão continua à vista, acima das abas, sem rolagem lateral.
+  await ed.setViewportSize({ width: 390, height: 844 });
+  await expect(approve).toBeInViewport();
+  expect(await ed.evaluate(() => document.documentElement.scrollWidth > window.innerWidth)).toBe(false);
+  await ctx.close();
+});

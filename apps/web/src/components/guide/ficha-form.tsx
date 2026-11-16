@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { saveFicha } from "@/lib/guide/actions";
 import { HOURS_OPTIONS, type FichaDefaults } from "@/lib/guide/types";
 
-const label = "font-mono text-[11.5px] font-medium uppercase leading-4 tracking-[0.1em] text-ink-2";
+const label = "block font-mono text-[11.5px] font-medium uppercase leading-4 tracking-[0.1em] text-ink-2";
 const chip =
   "inline-flex min-h-11 cursor-pointer items-center rounded-control border border-line px-3.5 t-ui text-ink has-[:checked]:border-ink has-[:checked]:bg-ink has-[:checked]:text-background has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[var(--rs-link-focus)]";
 

@@ -2,13 +2,15 @@
 
 import { clsx } from "clsx";
 import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { useState, useSyncExternalStore, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { markGuide, startFirstQuestion } from "@/lib/guide/actions";
 import { currentStep, FIRST_STEPS, type FichaDefaults, type FirstStep, type GuideState } from "@/lib/guide/types";
 import { CHECK } from "@/lib/ink/paths";
 import { DeskTour } from "./desk-tour";
 import { FichaForm } from "./ficha-form";
+
+const noop = () => () => {};
 
 const TITLE: Record<FirstStep, string> = {
   ficha: "Ficha de identificação",
@@ -36,6 +38,12 @@ export function FirstSteps({
   const [pending, start] = useTransition();
   const [message, setMessage] = useState<string | null>(null);
   const step = currentStep(done);
+  // O tour mede os objetos na tela: só existe no navegador, depois que a página está montada.
+  const mounted = useSyncExternalStore(
+    noop,
+    () => true,
+    () => false,
+  );
 
   const finish = (key: FirstStep, record = true) => {
     setDone((d) => ({ ...d, [key]: true }));
@@ -48,12 +56,22 @@ export function FirstSteps({
     else router.refresh();
   };
 
-  const tour = touring && (
+  const tour = mounted && touring && (
     <DeskTour
       onDone={() => {
         setTouring(false);
-        if (!done.tour) finish("tour");
-        if (autoTour) router.replace("/hoje", { scroll: false });
+        // Aberto por pedido (?tour=1): ao sair, o endereço volta a ser só Hoje. Uma navegação por vez:
+        // primeiro o registro, depois a troca de endereço (que já traz a página atualizada).
+        const leave = () => (autoTour ? router.replace("/hoje", { scroll: false }) : router.refresh());
+        if (done.tour) {
+          if (autoTour) leave();
+          return;
+        }
+        setDone((d) => ({ ...d, tour: true }));
+        start(async () => {
+          await markGuide("tour");
+          leave();
+        });
       }}
     />
   );

@@ -2,7 +2,7 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
 import { clsx } from "clsx";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { useReduced } from "@/components/prefs/prefs";
 import { Button } from "@/components/ui/button";
 import { TOUR } from "@/lib/guide/types";
@@ -17,20 +17,25 @@ const find = (target: string) => document.querySelector<HTMLElement>(`[data-tour
  */
 export function DeskTour({ onDone }: { onDone: () => void }) {
   const reduced = useReduced();
-  // Só as paradas cujo objeto está na tela (a agenda, por exemplo, pode não existir em modo local).
-  const [steps] = useState(() => TOUR.filter((s) => find(s.target)));
+  const steps = TOUR;
   const [i, setI] = useState(0);
   const spot = useRef<HTMLDivElement>(null);
   const note = useRef<HTMLDivElement>(null);
-  const step = steps[i];
+  const step = steps[i]!;
 
+  // Os objetos são procurados depois que a página está montada (o tour pode abrir junto com a mesa).
   useLayoutEffect(() => {
-    const el = step ? find(step.target) : null;
-    if (!el) return;
+    const el = find(step.target);
     const place = () => {
       const s = spot.current;
       const n = note.current;
       if (!s || !n) return;
+      if (!el) {
+        // Objeto fora da tela: a frase aparece sozinha, no canto, sem destaque.
+        s.style.width = s.style.height = "0px";
+        n.style.top = n.style.left = window.innerWidth < 640 ? "" : "96px";
+        return;
+      }
       const r = el.getBoundingClientRect();
       const vw = window.innerWidth;
       const vh = window.innerHeight;
@@ -62,11 +67,13 @@ export function DeskTour({ onDone }: { onDone: () => void }) {
       n.style.left = `${nl}px`;
     };
     // Traz o objeto para a vista, sem rolagem animada, deixando espaço para a frase.
-    const r = el.getBoundingClientRect();
-    const small = window.innerWidth < 640;
-    const roomBelow = small ? 250 : 40;
-    const lead = small ? 72 : 96;
-    if (r.top < lead || r.bottom > window.innerHeight - roomBelow) window.scrollTo({ top: Math.max(0, window.scrollY + r.top - lead), behavior: "instant" });
+    if (el) {
+      const r = el.getBoundingClientRect();
+      const small = window.innerWidth < 640;
+      const roomBelow = small ? 250 : 40;
+      const lead = small ? 72 : 96;
+      if (r.top < lead || r.bottom > window.innerHeight - roomBelow) window.scrollTo({ top: Math.max(0, window.scrollY + r.top - lead), behavior: "instant" });
+    }
     place();
     // Os objetos chegam à mesa com um giro curto: mede de novo quando assentam.
     const settle = window.setTimeout(place, 750);
@@ -78,12 +85,6 @@ export function DeskTour({ onDone }: { onDone: () => void }) {
       window.removeEventListener("scroll", place);
     };
   }, [step]);
-
-  // Sem nenhum objeto na tela não há o que mostrar: encerra sem abrir.
-  useEffect(() => {
-    if (!step) onDone();
-  }, [step, onDone]);
-  if (!step) return null;
 
   const last = i === steps.length - 1;
   const next = () => (last ? onDone() : setI(i + 1));

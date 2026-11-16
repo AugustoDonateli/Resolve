@@ -36,7 +36,7 @@ Defeito corrigido no caminho: com uma única revisão vencida (3 min), o plano d
 
 ## 1. Funciona (verificado com dados reais ou de ponta a ponta no projeto)
 
-- **Conta, perfis e papéis** (aluno, editor). Matriz de acesso contra o projeto: **256/256** (`pnpm test:access`), cobrindo também grupos, repertório, trilha, meta de curso, questão do dia e data da prova.
+- **Conta, perfis e papéis** (aluno, editor). Matriz de acesso contra o projeto: **293/293** (`pnpm test:access`), cobrindo também grupos, repertório, trilha, meta de curso, questão do dia, data da prova, TRI, fila de anotação, conferência e guia.
 - **Hoje** (`/hoje`): plano nos horários livres, foco com relógio do servidor, agenda com remarcação, feito hoje, ficou de fora, se-então, sequência. Agora também:
   - bloco com **"Abrir a atividade"** (revisão, redação ou treino já na área do bloco);
   - **contagem até a prova** e chip de **reta final**;
@@ -79,7 +79,8 @@ Defeito corrigido no caminho: com uma única revisão vencida (3 min), o plano d
   - caderno 7: figuras, alternativas em imagem, tabelas, fórmulas, símbolos (°, π), comandos e listas;
   - letras do cruzamento com o caderno 5 conferidas no PDF oficial.
   - O Dia D do dia 2 (caderno 7) fica completo assim que as 87 forem publicadas: o dia 2 não tem redação, e as anuladas entram como anuladas.
-- **Auditoria visual e de acessibilidade**: `pnpm --filter @resolve/web audit:ui` com 81 aprovados e 2 pulados (o fluxo do plano do dia é pulado depois das 21h de Brasília). `pnpm check`: 120 testes do app + 7 do pacote de UI.
+- **Auditoria visual e de acessibilidade**: `pnpm --filter @resolve/web audit:ui` com 87 aprovados e 1 pulado em 16/11 (o fluxo do plano do dia é pulado depois das 21h de Brasília). `pnpm check`: 141 testes do app + 7 do pacote de UI.
+- **Conferência das anotações e tutorial (16/11)**: descritos em "Retomar por aqui". Tutorial percorrido de ponta a ponta com a conta B (ficha, primeira questão, Raio-X, tour, dicas, recomeçar).
 
 ## 2. Implementado, mas não validado em uso real (falta conteúdo publicado ou chave)
 
@@ -126,11 +127,34 @@ Defeito corrigido no caminho: com uma única revisão vencida (3 min), o plano d
 
 ## Retomar por aqui
 
+**Sessão 3 (Fable 5.2) feita em 16/11: conferência relâmpago e tutorial.** Publicada por autorização permanente de Guto.
+
+- **Conferência das anotações** (`/editor/anotacoes`, atalho em Mais e na Revisão editorial; só editor):
+  - fila por área, na ordem do caderno, com contador do que falta; a ficha vizinha é buscada enquanto a atual é lida;
+  - à esquerda, a questão como o aluno vê, com a evidência proposta em marca-texto; à direita, a anotação: dúvida de quem anotou (quando há), gabarito circulado, tipo e justificativa de cada errada com a porcentagem que marcou cada letra na prova, resolução, habilidade, assunto e dependência de conteúdo;
+  - três decisões: **Aprovar** (tecla A), **Ajustar** (E: todos os campos editáveis; nova evidência a partir do trecho selecionado na questão) e **Devolver** (D, com motivo). J e K trocam de questão; os atalhos podem ser desligados na própria tela. Aprovar é definitivo: a tecla não vale nos primeiros instantes de uma ficha nova;
+  - a decisão é gravada antes do carimbo "Conferida"; depois a tela passa para a próxima por conferir.
+  - Verificado no navegador sem gravar nada real (o teste manda a ação com uma proposta inexistente e simula a resposta): **as 366 propostas continuam por conferir. A conferência é de Guto.** A gravação em si (`approve_item_annotation`) foi testada em transação desfeita na sessão 2.
+- **Tutorial** (aprender fazendo, na própria mesa; nada de tela de boas-vindas):
+  - **Primeiros passos** no alto da folha de Hoje, um aberto por vez, cada um com "pular": ficha de identificação, primeira questão, tour da mesa. Somem quando os três terminam.
+  - **Ficha de identificação**: curso e instituição (viram meta de curso, sem nota de corte), horas por semana (`profiles.weekly_hours`), língua estrangeira (`user_preferences.default_language`) e 1º dia de prova. A data vem preenchida com 7/11/2027 e o aviso de que é estimativa (o edital não saiu; a prova costuma cair em dois domingos de novembro). Editável depois em Mais › Ficha de identificação.
+  - **Primeira questão**: `first_question()` escolhe uma questão real, só de texto, que 60% ou mais acertaram na prova (28 servem hoje), preferindo as ainda não respondidas e as já conferidas. Depois da resposta o Raio-X abre sozinho, com uma frase de apresentação. Enquanto a anotação da questão não for aprovada, a frase diz que a correção comentada ainda está em conferência.
+  - **Tour da mesa**: seis paradas (folha de hoje, agenda, caderno, fichas, folha de redação, régua), uma frase cada. Só começa por pedido, só avança por toque, botão ou seta, fecha com Esc e não tem movimento para quem prefere reduzido.
+  - **Dicas da primeira vez** (triagem, ritmo, Dia D, duelo): ficha curta com o que é, quando usar e quanto tempo leva, no lugar em que o recurso começa. Aparece uma vez (fica registrada quando entra na tela) e continua em **Mais › Como funciona**, onde também está "Recomeçar o tutorial".
+  - Estado em `profiles.guide` (chave → quando foi visto), só pelas funções `mark_guide` e `reset_guide`.
+- Verificações: `pnpm check` (141 testes do app + 7 de UI), build, matriz de acesso **293/293**, `audit:ui` **87 aprovados e 1 pulado**, com dois testes novos (`e2e/tutorial.spec.ts` com a conta B; conferência em `e2e/editor.spec.ts`) e axe sem violações em todas as telas novas. As contas de teste A e editor ficaram com o guia marcado como visto, para a auditoria de Hoje não mudar.
+- Não validado em uso real: a conferência com decisões de verdade (é o próximo passo, de Guto) e o tutorial numa conta nova de verdade. Horas por semana e língua estrangeira ficam guardadas, mas ainda não mudam o plano nem o treino: quem usa é o plano anual (sessão 13 do roteiro).
+- Dois testes antigos falharam uma vez na suíte cheia e passaram ao repetir (`rotina.spec.ts` "plano de hoje…" e `estudo.spec.ts` "ritmo…"): dependem do horário e da carga, não da sessão 3.
+
+**Próximo passo de Guto: conferir as anotações** em `/editor/anotacoes` (comece por Matemática; as 46 com dúvida aparecem marcadas na lista "Ir para"). Cada aprovação já libera, para aquela questão, o Raio-X completo; com volume aprovado destravam treino por habilidade, banco por assunto, incidência e o perfil por área.
+
+**Próxima sessão do roteiro: 4 (Opus 5.5)**, convites, membros, cota de IA, termos, exportar e excluir.
+
 **Sessão 2 (Opus 5.5) feita em 16/11: árvore de conteúdos e anotação das 366.**
 - Árvore: os 379 objetos de conhecimento do anexo da matriz v1 (página a página, `tools/ingest/objetos.py` → `data/matriz/enem-objetos-v1.json`) viraram `subjects` com código curto (`MT.1.2.4`), em área → disciplina (só Natureza divide) → tema → objeto. Onde o objeto oficial junta vários conteúdos (sobretudo Matemática), há 26 subdivisões do Resolve, marcadas como tal (`data/matriz/assuntos-resolve-v1.json`). Filosofia e Sociologia não têm objeto próprio no anexo: essas questões usam o objeto mais próximo e trazem a dúvida registrada.
 - Anotação: as 366 questões publicadas têm proposta completa em `item_annotation_proposals` (habilidade principal e secundária, assunto, dependência de conteúdo, trecho de evidência, tipo e justificativa de cada distrator, resolução passo a passo), feita lendo cada questão e olhando as figuras quando necessário. Fonte versionada em `data/editorial/anotacoes/*.jsonl`; carga com `tools/ingest/anotar.py` (confere cada trecho no texto e as letras). 46 propostas trazem uma dúvida para a conferência.
 - Nada disso chega ao aluno ainda: a aprovação é do editor (`approve_item_annotation`, que grava tudo de uma vez numa versão publicada com anotação pendente; `return_item_annotation` devolve com motivo). Testado em transação desfeita. Matriz de acesso 279/279: conta comum não lê as propostas (trazem o gabarito).
-- **Próximo: sessão 3 (Fable 5.2), conferência relâmpago**: tela para Guto aprovar, ajustar ou devolver cada proposta em menos de um minuto. Assim que as propostas forem aprovadas, destravam treino por habilidade, banco por assunto, incidência, Raio-X completo e o perfil por área pedido por Guto.
+- A tela de conferência veio na sessão 3 (acima). Assim que as propostas forem aprovadas, destravam treino por habilidade, banco por assunto, incidência, Raio-X completo e o perfil por área pedido por Guto.
 
 Roteiro em `docs/plan/plano-v2.md`, seção 8. **Sessão 1 (Opus 5.5) feita em 15/11**: microdados, parâmetros, validação da TRI, nota do Dia D, taxa de acerto no Raio-X. 
 
@@ -142,7 +166,7 @@ Outros passos sem bloqueio externo:
 - fichas de cinco minutos com fonte (item 9);
 - rodar de novo `audit:ui` com os dados reais (as telas de Diagnóstico e Dia D não estão na suíte; conferidas à parte com axe em 15/11).
 
-Publicação: por autorização permanente de Guto (11/11/2026), o trabalho verificado vai direto para `claude/new-session-vhzm54` (Vercel). A sessão 1 (15/11) foi publicada assim, e os dados de TRI e taxas foram carregados com a conta de editor de teste.
+Publicação: por autorização permanente de Guto (11/11/2026), o trabalho verificado vai direto para `claude/new-session-vhzm54` (Vercel). As sessões 1 (15/11), 2 e 3 (16/11) foram publicadas assim; os dados de TRI e taxas e as propostas de anotação foram carregados com a conta de editor de teste.
 
 Lembretes:
 - Migrações sem `delete`/`drop`; tabela nova revoga `anon` e entra na matriz.

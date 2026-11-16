@@ -597,6 +597,40 @@ let batchId, proposalId;
   check("A", "não cria assunto", permError(si) || denied(si), si.error?.message ?? "criou!");
 }
 
+// ── Conferência das anotações e guia de primeiros passos (sessão 3 do plano v2) ──
+{
+  const vq = await V.c.rpc("annotation_review_queue");
+  check("visitante", "não recebe a fila da conferência", denied(vq), vq.error?.message ?? `${rows(vq)} linha(s)`);
+  const aq = await A.c.rpc("annotation_review_queue");
+  check("A", "não recebe a fila da conferência", denied(aq), aq.error?.message ?? `${rows(aq)} linha(s)`);
+  const eq = await E.c.rpc("annotation_review_queue");
+  check("E", "recebe a fila da conferência", !eq.error && rows(eq) >= 1, eq.error?.message ?? `${rows(eq)} linha(s)`);
+  const one = eq.data?.[0]?.proposal_id;
+  const ar = await A.c.rpc("annotation_review", { p_proposal: one });
+  check("A", "não abre ficha da conferência (traz o gabarito)", denied(ar), ar.error?.message ?? "sem conteúdo");
+  const er = await E.c.rpc("annotation_review", { p_proposal: one });
+  check("E", "abre ficha da conferência com gabarito", !er.error && (er.data?.alternatives ?? []).some((x) => x.is_correct === true), er.error?.message ?? "");
+
+  const vg = await V.c.rpc("mark_guide", { p_key: "tour" });
+  check("visitante", "não marca o guia", Boolean(vg.error), vg.error?.message ?? "marcou!");
+  const bad = await A.c.rpc("mark_guide", { p_key: "admin" });
+  check("A", "não grava chave fora do guia", /resolve_guide_key/.test(bad.error?.message ?? ""), bad.error?.message ?? "gravou!");
+  const mine = await A.c.rpc("mark_guide", { p_key: "tour" });
+  check("A", "marca o próprio guia", !mine.error && typeof mine.data?.tour === "string", mine.error?.message ?? "");
+  const other = await A.c.from("profiles").update({ guide: {}, weekly_hours: 1 }).eq("user_id", B.id).select("user_id");
+  check("A", "não altera o guia nem as horas de B", denied(other), other.error?.message ?? `${rows(other)} linha(s)`);
+  const peek = await A.c.from("profiles").select("guide").eq("user_id", B.id);
+  check("A", "não lê o guia de B", denied(peek), peek.error?.message ?? `${rows(peek)} linha(s)`);
+  const big = await A.c.from("profiles").update({ guide: { nota: "x".repeat(3000) } }).eq("user_id", A.id).select("user_id");
+  check("A", "guia não aceita conteúdo grande", Boolean(big.error), big.error?.message ?? "aceitou!");
+  const hours = await A.c.from("profiles").update({ weekly_hours: 200 }).eq("user_id", A.id).select("user_id");
+  check("A", "horas por semana fora do intervalo são recusadas", Boolean(hours.error), hours.error?.message ?? "aceitou!");
+  const vf = await V.c.rpc("first_question");
+  check("visitante", "não recebe a primeira questão", denied(vf), vf.error?.message ?? `${rows(vf)} linha(s)`);
+  const af = await A.c.rpc("first_question");
+  check("A", "recebe a primeira questão (só o identificador e a área)", !af.error && rows(af) === 1 && Object.keys(af.data[0]).sort().join() === "area,item_version_id", af.error?.message ?? `${rows(af)} linha(s)`);
+}
+
 // ── Arquivos ──
 {
   const bytes = new Blob(["arquivo de teste da matriz de acesso"], { type: "text/plain" });

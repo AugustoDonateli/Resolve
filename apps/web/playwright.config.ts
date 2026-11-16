@@ -24,6 +24,7 @@ export default defineConfig({
     { name: "rotina", testMatch: /rotina\.spec\.ts/ },
     { name: "estudo", testMatch: /estudo\.spec\.ts/ },
     { name: "redacao", testMatch: /redacao\.spec\.ts/ },
+    { name: "tutorial", testMatch: /tutorial\.spec\.ts/ },
   ],
   webServer: {
     command: "pnpm start -p 3100",

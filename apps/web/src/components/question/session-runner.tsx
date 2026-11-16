@@ -431,7 +431,13 @@ export function SessionRunner({ session, firstTime = false }: { session: Session
           <RaioXPanel
             view={view}
             headingId={`raiox-${entry.sessionItemId}`}
-            intro={firstTime ? "Este é o Raio-X. Depois de cada resposta, ele mostra de onde sai a resposta certa e por que cada errada atrai." : undefined}
+            intro={
+              !firstTime
+                ? undefined
+                : view.skill || view.evidence.length || view.distractors.length || view.steps.length
+                  ? "Este é o Raio-X. Depois de cada resposta, ele mostra de onde sai a resposta certa e por que cada errada atrai."
+                  : "Este é o Raio-X. Depois de cada resposta, ele mostra como a questão foi na prova. A correção comentada desta questão ainda está em conferência."
+            }
           />
         )}
         <div aria-live="assertive">
