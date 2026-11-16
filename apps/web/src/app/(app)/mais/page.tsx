@@ -9,6 +9,8 @@ import { currentUserIsEditor } from "@/lib/editor/data";
 export const metadata: Metadata = { title: "Mais" };
 
 const LINKS = [
+  { href: "/mais/como-funciona", label: "Como funciona", desc: "Triagem, ritmo, Dia D e duelo em uma ficha cada; rever o tutorial" },
+  { href: "/mais/ficha", label: "Ficha de identificação", desc: "Curso, horas por semana, língua estrangeira e data da prova" },
   { href: "/rotina", label: "Rotina e metas", desc: "Semana, compromissos e planos se-então" },
   { href: "/grupos", label: "Grupos e duelos", desc: "Estudar com colegas: as mesmas questões, cada um no seu tempo" },
   { href: "/progresso", label: "Progresso", desc: "Constelação de habilidades" },
@@ -18,7 +20,13 @@ const LINKS = [
 
 export default async function MaisPage() {
   const editor = await currentUserIsEditor();
-  const links = editor ? [{ href: "/editor", label: "Revisão editorial", desc: "Propostas extraídas dos PDFs, dúvidas e histórico" }, ...LINKS] : LINKS;
+  const links = editor
+    ? [
+        { href: "/editor/anotacoes", label: "Conferência das anotações", desc: "Aprovar, ajustar ou devolver a anotação de cada questão" },
+        { href: "/editor", label: "Revisão editorial", desc: "Propostas extraídas dos PDFs, dúvidas e histórico" },
+        ...LINKS,
+      ]
+    : LINKS;
   return (
     <>
       <ScreenHeader title="Mais" />

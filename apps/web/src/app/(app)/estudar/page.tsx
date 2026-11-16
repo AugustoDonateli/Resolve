@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { BookOpen } from "lucide-react";
 import Link from "next/link";
+import { FirstTimeTip } from "@/components/guide/first-time-tip";
 import { StartRhythm } from "@/components/question/start-rhythm";
 import { StartTraining } from "@/components/question/start-training";
 import { ScreenHeader } from "@/components/shell/app-shell";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Sumario } from "@/components/ui/sumario";
+import { loadGuide } from "@/lib/guide/data";
 import { publishedByArea } from "@/lib/study/session";
 
 export const metadata: Metadata = { title: "Estudar" };
@@ -27,7 +29,7 @@ const SUMARIO = [
 export default async function EstudarPage({ searchParams }: { searchParams: Promise<{ area?: string }> }) {
   const { area } = await searchParams;
   const initialArea = area && ["LC", "CH", "CN", "MT"].includes(area) ? area : "todas";
-  const counts = await publishedByArea();
+  const [counts, guide] = await Promise.all([publishedByArea(), loadGuide()]);
   const total = counts ? Object.values(counts).reduce((a, b) => a + b, 0) : 0;
   return (
     <>
@@ -54,6 +56,7 @@ export default async function EstudarPage({ searchParams }: { searchParams: Prom
               <p className="t-meta text-ink-2">
                 Para cada questão, decida em até 20 segundos: resolver agora, deixar para depois ou chutar. Depois você resolve todas e compara.
               </p>
+              {guide && <FirstTimeTip tip="dica_triagem" seen={guide.guide.dica_triagem} />}
               <StartTraining counts={counts!} mode="triagem" />
             </section>
             <section aria-labelledby="ritmo" className="flex flex-col gap-3">
@@ -61,6 +64,7 @@ export default async function EstudarPage({ searchParams }: { searchParams: Prom
                 Blocos de ritmo
               </h2>
               <p className="t-meta text-ink-2">Resolva contra o relógio, com alvo por questão, marcação para revisar e gabarito só no fim.</p>
+              {guide && <FirstTimeTip tip="dica_ritmo" seen={guide.guide.dica_ritmo} />}
               <StartRhythm available={total} />
             </section>
           </div>

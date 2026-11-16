@@ -9,6 +9,7 @@ import {
   setErrorReason,
   submitAttempt,
 } from "@/lib/study/actions";
+import { markGuide } from "@/lib/guide/actions";
 import { buildRaioX, type RaioXView } from "@/lib/study/raiox";
 import { flushPending, pendingFor, savePending } from "@/lib/study/pending";
 import { ERROR_REASONS } from "@/lib/study/reasons";
@@ -68,7 +69,7 @@ const ERRORS: Record<string, string> = {
  * Resolver (F3-T02): uma questão por vez, com a resposta gravada no servidor antes de revelar o gabarito.
  * Recarregar mostra de novo a resposta dada (o retorno vem do banco só para questões respondidas).
  */
-export function SessionRunner({ session }: { session: SessionView }) {
+export function SessionRunner({ session, firstTime = false }: { session: SessionView; firstTime?: boolean }) {
   const hydrated = useSyncExternalStore(
     noop,
     () => true,
@@ -297,6 +298,11 @@ export function SessionRunner({ session }: { session: SessionView }) {
       return;
     }
     applyResult(entry, value, r.value);
+    if (firstTime) {
+      // Tutorial: a primeira resposta fica registrada no guia e o Raio-X se apresenta sem precisar pedir.
+      void markGuide("primeira_questao");
+      void openRaioX(false);
+    }
   };
 
   const chooseReason = async (code: string) => {
@@ -422,7 +428,11 @@ export function SessionRunner({ session }: { session: SessionView }) {
           </Button>
         )}
         {view && (
-          <RaioXPanel view={view} headingId={`raiox-${entry.sessionItemId}`} />
+          <RaioXPanel
+            view={view}
+            headingId={`raiox-${entry.sessionItemId}`}
+            intro={firstTime ? "Este é o Raio-X. Depois de cada resposta, ele mostra de onde sai a resposta certa e por que cada errada atrai." : undefined}
+          />
         )}
         <div aria-live="assertive">
           {error && (
@@ -467,10 +477,21 @@ export function SessionRunner({ session }: { session: SessionView }) {
               Anterior
             </Button>
           )}
-          {(result || pendingKey) && (
-            <Button type="button" onClick={() => go(index + 1)}>
-              {index + 1 < total ? "Próxima questão" : "Ver resultado"}
-            </Button>
+          {firstTime && result ? (
+            <>
+              <Link href="/hoje?tour=1" className="inline-flex min-h-11 items-center rounded-control bg-primary px-4 t-ui text-on-primary hover:bg-primary-hover">
+                Conhecer a mesa
+              </Link>
+              <Link href="/hoje" className="inline-flex min-h-11 items-center rounded-control px-4 t-ui text-ink hover:bg-surface-subtle">
+                Voltar para Hoje
+              </Link>
+            </>
+          ) : (
+            (result || pendingKey) && (
+              <Button type="button" onClick={() => go(index + 1)}>
+                {index + 1 < total ? "Próxima questão" : "Ver resultado"}
+              </Button>
+            )
           )}
         </div>
         <ReportProblem

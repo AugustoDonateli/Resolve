@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Sun } from "lucide-react";
+import { FirstSteps } from "@/components/guide/first-steps";
 import { Today } from "@/components/routine/today";
 import { DailyQuestion } from "@/components/today/daily-question";
 import { DeskObjects } from "@/components/today/desk-objects";
 import { ScreenHeader } from "@/components/shell/app-shell";
 import { EmptyState } from "@/components/ui/empty-state";
+import { loadFicha, loadGuide } from "@/lib/guide/data";
+import { currentStep } from "@/lib/guide/types";
 import { loadGoals } from "@/lib/routine/goals";
 import { loadDayPlan } from "@/lib/routine/plan";
 import { loadStreak } from "@/lib/routine/streak";
@@ -14,11 +17,13 @@ import { loadDeskCounts } from "@/lib/today/desk";
 export const metadata: Metadata = { title: "Hoje" };
 export const dynamic = "force-dynamic";
 
-export default async function HojePage() {
-  const [plan, goals, streak] = await Promise.all([
+export default async function HojePage({ searchParams }: { searchParams: Promise<{ tour?: string }> }) {
+  const [plan, goals, streak, guide, { tour }] = await Promise.all([
     loadDayPlan(),
     loadGoals(),
     loadStreak(),
+    loadGuide(),
+    searchParams,
   ]);
   if (!plan)
     return (
@@ -34,12 +39,19 @@ export default async function HojePage() {
     );
   const ifThen =
     goals?.plans.find((p) => p.archived_at === null) ?? null;
-  const [daily, counts] = await Promise.all([loadDailyQuestion(plan.today), loadDeskCounts()]);
+  const step = guide ? currentStep(guide.guide) : null;
+  const [daily, counts, ficha] = await Promise.all([
+    loadDailyQuestion(plan.today),
+    loadDeskCounts(),
+    step === "ficha" ? loadFicha() : Promise.resolve(null),
+  ]);
+  const autoTour = tour === "1";
   return (
     <Today
       plan={plan}
       ifThen={ifThen}
       streak={streak}
+      guide={guide && (step || autoTour) ? <FirstSteps guide={guide.guide} ficha={ficha} autoTour={autoTour} /> : undefined}
       daily={<DailyQuestion q={daily} today={plan.today} />}
       desk={<DeskObjects counts={counts} />}
     />

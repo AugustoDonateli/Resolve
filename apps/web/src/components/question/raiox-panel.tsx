@@ -13,9 +13,12 @@ function participants(n: number) {
 export function RaioXPanel({
   view,
   headingId,
+  intro,
 }: {
   view: RaioXView;
   headingId: string;
+  /** Uma frase de apresentação, só na primeira vez que o Raio-X aparece (tutorial). */
+  intro?: string;
 }) {
   return (
     <section
@@ -25,6 +28,7 @@ export function RaioXPanel({
       <h3 id={headingId} tabIndex={-1} className="t-section outline-none">
         Raio-X
       </h3>
+      {intro && <p className="-mt-2 max-w-[60ch] border-l-2 border-primary pl-3 t-reading text-ink">{intro}</p>}
       {view.reason === "ajuda" && (
         <p className="rounded-card border border-line-subtle bg-surface-subtle p-3 t-meta">
           Você abriu a resolução antes de responder: esta tentativa fica

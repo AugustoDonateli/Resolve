@@ -93,10 +93,13 @@ export function Today({
   streak,
   daily,
   desk,
+  guide,
 }: {
   plan: DayPlan;
   ifThen: IfThenPlan | null;
   streak: StreakView | null;
+  /** Primeiros passos (ficha, primeira questão, tour): no alto da folha enquanto não terminam. */
+  guide?: ReactNode;
   /** Questão do dia (já renderizada pela página). */
   daily?: ReactNode;
   /** Atalhos-objeto da mesa (caderno, fichas, folha, régua), já renderizados pela página. */
@@ -325,7 +328,8 @@ export function Today({
                 </div>
               </ScreenHeader>
             </div>
-            <section aria-labelledby="plano-hoje" className="flex flex-col gap-4">
+            {guide}
+            <section aria-labelledby="plano-hoje" data-tour="plano" className="flex flex-col gap-4">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h2 id="plano-hoje" className="t-kicker">
                   Plano de hoje
@@ -477,7 +481,7 @@ export function Today({
                 {daily}
               </DeskObject>
             )}
-            <DeskObject i={1} r="-0.7deg">
+            <DeskObject i={1} r="-0.7deg" tour="agenda">
               {plan.blocks.length > 0 ? (
                 <DayAgenda plan={plan} openRequest={rescheduleReq} />
               ) : (

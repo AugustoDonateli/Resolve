@@ -31,6 +31,12 @@ export default async function EditorPage({
       <ScreenHeader title="Revisão editorial" kicker="Área do editor">
         <div className="flex flex-wrap gap-3">
           <Link
+            href="/editor/anotacoes"
+            className="inline-flex min-h-11 items-center rounded-control border border-ink bg-surface px-4 t-ui hover:bg-surface-subtle"
+          >
+            Conferência das anotações
+          </Link>
+          <Link
             href="/editor/temas"
             className="inline-flex min-h-11 items-center rounded-control border border-line bg-surface px-4 t-ui hover:bg-surface-subtle"
           >

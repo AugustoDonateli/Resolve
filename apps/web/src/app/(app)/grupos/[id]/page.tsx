@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { DuelStrip } from "@/components/groups/duel-strip";
+import { FirstTimeTip } from "@/components/guide/first-time-tip";
 import { InviteCode, LeaveGroup, NewDuel } from "@/components/groups/group-actions";
 import { ScreenHeader } from "@/components/shell/app-shell";
 import { loadGroup } from "@/lib/groups/data";
+import { loadGuide } from "@/lib/guide/data";
 import { AREA_LABEL } from "@/lib/study/question-types";
 
 export const metadata: Metadata = { title: "Grupo" };
@@ -15,7 +17,7 @@ const fmtDay = (iso: string) =>
 
 export default async function GrupoPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const g = await loadGroup(id);
+  const [g, guide] = await Promise.all([loadGroup(id), loadGuide()]);
   return (
     <>
       <Link href="/grupos" className="mb-3 inline-flex min-h-11 items-center gap-1 t-ui text-ink-2 hover:text-ink">
@@ -31,6 +33,7 @@ export default async function GrupoPage({ params }: { params: Promise<{ id: stri
             Todos resolvem as mesmas questões oficiais, cada um no seu tempo, durante 7 dias. Os acertos dos outros aparecem quando
             você termina.
           </p>
+          {guide && <FirstTimeTip tip="dica_duelo" seen={guide.guide.dica_duelo} />}
           <NewDuel groupId={g.id} />
           {g.duels.length === 0 ? (
             <p className="t-meta text-ink-2">Nenhum duelo ainda.</p>

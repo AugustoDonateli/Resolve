@@ -5,6 +5,7 @@ import { clsx } from "clsx";
 import { Maximize2, X } from "lucide-react";
 import { useId, type ReactNode } from "react";
 import { Alternatives, type Reveal } from "@/components/ui/alternatives";
+import { splitMarks, type MarkRange } from "@/lib/study/marks";
 import {
   AREA_LABEL,
   type QuestionBlock,
@@ -81,13 +82,33 @@ export function QuestionFigure({
   );
 }
 
-/** Blocos de texto-base e comando, na ordem da fonte. */
+/** Trecho de texto com marca-texto amarelo nas faixas pedidas (preenchimento; o texto continua em tinta). */
+function Marked({ text, ranges, from, to }: { text: string; ranges: MarkRange[] | undefined; from?: number; to?: number }) {
+  if (!ranges?.length) return <>{text.slice(from ?? 0, to ?? text.length)}</>;
+  return (
+    <>
+      {splitMarks(text, ranges, from, to).map((s, i) =>
+        s.marked ? (
+          <mark key={i} className="rounded-[2px] bg-mark-yellow px-0.5 text-on-mark [box-decoration-break:clone]">
+            {s.text}
+          </mark>
+        ) : (
+          s.text
+        ),
+      )}
+    </>
+  );
+}
+
+/** Blocos de texto-base e comando, na ordem da fonte. `marks` destaca trechos (evidência) por id de bloco. */
 export function QuestionBlocks({
   blocks,
   zoom = true,
+  marks,
 }: {
   blocks: QuestionBlock[];
   zoom?: boolean;
+  marks?: Record<string, MarkRange[]>;
 }) {
   const figureNo = new Map(
     blocks.filter((b) => b.type === "image").map((b, i) => [b.id, i + 1]),
@@ -176,27 +197,34 @@ export function QuestionBlocks({
             );
           default: {
             const numbered = numberedLines(b.text);
-            if (numbered)
+            const ranges = marks?.[b.id];
+            if (numbered) {
               // linhas numeradas do caderno: número na margem, texto com recuo (a referência "linha 12" continua valendo)
+              let offset = 0;
               return (
                 <span key={b.id} className="block">
-                  {numbered.map(([n, line]) => (
-                    <span key={n} className="grid grid-cols-[2.25rem_minmax(0,1fr)] gap-x-2">
-                      <span aria-hidden className="select-none pt-[0.2em] text-right t-meta tabular text-ink-2">
-                        {n}
+                  {numbered.map(([n, line]) => {
+                    const from = offset + n.length + 1;
+                    offset = from + line.length + 1;
+                    return (
+                      <span key={n} className="grid grid-cols-[2.25rem_minmax(0,1fr)] gap-x-2">
+                        <span aria-hidden className="select-none pt-[0.2em] text-right t-meta tabular text-ink-2">
+                          {n}
+                        </span>
+                        <span>
+                          <span className="sr-only">linha {n}: </span>
+                          {ranges ? <Marked text={b.text ?? ""} ranges={ranges} from={from} to={from + line.length} /> : line}
+                        </span>
                       </span>
-                      <span>
-                        <span className="sr-only">linha {n}: </span>
-                        {line}
-                      </span>
-                    </span>
-                  ))}
+                    );
+                  })}
                 </span>
               );
+            }
             // quebras de linha do texto são do original (listas): preservadas
             return (
               <P key={b.id} className="block whitespace-pre-line">
-                {b.text}
+                {ranges ? <Marked text={b.text ?? ""} ranges={ranges} /> : b.text}
               </P>
             );
           }
