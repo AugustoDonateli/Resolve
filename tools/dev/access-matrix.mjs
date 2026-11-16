@@ -574,6 +574,29 @@ let batchId, proposalId;
   check("A", "não altera versão do modelo", denied(mv), mv.error?.message ?? `${rows(mv)} linha(s)`);
 }
 
+// ── Anotação editorial (propostas, aprovação) e árvore de assuntos ──
+{
+  const v = await V.c.from("item_annotation_proposals").select("id").limit(1);
+  check("visitante", "não lê propostas de anotação", denied(v), v.error?.message ?? `${rows(v)} linha(s)`);
+  const a = await A.c.from("item_annotation_proposals").select("id, payload").limit(1);
+  check("A", "não lê propostas de anotação (trazem o gabarito)", denied(a), a.error?.message ?? `${rows(a)} linha(s)`);
+  const e = await E.c.from("item_annotation_proposals").select("id").eq("status", "proposta").limit(1);
+  check("E", "lê propostas de anotação", !e.error && rows(e) >= 1, e.error?.message ?? "");
+  const fake = "00000000-0000-4000-8000-000000000000";
+  const ai = await A.c.from("item_annotation_proposals").insert({ item_version_id: fake, payload: { schema: "anotacao/v1" }, origin: "teste da matriz" }).select();
+  check("A", "não cria proposta de anotação", permError(ai) || denied(ai), ai.error?.message ?? "criou!");
+  const ap = await A.c.rpc("approve_item_annotation", { p_proposal: e.data?.[0]?.id ?? fake });
+  check("A", "não aprova anotação", /resolve_not_editor/.test(ap.error?.message ?? ""), ap.error?.message ?? "aprovou!");
+  const rt = await B.c.rpc("return_item_annotation", { p_proposal: e.data?.[0]?.id ?? fake, p_note: "tentativa de devolução pela matriz" });
+  check("B", "não devolve anotação", /resolve_not_editor/.test(rt.error?.message ?? ""), rt.error?.message ?? "devolveu!");
+  const sj = await A.c.from("subjects").select("code").not("code", "is", null).limit(3);
+  check("A", "lê a árvore de assuntos", !sj.error && rows(sj) > 0, sj.error?.message ?? "");
+  const vs = await V.c.from("subjects").select("code").limit(1);
+  check("visitante", "não lê a árvore de assuntos", denied(vs), vs.error?.message ?? `${rows(vs)} linha(s)`);
+  const si = await A.c.from("subjects").insert({ label: "assunto falso", area_code: "MT" }).select();
+  check("A", "não cria assunto", permError(si) || denied(si), si.error?.message ?? "criou!");
+}
+
 // ── Arquivos ──
 {
   const bytes = new Blob(["arquivo de teste da matriz de acesso"], { type: "text/plain" });

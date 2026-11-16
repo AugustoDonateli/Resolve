@@ -126,7 +126,13 @@ Defeito corrigido no caminho: com uma única revisão vencida (3 min), o plano d
 
 ## Retomar por aqui
 
-Roteiro em `docs/plan/plano-v2.md`, seção 8. **Sessão 1 (Opus 5.5) feita em 15/11**: microdados, parâmetros, validação da TRI, nota do Dia D, taxa de acerto no Raio-X. **Próxima: sessão 2 (Opus 5.5)**, árvore de conteúdos e etiquetagem das 366 (destrava treino por habilidade, incidência, comparações de distrator e os agregados "o Brasil erra mais em…").
+**Sessão 2 (Opus 5.5) feita em 16/11: árvore de conteúdos e anotação das 366.**
+- Árvore: os 379 objetos de conhecimento do anexo da matriz v1 (página a página, `tools/ingest/objetos.py` → `data/matriz/enem-objetos-v1.json`) viraram `subjects` com código curto (`MT.1.2.4`), em área → disciplina (só Natureza divide) → tema → objeto. Onde o objeto oficial junta vários conteúdos (sobretudo Matemática), há 26 subdivisões do Resolve, marcadas como tal (`data/matriz/assuntos-resolve-v1.json`). Filosofia e Sociologia não têm objeto próprio no anexo: essas questões usam o objeto mais próximo e trazem a dúvida registrada.
+- Anotação: as 366 questões publicadas têm proposta completa em `item_annotation_proposals` (habilidade principal e secundária, assunto, dependência de conteúdo, trecho de evidência, tipo e justificativa de cada distrator, resolução passo a passo), feita lendo cada questão e olhando as figuras quando necessário. Fonte versionada em `data/editorial/anotacoes/*.jsonl`; carga com `tools/ingest/anotar.py` (confere cada trecho no texto e as letras). 46 propostas trazem uma dúvida para a conferência.
+- Nada disso chega ao aluno ainda: a aprovação é do editor (`approve_item_annotation`, que grava tudo de uma vez numa versão publicada com anotação pendente; `return_item_annotation` devolve com motivo). Testado em transação desfeita. Matriz de acesso 279/279: conta comum não lê as propostas (trazem o gabarito).
+- **Próximo: sessão 3 (Fable 5.2), conferência relâmpago**: tela para Guto aprovar, ajustar ou devolver cada proposta em menos de um minuto. Assim que as propostas forem aprovadas, destravam treino por habilidade, banco por assunto, incidência, Raio-X completo e o perfil por área pedido por Guto.
+
+Roteiro em `docs/plan/plano-v2.md`, seção 8. **Sessão 1 (Opus 5.5) feita em 15/11**: microdados, parâmetros, validação da TRI, nota do Dia D, taxa de acerto no Raio-X. 
 
 Para outras edições (2023, 2022… e o banco 2015–2025 do plano), os microdados seguem o mesmo endereço; `tri_inep.py` já faz provas, leitura, validação e carga assim que os cadernos da edição estiverem no banco. Os zips não ficam no repositório; baixar de novo leva uns 10 minutos por edição.
 

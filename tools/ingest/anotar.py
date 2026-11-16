@@ -40,7 +40,7 @@ def text_of(blocks) -> list[tuple[str, str]]:
     return out
 
 
-KEYS = Path("/tmp/claude-0/-home-user-Resolve/8af7aac1-5545-51e1-bc81-f3299c2829b3/scratchpad/tri")
+KEYS = REPO / "data" / "tri"  # gabarito oficial por caderno e posição (CHAVES_SQL de tri_inep.py)
 
 
 def load_items(api: Api, keys_dir: Path = KEYS) -> list[dict]:

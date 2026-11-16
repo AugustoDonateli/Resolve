@@ -464,7 +464,7 @@ Sessões curtas, uma frente (ou metade) por sessão. Cada uma termina com um tou
 | # | Modelo | Sessão |
 |---|---|---|
 | 1 | Opus 5.5 | **Feita (15/11).** Microdados do Inep; parâmetros e taxas de acerto; validação da TRI contra notas oficiais (4.1, 4.2) |
-| 2 | Opus 5.5 | Árvore de conteúdos e etiquetagem das 366 (2.1, 3.1) |
+| 2 | Opus 5.5 | **Feita (16/11).** Árvore de conteúdos e etiquetagem das 366 (2.1, 3.1) |
 | 3 | Fable 5.2 | Conferência relâmpago para Guto; tutorial: primeira entrada, primeira questão, tour da mesa, dicas da primeira vez (3.1, 2A.5) |
 | 4 | Opus 5.5 | Convites, membros, cota de IA, termos, exportar e excluir (7, 9) |
 | 5 | Opus 5.5 | Cursos e cortes do Sisu, pesos, CC UFES e UFV, explicador do Sisu (4.3) |
