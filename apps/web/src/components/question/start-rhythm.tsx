@@ -67,6 +67,7 @@ export function StartRhythm({ available }: { available: number }) {
       </p>
       <Button
         type="submit"
+        variant="secondary"
         className="self-start"
         loading={pending}
         disabled={!hydrated || available === 0}

@@ -100,6 +100,7 @@ export function StartTraining({
       </p>
       <Button
         type="submit"
+        variant={mode === "triagem" ? "secondary" : "primary"}
         className="self-start"
         loading={pending}
         disabled={!hydrated || available === 0}

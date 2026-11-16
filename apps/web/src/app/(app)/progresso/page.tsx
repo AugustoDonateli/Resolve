@@ -58,7 +58,10 @@ export default async function ProgressoPage() {
               Dados insuficientes. Uma habilidade só é classificada depois de oito tentativas sem ajuda, em cinco questões diferentes e em
               dois dias. Até lá, ela aparece como sem evidência, nunca como fraca ou forte.
             </p>
-            <Link href="/prototipos/constelacao" className="mt-3 inline-flex min-h-11 items-center t-ui text-link underline">
+            <Link href="/estudar/matriz" className="mt-3 flex min-h-11 items-center t-ui text-link underline">
+              Matriz e incidência: as 120 habilidades oficiais e a ficha de cada uma
+            </Link>
+            <Link href="/prototipos/constelacao" className="flex min-h-11 items-center t-ui text-link underline">
               Ver como o mapa vai funcionar (demonstração)
             </Link>
           </div>

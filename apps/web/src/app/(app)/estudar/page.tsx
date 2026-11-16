@@ -8,70 +8,154 @@ import { ScreenHeader } from "@/components/shell/app-shell";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Sumario } from "@/components/ui/sumario";
 import { loadGuide } from "@/lib/guide/data";
+import { loadSuggestion } from "@/lib/study/suggestion";
 import { publishedByArea } from "@/lib/study/session";
 
 export const metadata: Metadata = { title: "Estudar" };
 export const dynamic = "force-dynamic";
 
-/** Sumário do caderno: todos os modos de estudo, na ordem em que costumam ser usados. */
-const SUMARIO = [
-  { href: "#treino", title: "Treino livre", tag: "nesta página", body: "Questões sorteadas, primeiro as que você ainda não respondeu." },
-  { href: "/estudar/banco", title: "Banco de questões", tag: "filtros", body: "Escolha por área, edição, dia de prova, habilidade ou assunto." },
-  { href: "/estudar/dia-d", title: "Dia D", tag: "simulado", body: "Caderno oficial inteiro, relógio do servidor e cartão-resposta." },
-  { href: "/estudar/comando", title: "Comando primeiro", tag: "leitura", body: "Leia o comando antes do texto, marque a evidência e só então responda." },
-  { href: "/estudar/distrator", title: "Caça ao distrator", tag: "eliminação", body: "Depois de responder, classifique por que cada alternativa errada atrai." },
-  { href: "#triagem", title: "Triagem de 20 segundos", tag: "nesta página", body: "Decida rápido: resolver agora, deixar para depois ou chutar." },
-  { href: "#ritmo", title: "Blocos de ritmo", tag: "nesta página", body: "Contra o relógio, com alvo por questão e gabarito só no fim." },
-  { href: "/estudar/matriz", title: "Matriz e incidência", tag: "mapa", body: "As 120 habilidades oficiais e a ficha de cada uma." },
-  { href: "/diagnostico", title: "Diagnóstico", tag: "medida", body: "Até 20 questões por área; estimativa por TRI quando houver parâmetros oficiais." },
+/** As três portas do caderno, na ordem em que costumam ser usadas. Cada uma diz quando serve. */
+const DOORS = [
+  { href: "#praticar", n: "1", title: "Praticar", when: "No dia a dia: resolver questões e ver a correção de cada uma." },
+  { href: "#treinar-a-prova", n: "2", title: "Treinar a prova", when: "Quando o problema não é o conteúdo: leitura do comando, pegadinha, tempo." },
+  { href: "#provar", n: "3", title: "Provar", when: "De tempos em tempos: a prova inteira, no relógio, e uma medida da sua nota." },
+];
+
+const PRATICAR = [
+  { href: "/estudar/banco", title: "Banco de questões", tag: "com filtros", body: "Quando você já sabe o que quer: escolha por área, edição, dia de prova, habilidade ou assunto." },
+];
+const TECNICAS = [
+  { href: "/estudar/comando", title: "Comando primeiro", tag: "leitura", body: "Quando você erra por ler errado: leia o comando antes do texto, marque a evidência e só então responda." },
+  { href: "/estudar/distrator", title: "Caça ao distrator", tag: "pegadinha", body: "Quando você fica entre duas: depois de responder, diga por que cada alternativa errada atrai." },
+];
+const PROVAR = [
+  { href: "/estudar/dia-d", title: "Dia D", tag: "simulado", body: "Um caderno oficial inteiro, com o relógio do servidor e o cartão-resposta. Reserve o tempo da prova." },
+  { href: "/diagnostico", title: "Diagnóstico", tag: "medida", body: "Até 20 questões por área e uma estimativa da nota pelo cálculo do Enem, com a faixa de erro." },
 ];
 
 export default async function EstudarPage({ searchParams }: { searchParams: Promise<{ area?: string }> }) {
   const { area } = await searchParams;
   const initialArea = area && ["LC", "CH", "CN", "MT"].includes(area) ? area : "todas";
-  const [counts, guide] = await Promise.all([publishedByArea(), loadGuide()]);
+  const [counts, guide, suggestion] = await Promise.all([publishedByArea(), loadGuide(), loadSuggestion()]);
   const total = counts ? Object.values(counts).reduce((a, b) => a + b, 0) : 0;
   return (
     <>
       <ScreenHeader title="Estudar" kicker={total > 0 ? `Caderno de questões · ${total} questões oficiais` : "Caderno de questões"} />
       {total > 0 ? (
         <div className="flex flex-col gap-12">
-          {/* Página dupla de abertura: o treino à esquerda, o sumário à direita */}
-          <div className="grid gap-x-12 gap-y-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
-            <section id="treino" aria-labelledby="treino-t" className="flex scroll-mt-20 flex-col gap-4">
-              <h2 id="treino-t" className="t-section">
-                Treino livre
-              </h2>
-              <p className="max-w-[46ch] t-reading text-ink-2">Abra o caderno numa área e resolva. Cada resposta é corrigida na hora, à caneta.</p>
-              <StartTraining counts={counts!} initialArea={initialArea} />
-            </section>
-            <Sumario id="sumario-t" items={SUMARIO} />
+          <div className="flex flex-col gap-6">
+            <p className="max-w-[62ch] t-reading text-ink-2">O caderno tem três portas. Escolha pela sua necessidade de hoje.</p>
+            <nav aria-label="As três portas do caderno">
+              <ol className="grid gap-x-8 border-t-[1.5px] border-ink md:grid-cols-3">
+                {DOORS.map((d) => (
+                  <li key={d.href} className="border-b border-line-subtle md:border-b-0">
+                    <Link href={d.href} className="group flex h-full gap-3 py-4">
+                      <span aria-hidden="true" className="font-display text-[40px] leading-[0.9] text-ink-2">
+                        {d.n}
+                      </span>
+                      <span>
+                        <span className="block t-section text-ink [background:linear-gradient(currentColor,currentColor)_no-repeat_left_100%/0%_1.5px] transition-[background-size] duration-[var(--rs-dur-layout)] ease-layout group-hover:[background-size:100%_1.5px] group-focus-visible:[background-size:100%_1.5px]">
+                          {d.title}
+                        </span>
+                        <span className="mt-1 block t-meta text-ink-2">{d.when}</span>
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+            {suggestion && (
+              <section aria-labelledby="sugestao" className="relative rounded-card border border-line-subtle bg-surface px-5 pb-5 pt-6 shadow-paper sm:px-6">
+                <span aria-hidden="true" className="absolute -top-2.5 left-5 rounded-sm bg-mark-yellow px-2 py-0.5 t-meta font-medium text-on-mark">
+                  agora
+                </span>
+                <h2 id="sugestao" className="t-kicker">
+                  Sugestão para agora
+                </h2>
+                <div className="mt-1 flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
+                  <div className="min-w-0 max-w-[62ch]">
+                    <p className="t-section text-ink">{suggestion.title}</p>
+                    <p className="mt-1 t-meta text-ink-2">
+                      <span className="font-medium text-ink">Por quê: </span>
+                      {suggestion.reason}
+                    </p>
+                  </div>
+                  <Link
+                    href={suggestion.href}
+                    className="inline-flex min-h-11 items-center rounded-control border-[1.5px] border-ink px-4 t-ui text-ink hover:bg-ink hover:text-background"
+                  >
+                    {suggestion.action}
+                  </Link>
+                </div>
+              </section>
+            )}
           </div>
 
-          <div className="grid gap-x-12 gap-y-10 border-t-[1.5px] border-ink pt-8 lg:grid-cols-2">
-            <section id="triagem" aria-labelledby="triagem-t" className="flex scroll-mt-20 flex-col gap-3">
-              <h2 id="triagem-t" className="t-section">
-                Triagem de 20 segundos
-              </h2>
-              <p className="t-meta text-ink-2">
-                Para cada questão, decida em até 20 segundos: resolver agora, deixar para depois ou chutar. Depois você resolve todas e compara.
-              </p>
-              {guide && <FirstTimeTip tip="dica_triagem" seen={guide.guide.dica_triagem} />}
-              <StartTraining counts={counts!} mode="triagem" />
-            </section>
-            <section aria-labelledby="ritmo" className="flex flex-col gap-3">
-              <h2 id="ritmo" className="scroll-mt-24 t-section">
-                Blocos de ritmo
-              </h2>
-              <p className="t-meta text-ink-2">Resolva contra o relógio, com alvo por questão, marcação para revisar e gabarito só no fim.</p>
-              {guide && <FirstTimeTip tip="dica_ritmo" seen={guide.guide.dica_ritmo} />}
-              <StartRhythm available={total} />
-            </section>
-          </div>
+          <section id="praticar" aria-labelledby="praticar-t" className="scroll-mt-20 border-t-[1.5px] border-ink pt-8">
+            <p className="t-kicker">Porta 1</p>
+            <h2 id="praticar-t" className="t-screen text-ink">
+              Praticar
+            </h2>
+            <div className="mt-6 grid gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
+              <div id="treino" className="flex scroll-mt-20 flex-col gap-3">
+                <h3 className="t-section">Treino livre</h3>
+                <p className="max-w-[46ch] t-meta text-ink-2">
+                  Quando usar: todo dia. Questões sorteadas, primeiro as que você ainda não respondeu; cada resposta é corrigida na hora, com o Raio-X.
+                </p>
+                <StartTraining counts={counts!} initialArea={initialArea} />
+              </div>
+              <Sumario id="praticar-mais" label="Também em Praticar" items={PRATICAR} />
+            </div>
+          </section>
+
+          <section id="treinar-a-prova" aria-labelledby="tecnica-t" className="scroll-mt-20 border-t-[1.5px] border-ink pt-8">
+            <p className="t-kicker">Porta 2</p>
+            <h2 id="tecnica-t" className="t-screen text-ink">
+              Treinar a prova
+            </h2>
+            <p className="mt-2 max-w-[62ch] t-meta text-ink-2">Quatro treinos do jeito de fazer a prova. Cada um ataca um problema diferente.</p>
+            <div className="mt-6 grid gap-x-12 gap-y-10 lg:grid-cols-2">
+              <div id="triagem" className="flex scroll-mt-20 flex-col gap-3">
+                <h3 className="t-section">Triagem de 20 segundos</h3>
+                <p className="t-meta text-ink-2">
+                  Quando usar: se você trava em questão difícil e falta tempo no fim. Decida em até 20 segundos: resolver agora, deixar para depois ou
+                  chutar. Depois você resolve todas e compara.
+                </p>
+                {guide && <FirstTimeTip tip="dica_triagem" seen={guide.guide.dica_triagem} />}
+                <StartTraining counts={counts!} mode="triagem" />
+              </div>
+              <div id="ritmo" className="flex scroll-mt-24 flex-col gap-3">
+                <h3 className="t-section">Blocos de ritmo</h3>
+                <p className="t-meta text-ink-2">
+                  Quando usar: se você acerta com calma, mas não sabe se o tempo dá. Contra o relógio, com alvo por questão e gabarito só no fim.
+                </p>
+                {guide && <FirstTimeTip tip="dica_ritmo" seen={guide.guide.dica_ritmo} />}
+                <StartRhythm available={total} />
+              </div>
+            </div>
+            <div className="mt-10">
+              <Sumario id="tecnica-mais" label="Também em Treinar a prova" items={TECNICAS} />
+            </div>
+          </section>
+
+          <section id="provar" aria-labelledby="provar-t" className="scroll-mt-20 border-t-[1.5px] border-ink pt-8">
+            <p className="t-kicker">Porta 3</p>
+            <h2 id="provar-t" className="t-screen text-ink">
+              Provar
+            </h2>
+            <div className="mt-6 max-w-[46rem]">
+              <Sumario id="provar-mais" label="Prova inteira e medida" items={PROVAR} />
+            </div>
+          </section>
+
           <p className="t-meta text-ink-2">
             Só questões reais do Enem, conferidas e publicadas.{" "}
             <Link href="/estudar/demonstracao" className="underline">
               Ver a questão demonstrativa
+            </Link>
+            . A matriz de habilidades fica em{" "}
+            <Link href="/progresso#habilidades" className="underline">
+              Progresso
             </Link>
             .
           </p>
