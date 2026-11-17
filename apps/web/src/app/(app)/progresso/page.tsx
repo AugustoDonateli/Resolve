@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { WeeklyReport } from "@/components/progress/weekly-report";
-import { ErrorPattern, ProfileView } from "@/components/progress/profile-view";
+import { ErrorPattern, HabitsView, ProfileView, WeeksView } from "@/components/progress/profile-view";
 import { ScreenHeader } from "@/components/shell/app-shell";
 import { loadGuide } from "@/lib/guide/data";
-import { loadProfile } from "@/lib/profile/data";
+import { loadHabits, loadProfile } from "@/lib/profile/data";
 import { longExamDate } from "@/lib/routine/exam";
 import { loadSuggestion } from "@/lib/study/suggestion";
 import { EmptyState } from "@/components/ui/empty-state";
@@ -16,7 +16,14 @@ export const metadata: Metadata = { title: "Progresso" };
 export const dynamic = "force-dynamic";
 
 export default async function ProgressoPage() {
-  const [report, goals, profile, suggestion, guide] = await Promise.all([loadWeeklyReport(), loadCourseGoals(), loadProfile(), loadSuggestion(), loadGuide()]);
+  const [report, goals, profile, suggestion, guide, habits] = await Promise.all([
+    loadWeeklyReport(),
+    loadCourseGoals(),
+    loadProfile(),
+    loadSuggestion(),
+    loadGuide(),
+    loadHabits(),
+  ]);
   if (!report)
     return (
       <>
@@ -77,6 +84,24 @@ export default async function ProgressoPage() {
               </ul>
             </section>
           </div>
+        )}
+        {habits && (
+          <div className="grid gap-x-14 gap-y-12 border-t border-line-subtle pt-10 lg:grid-cols-2">
+            <HabitsView habits={habits} />
+            <WeeksView habits={habits} />
+          </div>
+        )}
+        {suggestion && (
+          <section aria-labelledby="proximo" className="border-t border-line-subtle pt-10">
+            <h2 id="proximo" className="t-kicker">
+              Próximo passo
+            </h2>
+            <p className="mt-1 t-section text-ink">{suggestion.title}</p>
+            <p className="mt-1 max-w-[62ch] t-meta text-ink-2">{suggestion.reason}</p>
+            <Link href={suggestion.href.startsWith("#") ? `/estudar${suggestion.href}` : suggestion.href} className="mt-2 inline-flex min-h-11 items-center t-ui text-link underline">
+              {suggestion.action}
+            </Link>
+          </section>
         )}
         <div className="border-t border-line-subtle pt-10">
           <WeeklyReport r={report} />

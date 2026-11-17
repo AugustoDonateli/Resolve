@@ -655,6 +655,14 @@ let batchId, proposalId;
   check("A", "recebe o próprio perfil (somas por área, tema e tipo de erro)", !ap.error && Array.isArray(ap.data?.areas) && Array.isArray(ap.data?.themes) && Array.isArray(ap.data?.distractors), ap.error?.message ?? "");
   const keys = new Set((ap.data?.areas ?? []).flatMap((x) => Object.keys(x)));
   check("A", "o perfil não traz questão, alternativa nem gabarito", ![...keys].some((k) => /item|alternative|key|correct_alternative/.test(k)), [...keys].join(","));
+  for (const fn of ["study_habits", "my_weeks"]) {
+    const v = await V.c.rpc(fn);
+    check("visitante", `não chama ${fn}`, denied(v), v.error?.message ?? "sem conteúdo");
+    const r = await A.c.rpc(fn);
+    check("A", `recebe ${fn} da própria conta`, !r.error && r.data !== null, r.error?.message ?? "");
+  }
+  const many = await A.c.rpc("my_weeks", { p_weeks: 500 });
+  check("A", "my_weeks devolve no máximo 12 semanas", !many.error && (many.data ?? []).length === 12, many.error?.message ?? `${(many.data ?? []).length} semanas`);
   const aa = await A.c.from("alternative_annotations").select("alternative_id").limit(1);
   check("A", "não lê a classificação das alternativas direto", denied(aa), aa.error?.message ?? `${rows(aa)} linha(s)`);
 }

@@ -3,6 +3,7 @@ import { authEnabled } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
 import { loadDiagnostic, AREAS } from "@/lib/tri/diagnostic";
 import { eap, type ItemParameters } from "@/lib/tri/engine";
+import type { AreaPace, PeriodTally, WeekRow } from "./habits";
 import { errorPattern, extremes, PROFILE_RULE, read, type DistractorCount, type Reading, type Tally } from "./rule";
 
 interface RawTally {
@@ -82,5 +83,48 @@ export async function loadProfile(): Promise<Profile | null> {
     extremes: extremes(areas),
     pattern: errorPattern(raw.distractors, raw.wrong_total),
     answers: raw.areas.reduce((n, a) => n + a.answers, 0),
+  };
+}
+
+export interface Habits {
+  areas: (AreaPace & { label: string })[];
+  overallMedianMs: number | null;
+  timed: number;
+  periods: PeriodTally[];
+  weeks: WeekRow[];
+}
+
+/** Tempo por questão, períodos do dia e últimas semanas da conta do login; null sem sessão. */
+export async function loadHabits(): Promise<Habits | null> {
+  if (!authEnabled) return null;
+  const supabase = await createClient();
+  const { data: auth } = await supabase.auth.getUser();
+  if (!auth.user) return null;
+  const [h, w] = await Promise.all([supabase.rpc("study_habits"), supabase.rpc("my_weeks", { p_weeks: 8 })]);
+  if (h.error || !h.data) return null;
+  const raw = h.data as {
+    areas: { area: string; n: number; median_ms: number | null; n_correct: number; median_ms_correct: number | null; n_wrong: number; median_ms_wrong: number | null }[];
+    overall_median_ms: number | null;
+    timed: number;
+    periods: PeriodTally[];
+  };
+  const weeks = ((w.data ?? []) as { week_start: string; minutes: number; answers: number; correct: number; days_active: number }[]).map((x) => ({
+    weekStart: x.week_start,
+    minutes: x.minutes,
+    answers: x.answers,
+    correct: x.correct,
+    daysActive: x.days_active,
+  }));
+  return {
+    areas: AREAS.flatMap((a) => {
+      const x = raw.areas.find((r) => r.area === a.code);
+      return x
+        ? [{ area: a.code, label: a.label, n: x.n, medianMs: x.median_ms, nCorrect: x.n_correct, medianMsCorrect: x.median_ms_correct, nWrong: x.n_wrong, medianMsWrong: x.median_ms_wrong }]
+        : [];
+    }),
+    overallMedianMs: raw.overall_median_ms,
+    timed: raw.timed,
+    periods: raw.periods,
+    weeks,
   };
 }

@@ -5,6 +5,10 @@ import { createClient } from "@/lib/supabase/server";
 import { CLIENT_EVENT_TYPES } from "./events";
 import { ERROR_REASONS } from "./reasons";
 import { classify, type Outcome } from "./retry";
+import { loadDiagnostic } from "@/lib/tri/diagnostic";
+import { eap, type ItemParameters } from "@/lib/tri/engine";
+import { loadAreaModels, loadItemParameters } from "@/lib/tri/models";
+import { pickFitted } from "./fit";
 import { packSharedTexts } from "./shared-text";
 import type { Explanation } from "./raiox";
 
@@ -217,6 +221,54 @@ export async function startTraining(input: unknown): Promise<Outcome<string>> {
     p_planned_minutes: null,
     p_time_limit_minutes: null,
     p_selection_reason: "escolha",
+  });
+}
+
+/**
+ * Treino na medida: 10 questões ainda não respondidas da área, com dificuldade oficial logo acima do nível
+ * estimado da conta (mesma estimativa do Diagnóstico). Sem estimativa na área (menos de 10 respostas com
+ * parâmetro), não abre e diz o que falta.
+ */
+export async function startFittedTraining(input: unknown): Promise<Outcome<string>> {
+  const p = z.object({ actionId: uuid, area: z.enum(["LC", "CH", "CN", "MT"]) }).safeParse(input);
+  if (!p.success) return { ok: false, error: "dados inválidos", final: true };
+  const supabase = await createClient();
+  const { data: auth } = await supabase.auth.getUser();
+  if (!auth.user) return { ok: false, error: "resolve_not_signed_in", final: true };
+  const d = (await loadDiagnostic())?.find((x) => x.code === p.data.area);
+  if (!d || !d.model || d.reason !== null) return { ok: false, error: "resolve_fit_needs_answers", final: true };
+  const estimate = eap(
+    d.data.map((x) => ({ itemId: x.itemId, correct: x.correct })),
+    new Map<string, ItemParameters>(d.data.map((x) => [x.itemId, { a: x.a, b: x.b, c: x.c }])),
+    d.model.config,
+  );
+  const [{ data: pool }, { data: done }, models] = await Promise.all([
+    supabase.from("study_items").select("item_version_id, item_id").eq("annulled", false).eq("area", p.data.area),
+    supabase.from("attempts").select("item_id"),
+    loadAreaModels(supabase),
+  ]);
+  const model = models.get(p.data.area);
+  if (!model) return { ok: false, error: "resolve_fit_needs_answers", final: true };
+  const answered = new Set((done ?? []).map((a) => a.item_id as string));
+  const open = (pool ?? []).filter((r) => !answered.has(r.item_id as string));
+  const params = await loadItemParameters(supabase, model, open.map((r) => r.item_id as string));
+  const versionOf = new Map(open.map((r) => [r.item_id as string, r.item_version_id as string]));
+  const chosen = pickFitted(
+    open.flatMap((r) => {
+      const prm = params.get(r.item_id as string);
+      return prm ? [{ id: r.item_id as string, b: prm.b }] : [];
+    }),
+    estimate.theta,
+    10,
+  ).map((id) => versionOf.get(id)!);
+  if (!chosen.length) return { ok: false, error: "resolve_no_items", final: true };
+  return rpc<string>("start_session", {
+    p_client_action_id: p.data.actionId,
+    p_mode: "treino",
+    p_item_version_ids: chosen,
+    p_planned_minutes: null,
+    p_time_limit_minutes: null,
+    p_selection_reason: "plano",
   });
 }
 

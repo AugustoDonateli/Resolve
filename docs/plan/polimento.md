@@ -75,7 +75,7 @@ Cada etapa é um conjunto completo: implementar, conferir no navegador (claro, e
 | P5 | **Feita (17/11).** **Grupos: tempo de estudo** (D1–D3, D5): tempo medido pelo servidor, ranking semanal, "estudando agora", meta coletiva, placares; lugar próprio na mesa | Fable (telas) com cuidado de banco |
 | P6 | **Feita (17/11).** **O site aprende, parte 1** (E1, E2, E7): perfil por área e assunto, padrão de erro, página "o que o Resolve aprendeu" | Fable |
 | P7 | **Feita (17/11).** **Grupos, parte 2 e animações** (D4, D6, F2, F3): duelo de tempo, resumo de domingo, aplauso; replay, constelação e transições pequenas | Fable |
-| P8 | **O site aprende, parte 2** (E3–E6): tempo pessoal, dificuldade pela TRI, melhor horário, revisão com intervalo ajustável; Progresso como história | Opus ou Fable |
+| P8 | **Feita (17/11), menos a revisão com intervalo ajustável.** **O site aprende, parte 2** (E3–E6): tempo pessoal, dificuldade pela TRI, melhor horário, revisão com intervalo ajustável; Progresso como história | Opus ou Fable |
 
 ## O que falta do roteiro, depois do polimento
 (`docs/plan/plano-v2.md`, seção 8)
@@ -122,3 +122,17 @@ Cada etapa é um conjunto completo: implementar, conferir no navegador (claro, e
   - **Animações**: troca de questão chega de lado (240 ms) e o Raio-X sobe como folha (400 ms), sem deslocamento com movimento reduzido; o **replay do Dia D** ganhou uma linha do tempo com um traço por evento e a caneta azul no instante atual.
   - Conferido no navegador com as contas A e B (aplauso e desafio aparecem para os dois). `audit:ui`: 85 aprovados na rodada cheia; o teste do tutorial falhou uma vez sob carga e passou duas vezes seguidas sozinho. 157 testes de unidade.
   - Não feito: a constelação (o protótipo ficou sem entrada depois que o mapa de habilidades saiu do Progresso; decidir se some de vez) e aviso fora do app para o resumo de domingo (o resumo aparece na página do grupo).
+- **P8 (17/11)**, última etapa do polimento:
+  - **Constelação removida** a pedido de Guto (página de protótipo, componente e dados demonstrativos).
+  - **Na sua medida** (Estudar › Praticar; regra `medida-v1`, `lib/study/fit.ts`): 10 questões ainda não respondidas da área, com dificuldade oficial (parâmetro b do Inep) logo acima do nível estimado da conta. Sem estimativa na área (menos de 10 respostas), não abre e diz o que falta. Conferido com a conta A: Humanas recusa com a explicação; Linguagens abre a sessão.
+  - **Seu ritmo** (Progresso; regra `habitos-v1`, `lib/profile/habits.ts`): tempo típico por questão em cada área, nas certas e nas erradas, com comentário só quando a diferença é grande; alvo sugerido para os blocos de ritmo.
+  - **Seu melhor horário**: período do dia em que a conta mais acerta, só com 15 respostas em dois períodos e diferença de 8 pontos; senão, diz que não há diferença clara.
+  - **Suas últimas semanas** e **Próximo passo**: até 8 semanas (respostas, acertos, tempo medido, dias com estudo) e a sugestão de agora com o motivo.
+  - Banco: `20261117150000_habitos_e_semanas.sql` (`study_habits`, `my_weeks`). Matriz de acesso 325/325. 158 testes de unidade. `audit:ui`: 85 aprovados na rodada cheia; a única falha era um rótulo do formulário novo que confundia um teste antigo (corrigido; Estudar, auditoria e tutorial repetidos: 54 de 54).
+  - **Não feito, com o motivo:**
+    - Revisão com intervalo ajustável (E6): a regra atual já ajusta por ficha (acertou avança; errou recomeça). Um intervalo por pessoa precisa de semanas de histórico de revisão para ser calibrado sem chute; hoje esse histórico não existe.
+    - O melhor horário e o padrão de erro só informam; ainda não mudam o plano nem o sorteio do treino.
+    - Progresso não mostra a evolução da nota estimada semana a semana (precisa guardar a estimativa no tempo; é a "previsão" do roteiro).
+
+## Situação
+O polimento P1 a P8 está feito e publicado, com as exceções listadas em cada etapa. O que vem depois está em "O que falta do roteiro, depois do polimento": sessão 4 e as lições (ensinar, não só exercitar).

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { BookOpen } from "lucide-react";
 import Link from "next/link";
 import { FirstTimeTip } from "@/components/guide/first-time-tip";
+import { StartFitted } from "@/components/question/start-fitted";
 import { StartRhythm } from "@/components/question/start-rhythm";
 import { StartTraining } from "@/components/question/start-training";
 import { ScreenHeader } from "@/components/shell/app-shell";
@@ -104,7 +105,17 @@ export default async function EstudarPage({ searchParams }: { searchParams: Prom
                 </p>
                 <StartTraining counts={counts!} initialArea={initialArea} />
               </div>
-              <Sumario id="praticar-mais" label="Também em Praticar" items={PRATICAR} />
+              <div className="flex flex-col gap-8">
+                <div id="medida" className="flex scroll-mt-20 flex-col gap-3">
+                  <h3 className="t-section">Na sua medida</h3>
+                  <p className="max-w-[52ch] t-meta text-ink-2">
+                    Quando usar: depois de umas 10 respostas na área. Dez questões novas com dificuldade logo acima do seu nível estimado: nem fáceis demais,
+                    nem fora de alcance.
+                  </p>
+                  <StartFitted initialArea={initialArea} />
+                </div>
+                <Sumario id="praticar-mais" label="Também em Praticar" items={PRATICAR} />
+              </div>
             </div>
           </section>
 

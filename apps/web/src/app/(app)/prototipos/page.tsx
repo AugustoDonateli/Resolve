@@ -21,7 +21,6 @@ const FLOWS = [
 const MOMENTS = [
   { href: "/prototipos/envelope", label: "Envelope e caderno", id: "F1-T10 · M03" },
   { href: "/prototipos/replay", label: "Replay da sessão", id: "F1-T12 · M06" },
-  { href: "/prototipos/constelacao", label: "Constelação como evidência", id: "F1-T15 · M05" },
 ];
 
 export default function PrototiposPage() {
