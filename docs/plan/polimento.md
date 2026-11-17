@@ -73,7 +73,7 @@ Cada etapa é um conjunto completo: implementar, conferir no navegador (claro, e
 | P3 | **Feita (16/11).** **Estudar em três portas** (B, H): Praticar, Treinar a prova, Provar; sugestão para agora com o motivo; treino por habilidade e assunto; matriz em Progresso | Fable |
 | P4 | **Feita (17/11).** **Redação e Rotina claras** (G, H): caminho numerado da redação, rascunhos com nome; agenda da semana em que se marca direto no dia; Hoje no primeiro uso | Fable |
 | P5 | **Feita (17/11).** **Grupos: tempo de estudo** (D1–D3, D5): tempo medido pelo servidor, ranking semanal, "estudando agora", meta coletiva, placares; lugar próprio na mesa | Fable (telas) com cuidado de banco |
-| P6 | **O site aprende, parte 1** (E1, E2, E7): perfil por área e assunto, padrão de erro, página "o que o Resolve aprendeu" | Fable |
+| P6 | **Feita (17/11).** **O site aprende, parte 1** (E1, E2, E7): perfil por área e assunto, padrão de erro, página "o que o Resolve aprendeu" | Fable |
 | P7 | **Grupos, parte 2 e animações** (D4, D6, F2, F3): duelo de tempo, resumo de domingo, aplauso; replay, constelação e transições pequenas | Fable |
 | P8 | **O site aprende, parte 2** (E3–E6): tempo pessoal, dificuldade pela TRI, melhor horário, revisão com intervalo ajustável; Progresso como história | Opus ou Fable |
 
@@ -105,3 +105,12 @@ Cada etapa é um conjunto completo: implementar, conferir no navegador (claro, e
   - Testado no banco em transação desfeita (três períodos de foco sobrepostos e um de 5 h deram 16.208 s: sobreposição contada uma vez, limite de 3 h aplicado; antes de participar, o colega recebe só o apelido). Matriz de acesso 304/304. `audit:ui` 86 aprovados, 2 pulados (o do plano do dia é pulado depois das 21h). 150 testes de unidade.
   - Não validado em uso real: tempos de verdade (as contas de teste têm segundos de estudo). Redação ainda não entra na conta: o editor não mede tempo ativo.
   - Ficaram para a P7: duelo de tempo 1×1, resumo de domingo e aplauso.
+- **P6 (17/11)**: Progresso passou a abrir com **o perfil por área** (pedido de Guto de 16/11).
+  - Função `learning_profile()` (migração `20261117130000_perfil_de_aprendizado.sql`): só somas das questões que a própria conta respondeu (primeira tentativa, sem ajuda), por área, por tema da matriz (com a disciplina em Natureza) e por tipo da alternativa errada marcada. Conta comum continua sem ler anotações nem taxas direto.
+  - Regra `perfil-v1` (`lib/profile/rule.ts`, com teste): compara o acerto da conta com o acerto médio de quem fez o Enem **nas mesmas questões**; 10 pontos percentuais acima é "Você vai bem", 10 abaixo é "Precisa de reforço", no meio é "Na média". Só classifica com 10 respostas na área e 5 no tema; antes diz quantas faltam. Só chama de ponto forte o que está na média ou acima.
+  - Cada área mostra também a **nota estimada pela TRI**, com a faixa (mesmo cálculo do Diagnóstico, feito no servidor). Saiu o texto antigo que dizia que a TRI estava indisponível.
+  - **Padrão de erro**: o tipo de alternativa errada mais marcado, com a definição e o treino indicado; aparece com 5 erros de tipo identificado.
+  - **"O que o Resolve aprendeu sobre você"**: o que o site sabe e o que faz com isso (sugestão de agora com o motivo, erro mais comum, horas por semana, data da prova), dizendo também o que ainda não muda nada.
+  - O "Mapa de habilidades", que Guto achou confuso, saiu da tela; a matriz e o diagnóstico ficaram em "Para consultar".
+  - Verificação: conferido com os dados reais da conta de teste A; matriz de acesso 308/308; `audit:ui` 86 aprovados e 2 pulados; 150+ testes de unidade.
+  - Limites: não sugere curso nem profissão (seria invenção); mostra como a pessoa está hoje. O padrão de erro ainda só informa, não muda o sorteio do treino (fica para a P8).

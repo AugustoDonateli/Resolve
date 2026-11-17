@@ -627,6 +627,18 @@ let batchId, proposalId;
   }
 }
 
+// ── Perfil de aprendizado (polimento P6) ──
+{
+  const vp = await V.c.rpc("learning_profile");
+  check("visitante", "não recebe perfil de aprendizado", denied(vp), vp.error?.message ?? "sem conteúdo");
+  const ap = await A.c.rpc("learning_profile");
+  check("A", "recebe o próprio perfil (somas por área, tema e tipo de erro)", !ap.error && Array.isArray(ap.data?.areas) && Array.isArray(ap.data?.themes) && Array.isArray(ap.data?.distractors), ap.error?.message ?? "");
+  const keys = new Set((ap.data?.areas ?? []).flatMap((x) => Object.keys(x)));
+  check("A", "o perfil não traz questão, alternativa nem gabarito", ![...keys].some((k) => /item|alternative|key|correct_alternative/.test(k)), [...keys].join(","));
+  const aa = await A.c.from("alternative_annotations").select("alternative_id").limit(1);
+  check("A", "não lê a classificação das alternativas direto", denied(aa), aa.error?.message ?? `${rows(aa)} linha(s)`);
+}
+
 // ── Conferência das anotações e guia de primeiros passos (sessão 3 do plano v2) ──
 {
   const vq = await V.c.rpc("annotation_review_queue");
