@@ -1,3 +1,4 @@
+import type { WeekBoard } from "./week";
 import "server-only";
 import { notFound } from "next/navigation";
 import { authEnabled } from "@/lib/supabase/env";
@@ -101,4 +102,32 @@ export async function loadDuel(id: string): Promise<{ board: DuelBoard; groupNam
   const board = toBoard(data as Record<string, unknown>);
   const { data: g } = await supabase.from("study_groups").select("name").eq("id", board.groupId).maybeSingle();
   return { board, groupName: g?.name ?? "Grupo" };
+}
+
+/** Placar da semana (tempo de estudo, regra `tempo-v1`); null se a conta não é do grupo. */
+export async function loadWeekBoard(groupId: string): Promise<WeekBoard | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase.rpc("group_week_board", { p_group: groupId });
+  if (error || !data) return null;
+  const b = data as {
+    week_start: string;
+    goal_minutes: number | null;
+    total_minutes: number;
+    members: { nickname: string; me: boolean; sharing: boolean; minutes: number | null; previous_minutes: number | null; questions: number | null; days_active: number | null; studying_now: boolean | null }[];
+  };
+  return {
+    weekStart: b.week_start,
+    goalMinutes: b.goal_minutes,
+    totalMinutes: b.total_minutes,
+    members: b.members.map((m) => ({
+      nickname: m.nickname,
+      me: m.me,
+      sharing: m.sharing,
+      minutes: m.minutes,
+      previousMinutes: m.previous_minutes,
+      questions: m.questions,
+      daysActive: m.days_active,
+      studyingNow: m.studying_now,
+    })),
+  };
 }

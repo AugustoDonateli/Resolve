@@ -68,3 +68,21 @@ export async function startDuel(input: unknown): Promise<Result> {
   if (!p.success) return { ok: false, message: "Pedido inválido." };
   return call<string>("start_duel", { p_duel: p.data.duelId, p_client_action_id: p.data.actionId });
 }
+
+/** Aparecer (ou não) no ranking de tempo deste grupo. */
+export async function setTimeSharing(input: unknown): Promise<Result<null>> {
+  const p = z.object({ groupId: z.string().uuid(), share: z.boolean() }).safeParse(input);
+  if (!p.success) return { ok: false, message: "Pedido inválido." };
+  const r = await call<null>("set_group_time_sharing", { p_group: p.data.groupId, p_share: p.data.share });
+  if (r.ok) revalidatePath(`/grupos/${p.data.groupId}`);
+  return r;
+}
+
+/** Meta coletiva da semana, em horas somadas; null tira a meta. */
+export async function setWeeklyGoal(input: unknown): Promise<Result<null>> {
+  const p = z.object({ groupId: z.string().uuid(), hours: z.number().int().min(1).max(1000).nullable() }).safeParse(input);
+  if (!p.success) return { ok: false, message: "A meta vai de 1 a 1000 horas por semana." };
+  const r = await call<null>("set_group_weekly_goal", { p_group: p.data.groupId, p_minutes: p.data.hours === null ? null : p.data.hours * 60 });
+  if (r.ok) revalidatePath(`/grupos/${p.data.groupId}`);
+  return r;
+}

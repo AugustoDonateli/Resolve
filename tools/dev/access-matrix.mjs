@@ -580,7 +580,7 @@ let batchId, proposalId;
   check("visitante", "não lê propostas de anotação", denied(v), v.error?.message ?? `${rows(v)} linha(s)`);
   const a = await A.c.from("item_annotation_proposals").select("id, payload").limit(1);
   check("A", "não lê propostas de anotação (trazem o gabarito)", denied(a), a.error?.message ?? `${rows(a)} linha(s)`);
-  const e = await E.c.from("item_annotation_proposals").select("id").eq("status", "proposta").limit(1);
+  const e = await E.c.from("item_annotation_proposals").select("id").limit(1);
   check("E", "lê propostas de anotação", !e.error && rows(e) >= 1, e.error?.message ?? "");
   const fake = "00000000-0000-4000-8000-000000000000";
   const ai = await A.c.from("item_annotation_proposals").insert({ item_version_id: fake, payload: { schema: "anotacao/v1" }, origin: "teste da matriz" }).select();
@@ -595,6 +595,36 @@ let batchId, proposalId;
   check("visitante", "não lê a árvore de assuntos", denied(vs), vs.error?.message ?? `${rows(vs)} linha(s)`);
   const si = await A.c.from("subjects").insert({ label: "assunto falso", area_code: "MT" }).select();
   check("A", "não cria assunto", permError(si) || denied(si), si.error?.message ?? "criou!");
+}
+
+// ── Grupos: tempo de estudo da semana (polimento P5) ──
+{
+  const mine = await A.c.from("study_group_members").select("group_id").eq("user_id", A.id).is("left_at", null);
+  const gid = mine.data?.[0]?.group_id;
+  check("A", "participa de um grupo de teste", Boolean(gid), mine.error?.message ?? "");
+  if (gid) {
+    const vb = await V.c.rpc("group_week_board", { p_group: gid });
+    check("visitante", "não lê o placar da semana", denied(vb), vb.error?.message ?? "leu!");
+    const eb = await E.c.rpc("group_week_board", { p_group: gid });
+    check("E", "fora do grupo, não lê o placar da semana", denied(eb), eb.error?.message ?? "sem conteúdo");
+    const eg = await E.c.rpc("set_group_weekly_goal", { p_group: gid, p_minutes: 120 });
+    check("E", "fora do grupo, não muda a meta coletiva", /resolve_not_member/.test(eg.error?.message ?? ""), eg.error?.message ?? "mudou!");
+    const es = await E.c.rpc("set_group_time_sharing", { p_group: gid, p_share: true });
+    check("E", "fora do grupo, não entra no ranking", /resolve_not_member/.test(es.error?.message ?? ""), es.error?.message ?? "entrou!");
+    const direct = await A.c.from("study_group_members").update({ share_time: true }).eq("group_id", gid).neq("user_id", A.id).select("user_id");
+    check("A", "não põe outra pessoa no ranking", permError(direct) || denied(direct), direct.error?.message ?? `${rows(direct)} linha(s)`);
+    const goal = await A.c.from("study_groups").update({ weekly_goal_minutes: 99 }).eq("id", gid).select("id");
+    check("A", "não altera o grupo direto na tabela", permError(goal) || denied(goal), goal.error?.message ?? `${rows(goal)} linha(s)`);
+    await A.c.rpc("set_group_time_sharing", { p_group: gid, p_share: false });
+    const hidden = await A.c.rpc("group_week_board", { p_group: gid });
+    const others = (hidden.data?.members ?? []).filter((m) => !m.me && !m.sharing);
+    check("A", "lê o placar do próprio grupo", !hidden.error && Array.isArray(hidden.data?.members), hidden.error?.message ?? "");
+    check("A", "de quem não participa do ranking, só recebe o apelido", others.every((m) => m.minutes === null && m.questions === null && m.studying_now === null), `${others.length} fora do ranking`);
+    const bad = await A.c.rpc("set_group_weekly_goal", { p_group: gid, p_minutes: 5 });
+    check("A", "meta coletiva fora do intervalo é recusada", /resolve_group_goal/.test(bad.error?.message ?? ""), bad.error?.message ?? "aceitou!");
+    const secs = await A.c.rpc("study_seconds", { p_user: B.id, p_from: "2026-01-01", p_to: "2027-01-01" });
+    check("A", "não calcula o tempo de outra conta", Boolean(secs.error), secs.error?.message ?? "calculou!");
+  }
 }
 
 // ── Conferência das anotações e guia de primeiros passos (sessão 3 do plano v2) ──

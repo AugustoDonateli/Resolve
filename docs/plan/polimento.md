@@ -72,7 +72,7 @@ Cada etapa é um conjunto completo: implementar, conferir no navegador (claro, e
 | P2 | **Feita (16/11).** **Abertura do Dia D refeita** (F1): cena nova na Mesa, peças em camadas fixas (nada atravessa nada), pulável, sem movimento para quem prefere reduzido | Fable |
 | P3 | **Feita (16/11).** **Estudar em três portas** (B, H): Praticar, Treinar a prova, Provar; sugestão para agora com o motivo; treino por habilidade e assunto; matriz em Progresso | Fable |
 | P4 | **Feita (17/11).** **Redação e Rotina claras** (G, H): caminho numerado da redação, rascunhos com nome; agenda da semana em que se marca direto no dia; Hoje no primeiro uso | Fable |
-| P5 | **Grupos: tempo de estudo** (D1–D3, D5): tempo medido pelo servidor, ranking semanal, "estudando agora", meta coletiva, placares; lugar próprio na mesa | Fable (telas) com cuidado de banco |
+| P5 | **Feita (17/11).** **Grupos: tempo de estudo** (D1–D3, D5): tempo medido pelo servidor, ranking semanal, "estudando agora", meta coletiva, placares; lugar próprio na mesa | Fable (telas) com cuidado de banco |
 | P6 | **O site aprende, parte 1** (E1, E2, E7): perfil por área e assunto, padrão de erro, página "o que o Resolve aprendeu" | Fable |
 | P7 | **Grupos, parte 2 e animações** (D4, D6, F2, F3): duelo de tempo, resumo de domingo, aplauso; replay, constelação e transições pequenas | Fable |
 | P8 | **O site aprende, parte 2** (E3–E6): tempo pessoal, dificuldade pela TRI, melhor horário, revisão com intervalo ajustável; Progresso como história | Opus ou Fable |
@@ -98,3 +98,10 @@ Cada etapa é um conjunto completo: implementar, conferir no navegador (claro, e
   - **Redação**: no alto, o caminho de uma redação em cinco passos (escolher o tema, escrever, enviar, ler a correção, reescrever), com o passo atual marcado e o link para ele (`lib/essay/path.ts`, com teste). Rascunhos com nome: o tema, o começo do texto ou "Folha em branco", no lugar de várias linhas "Tema livre".
   - Não feito nesta etapa: Rotina como grade visual da semana (ficou a lista de dias com marcação no próprio dia) e o "Por quê?" nas demais decisões automáticas (há em Estudar e nos blocos do plano).
   - Verificação: `pnpm check`, build, capturas em PC e celular; `audit:ui` 81 aprovados na rodada cheia, com uma falha que era do teste (link "Temas" ambíguo, corrigido) e travou 4 dependentes; o projeto do editor repetido passou 15 de 15.
+- **P5 (17/11)**: **placar da semana** em cada grupo (`/grupos/[id]`), acima dos duelos.
+  - Regra `tempo-v1` (migração `20261117120000_grupos_tempo_de_estudo.sql`, função `private.study_seconds`): tempo de foco pelo relógio do servidor (até 3 h por período) mais o tempo ativo em cada questão (até 15 min), com períodos sobrepostos contados uma vez só e teto de 12 h por dia; semana de segunda a domingo, horário de Brasília. Ninguém digita horas.
+  - Ranking por tempo, com questões respondidas, dias com estudo, "estudando agora" e a comparação com a própria semana anterior; **meta coletiva** em horas somadas, com barra; **participar é escolha de cada pessoa em cada grupo** (`share_time`, desligado por padrão): de quem não participa só aparece o apelido, e cada um sempre vê o próprio tempo.
+  - Objeto "Grupos" na mesa de Hoje (o atalho em Mais continua).
+  - Testado no banco em transação desfeita (três períodos de foco sobrepostos e um de 5 h deram 16.208 s: sobreposição contada uma vez, limite de 3 h aplicado; antes de participar, o colega recebe só o apelido). Matriz de acesso 304/304. `audit:ui` 86 aprovados, 2 pulados (o do plano do dia é pulado depois das 21h). 150 testes de unidade.
+  - Não validado em uso real: tempos de verdade (as contas de teste têm segundos de estudo). Redação ainda não entra na conta: o editor não mede tempo ativo.
+  - Ficaram para a P7: duelo de tempo 1×1, resumo de domingo e aplauso.
