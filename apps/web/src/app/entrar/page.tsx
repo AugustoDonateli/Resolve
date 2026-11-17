@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { DeskLamp } from "@/components/shell/desk-lamp";
 import { Wordmark } from "@/components/ui/wordmark";
@@ -12,7 +13,7 @@ export const metadata: Metadata = { title: "Entrar" };
  * apresentam o Resolve; à direita, a ficha de identificação, que é o formulário. No celular fica só
  * a ficha, com a marca em cima.
  */
-export default async function EntrarPage({ searchParams }: { searchParams: Promise<{ next?: string }> }) {
+export default async function EntrarPage({ searchParams }: { searchParams: Promise<{ next?: string; conta?: string }> }) {
   if (!authEnabled) redirect("/hoje");
   const sp = await searchParams;
   return (
@@ -55,7 +56,12 @@ export default async function EntrarPage({ searchParams }: { searchParams: Promi
             </div>
             <Wordmark size={22} className="mb-1 md:hidden" />
           </div>
-          <SignInForm next={safeNext(sp.next)} />
+          <SignInForm next={safeNext(sp.next)} notice={sp.conta === "excluida" ? "Sua conta e todos os seus dados foram excluídos." : undefined} />
+          <p className="mt-5 border-t border-line-subtle pt-4 t-meta text-ink-2">
+            <Link href="/termos" className="text-link underline">
+              Termos e privacidade
+            </Link>
+          </p>
         </div>
       </div>
     </main>

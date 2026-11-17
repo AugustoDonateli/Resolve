@@ -31,6 +31,16 @@ export function createAccountMessage(status: string): string {
       return "Digite um e-mail válido.";
     case "rate_limited":
       return "Muitas tentativas em pouco tempo. Aguarde um minuto e tente de novo.";
+    case "convite_invalido":
+      return "Este convite não existe ou foi cancelado. Peça um novo a quem convidou você.";
+    case "convite_expirado":
+      return "Este convite passou da validade. Peça um novo a quem convidou você.";
+    case "convite_usado":
+      return "Este convite já foi usado. Peça um novo a quem convidou você.";
+    case "convite_cheio":
+      return "O grupo já está completo. Fale com quem convidou você.";
+    case "termos":
+      return "Para criar a conta, leia e aceite os termos.";
     default:
       return "Não foi possível criar a conta agora. Seus dados continuam no formulário; tente de novo.";
   }

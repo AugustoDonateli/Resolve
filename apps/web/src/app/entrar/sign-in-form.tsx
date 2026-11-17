@@ -10,7 +10,7 @@ import { authenticate, type AuthState } from "./actions";
  * Entrar e criar conta por convite (T01). Erro conserva o e-mail digitado e
  * diz o que fazer; carregando preserva o rótulo do botão.
  */
-export function SignInForm({ next }: { next: string }) {
+export function SignInForm({ next, notice }: { next: string; notice?: string }) {
   const [state, action, pending] = useActionState<AuthState, FormData>(authenticate, {
     mode: "entrar",
     email: "",
@@ -55,7 +55,9 @@ export function SignInForm({ next }: { next: string }) {
       </fieldset>
 
       {current === "criar" && (
-        <p className="-mt-2 t-meta text-ink-2">Escolha uma senha e pronto: a conta já fica ativa, sem e-mail de confirmação.</p>
+        <p className="-mt-2 t-meta text-ink-2">
+          O Resolve é fechado: conta nova só com convite. Recebeu um link? Abra o link do convite. E-mails já liberados criam a conta aqui.
+        </p>
       )}
 
       <div className="flex flex-col gap-1.5">
@@ -96,6 +98,12 @@ export function SignInForm({ next }: { next: string }) {
       </div>
 
       <div id="auth-msg" aria-live="polite" className="min-h-5">
+        {notice && !state.error && !state.info && (
+          <p className="flex gap-2 t-meta text-ink">
+            <Info aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
+            {notice}
+          </p>
+        )}
         {state.error && (
           <p className="flex gap-2 t-meta text-ink">
             <AlertCircle aria-hidden="true" className="mt-0.5 size-4 shrink-0" />

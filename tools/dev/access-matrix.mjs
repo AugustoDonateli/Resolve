@@ -667,6 +667,44 @@ let batchId, proposalId;
   check("A", "não lê a classificação das alternativas direto", denied(aa), aa.error?.message ?? `${rows(aa)} linha(s)`);
 }
 
+// ── Clube: dono, convites, membros, cota e conta (sessão 4 do plano v2) ──
+{
+  const vs = await V.c.rpc("invite_status", { p_code: "AAAAAAAAAA" });
+  check("visitante", "consulta um código de convite (só a situação)", !vs.error && vs.data === "invalido", vs.error?.message ?? String(vs.data));
+  const vc = await V.c.rpc("create_account_with_invite", { p_email: "ninguem@resolve.test", p_password: "senha-qualquer-1", p_code: "AAAAAAAAAA", p_terms_version: "x" });
+  check("visitante", "não cria conta com convite inexistente", !vc.error && vc.data === "convite_invalido", vc.error?.message ?? String(vc.data));
+  const vo = await V.c.rpc("club_overview");
+  check("visitante", "não lê o clube", denied(vo), vo.error?.message ?? "sem conteúdo");
+  for (const [who, u] of [["A", A], ["E", E]]) {
+    const own = await u.c.rpc("is_owner");
+    check(who, "não é dono", !own.error && own.data === false, own.error?.message ?? String(own.data));
+    const ov = await u.c.rpc("club_overview");
+    check(who, "não lê o clube (contas e e-mails)", denied(ov), ov.error?.message ?? "sem conteúdo");
+    const ci = await u.c.rpc("create_invite", { p_note: "x", p_max_uses: 1, p_days: 1 });
+    check(who, "não cria convite", /resolve_not_owner/.test(ci.error?.message ?? ""), ci.error?.message ?? "criou!");
+    const ss = await u.c.rpc("set_member_status", { p_user: B.id, p_status: "suspenso" });
+    check(who, "não suspende outra conta", /resolve_not_owner/.test(ss.error?.message ?? ""), ss.error?.message ?? "suspendeu!");
+    const rm = await u.c.rpc("remove_member", { p_user: B.id });
+    check(who, "não remove outra conta", /resolve_not_owner/.test(rm.error?.message ?? ""), rm.error?.message ?? "removeu!");
+  }
+  for (const t of ["invites"]) {
+    const r = await A.c.from(t).select("id").limit(1);
+    check("A", `não lê ${t} direto`, permError(r), r.error?.message ?? `${rows(r)} linha(s)`);
+  }
+  const mm = await A.c.from("members").select("user_id");
+  check("A", "em members, só lê a própria linha", !mm.error && (mm.data ?? []).every((x) => x.user_id === A.id), mm.error?.message ?? `${rows(mm)} linha(s)`);
+  const ao = await A.c.from("app_owners").select("user_id");
+  check("A", "não descobre quem é o dono", !ao.error && rows(ao) === 0, ao.error?.message ?? `${rows(ao)} linha(s)`);
+  const ow = await A.c.from("app_owners").insert({ user_id: A.id }).select();
+  check("A", "não se torna dono", permError(ow), ow.error?.message ?? "virou dono!");
+  const mw = await A.c.from("members").update({ status: "ativo" }).eq("user_id", B.id).select();
+  check("A", "não altera members direto", permError(mw) || denied(mw), mw.error?.message ?? `${rows(mw)} linha(s)`);
+  const q = await A.c.rpc("my_ai_quota");
+  check("A", "consulta a própria cota de IA", !q.error, q.error?.message ?? "");
+  const vd = await V.c.rpc("delete_my_account");
+  check("visitante", "não chama a exclusão de conta", Boolean(vd.error), vd.error?.message ?? "chamou!");
+}
+
 // ── Conferência das anotações e guia de primeiros passos (sessão 3 do plano v2) ──
 {
   const vq = await V.c.rpc("annotation_review_queue");

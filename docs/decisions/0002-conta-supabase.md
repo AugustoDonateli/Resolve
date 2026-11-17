@@ -29,3 +29,13 @@ Data: 9 nov. 2026 · Sessão 04
 19. **Risco aceito:** sem confirmação, quem souber um e-mail liberado e chegar antes pode criar a conta com ele. Hoje só o e-mail de Guto e as contas de teste estão liberados, e a conta de Guto já existe. Ao liberar novos e-mails, crie a conta logo ou avise a pessoa.
 20. **Esqueci a senha:** sem e-mail, não há recuperação automática. A troca é feita pelo dono do banco (gerar o hash bcrypt localmente, como em `tools/dev/test-accounts.mjs`, e atualizar `auth.users.encrypted_password`). Uma tela "trocar senha" para quem está logado pode entrar numa tarefa futura.
 21. **Liberar um e-mail:** `insert into public.signup_allowlist (email, note) values ('pessoa@exemplo.com', '...');`. Para abrir o cadastro a qualquer e-mail, basta remover a checagem de `signup_allowlist` em `create_account` (decisão de abertura ao público: EXT-PUBLICO).
+
+## Clube por convite (sessão 4 do plano v2, 17/11/2026)
+
+22. **Dono** em `public.app_owners` (a linha de Guto foi criada por SQL; e-mails e ids não ficam no repositório). Só o dono vê `/mais/clube`; para os outros a página responde 404.
+23. **Convites**: código de 10 letras e números, de 1 a 5 usos, de 1 a 30 dias, até 10 abertos e até 5 convidados no clube. O link é `/convite/<código>`. `create_account_with_invite` confere o código, cria a conta pela mesma `create_account`, grava o aceite da versão dos termos (`members.terms_version`) e cria a cota pessoal de IA (US$ 1,50 por mês, aviso aos 70%). Se algum passo falha, nada fica gravado. A tela Entrar continua aceitando os e-mails já liberados.
+24. **Suspender** bloqueia a conta no Supabase Auth (`banned_until`): a próxima página já manda a pessoa para Entrar. **Reativar** desfaz.
+25. **Remover** (dono) e **excluir a própria conta**: os arquivos pessoais são apagados primeiro pelo app; depois a conta sai e leva, em cascata, todos os dados. O e-mail deixa de estar liberado. O dono não pode ser suspenso, removido nem se excluir pela tela.
+26. **Teto do clube**: US$ 10 por mês (antes, US$ 5 da conta única).
+27. **Exportar**: `/mais/conta/exportar` devolve um JSON com as linhas da própria conta (pelas políticas do banco), as redações com todas as versões e os links das fotos válidos por 7 dias.
+28. **Termos**: `/termos`, público; texto e versão em `apps/web/src/lib/club/terms.ts`. Mudou o texto, muda a versão.
