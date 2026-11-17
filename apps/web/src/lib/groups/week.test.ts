@@ -48,7 +48,6 @@ describe("placar da semana do grupo", () => {
       "Ana ficou em 1º, com 5 h. O grupo somou 8 h 20 min.",
       "Você ficou em 2º, com 3 h 20 min.",
       "Ana recebeu 2 aplausos.",
-      "Duelo de tempo: Você 3 h 20 min × Ana 5 h: Ana venceu.",
     ]);
   });
 });

@@ -100,6 +100,5 @@ export function recapLines(r: WeekRecap): string[] {
   if (mine > 0) out.push(`Você ficou em ${mine + 1}º, com ${fmtStudy(sorted[mine]!.minutes)}.`);
   const clapped = sorted.filter((m) => m.applause > 0).sort((a, b) => b.applause - a.applause)[0];
   if (clapped) out.push(`${clapped.me ? "Você recebeu" : `${clapped.nickname} recebeu`} ${clapped.applause} ${clapped.applause === 1 ? "aplauso" : "aplausos"}.`);
-  for (const d of r.timeDuels) out.push(`Duelo de tempo: ${duelLine(d, true)}`);
   return out;
 }

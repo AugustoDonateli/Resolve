@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { Sun } from "lucide-react";
+import type { CSSProperties } from "react";
 import { FirstSteps } from "@/components/guide/first-steps";
 import { Today } from "@/components/routine/today";
 import { DailyQuestion } from "@/components/today/daily-question";
 import { DeskObjects } from "@/components/today/desk-objects";
+import { GroupCard } from "@/components/today/group-card";
 import { ScreenHeader } from "@/components/shell/app-shell";
 import { EmptyState } from "@/components/ui/empty-state";
+import { loadDeskGroup } from "@/lib/groups/data";
 import { loadFicha, loadGuide } from "@/lib/guide/data";
 import { currentStep } from "@/lib/guide/types";
 import { loadGoals } from "@/lib/routine/goals";
@@ -40,10 +43,11 @@ export default async function HojePage({ searchParams }: { searchParams: Promise
   const ifThen =
     goals?.plans.find((p) => p.archived_at === null) ?? null;
   const step = guide ? currentStep(guide.guide) : null;
-  const [daily, counts, ficha] = await Promise.all([
+  const [daily, counts, ficha, group] = await Promise.all([
     loadDailyQuestion(plan.today),
     loadDeskCounts(),
     step === "ficha" ? loadFicha() : Promise.resolve(null),
+    loadDeskGroup(),
   ]);
   const autoTour = tour === "1";
   return (
@@ -53,7 +57,14 @@ export default async function HojePage({ searchParams }: { searchParams: Promise
       streak={streak}
       guide={guide && (step || autoTour) ? <FirstSteps guide={guide.guide} ficha={ficha} autoTour={autoTour} /> : undefined}
       daily={<DailyQuestion q={daily} today={plan.today} />}
-      desk={<DeskObjects counts={counts} />}
+      desk={
+        <>
+          <div className="desk-object" style={{ "--i": 2, "--r": "0.6deg" } as CSSProperties}>
+            <GroupCard group={group} />
+          </div>
+          <DeskObjects counts={counts} />
+        </>
+      }
     />
   );
 }

@@ -55,18 +55,6 @@ export function DeskObjects({ counts }: { counts: DeskCounts }) {
         <span className="relative font-mono text-[10.5px] uppercase tracking-[0.1em]">Progresso</span>
         <span className="relative font-mono text-[10.5px] uppercase tracking-[0.1em]">0 — 1000</span>
       </Link>
-
-      <Link
-        href="/grupos"
-        className="desk-object col-span-2 flex items-baseline justify-between gap-3 rounded-card border border-line-subtle bg-surface px-4 py-3 shadow-paper"
-        style={{ "--i": 6, "--r": "-0.6deg" } as CSSProperties}
-      >
-        <span>
-          <span className="block t-kicker">Estudar junto</span>
-          <span className="block font-display text-[26px] leading-none text-ink">Grupos</span>
-        </span>
-        <span className="t-meta text-ink-2">placar da semana e duelos</span>
-      </Link>
     </nav>
   );
 }

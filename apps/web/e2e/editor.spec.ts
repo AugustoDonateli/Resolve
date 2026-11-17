@@ -71,10 +71,9 @@ test("editor corrige o comando e o histórico preserva a versão anterior", asyn
   browser,
 }) => {
   const { ctx, page } = await editorPage(browser);
+  // A área editorial não aparece em Mais (pedido de Guto, 17/11): o editor chega pelo endereço.
   await page.goto("/mais");
-  await expect(
-    page.getByRole("link", { name: /Revisão editorial/ }),
-  ).toBeVisible();
+  await expect(page.getByRole("link", { name: /Revisão editorial/ })).toHaveCount(0);
   await openFixture(page);
 
   // Lado a lado: a página original carregou (bucket privado, link assinado).

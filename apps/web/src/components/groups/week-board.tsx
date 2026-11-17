@@ -3,8 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useId, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
-import { applaudMember, challengeTimeDuel, setTimeSharing, setWeeklyGoal } from "@/lib/groups/actions";
-import { duelLine, evolution, fmtStudy, goalProgress, ranking, recapLines, weekLabel, type WeekBoard as Board, type WeekRecap } from "@/lib/groups/week";
+import { applaudMember, setTimeSharing, setWeeklyGoal } from "@/lib/groups/actions";
+import { evolution, fmtStudy, goalProgress, ranking, recapLines, weekLabel, type WeekBoard as Board, type WeekRecap } from "@/lib/groups/week";
 
 /**
  * Placar da semana do grupo: quem escolheu participar, em ordem de tempo de estudo medido pelo Resolve.
@@ -22,8 +22,6 @@ export function WeekBoard({ groupId, board, recap }: { groupId: string; board: B
   const out = board.members.filter((m) => !m.sharing && !m.me);
   const progress = goalProgress(board.totalMinutes, board.goalMinutes);
   const last = recap ? recapLines(recap) : [];
-  /** Com quem a conta já tem duelo de tempo nesta semana. */
-  const dueling = new Set(board.timeDuels.filter((d) => d.aMe || d.bMe).map((d) => (d.aMe ? d.b : d.a)));
   const run = (fn: () => Promise<{ ok: boolean; message?: string }>) =>
     start(async () => {
       setMessage(null);
@@ -54,7 +52,7 @@ export function WeekBoard({ groupId, board, recap }: { groupId: string; board: B
       )}
 
       {rows.length === 0 ? (
-        <p className="max-w-xl t-reading text-ink-2">Ninguém entrou no ranking ainda. Quem marcar a opção abaixo aparece aqui com o tempo de estudo da semana.</p>
+        <p className="max-w-xl t-reading text-ink-2">Ninguém está no ranking deste grupo agora. Quem marcar a opção abaixo volta a aparecer com o tempo de estudo da semana.</p>
       ) : (
         <ol className="flex flex-col border-t-[1.5px] border-ink">
           {rows.map((m, i) => {
@@ -91,12 +89,6 @@ export function WeekBoard({ groupId, board, recap }: { groupId: string; board: B
                         {m.applaudedByMe ? "Você aplaudiu" : "Aplaudir"}
                         <span className="sr-only"> {m.nickname}</span>
                       </Button>
-                      {!dueling.has(m.nickname) && (
-                        <Button size="sm" variant="ghost" disabled={pending} onClick={() => run(() => challengeTimeDuel({ groupId, userId: m.userId }))}>
-                          Desafiar no tempo
-                          <span className="sr-only"> {m.nickname}</span>
-                        </Button>
-                      )}
                     </div>
                   )}
                 </div>
@@ -107,20 +99,6 @@ export function WeekBoard({ groupId, board, recap }: { groupId: string; board: B
         </ol>
       )}
       {out.length > 0 && <p className="t-meta text-ink-2">Fora do ranking por escolha: {out.map((m) => m.nickname).join(", ")}.</p>}
-
-      {board.timeDuels.length > 0 && (
-        <div>
-          <h3 className="mb-1 t-kicker">Duelos de tempo da semana</h3>
-          <ul className="flex flex-col border-t border-line-subtle">
-            {board.timeDuels.map((d) => (
-              <li key={`${d.a}-${d.b}`} className="border-b border-line-subtle py-2.5 t-ui text-ink">
-                {duelLine(d, false)}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-1 t-meta text-ink-2">Vence quem tiver mais tempo de estudo até domingo à noite.</p>
-        </div>
-      )}
 
       {recap && last.length > 0 && (
         <div className="rounded-card border border-line-subtle bg-surface p-4 shadow-paper sm:p-5">
@@ -146,8 +124,8 @@ export function WeekBoard({ groupId, board, recap }: { groupId: string; board: B
             <span>
               Aparecer no ranking de tempo deste grupo
               <span className="block t-meta text-ink-2">
-                Os colegas veem só o seu apelido, o tempo da semana, quantas questões você respondeu e se está estudando agora. Nada do seu plano, das suas
-                notas ou das suas respostas.
+                Todo mundo do grupo entra no ranking, sem precisar desafiar ninguém. Os colegas veem só o seu apelido, o tempo da semana, quantas questões
+                você respondeu e se está estudando agora. Nada do seu plano, das suas notas ou das suas respostas. Se preferir, desmarque.
               </span>
             </span>
           </label>
@@ -209,9 +187,9 @@ export function WeekBoard({ groupId, board, recap }: { groupId: string; board: B
       <details className="max-w-xl">
         <summary className="min-h-11 cursor-pointer t-ui text-link underline">Como o tempo é contado</summary>
         <p className="mt-1 t-meta text-ink-2">
-          Conta o tempo de foco, pelo relógio do servidor, e o tempo em cada questão respondida. Ninguém digita horas. Se você faz questões dentro de um
-          bloco de foco, o período conta uma vez só. Limites: 3 horas por período de foco sem pausa, 15 minutos por questão e 12 horas por dia. A semana
-          vai de segunda a domingo, no horário de Brasília.
+          O site conta sozinho o tempo em que você está estudando nele: resolvendo questões, revisando, escrevendo a redação, no simulado, no
+          diagnóstico ou num bloco de foco. Para de contar com a aba escondida ou depois de 3 minutos sem mexer na página. Ninguém digita horas, e o que
+          se sobrepõe conta uma vez só. Limite de 12 horas por dia. A semana vai de segunda a domingo, no horário de Brasília.
         </p>
       </details>
     </section>

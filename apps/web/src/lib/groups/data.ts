@@ -155,3 +155,12 @@ export async function loadWeekRecap(groupId: string): Promise<WeekRecap | null> 
   const r = data as { week_start: string; total_minutes: number; members: WeekRecap["members"]; time_duels: RawDuel[] | null };
   return { weekStart: r.week_start, totalMinutes: r.total_minutes, members: r.members, timeDuels: (r.time_duels ?? []).map(duel) };
 }
+
+/** O grupo com mais gente (empate: o mais recente), com o placar da semana, para a mesa de Hoje; null sem grupo. */
+export async function loadDeskGroup(): Promise<{ id: string; name: string; board: WeekBoard; others: number } | null> {
+  const groups = await loadMyGroups();
+  if (!groups || groups.length === 0) return null;
+  const g = [...groups].sort((x, y) => y.members - x.members)[0]!;
+  const board = await loadWeekBoard(g.id);
+  return board ? { id: g.id, name: g.name, board, others: groups.length - 1 } : null;
+}

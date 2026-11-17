@@ -22,7 +22,7 @@ export const TERMS: { title: string; items: string[] }[] = [
     title: "Quem vê o quê",
     items: [
       "Seus dados são só seus. O banco de dados bloqueia o acesso de outras contas.",
-      "Nos grupos, os colegas veem o apelido que você escolher e, se você marcar a opção, o tempo de estudo da semana e quantas questões respondeu. Nada do seu plano, das notas ou das redações.",
+      "Nos grupos, os colegas veem o apelido que você escolher, o tempo de estudo da semana e quantas questões você respondeu. Dá para sair do ranking de cada grupo. Nada do seu plano, das notas ou das redações aparece.",
       "O dono vê a lista de contas, o último acesso e quanto cada uma gastou da cota de inteligência artificial. Ele não vê respostas nem redações pela tela do site.",
     ],
   },

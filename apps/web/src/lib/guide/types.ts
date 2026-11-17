@@ -25,7 +25,7 @@ export function currentStep(g: Pick<GuideState, FirstStep>): FirstStep | null {
  */
 export const EXAM_DAY_GUESS = "2027-11-07";
 
-export const HOURS_OPTIONS = [5, 10, 15, 20, 30, 40] as const;
+export const HOURS_OPTIONS = [1, 2, 3, 5, 10, 15, 20, 30, 40] as const;
 
 export interface FichaValues {
   course: string;

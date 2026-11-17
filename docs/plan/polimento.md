@@ -137,8 +137,15 @@ Cada etapa é um conjunto completo: implementar, conferir no navegador (claro, e
 ## Situação
 O polimento P1 a P8 está feito e publicado, com as exceções listadas em cada etapa. O que vem depois está em "O que falta do roteiro, depois do polimento": sessão 4 e as lições (ensinar, não só exercitar).
 
-## Pendências anotadas por Guto (17/11), para depois da sessão 4
+## Pendências anotadas por Guto (17/11), para depois da sessão 4 — **feitas em 17/11**
 1. **Ficha de identificação**: as horas por semana começam em 5 h; faltam opções menores (ele vai estudar cerca de 2 h por semana agora, porque a prova está longe). Incluir 1, 2 e 3 h.
 2. **Mais**: tirar Protótipos de movimento, Componentes, Revisão editorial e Conferência das anotações (hoje aparecem para ele porque a conta é de editor). As telas continuam existindo pelo endereço.
 3. **Grupos com mais destaque**: hoje estão escondidos (um objeto pequeno na mesa e um item em Mais).
 4. **Tempo de estudo automático e disputa sem convite**: o site deve guardar sozinho quanto tempo a pessoa passa estudando nele, e a disputa por tempo não deve depender de chamar alguém para um duelo (hoje o ranking pede que cada um marque "aparecer" e o duelo de tempo pede o desafio). Rever a participação opcional com ele: é uma escolha de privacidade.
+
+### Registro das pendências (17/11)
+1. **Ficha**: horas por semana com 1, 2 e 3 h (além de 5 a 40).
+2. **Mais**: só Ajuda (Como funciona, Ficha), Sua conta (Conta e dados) e, para o dono, Clube. Protótipos, Componentes, Revisão editorial e Conferência das anotações saíram; continuam pelo endereço (`/editor`, `/editor/anotacoes`, `/prototipos`, `/componentes`).
+3. **Grupos com destaque**: divisória e aba própria (oito divisórias no PC, seis abas no celular) e cartão na mesa de Hoje com a sua posição, os três primeiros e quem está estudando agora (sem grupo, convite para criar um).
+4. **Tempo automático e disputa sem convite**: o site guarda sozinho o tempo nas páginas de estudo (questões, revisão, redação, simulado, diagnóstico), com aviso a cada 30 s só com a página à vista e alguma ação nos últimos 3 minutos (`study_presence`, `ping_study`, regra `tempo-v2` que une foco, questões e presença sem contar duas vezes). No grupo, todo mundo entra no ranking por padrão (os membros atuais também) e pode sair; o botão de desafiar saiu (a disputa é o próprio placar). Termos atualizados.
+- Verificação: tempo testado no banco (sobreposição contada uma vez) e no navegador (95 s numa sessão entraram no placar e o colega viu "estudando agora"). Matriz de acesso 351/351, 164 testes de unidade, `audit:ui` 87 aprovados e 1 pulado.

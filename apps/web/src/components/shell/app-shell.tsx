@@ -1,11 +1,12 @@
 "use client";
 
 import { clsx } from "clsx";
-import { BarChart3, BookOpen, CalendarRange, Menu, PenLine, RotateCcw, Sun } from "lucide-react";
+import { BarChart3, BookOpen, CalendarRange, Menu, PenLine, RotateCcw, Sun, Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { DeskLamp } from "@/components/shell/desk-lamp";
+import { StudyPresence } from "@/components/shell/study-presence";
 import { Wordmark } from "@/components/ui/wordmark";
 
 interface NavItem {
@@ -15,7 +16,7 @@ interface NavItem {
   mobile: boolean;
 }
 
-/** Celular: Hoje, Estudar, Revisar, Redação e Mais. No PC, as sete divisórias ficam sempre à vista. */
+/** Celular: Hoje, Estudar, Revisar, Redação, Grupos e Mais. No PC, as oito divisórias ficam sempre à vista. */
 const NAV: NavItem[] = [
   { href: "/hoje", label: "Hoje", icon: Sun, mobile: true },
   { href: "/estudar", label: "Estudar", icon: BookOpen, mobile: true },
@@ -23,11 +24,12 @@ const NAV: NavItem[] = [
   { href: "/redacao", label: "Redação", icon: PenLine, mobile: true },
   { href: "/rotina", label: "Rotina", icon: CalendarRange, mobile: false },
   { href: "/progresso", label: "Progresso", icon: BarChart3, mobile: false },
+  { href: "/grupos", label: "Grupos", icon: Users, mobile: true },
   { href: "/mais", label: "Mais", icon: Menu, mobile: true },
 ];
 
 function isActive(pathname: string, href: string) {
-  if (href === "/mais") return ["/mais", "/componentes", "/prototipos", "/editor", "/grupos", "/diagnostico"].some((p) => pathname.startsWith(p));
+  if (href === "/mais") return ["/mais", "/componentes", "/prototipos", "/editor", "/diagnostico"].some((p) => pathname.startsWith(p));
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
@@ -86,6 +88,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="desk min-h-dvh">
       <DeskLamp />
+      <StudyPresence />
       <a
         href="#conteudo"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-control focus:bg-surface focus:px-4 focus:py-2 focus:shadow-paper"
@@ -137,12 +140,12 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
       </div>
 
-      {/* Celular: cinco abas numa tira de papel na borda de baixo */}
+      {/* Celular: seis abas numa tira de papel na borda de baixo */}
       <nav
         aria-label="Principal"
         className="fixed inset-x-0 bottom-0 z-30 border-t border-line-subtle bg-background pb-[env(safe-area-inset-bottom)] shadow-[0_-10px_26px_rgb(0_0_0/0.28)] md:hidden"
       >
-        <ul className="mx-auto grid max-w-md grid-cols-5">
+        <ul className="mx-auto grid max-w-lg grid-cols-6">
           {NAV.filter((n) => n.mobile).map((item) => {
             const active = isActive(pathname, item.href);
             const Icon = item.icon;

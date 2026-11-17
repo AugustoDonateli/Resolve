@@ -43,8 +43,9 @@ export default async function GruposPage() {
         )}
         <GroupForms />
         <p className="max-w-2xl t-meta text-ink-2">
-          No grupo, os outros veem só o apelido que você escolher e, em cada duelo, quantas questões você respondeu e acertou.
-          Nada do seu plano, das suas redações ou do seu histórico aparece.
+          O site conta sozinho o seu tempo de estudo, e cada grupo tem o placar da semana: quem estudou mais, quem está estudando agora e uma meta
+          coletiva. No grupo, os outros veem só o apelido que você escolher, o seu tempo e quantas questões respondeu (dá para sair do ranking). Nada do
+          seu plano, das suas redações ou do seu histórico aparece.
         </p>
       </div>
     </>

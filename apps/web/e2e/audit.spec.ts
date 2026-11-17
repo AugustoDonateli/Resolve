@@ -153,7 +153,7 @@ for (const width of [1440, 1100, 390]) {
     const page = await ctx.newPage();
     await page.goto("/hoje");
     const nav = page.getByRole("navigation", { name: "Principal" });
-    const dest: [string, string][] = [["Estudar", "/estudar"], ["Revisar", "/revisar"], ["Redação", "/redacao"], ["Rotina", "/rotina"], ["Progresso", "/progresso"], ["Mais", "/mais"], ["Hoje", "/hoje"]];
+    const dest: [string, string][] = [["Estudar", "/estudar"], ["Revisar", "/revisar"], ["Redação", "/redacao"], ["Rotina", "/rotina"], ["Progresso", "/progresso"], ["Grupos", "/grupos"], ["Mais", "/mais"], ["Hoje", "/hoje"]];
     for (const [label, path] of dest) {
       const link = nav.getByRole("link", { name: label, exact: true }).locator("visible=true");
       if (!(await link.count())) continue; // no celular, Rotina e Progresso ficam em Mais

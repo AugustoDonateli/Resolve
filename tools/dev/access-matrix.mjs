@@ -667,6 +667,22 @@ let batchId, proposalId;
   check("A", "não lê a classificação das alternativas direto", denied(aa), aa.error?.message ?? `${rows(aa)} linha(s)`);
 }
 
+// ── Tempo de estudo automático (pedido de Guto, 17/11) ──
+{
+  const vp = await V.c.rpc("ping_study", { p_kind: "questoes" });
+  check("visitante", "não registra presença", Boolean(vp.error), vp.error?.message ?? "registrou!");
+  const bad = await A.c.rpc("ping_study", { p_kind: "outra" });
+  check("A", "presença com tipo inválido é recusada", /resolve_presence_kind/.test(bad.error?.message ?? ""), bad.error?.message ?? "aceitou!");
+  const ok = await A.c.rpc("ping_study", { p_kind: "questoes" });
+  check("A", "registra a própria presença", !ok.error, ok.error?.message ?? "");
+  for (const [who, u] of [["visitante", V], ["A", A]]) {
+    const r = await u.c.from("study_presence").select("id").limit(1);
+    check(who, "não lê study_presence direto", permError(r), r.error?.message ?? `${rows(r)} linha(s)`);
+  }
+  const w = await A.c.from("study_presence").insert({ kind: "questoes", started_at: "2026-11-01T00:00:00Z", last_at: "2026-11-01T11:00:00Z" }).select();
+  check("A", "não grava horas na mão", permError(w), w.error?.message ?? "gravou!");
+}
+
 // ── Clube: dono, convites, membros, cota e conta (sessão 4 do plano v2) ──
 {
   const vs = await V.c.rpc("invite_status", { p_code: "AAAAAAAAAA" });
