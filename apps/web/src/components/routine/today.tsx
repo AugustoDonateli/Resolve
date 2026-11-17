@@ -213,11 +213,13 @@ export function Today({
       if (!r2.ok) {
         setFocus(null);
         setError(r2.message);
+        // Bloco trocado por um plano refeito (em outra aba ou instantes antes): traz o plano atual.
+        if ("gone" in r2 && r2.gone) router.refresh();
         return;
       }
       setFocus({ id, clock: clockFrom(r2.state, t), synced: true });
     },
-    [focus, busy, blocks],
+    [focus, busy, blocks, router],
   );
 
   const togglePause = useCallback(async () => {
@@ -829,12 +831,16 @@ function PlanButton({ made }: { made: boolean }) {
         onClick={() =>
           start(async () => {
             const r = await generateDayPlan();
-            setMsg(
-              r.ok
-                ? { ok: true, text: "Plano montado." }
-                : { ok: false, text: r.message },
-            );
-            if (r.ok) router.refresh();
+            // Depois do await, a mensagem entra na mesma transição da atualização: "Plano montado."
+            // só aparece com o plano novo já na tela (antes, os botões ainda apontavam para blocos trocados).
+            start(() => {
+              setMsg(
+                r.ok
+                  ? { ok: true, text: "Plano montado." }
+                  : { ok: false, text: r.message },
+              );
+              if (r.ok) router.refresh();
+            });
           })
         }
       >

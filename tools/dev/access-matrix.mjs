@@ -755,6 +755,32 @@ let batchId, proposalId;
   check("A", "recebe a primeira questão (só o identificador e a área)", !af.error && rows(af) === 1 && Object.keys(af.data[0]).sort().join() === "area,item_version_id", af.error?.message ?? `${rows(af)} linha(s)`);
 }
 
+// ── Lições: marcações por parte (sessão 7 do plano v2) ──
+{
+  const vr = await V.c.from("lesson_feedback").select("lesson_slug").limit(1);
+  check("visitante", "não lê lesson_feedback", permError(vr), vr.error?.message ?? `${rows(vr)} linha(s)`);
+  const vw = await V.c.from("lesson_feedback").insert({ lesson_slug: "porcentagem", section: "entrada", verdict: "entendi" }).select();
+  check("visitante", "não grava lesson_feedback", permError(vw) || Boolean(vw.error), vw.error?.message ?? "gravou!");
+  const row = { lesson_slug: "porcentagem", section: "entrada", verdict: "confuso", note: TEST_NOTE, updated_at: new Date().toISOString() };
+  const up1 = await A.c.from("lesson_feedback").upsert(row, { onConflict: "user_id,lesson_slug,section" }).select("verdict");
+  const up2 = await A.c.from("lesson_feedback").upsert({ ...row, verdict: "entendi", note: null }, { onConflict: "user_id,lesson_slug,section" }).select("verdict");
+  check("A", "grava e troca a própria marcação", !up1.error && !up2.error && up2.data?.[0]?.verdict === "entendi", up1.error?.message ?? up2.error?.message ?? "");
+  const own = await A.c.from("lesson_feedback").select("user_id");
+  check("A", "lê só as próprias marcações", !own.error && rows(own) >= 1 && own.data.every((x) => x.user_id === A.id), own.error?.message ?? `${rows(own)} linha(s)`);
+  const peek = await B.c.from("lesson_feedback").select("user_id").eq("user_id", A.id);
+  check("B", "não lê as marcações de A", !peek.error && rows(peek) === 0, peek.error?.message ?? `${rows(peek)} linha(s)`);
+  const change = await B.c.from("lesson_feedback").update({ verdict: "chato" }).eq("user_id", A.id).select("user_id");
+  check("B", "não muda as marcações de A", denied(change), change.error?.message ?? `${rows(change)} linha(s)`);
+  const forge = await B.c.from("lesson_feedback").insert({ user_id: A.id, lesson_slug: "porcentagem", section: "cartoes", verdict: "chato" }).select();
+  check("B", "não grava marcação em nome de A", Boolean(forge.error), forge.error?.message ?? "gravou!");
+  const bs = await A.c.from("lesson_feedback").upsert({ lesson_slug: "porcentagem", section: "admin", verdict: "entendi" }, { onConflict: "user_id,lesson_slug,section" }).select();
+  check("A", "parte fora da lista é recusada", Boolean(bs.error), bs.error?.message ?? "aceitou!");
+  const bv = await A.c.from("lesson_feedback").upsert({ lesson_slug: "porcentagem", section: "treino", verdict: "otimo" }, { onConflict: "user_id,lesson_slug,section" }).select();
+  check("A", "marcação fora da lista é recusada", Boolean(bv.error), bv.error?.message ?? "aceitou!");
+  const bn = await A.c.from("lesson_feedback").upsert({ lesson_slug: "porcentagem", section: "treino", verdict: "chato", note: "x".repeat(501) }, { onConflict: "user_id,lesson_slug,section" }).select();
+  check("A", "nota acima de 500 caracteres é recusada", Boolean(bn.error), bn.error?.message ?? "aceitou!");
+}
+
 // ── Arquivos ──
 {
   const bytes = new Blob(["arquivo de teste da matriz de acesso"], { type: "text/plain" });

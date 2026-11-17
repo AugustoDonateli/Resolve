@@ -17,9 +17,10 @@ export const dynamic = "force-dynamic";
 
 /** As três portas do caderno, na ordem em que costumam ser usadas. Cada uma diz quando serve. */
 const DOORS = [
-  { href: "#praticar", n: "1", title: "Praticar", when: "No dia a dia: resolver questões e ver a correção de cada uma." },
-  { href: "#treinar-a-prova", n: "2", title: "Treinar a prova", when: "Quando o problema não é o conteúdo: leitura do comando, pegadinha, tempo." },
-  { href: "#provar", n: "3", title: "Provar", when: "De tempos em tempos: a prova inteira, no relógio, e uma medida da sua nota." },
+  { href: "/estudar/licoes", n: "1", title: "Aprender", when: "Quando o assunto é novo ou esqueceu: lição curta, com exemplo e questões reais." },
+  { href: "#praticar", n: "2", title: "Praticar", when: "No dia a dia: resolver questões e ver a correção de cada uma." },
+  { href: "#treinar-a-prova", n: "3", title: "Treinar a prova", when: "Quando o problema não é o conteúdo: leitura do comando, pegadinha, tempo." },
+  { href: "#provar", n: "4", title: "Provar", when: "De tempos em tempos: a prova inteira, no relógio, e uma medida da sua nota." },
 ];
 
 const PRATICAR = [
@@ -45,9 +46,9 @@ export default async function EstudarPage({ searchParams }: { searchParams: Prom
       {total > 0 ? (
         <div className="flex flex-col gap-12">
           <div className="flex flex-col gap-6">
-            <p className="max-w-[62ch] t-reading text-ink-2">O caderno tem três portas. Escolha pela sua necessidade de hoje.</p>
-            <nav aria-label="As três portas do caderno">
-              <ol className="grid gap-x-8 border-t-[1.5px] border-ink md:grid-cols-3">
+            <p className="max-w-[62ch] t-reading text-ink-2">O caderno tem quatro portas. Escolha pela sua necessidade de hoje.</p>
+            <nav aria-label="As quatro portas do caderno">
+              <ol className="grid gap-x-8 border-t-[1.5px] border-ink sm:grid-cols-2 lg:grid-cols-4">
                 {DOORS.map((d) => (
                   <li key={d.href} className="border-b border-line-subtle md:border-b-0">
                     <Link href={d.href} className="group flex h-full gap-3 py-4">
@@ -93,7 +94,7 @@ export default async function EstudarPage({ searchParams }: { searchParams: Prom
           </div>
 
           <section id="praticar" aria-labelledby="praticar-t" className="scroll-mt-20 border-t-[1.5px] border-ink pt-8">
-            <p className="t-kicker">Porta 1</p>
+            <p className="t-kicker">Porta 2</p>
             <h2 id="praticar-t" className="t-screen text-ink">
               Praticar
             </h2>
@@ -120,7 +121,7 @@ export default async function EstudarPage({ searchParams }: { searchParams: Prom
           </section>
 
           <section id="treinar-a-prova" aria-labelledby="tecnica-t" className="scroll-mt-20 border-t-[1.5px] border-ink pt-8">
-            <p className="t-kicker">Porta 2</p>
+            <p className="t-kicker">Porta 3</p>
             <h2 id="tecnica-t" className="t-screen text-ink">
               Treinar a prova
             </h2>
@@ -150,7 +151,7 @@ export default async function EstudarPage({ searchParams }: { searchParams: Prom
           </section>
 
           <section id="provar" aria-labelledby="provar-t" className="scroll-mt-20 border-t-[1.5px] border-ink pt-8">
-            <p className="t-kicker">Porta 3</p>
+            <p className="t-kicker">Porta 4</p>
             <h2 id="provar-t" className="t-screen text-ink">
               Provar
             </h2>

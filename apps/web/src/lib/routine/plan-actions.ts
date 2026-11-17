@@ -306,7 +306,9 @@ export type FocusState = {
 /** Foco e pausa (F4-T17): começar, pausar, concluir ou só ler o estado. O tempo vem do relógio do servidor. */
 export async function focusAction(
   input: unknown,
-): Promise<{ ok: true; state: FocusState } | { ok: false; message: string }> {
+): Promise<
+  { ok: true; state: FocusState } | { ok: false; message: string; gone?: boolean }
+> {
   const { z } = await import("zod");
   const p = z
     .object({
@@ -320,13 +322,20 @@ export async function focusAction(
     p_block_id: p.data.blockId,
     p_action: p.data.action,
   });
-  if (error)
+  if (error) {
+    if (/block_not_found/.test(error.message))
+      return {
+        ok: false,
+        gone: true,
+        message: "Este bloco saiu do plano, que foi refeito. A tela mostra o plano atual.",
+      };
     return {
       ok: false,
       message: /block_closed/.test(error.message)
         ? "Este bloco já foi encerrado."
         : "Não foi possível registrar agora. Tente de novo.",
     };
+  }
   const state = (data as FocusState[] | null)?.[0];
   if (!state) return { ok: false, message: "Bloco não encontrado." };
   if (p.data.action !== "estado") {

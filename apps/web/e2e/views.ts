@@ -41,6 +41,18 @@ export const VIEWS: View[] = [
       await page.waitForTimeout(300);
     },
   },
+  {
+    id: "licao",
+    label: "Lição com questão real",
+    path: "/estudar/licoes/porcentagem",
+    open: async (page) => {
+      // Estado denso: resposta da entrada aberta (com o exemplo extra) e a primeira lacuna com a dica.
+      await page.locator("#entrada").getByRole("button", { name: "R$ 12" }).click();
+      await page.locator("#lacunas input").first().fill("1");
+      await page.locator("#lacunas").getByRole("button", { name: "Conferir" }).click();
+      await page.waitForTimeout(300);
+    },
+  },
 ];
 
 export const THEMES = ["light", "dark"] as const;

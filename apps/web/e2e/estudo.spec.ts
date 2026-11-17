@@ -266,3 +266,24 @@ test("ritmo: marcar, navegar e voltar preserva resposta; gabarito só no fim", a
   await page.getByRole("button", { name: "Encerrar bloco" }).click();
   await expect(page.getByRole("heading", { name: "Bloco encerrado" })).toBeVisible({ timeout: 15_000 });
 });
+
+test("lições: questões reais carregam, lacunas aceitam número em formato brasileiro e o treino abre", async ({ page }) => {
+  await signIn(page);
+  await page.goto("/estudar");
+  await page.getByRole("link", { name: /Aprender/ }).click();
+  await page.waitForURL("**/estudar/licoes");
+  await page.getByRole("link", { name: /Porcentagem/ }).first().click();
+  await page.waitForURL("**/estudar/licoes/porcentagem");
+  // Exemplo resolvido e exemplo com lacunas vêm do banco (nunca o aviso de indisponível).
+  await expect(page.getByText(/não está disponível agora/)).toHaveCount(0);
+  await expect(page.getByRole("article", { name: /questão 140 do Enem 2024/ })).toBeVisible();
+  await expect(page.getByRole("article", { name: /questão 158 do Enem 2025/ })).toBeVisible();
+  const gaps = page.locator("#lacunas");
+  for (const v of ["43,20", "29.424", "R$ 245,20"]) {
+    await gaps.locator("input").last().fill(v);
+    await gaps.getByRole("button", { name: "Conferir" }).click();
+  }
+  await expect(gaps.getByRole("status")).toContainText("de primeira");
+  await page.locator("#treino").getByRole("button", { name: /Resolver/ }).click();
+  await page.waitForURL("**/estudar/sessao/**", { timeout: 20_000 });
+});
