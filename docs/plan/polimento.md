@@ -74,7 +74,7 @@ Cada etapa é um conjunto completo: implementar, conferir no navegador (claro, e
 | P4 | **Feita (17/11).** **Redação e Rotina claras** (G, H): caminho numerado da redação, rascunhos com nome; agenda da semana em que se marca direto no dia; Hoje no primeiro uso | Fable |
 | P5 | **Feita (17/11).** **Grupos: tempo de estudo** (D1–D3, D5): tempo medido pelo servidor, ranking semanal, "estudando agora", meta coletiva, placares; lugar próprio na mesa | Fable (telas) com cuidado de banco |
 | P6 | **Feita (17/11).** **O site aprende, parte 1** (E1, E2, E7): perfil por área e assunto, padrão de erro, página "o que o Resolve aprendeu" | Fable |
-| P7 | **Grupos, parte 2 e animações** (D4, D6, F2, F3): duelo de tempo, resumo de domingo, aplauso; replay, constelação e transições pequenas | Fable |
+| P7 | **Feita (17/11).** **Grupos, parte 2 e animações** (D4, D6, F2, F3): duelo de tempo, resumo de domingo, aplauso; replay, constelação e transições pequenas | Fable |
 | P8 | **O site aprende, parte 2** (E3–E6): tempo pessoal, dificuldade pela TRI, melhor horário, revisão com intervalo ajustável; Progresso como história | Opus ou Fable |
 
 ## O que falta do roteiro, depois do polimento
@@ -114,3 +114,11 @@ Cada etapa é um conjunto completo: implementar, conferir no navegador (claro, e
   - O "Mapa de habilidades", que Guto achou confuso, saiu da tela; a matriz e o diagnóstico ficaram em "Para consultar".
   - Verificação: conferido com os dados reais da conta de teste A; matriz de acesso 308/308; `audit:ui` 86 aprovados e 2 pulados; 150+ testes de unidade.
   - Limites: não sugere curso nem profissão (seria invenção); mostra como a pessoa está hoje. O padrão de erro ainda só informa, não muda o sorteio do treino (fica para a P8).
+- **P7 (17/11)**:
+  - **Aplauso**: quem está no ranking pode aplaudir a semana de um colega (uma vez por semana por pessoa); a contagem aparece no placar.
+  - **Duelo de tempo**: "Desafiar no tempo" cria o duelo da semana entre duas pessoas do ranking; vence quem tiver mais tempo até domingo. Um duelo por dupla por semana, qualquer que seja o lado que desafiou.
+  - **Semana passada**: resumo em frases (quem ficou em 1º, quanto o grupo somou, a posição da conta, aplausos e resultado dos duelos de tempo); só aparece se alguém do ranking estudou.
+  - Banco: `20261117140000_grupos_aplauso_duelo_de_tempo.sql` (tabelas `group_applause` e `time_duels`, sem acesso direto; funções `applaud_member`, `challenge_time_duel`, `group_week_recap`; `group_week_board` passou a trazer aplausos e duelos). Tudo vale só entre quem está no ranking. Matriz de acesso 320/320.
+  - **Animações**: troca de questão chega de lado (240 ms) e o Raio-X sobe como folha (400 ms), sem deslocamento com movimento reduzido; o **replay do Dia D** ganhou uma linha do tempo com um traço por evento e a caneta azul no instante atual.
+  - Conferido no navegador com as contas A e B (aplauso e desafio aparecem para os dois). `audit:ui`: 85 aprovados na rodada cheia; o teste do tutorial falhou uma vez sob carga e passou duas vezes seguidas sozinho. 157 testes de unidade.
+  - Não feito: a constelação (o protótipo ficou sem entrada depois que o mapa de habilidades saiu do Progresso; decidir se some de vez) e aviso fora do app para o resumo de domingo (o resumo aparece na página do grupo).

@@ -622,6 +622,26 @@ let batchId, proposalId;
     check("A", "de quem não participa do ranking, só recebe o apelido", others.every((m) => m.minutes === null && m.questions === null && m.studying_now === null), `${others.length} fora do ranking`);
     const bad = await A.c.rpc("set_group_weekly_goal", { p_group: gid, p_minutes: 5 });
     check("A", "meta coletiva fora do intervalo é recusada", /resolve_group_goal/.test(bad.error?.message ?? ""), bad.error?.message ?? "aceitou!");
+    for (const t of ["group_applause", "time_duels"]) {
+      for (const [who, u] of [["visitante", V], ["A", A]]) {
+        const r = await u.c.from(t).select("group_id").limit(1);
+        check(who, `não lê ${t} direto`, permError(r), r.error?.message ?? `${rows(r)} linha(s)`);
+      }
+      const w = await A.c.from(t).insert(t === "group_applause" ? { group_id: gid, week_start: "2026-11-16", from_user: A.id, to_user: B.id } : { group_id: gid, week_start: "2026-11-16", challenger: A.id, opponent: B.id }).select();
+      check("A", `não grava em ${t} direto`, permError(w), w.error?.message ?? "gravou!");
+    }
+    const ea = await E.c.rpc("applaud_member", { p_group: gid, p_to: A.id });
+    check("E", "fora do grupo, não aplaude", /resolve_not_in_ranking/.test(ea.error?.message ?? ""), ea.error?.message ?? "aplaudiu!");
+    const ed = await E.c.rpc("challenge_time_duel", { p_group: gid, p_opponent: A.id });
+    check("E", "fora do grupo, não desafia", /resolve_not_in_ranking/.test(ed.error?.message ?? ""), ed.error?.message ?? "desafiou!");
+    const self = await A.c.rpc("applaud_member", { p_group: gid, p_to: A.id });
+    check("A", "não aplaude a si mesmo", /resolve_not_in_ranking/.test(self.error?.message ?? ""), self.error?.message ?? "aplaudiu!");
+    const off = await A.c.rpc("applaud_member", { p_group: gid, p_to: B.id });
+    check("A", "fora do ranking, não aplaude", /resolve_not_in_ranking/.test(off.error?.message ?? ""), off.error?.message ?? "aplaudiu!");
+    const er = await E.c.rpc("group_week_recap", { p_group: gid });
+    check("E", "fora do grupo, não lê o resumo da semana", denied(er), er.error?.message ?? "sem conteúdo");
+    const ar = await A.c.rpc("group_week_recap", { p_group: gid });
+    check("A", "lê o resumo da semana do próprio grupo", !ar.error && Array.isArray(ar.data?.members), ar.error?.message ?? "");
     const secs = await A.c.rpc("study_seconds", { p_user: B.id, p_from: "2026-01-01", p_to: "2027-01-01" });
     check("A", "não calcula o tempo de outra conta", Boolean(secs.error), secs.error?.message ?? "calculou!");
   }

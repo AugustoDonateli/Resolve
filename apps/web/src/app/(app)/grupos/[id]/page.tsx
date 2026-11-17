@@ -6,7 +6,7 @@ import { FirstTimeTip } from "@/components/guide/first-time-tip";
 import { InviteCode, LeaveGroup, NewDuel } from "@/components/groups/group-actions";
 import { WeekBoard } from "@/components/groups/week-board";
 import { ScreenHeader } from "@/components/shell/app-shell";
-import { loadGroup, loadWeekBoard } from "@/lib/groups/data";
+import { loadGroup, loadWeekBoard, loadWeekRecap } from "@/lib/groups/data";
 import { loadGuide } from "@/lib/guide/data";
 import { AREA_LABEL } from "@/lib/study/question-types";
 
@@ -18,7 +18,7 @@ const fmtDay = (iso: string) =>
 
 export default async function GrupoPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const [g, guide, board] = await Promise.all([loadGroup(id), loadGuide(), loadWeekBoard(id)]);
+  const [g, guide, board, recap] = await Promise.all([loadGroup(id), loadGuide(), loadWeekBoard(id), loadWeekRecap(id)]);
   return (
     <>
       <Link href="/grupos" className="mb-3 inline-flex min-h-11 items-center gap-1 t-ui text-ink-2 hover:text-ink">
@@ -27,7 +27,7 @@ export default async function GrupoPage({ params }: { params: Promise<{ id: stri
       <ScreenHeader title={g.name} kicker={`${g.members.length} ${g.members.length === 1 ? "pessoa" : "pessoas"}`} />
       <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(260px,320px)] lg:gap-14">
         <div className="flex min-w-0 flex-col gap-12">
-        {board && <WeekBoard groupId={g.id} board={board} />}
+        {board && <WeekBoard groupId={g.id} board={board} recap={recap} />}
         <section aria-labelledby="duelos" className="flex min-w-0 flex-col gap-5">
           <h2 id="duelos" className="t-section">
             Duelos

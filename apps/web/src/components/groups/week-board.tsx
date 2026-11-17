@@ -3,15 +3,15 @@
 import { useRouter } from "next/navigation";
 import { useId, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
-import { setTimeSharing, setWeeklyGoal } from "@/lib/groups/actions";
-import { evolution, fmtStudy, goalProgress, ranking, weekLabel, type WeekBoard as Board } from "@/lib/groups/week";
+import { applaudMember, challengeTimeDuel, setTimeSharing, setWeeklyGoal } from "@/lib/groups/actions";
+import { duelLine, evolution, fmtStudy, goalProgress, ranking, recapLines, weekLabel, type WeekBoard as Board, type WeekRecap } from "@/lib/groups/week";
 
 /**
  * Placar da semana do grupo: quem escolheu participar, em ordem de tempo de estudo medido pelo Resolve.
  * Mostra só apelido e totais da semana; cada pessoa decide se aparece, e sempre vê o próprio tempo.
  * A meta coletiva soma o tempo de quem participa.
  */
-export function WeekBoard({ groupId, board }: { groupId: string; board: Board }) {
+export function WeekBoard({ groupId, board, recap }: { groupId: string; board: Board; recap: WeekRecap | null }) {
   const router = useRouter();
   const uid = useId();
   const [pending, start] = useTransition();
@@ -21,6 +21,9 @@ export function WeekBoard({ groupId, board }: { groupId: string; board: Board })
   const rows = ranking(board.members);
   const out = board.members.filter((m) => !m.sharing && !m.me);
   const progress = goalProgress(board.totalMinutes, board.goalMinutes);
+  const last = recap ? recapLines(recap) : [];
+  /** Com quem a conta já tem duelo de tempo nesta semana. */
+  const dueling = new Set(board.timeDuels.filter((d) => d.aMe || d.bMe).map((d) => (d.aMe ? d.b : d.a)));
   const run = (fn: () => Promise<{ ok: boolean; message?: string }>) =>
     start(async () => {
       setMessage(null);
@@ -75,7 +78,27 @@ export function WeekBoard({ groupId, board }: { groupId: string; board: Board })
                   <p className="t-meta text-ink-2">
                     {m.questions ?? 0} {m.questions === 1 ? "questão" : "questões"} · {m.daysActive ?? 0} {m.daysActive === 1 ? "dia" : "dias"} com estudo
                     {delta ? ` · ${delta}` : ""}
+                    {m.applause ? ` · ${m.applause} ${m.applause === 1 ? "aplauso" : "aplausos"}` : ""}
                   </p>
+                  {!m.me && me?.sharing && m.userId && (
+                    <div className="-ml-3 mt-1 flex flex-wrap gap-1">
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        disabled={pending || Boolean(m.applaudedByMe)}
+                        onClick={() => run(() => applaudMember({ groupId, userId: m.userId }))}
+                      >
+                        {m.applaudedByMe ? "Você aplaudiu" : "Aplaudir"}
+                        <span className="sr-only"> {m.nickname}</span>
+                      </Button>
+                      {!dueling.has(m.nickname) && (
+                        <Button size="sm" variant="ghost" disabled={pending} onClick={() => run(() => challengeTimeDuel({ groupId, userId: m.userId }))}>
+                          Desafiar no tempo
+                          <span className="sr-only"> {m.nickname}</span>
+                        </Button>
+                      )}
+                    </div>
+                  )}
                 </div>
                 <p className="t-metric tabular text-ink">{fmtStudy(m.minutes ?? 0)}</p>
               </li>
@@ -84,6 +107,31 @@ export function WeekBoard({ groupId, board }: { groupId: string; board: Board })
         </ol>
       )}
       {out.length > 0 && <p className="t-meta text-ink-2">Fora do ranking por escolha: {out.map((m) => m.nickname).join(", ")}.</p>}
+
+      {board.timeDuels.length > 0 && (
+        <div>
+          <h3 className="mb-1 t-kicker">Duelos de tempo da semana</h3>
+          <ul className="flex flex-col border-t border-line-subtle">
+            {board.timeDuels.map((d) => (
+              <li key={`${d.a}-${d.b}`} className="border-b border-line-subtle py-2.5 t-ui text-ink">
+                {duelLine(d, false)}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-1 t-meta text-ink-2">Vence quem tiver mais tempo de estudo até domingo à noite.</p>
+        </div>
+      )}
+
+      {recap && last.length > 0 && (
+        <div className="rounded-card border border-line-subtle bg-surface p-4 shadow-paper sm:p-5">
+          <h3 className="t-kicker">Semana passada · {weekLabel(recap.weekStart)}</h3>
+          <ul className="mt-2 flex flex-col gap-1 t-reading text-ink">
+            {last.map((l) => (
+              <li key={l}>{l}</li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {me && (
         <div className="flex flex-col gap-2">

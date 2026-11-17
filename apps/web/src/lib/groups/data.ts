@@ -1,4 +1,4 @@
-import type { WeekBoard } from "./week";
+import type { TimeDuel, WeekBoard, WeekRecap } from "./week";
 import "server-only";
 import { notFound } from "next/navigation";
 import { authEnabled } from "@/lib/supabase/env";
@@ -113,7 +113,8 @@ export async function loadWeekBoard(groupId: string): Promise<WeekBoard | null> 
     week_start: string;
     goal_minutes: number | null;
     total_minutes: number;
-    members: { nickname: string; me: boolean; sharing: boolean; minutes: number | null; previous_minutes: number | null; questions: number | null; days_active: number | null; studying_now: boolean | null }[];
+    members: { nickname: string; me: boolean; sharing: boolean; minutes: number | null; previous_minutes: number | null; questions: number | null; days_active: number | null; studying_now: boolean | null; user_id: string | null; applause: number | null; applauded_by_me: boolean | null }[];
+    time_duels: RawDuel[] | null;
   };
   return {
     weekStart: b.week_start,
@@ -128,6 +129,29 @@ export async function loadWeekBoard(groupId: string): Promise<WeekBoard | null> 
       questions: m.questions,
       daysActive: m.days_active,
       studyingNow: m.studying_now,
+      userId: m.user_id,
+      applause: m.applause,
+      applaudedByMe: m.applauded_by_me,
     })),
+    timeDuels: (b.time_duels ?? []).map(duel),
   };
+}
+
+interface RawDuel {
+  a: string;
+  b: string;
+  a_minutes: number;
+  b_minutes: number;
+  a_me: boolean;
+  b_me: boolean;
+}
+const duel = (d: RawDuel): TimeDuel => ({ a: d.a, b: d.b, aMinutes: d.a_minutes, bMinutes: d.b_minutes, aMe: d.a_me, bMe: d.b_me });
+
+/** Resumo da semana passada (só de quem está no ranking); null se a conta não é do grupo. */
+export async function loadWeekRecap(groupId: string): Promise<WeekRecap | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase.rpc("group_week_recap", { p_group: groupId });
+  if (error || !data) return null;
+  const r = data as { week_start: string; total_minutes: number; members: WeekRecap["members"]; time_duels: RawDuel[] | null };
+  return { weekStart: r.week_start, totalMinutes: r.total_minutes, members: r.members, timeDuels: (r.time_duels ?? []).map(duel) };
 }

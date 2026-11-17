@@ -335,23 +335,26 @@ export function SessionRunner({ session, firstTime = false }: { session: Session
         </p>
       </div>
 
-      <QuestionView
-        question={entry.question}
-        answer={{
-          value: result ? result.chosenKey : (pendingKey ?? value),
-          onValueChange: setValue,
-          eliminated: result ? new Set() : eliminated,
-          onToggleEliminate: (k) =>
-            setEliminated((s) => {
-              const n = new Set(s);
-              if (n.has(k)) n.delete(k);
-              else n.add(k);
-              return n;
-            }),
-          confirmed: Boolean(result) || Boolean(pendingKey) || sending,
-          reveal: result?.correctKey ? { correctKey: result.correctKey } : null,
-        }}
-      />
+      {/* Troca de questão: a página nova chega de lado (240 ms; sem deslocamento com movimento reduzido). */}
+      <div key={entry.sessionItemId} className="arrive arrive-pagina">
+        <QuestionView
+          question={entry.question}
+          answer={{
+            value: result ? result.chosenKey : (pendingKey ?? value),
+            onValueChange: setValue,
+            eliminated: result ? new Set() : eliminated,
+            onToggleEliminate: (k) =>
+              setEliminated((s) => {
+                const n = new Set(s);
+                if (n.has(k)) n.delete(k);
+                else n.add(k);
+                return n;
+              }),
+            confirmed: Boolean(result) || Boolean(pendingKey) || sending,
+            reveal: result?.correctKey ? { correctKey: result.correctKey } : null,
+          }}
+        />
+      </div>
 
       <div className="flex max-w-[72ch] flex-col gap-4">
         {pendingKey ? (
@@ -428,17 +431,19 @@ export function SessionRunner({ session, firstTime = false }: { session: Session
           </Button>
         )}
         {view && (
-          <RaioXPanel
-            view={view}
-            headingId={`raiox-${entry.sessionItemId}`}
-            intro={
-              !firstTime
-                ? undefined
-                : view.skill || view.evidence.length || view.distractors.length || view.steps.length
-                  ? "Este é o Raio-X. Depois de cada resposta, ele mostra de onde sai a resposta certa e por que cada errada atrai."
-                  : "Este é o Raio-X. Depois de cada resposta, ele mostra como a questão foi na prova. A correção comentada desta questão ainda está em conferência."
-            }
-          />
+          <div className="arrive arrive-folha">
+            <RaioXPanel
+              view={view}
+              headingId={`raiox-${entry.sessionItemId}`}
+              intro={
+                !firstTime
+                  ? undefined
+                  : view.skill || view.evidence.length || view.distractors.length || view.steps.length
+                    ? "Este é o Raio-X. Depois de cada resposta, ele mostra de onde sai a resposta certa e por que cada errada atrai."
+                    : "Este é o Raio-X. Depois de cada resposta, ele mostra como a questão foi na prova. A correção comentada desta questão ainda está em conferência."
+              }
+            />
+          </div>
         )}
         <div aria-live="assertive">
           {error && (

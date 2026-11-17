@@ -13,6 +13,7 @@ const MSG: [RegExp, string][] = [
   [/resolve_no_items/, "Ainda não há questões publicadas suficientes para esse duelo."],
   [/resolve_duel_closed/, "Esse duelo já fechou."],
   [/resolve_not_member|resolve_duel_not_found/, "Você não participa deste grupo."],
+  [/resolve_not_in_ranking/, "Vocês dois precisam estar no ranking de tempo do grupo."],
   [/check constraint|text_is_safe/, "Use de 2 a 30 caracteres no apelido e de 2 a 60 no nome do grupo."],
 ];
 const explain = (m: string) => MSG.find(([re]) => re.test(m))?.[1] ?? "Não foi possível agora. Tente de novo.";
@@ -83,6 +84,26 @@ export async function setWeeklyGoal(input: unknown): Promise<Result<null>> {
   const p = z.object({ groupId: z.string().uuid(), hours: z.number().int().min(1).max(1000).nullable() }).safeParse(input);
   if (!p.success) return { ok: false, message: "A meta vai de 1 a 1000 horas por semana." };
   const r = await call<null>("set_group_weekly_goal", { p_group: p.data.groupId, p_minutes: p.data.hours === null ? null : p.data.hours * 60 });
+  if (r.ok) revalidatePath(`/grupos/${p.data.groupId}`);
+  return r;
+}
+
+const pair = z.object({ groupId: z.string().uuid(), userId: z.string().uuid() });
+
+/** Aplaudir a semana de um colega do ranking (uma vez por semana por pessoa). */
+export async function applaudMember(input: unknown): Promise<Result<null>> {
+  const p = pair.safeParse(input);
+  if (!p.success) return { ok: false, message: "Pedido inválido." };
+  const r = await call<null>("applaud_member", { p_group: p.data.groupId, p_to: p.data.userId });
+  if (r.ok) revalidatePath(`/grupos/${p.data.groupId}`);
+  return r;
+}
+
+/** Desafiar um colega do ranking para o duelo de tempo desta semana. */
+export async function challengeTimeDuel(input: unknown): Promise<Result<null>> {
+  const p = pair.safeParse(input);
+  if (!p.success) return { ok: false, message: "Pedido inválido." };
+  const r = await call<null>("challenge_time_duel", { p_group: p.data.groupId, p_opponent: p.data.userId });
   if (r.ok) revalidatePath(`/grupos/${p.data.groupId}`);
   return r;
 }

@@ -74,6 +74,22 @@ export function ExamReplay({ run, open }: { run: ExamRun; open: (position: numbe
           onChange={(e) => { setPlaying(false); setTime(Number(e.target.value)); }}
         />
       </div>
+      {/* Linha do tempo da prova: um traço por evento registrado; o que já passou fica em tinta, e a caneta azul marca o instante. */}
+      <div aria-hidden="true" className="relative mb-2 h-9 max-w-3xl border-b-[1.5px] border-ink">
+        {events.map(({ event, at }) => (
+          <span
+            key={event.sequence}
+            className={at <= time ? "absolute bottom-0 w-px bg-ink" : "absolute bottom-0 w-px bg-line-subtle"}
+            style={{ left: `${(at / length) * 100}%`, height: event.kind === "transcreveu" ? "70%" : "40%" }}
+          />
+        ))}
+        <span className="absolute -bottom-1 top-0 w-[2px] bg-primary" style={{ left: `${(time / length) * 100}%` }} />
+      </div>
+      <p className="mb-1 t-meta text-ink-2">
+        Traço alto = resposta passada para o cartão; traço baixo = outro registro (abrir, marcar, voltar).{" "}
+        {events.filter(({ event, at }) => event.kind === "transcreveu" && at <= time).length} de {events.filter(({ event }) => event.kind === "transcreveu").length}{" "}
+        transcrições até este instante.
+      </p>
       <p className="mb-4 t-ui">
         {current ? `${current.position ? `Questão ${current.position} · ` : ""}${describe(current)}` : "Início da prova"}
       </p>
