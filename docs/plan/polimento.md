@@ -136,3 +136,9 @@ Cada etapa é um conjunto completo: implementar, conferir no navegador (claro, e
 
 ## Situação
 O polimento P1 a P8 está feito e publicado, com as exceções listadas em cada etapa. O que vem depois está em "O que falta do roteiro, depois do polimento": sessão 4 e as lições (ensinar, não só exercitar).
+
+## Pendências anotadas por Guto (17/11), para depois da sessão 4
+1. **Ficha de identificação**: as horas por semana começam em 5 h; faltam opções menores (ele vai estudar cerca de 2 h por semana agora, porque a prova está longe). Incluir 1, 2 e 3 h.
+2. **Mais**: tirar Protótipos de movimento, Componentes, Revisão editorial e Conferência das anotações (hoje aparecem para ele porque a conta é de editor). As telas continuam existindo pelo endereço.
+3. **Grupos com mais destaque**: hoje estão escondidos (um objeto pequeno na mesa e um item em Mais).
+4. **Tempo de estudo automático e disputa sem convite**: o site deve guardar sozinho quanto tempo a pessoa passa estudando nele, e a disputa por tempo não deve depender de chamar alguém para um duelo (hoje o ranking pede que cada um marque "aparecer" e o duelo de tempo pede o desafio). Rever a participação opcional com ele: é uma escolha de privacidade.
