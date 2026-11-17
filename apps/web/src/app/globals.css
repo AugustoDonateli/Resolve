@@ -140,6 +140,8 @@ body {
 
   /* ── A mesa ── */
   .desk {
+    /* Fichário (divisórias de 196 px + folha de até 1280 px + respiro) centrado na mesa. */
+    --shell-pad: max(0px, calc((100vw - 1500px) / 2));
     background-color: var(--rs-desk);
     background-image: var(--rs-grain);
   }

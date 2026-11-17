@@ -93,8 +93,9 @@ export function AppShell({ children }: { children: ReactNode }) {
         Ir para o conteúdo
       </a>
 
-      {/* PC: divisórias de fichário saindo por baixo da folha */}
-      <aside className="fixed inset-y-0 left-0 z-10 hidden w-[196px] flex-col pb-6 pt-7 md:flex">
+      {/* PC: divisórias de fichário saindo por baixo da folha. Em tela larga, divisórias e folha ficam
+          juntas no meio da mesa (--shell-pad é a sobra de cada lado). */}
+      <aside className="fixed inset-y-0 left-[var(--shell-pad)] z-10 hidden w-[196px] flex-col pb-6 pt-7 md:flex">
         <Link href="/hoje" className="mb-9 ml-7 self-start rounded-control py-1">
           <Wordmark size={32} tone="desk" />
         </Link>
@@ -128,7 +129,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </Link>
       </header>
 
-      <div className="relative z-20 md:ml-[196px] md:py-6 md:pr-6">
+      <div className="relative z-20 md:ml-[calc(196px+var(--shell-pad))] md:py-6 md:pr-6">
         <div className="relative w-full max-w-[1280px] [perspective:2200px]">
           <Sheet key={pathname} pathname={pathname}>
             {children}
