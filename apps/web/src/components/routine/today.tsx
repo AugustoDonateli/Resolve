@@ -45,6 +45,7 @@ import { minuteInZone } from "@/lib/routine/schedule-types";
 import { ExamCountdown } from "@/components/today/exam-countdown";
 import type { StreakView } from "@/lib/routine/streak";
 import { DayAgenda } from "./day-agenda";
+import { QuickHours } from "./quick-hours";
 import { activeMs, FocusView, type FocusClock } from "./focus-view";
 import { KindIcon } from "./kind-icon";
 
@@ -369,7 +370,6 @@ export function Today({
                 )
               ) : (
                 <EmptyDay
-                  quiet={Boolean(guide)}
                   made={made}
                   hasAvailability={plan.available.length > 0}
                   allDone={done.length > 0}
@@ -763,10 +763,7 @@ function EmptyDay({
   made,
   hasAvailability,
   allDone,
-  quiet = false,
 }: {
-  /** Os primeiros passos estão abertos na folha: a ação azul é a deles; esta fica em contorno. */
-  quiet?: boolean;
   made: boolean;
   hasAvailability: boolean;
   allDone: boolean;
@@ -795,18 +792,11 @@ function EmptyDay({
           Quando você pode estudar?
         </p>
         <p className="mt-2 max-w-lg t-reading text-ink-2">
-          O plano do dia nasce dos seus horários livres. Marque na Rotina os
-          horários da semana e os compromissos fixos; depois o Resolve monta os
-          blocos sem encostar neles.
+          O plano do dia sai dos seus horários livres. Marque um período agora, com um toque; depois dá para ajustar na Rotina.
         </p>
-        <Link
-          href="/rotina#semana"
-          className={clsx(
-            "mt-5 inline-flex min-h-11 items-center gap-2 rounded-control px-4 t-ui",
-            quiet ? "border-[1.5px] border-ink text-ink hover:bg-ink hover:text-background" : "bg-primary text-on-primary hover:bg-primary-hover",
-          )}
-        >
-          <CalendarRange aria-hidden className="size-4" /> Definir horários
+        <QuickHours className="mt-5" />
+        <Link href="/rotina#semana" className="mt-5 inline-flex min-h-11 items-center gap-2 t-ui text-link underline">
+          <CalendarRange aria-hidden className="size-4" /> Marcar outros horários e compromissos
         </Link>
       </div>
     );

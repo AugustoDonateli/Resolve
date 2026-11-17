@@ -69,6 +69,27 @@ export async function addWeeklyRule(input: unknown): Promise<ScheduleResult> {
   return done(error);
 }
 
+const PRESET = {
+  manha: ["08:00", "12:00"],
+  tarde: ["14:00", "18:00"],
+  noite: ["19:00", "22:00"],
+} as const;
+
+/**
+ * Horários rápidos: marca de uma vez o mesmo período como horário livre nos dias úteis ou em todos os dias.
+ * Vai tudo num pedido só: se algum dia colide com o que já existe, o banco recusa e nada é gravado.
+ */
+export async function addStudyPreset(input: unknown): Promise<ScheduleResult> {
+  const p = z.object({ period: z.enum(["manha", "tarde", "noite"]), days: z.enum(["uteis", "todos"]) }).safeParse(input);
+  if (!p.success) return { ok: false, message: "Escolha o período." };
+  const supabase = await signedIn();
+  if (!supabase) return { ok: false, message: "Entre para planejar a semana." };
+  const [start, end] = PRESET[p.data.period];
+  const weekdays = p.data.days === "uteis" ? [1, 2, 3, 4, 5] : [0, 1, 2, 3, 4, 5, 6];
+  const { error } = await supabase.from("availability_rules").insert(weekdays.map((weekday) => ({ weekday, start_time: start, end_time: end })));
+  return done(error);
+}
+
 /** Remove uma regra semanal inteira (e as mudanças de um dia ligadas a ela). */
 export async function removeWeeklyRule(
   input: unknown,

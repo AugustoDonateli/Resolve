@@ -34,8 +34,10 @@ import {
   hhmm,
   occurrenceRange,
   type Occurrence,
+  weekdayOf,
   type WeeklyRule,
 } from "@/lib/routine/schedule-types";
+import { QuickHours } from "./quick-hours";
 
 const selectCls =
   "w-full min-w-0 min-h-11 rounded-control border border-line bg-surface px-3 t-ui text-ink";
@@ -59,6 +61,8 @@ export function SchedulePlanner({ data }: { data: ScheduleData }) {
   } | null>(null);
   const [editing, setEditing] = useState<string | null>(null);
   const [confirmRemove, setConfirmRemove] = useState<string | null>(null);
+  /** Dia da lista em que o formulário de marcar está aberto. */
+  const [adding, setAdding] = useState<string | null>(null);
 
   const run = (
     scope: string,
@@ -97,10 +101,10 @@ export function SchedulePlanner({ data }: { data: ScheduleData }) {
           Preferências).
         </p>
         {data.rules.length === 0 && (
-          <p className="mb-4 t-ui">
-            Nenhum horário ainda. Comece pelos horários livres e compromissos
-            fixos em “Toda semana”.
-          </p>
+          <div className="mb-6 rounded-card border border-line-subtle bg-surface p-4 shadow-paper sm:p-5">
+            <p className="mb-3 t-ui">Nenhum horário ainda. Comece marcando quando você costuma estudar:</p>
+            <QuickHours />
+          </div>
         )}
         <ol className="flex flex-col border-t border-line">
           {data.days.map((day) => {
@@ -128,6 +132,7 @@ export function SchedulePlanner({ data }: { data: ScheduleData }) {
                     {dayLabel(day)}
                   </span>
                 </h3>
+                <div className="flex min-w-0 flex-col gap-1">
                 {list.length === 0 && off.length === 0 ? (
                   <p className="pt-0.5 t-meta text-ink-2">Nada marcado.</p>
                 ) : (
@@ -185,6 +190,21 @@ export function SchedulePlanner({ data }: { data: ScheduleData }) {
                     })}
                   </ul>
                 )}
+                {adding === day ? (
+                  <WeeklyForm
+                    weekday={weekdayOf(day)}
+                    pending={pending}
+                    run={run}
+                    message={message}
+                    onClose={() => setAdding(null)}
+                  />
+                ) : (
+                  <Button type="button" size="sm" variant="ghost" className="-ml-3 self-start text-ink-2" onClick={() => setAdding(day)}>
+                    Marcar horário neste dia
+                    <span className="sr-only"> ({dayLabel(day)})</span>
+                  </Button>
+                )}
+                </div>
               </li>
             );
           })}
@@ -456,15 +476,24 @@ function WeeklyForm({
   pending,
   run,
   message,
+  weekday,
+  onClose,
 }: {
   pending: boolean;
   run: Run;
   message: (scope: string) => ReactNode;
+  /** Aberto dentro de um dia da lista: o dia da semana já vem escolhido. */
+  weekday?: number;
+  onClose?: () => void;
 }) {
+  const fixed = weekday !== undefined;
+  const scope = fixed ? `semanal-${weekday}` : "semanal";
+  // "toda segunda", mas "todo sábado" e "todo domingo".
+  const every = fixed ? `${weekday === 0 || weekday === 6 ? "todo" : "toda"} ${WEEKDAYS[weekday]!.toLowerCase()}` : "";
   const empty = {
     kind: "disponivel" as "disponivel" | "compromisso",
     title: "",
-    weekday: "1",
+    weekday: String(weekday ?? 1),
     start: "",
     end: "",
   };
@@ -474,19 +503,19 @@ function WeeklyForm({
     setForm((f) => ({ ...f, [k]: e.target.value }));
   return (
     <form
-      aria-label="Novo horário semanal"
+      aria-label={fixed ? `Novo horário ${every}` : "Novo horário semanal"}
       className="flex flex-col gap-4 rounded-panel border border-line-subtle bg-surface p-4 shadow-paper sm:p-5"
       onSubmit={(e) => {
         e.preventDefault();
         run(
-          "semanal",
+          scope,
           () => addWeeklyRule(form),
           "Horário criado.",
-          () => setForm({ ...empty, kind: form.kind, weekday: form.weekday }),
+          () => (onClose ? onClose() : setForm({ ...empty, kind: form.kind, weekday: form.weekday })),
         );
       }}
     >
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className={fixed ? "grid gap-4" : "grid gap-4 sm:grid-cols-2"}>
         <label className="flex flex-col gap-1.5 t-ui">
           Tipo
           <select
@@ -498,20 +527,22 @@ function WeeklyForm({
             <option value="compromisso">Compromisso fixo</option>
           </select>
         </label>
-        <label className="flex flex-col gap-1.5 t-ui">
-          Dia da semana
-          <select
-            className={selectCls}
-            value={form.weekday}
-            onChange={set("weekday")}
-          >
-            {WEEKDAYS.map((w, i) => (
-              <option key={w} value={i}>
-                {w}
-              </option>
-            ))}
-          </select>
-        </label>
+        {!fixed && (
+          <label className="flex flex-col gap-1.5 t-ui">
+            Dia da semana
+            <select
+              className={selectCls}
+              value={form.weekday}
+              onChange={set("weekday")}
+            >
+              {WEEKDAYS.map((w, i) => (
+                <option key={w} value={i}>
+                  {w}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
       </div>
       {form.kind === "compromisso" && (
         <TextField
@@ -540,15 +571,22 @@ function WeeklyForm({
           required
         />
       </div>
-      <Button
-        type="submit"
-        className="self-start"
-        loading={pending}
-        disabled={!hydrated}
-      >
-        Adicionar toda semana
-      </Button>
-      <div aria-live="polite">{message("semanal")}</div>
+      <div className="flex flex-wrap gap-3">
+        <Button
+          type="submit"
+          variant={fixed ? "secondary" : "primary"}
+          loading={pending}
+          disabled={!hydrated}
+        >
+          {fixed ? `Marcar ${every}` : "Adicionar toda semana"}
+        </Button>
+        {onClose && (
+          <Button type="button" variant="ghost" disabled={pending} onClick={onClose}>
+            Fechar
+          </Button>
+        )}
+      </div>
+      <div aria-live="polite">{message(scope)}</div>
     </form>
   );
 }

@@ -507,7 +507,7 @@ test("temas: aluno não chega à revisão e vê só temas publicados", async ({
   await signIn(page, student);
   expect((await page.goto("/editor/temas"))?.status()).toBe(404);
   await page.goto("/redacao");
-  await page.getByRole("link", { name: "Temas" }).click();
+  await page.getByRole("link", { name: /^Temas/ }).click();
   await expect(
     page.getByRole("heading", { level: 1, name: "Temas de redação" }),
   ).toBeVisible();

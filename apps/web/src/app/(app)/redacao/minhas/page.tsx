@@ -1,3 +1,4 @@
+import { essayName } from "@/lib/essay/path";
 import type { Metadata } from "next";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
@@ -37,7 +38,7 @@ export default async function MyEssaysPage() {
                     {pieceOf(e.trainingPiece)
                       ? ` Peça: ${pieceOf(e.trainingPiece)!.label} ·`
                       : ""}{" "}
-                    {e.promptTitle ?? "Tema livre"} · atualizada em{" "}
+                    {essayName(e)} · atualizada em{" "}
                     {new Date(e.updated_at).toLocaleDateString("pt-BR")}
                   </span>
                   <span className="t-reading">
