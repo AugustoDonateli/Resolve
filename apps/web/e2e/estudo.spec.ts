@@ -278,6 +278,10 @@ test("lições: questões reais carregam, lacunas aceitam número em formato bra
   await expect(page.getByText(/não está disponível agora/)).toHaveCount(0);
   await expect(page.getByRole("article", { name: /questão 140 do Enem 2024/ })).toBeVisible();
   await expect(page.getByRole("article", { name: /questão 158 do Enem 2025/ })).toBeVisible();
+  // Controle da explicação: 10% de aumento e 20% de desconto sobre R$ 100 dão R$ 88.
+  const control = page.locator("#explicacao figure");
+  await control.getByLabel("Desconto, depois").fill("20");
+  await expect(control.locator("[aria-live]")).toContainText("= R$ 88,00");
   const gaps = page.locator("#lacunas");
   for (const v of ["43,20", "29.424", "R$ 245,20"]) {
     await gaps.locator("input").last().fill(v);

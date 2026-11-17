@@ -47,7 +47,27 @@ export function checkLesson(l: Lesson): StyleProblem[] {
   need(l.cards.length >= 2, "pelo menos 2 cartões de resumo");
   const used = [l.worked.q, l.gapped.q, ...l.traps.map((t) => t.q)];
   need(!l.practice.qs.some((q) => used.includes(q)), "questão do treino sozinho não pode aparecer resolvida na lição");
+  const r = l.resource;
+  if (r) {
+    need(r.after >= 0 && r.after < l.explanation.length, "recurso depois de um parágrafo que existe");
+    need(r.difficulty.trim().length >= 20, "recurso com a dificuldade que resolve escrita em uma linha");
+    if (r.kind === "grafico-em-etapas") {
+      need(r.steps.length >= 2, "gráfico em etapas com 2 etapas ou mais");
+      need(r.chart.series.every((x) => x.values.length === r.chart.categories.length), "cada série do gráfico com um valor por categoria");
+      need(r.chart.series.every((x) => x.values.every((v) => v >= 0 && v <= r.chart.max)), "valores do gráfico dentro da escala");
+    }
+    if (r.kind === "grifo")
+      need(r.commands.length >= 1 && r.commands.every((c) => c.words.some((w) => w.core)), "grifo com ao menos uma palavra do núcleo por comando");
+  }
+  const resourceTexts: [string, string, boolean?][] = !r
+    ? []
+    : [
+        [r.intro, "recurso, abertura"],
+        ...(r.kind === "grafico-em-etapas" ? r.steps.map((x, i): [string, string] => [x.text, `recurso, etapa ${i + 1}`]) : []),
+        ...(r.kind === "grifo" ? r.commands.map((c, i): [string, string] => [c.why, `recurso, comando ${i + 1}`]) : []),
+      ];
   const texts: [string, string, boolean?][] = [
+    ...resourceTexts,
     [l.oneLine, "em uma frase"],
     [l.entry.prompt, "pergunta de entrada", true],
     ...l.entry.options.map((o, i): [string, string] => [o.feedback, `retorno da opção ${i + 1}`]),

@@ -26,6 +26,13 @@ export const porcentagem: Lesson = {
     "O Enem também cobra a diferença entre por cento e pontos percentuais. Se uma nota cai de 75% para 45%, ela caiu 30 pontos percentuais. Se ela cai 30% a partir de 75%, fica em 75 × 0,70 = 52,5%.",
     "Antes de calcular, ache a base: o valor que vale 100%. Em “30% a menos que João”, a base é o que João acertou. Errar a base é o erro mais comum nesse assunto.",
   ],
+  resource: {
+    kind: "controle-porcentagem",
+    after: 3,
+    base: 100,
+    difficulty: "Aumento e desconto seguidos parecem se cancelar, mas o desconto incide sobre um valor que já cresceu.",
+    intro: "Escolha um aumento e depois um desconto sobre R$ 100. Com 10% e 10%, o valor não volta a R$ 100.",
+  },
   extraExample:
     "Mais um exemplo. Uma conta de luz de R$ 150 teve aumento de 8%. O valor novo é 150 × 1,08 = R$ 162. O aumento em reais é 162 − 150 = R$ 12, que é 8% de 150.",
   worked: {

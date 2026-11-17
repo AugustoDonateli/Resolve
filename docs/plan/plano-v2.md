@@ -470,7 +470,7 @@ Sessões curtas, uma frente (ou metade) por sessão. Cada uma termina com um tou
 | 5 | Opus 5.5 | Cursos e cortes do Sisu, pesos, CC UFES e UFV, explicador do Sisu (4.3) |
 | 6 | Fable 5.2 | Régua da nota e do curso; progresso como história; reorganização do Estudar (4.3, 5.3) |
 | 7 | Opus 5.5 | **Piloto feito (17/11), aguardando as marcações de Guto.** Lições de porcentagem, leitura de gráficos e comando em Linguagens; checagem automática de estilo; marcações por parte (2A.1, 2A.2, 2A.4). Falta "para ir além" (links não conferidos) |
-| 8 | Fable 5.2 | Componentes de lição (controle com gráfico, etapas por toque, figura com marca-texto, linha do tempo, mapa, grifo, lacunas) aplicados ao piloto; Guto aprova o molde (2A.3) |
+| 8 | Fable 5.2 | **Primeira leva feita (17/11):** controle deslizante, gráfico em etapas com marca-texto e grifo, aplicados ao piloto; faltam linha do tempo e mapa. Componentes de lição (controle com gráfico, etapas por toque, figura com marca-texto, linha do tempo, mapa, grifo, lacunas) aplicados ao piloto; Guto aprova o molde (2A.3) |
 | 9–11 | Opus 5.5 | Lições em lote, por incidência, no molde aprovado: Matemática e Natureza, depois Humanas e Linguagens (2.2, 2.5) |
 | 12 | Fable 5.2 | Trilhas e mapa de domínio; central "Como funciona" e glossário (2.3, 5.2) |
 | 13 | Opus 5.5 | Plano anual pelas horas informadas, prioridade por curso, diagnóstico de entrada, mapa de domínio, reavaliação mensal, treino de lacuna (2B, 2.3, 2.4) |

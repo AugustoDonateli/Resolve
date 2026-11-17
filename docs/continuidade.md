@@ -167,6 +167,13 @@ Pendente no piloto: "para ir além" ficou de fora, porque nenhum link de aula fo
 
 Corrigido no caminho: depois de "Refazer plano de hoje", o aviso "Plano montado." aparecia antes de o plano novo chegar à tela, e "Começar foco" nesse instante apontava para um bloco já trocado ("Não foi possível registrar agora"). Agora o aviso entra junto com o plano novo; se o bloco tiver saído do plano, a mensagem diz isso e a tela se atualiza.
 
+**Sessão 8, primeira leva (17/11), publicada:** um recurso por lição, só onde a seção 2A.3 justifica, com a dificuldade escrita no próprio conteúdo (`resource.difficulty`). Componentes em `components/lessons/resources.tsx`, todos por teclado e toque, sem movimento e com texto equivalente:
+- Porcentagem: **controle deslizante** de aumento e desconto sobre R$ 100, com barras e a conta escrita (10% e 10% dão R$ 99).
+- Leitura de gráficos: **gráfico em etapas** (título, eixo, legenda, o número pedido), com marca-texto em cada ponto. Dados de exemplo, ditos na tela como inventados; tabela equivalente para leitor de tela.
+- Comando em Linguagens: **grifo no comando**. O aluno toca nas palavras, compara com o grifo revisado e vê o que faltou e o que não precisava. Os três comandos são exemplos no estilo do Enem, não questões reais.
+
+A checagem de estilo cobre também os textos dos recursos. Faltam linha do tempo e mapa (servem a História e Geografia, nas lições em lote).
+
 **Próximo: Guto lê as três lições e marca as partes.** Com as marcações, ajustar o molde e seguir para a sessão 8 (componentes de lição) e depois para as lições em lote (9 a 11).
 
 **Sessão 2 (Opus 5.5) feita em 16/11: árvore de conteúdos e anotação das 366.**

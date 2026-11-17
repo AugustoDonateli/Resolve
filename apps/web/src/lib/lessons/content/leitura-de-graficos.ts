@@ -25,6 +25,33 @@ export const leituraDeGraficos: Lesson = {
     "Quando o valor fica entre duas linhas da grade, estime pelo meio do intervalo. Se a conta precisar de um número exato, procure o valor escrito no próprio gráfico.",
     "Por fim, volte ao comando. Ele pode pedir um valor, uma comparação, uma diferença ou uma ordem. A alternativa certa responde exatamente ao que foi pedido.",
   ],
+  resource: {
+    kind: "grafico-em-etapas",
+    after: 0,
+    difficulty: "Quem começa pelos números lê a barra errada; as etapas treinam a ordem título, eixo, legenda.",
+    intro: "Um gráfico de exemplo, com números inventados, para treinar a ordem da leitura. Avance uma etapa por vez.",
+    chart: {
+      title: "Esporte preferido dos alunos de duas turmas",
+      unit: "Número de alunos",
+      categories: ["Futebol", "Vôlei", "Basquete", "Natação"],
+      series: [
+        { name: "Turma da manhã", values: [14, 9, 5, 8] },
+        { name: "Turma da tarde", values: [10, 12, 4, 6] },
+      ],
+      max: 16,
+      tick: 4,
+    },
+    steps: [
+      { label: "Título", target: "titulo", text: "O título diz o que foi medido: o esporte preferido dos alunos de duas turmas. Ainda não olhe os números." },
+      { label: "Eixo", target: "eixo", text: "O eixo vertical diz a unidade: número de alunos. Cada linha da grade vale 4 alunos." },
+      { label: "Legenda", target: "legenda", text: "A legenda diz qual barra é de qual turma. A barra cheia é a turma da manhã. A listrada é a turma da tarde." },
+      {
+        label: "O número pedido",
+        target: { category: 1, series: 1 },
+        text: "Agora o número que o comando pediria: os alunos da tarde que preferem vôlei. Barra listrada, no vôlei: 12 alunos. Quem pulou a legenda costuma responder 9, que é a manhã.",
+      },
+    ],
+  },
   extraExample:
     "Mais um exemplo. Numa pesquisa com 300 pessoas, um gráfico de setores mostra 60% para ônibus. São 300 × 0,60 = 180 pessoas que usam ônibus.",
   worked: {

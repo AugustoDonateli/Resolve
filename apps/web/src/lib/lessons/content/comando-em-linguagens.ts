@@ -25,6 +25,26 @@ export const comandoEmLinguagens: Lesson = {
     "Muitas alternativas erradas dizem algo verdadeiro sobre o texto, mas respondem a outra pergunta. Antes de marcar, confira se a alternativa responde ao núcleo do comando.",
     "Depois de escolher, volte ao texto e ache o trecho que sustenta a alternativa. Se não achar, desconfie da escolha.",
   ],
+  resource: {
+    kind: "grifo",
+    after: 2,
+    difficulty: "Achar no comando as palavras que definem o que se pede, antes de ler o texto.",
+    intro: "Toque nas palavras que dizem o que a questão pede e compare com o grifo revisado. Os comandos são exemplos no estilo do Enem.",
+    commands: [
+      {
+        words: [{ t: "Nesse" }, { t: "texto," }, { t: "o", ok: true }, { t: "uso", core: true }, { t: "de", ok: true }, { t: "gírias", core: true }, { t: "tem", ok: true }, { t: "a", ok: true }, { t: "função", core: true }, { t: "de", ok: true }],
+        why: "O núcleo é a função das gírias. A resposta diz para que as gírias servem, e não o que o texto conta.",
+      },
+      {
+        words: [{ t: "No" }, { t: "trecho," }, { t: "a", ok: true }, { t: "palavra", ok: true }, { t: "“mas”", core: true }, { t: "estabelece", ok: true }, { t: "uma", ok: true }, { t: "relação", core: true }, { t: "de", ok: true }],
+        why: "O núcleo é a relação criada pelo “mas”. A resposta é um tipo de relação entre ideias, como oposição.",
+      },
+      {
+        words: [{ t: "A" }, { t: "charge" }, { t: "critica,", core: true }, { t: "principalmente,", core: true }, { t: "o", ok: true }, { t: "comportamento", core: true }, { t: "dos", ok: true }, { t: "motoristas", ok: true }, { t: "que", ok: true }],
+        why: "Três palavras pesam. Critica: é uma crítica. Principalmente: a crítica central, não uma de passagem. Comportamento: o que as pessoas fazem, e não as leis.",
+      },
+    ],
+  },
   extraExample:
     "Mais um exemplo. Em “O uso das aspas no segundo parágrafo produz o efeito de...”, o núcleo é o efeito das aspas. A resposta fala do que as aspas fazem naquele trecho, e não do texto inteiro.",
   worked: {

@@ -3,9 +3,16 @@
 import { clsx } from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useId, useState, useTransition, type ReactNode } from "react";
+import {
+  Fragment,
+  useId,
+  useState,
+  useTransition,
+  type ReactNode,
+} from "react";
 import { QuestionBlocks } from "@/components/question/question-view";
 import { Button } from "@/components/ui/button";
+import { LessonResourceView } from "./resources";
 import { startLessonPractice, rateLessonSection } from "@/lib/lessons/actions";
 import { isRight } from "@/lib/lessons/answer";
 import type { LessonPage, Section, Verdict } from "@/lib/lessons/data";
@@ -478,8 +485,13 @@ export function LessonView({
 
         <Part n={2} id="explicacao" title="O essencial">
           <div className="flex flex-col gap-4 t-reading text-ink">
-            {lesson.explanation.map((p) => (
-              <p key={p}>{p}</p>
+            {lesson.explanation.map((p, i) => (
+              <Fragment key={p}>
+                <p>{p}</p>
+                {lesson.resource?.after === i && (
+                  <LessonResourceView resource={lesson.resource} />
+                )}
+              </Fragment>
             ))}
             {entry !== null && !entryRight && (
               <p className="border-l-2 border-primary pl-4">

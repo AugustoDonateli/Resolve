@@ -29,6 +29,34 @@ export interface Trap {
   text: string[];
 }
 
+/** Gráfico de exemplo desenhado em código (dados didáticos, identificados como exemplo na tela). */
+export interface StepChart {
+  title: string;
+  /** Unidade do eixo vertical. */
+  unit: string;
+  categories: string[];
+  series: { name: string; values: number[] }[];
+  max: number;
+  tick: number;
+}
+export type ChartTarget = "titulo" | "eixo" | "legenda" | { category: number; series: number };
+
+export interface GrifoCommand {
+  /** O comando em palavras; `core` deve ser grifada, `ok` pode ou não. */
+  words: { t: string; core?: true; ok?: true }[];
+  why: string;
+}
+
+/**
+ * Recurso da explicação (2A.3): no máximo um por lição, e só com a dificuldade que ele resolve escrita
+ * em uma linha (`difficulty`). Fica depois do parágrafo `after` (índice a partir de 0).
+ */
+export type LessonResource = { after: number; difficulty: string; intro: string } & (
+  | { kind: "controle-porcentagem"; base: number }
+  | { kind: "grafico-em-etapas"; chart: StepChart; steps: { label: string; target: ChartTarget; text: string }[] }
+  | { kind: "grifo"; commands: GrifoCommand[] }
+);
+
 export interface Lesson {
   slug: string;
   title: string;
@@ -42,6 +70,7 @@ export interface Lesson {
   /** Pergunta de entrada: não é do Enem e não vale nota. */
   entry: { prompt: string; options: EntryOption[] };
   explanation: string[];
+  resource?: LessonResource;
   /** Mais um exemplo, mostrado a quem errou a pergunta de entrada. */
   extraExample: string;
   worked: { q: QuestionCode; correct: Letter; intro: string; steps: string[]; afterNote: string };
